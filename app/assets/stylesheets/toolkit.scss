@@ -3813,18 +3813,18 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   background-color: transparent;
 }
 .navbar-inverse .navbar-toggle {
-  border-color: #333;
+  border-color: #222;
 }
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
-  background-color: #2d91ca;
+  background-color: #333;
 }
 .navbar-inverse .navbar-toggle .icon-bar {
   background-color: #ffffff;
 }
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {
-  border-color: #2882b5;
+  border-color: #333;
 }
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
@@ -6495,8 +6495,8 @@ fieldset[disabled] .btn-danger-outline.active {
 }
 @font-face {
   font-family: "toolkit-entypo";
-  src: url('../fonts/toolkit-entypo.eot');
-  src: url('../fonts/toolkit-entypo.eot?#iefix') format('eot'), url('../fonts/toolkit-entypo.woff') format('woff'), url('../fonts/toolkit-entypo.ttf') format('truetype'), url('../fonts/toolkit-entypo.svg#toolkit-entypo') format('svg');
+  src: url('/fonts/toolkit-entypo.eot');
+  src: url('/fonts/toolkit-entypo.eot?#iefix') format('eot'), url('/fonts/toolkit-entypo.woff') format('woff'), url('/fonts/toolkit-entypo.ttf') format('truetype'), url('/fonts/toolkit-entypo.svg#toolkit-entypo') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -8297,7 +8297,7 @@ img.zoom-img {
 }
 @media (min-width: 768px) {
   .profile-header {
-    height: 500px;
+    height: 350px;
   }
   .profile-header .media-object {
     width: 110px;

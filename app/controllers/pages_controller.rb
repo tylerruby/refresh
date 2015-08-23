@@ -3,4 +3,6 @@ class PagesController < ApplicationController
   end
   def store
   end
+  def city
+  end
 end
