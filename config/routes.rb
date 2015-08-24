@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'store/' => 'pages#store'
   get 'city/' => 'pages#city'
+  get 'notifications/' => 'pages#notifications'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

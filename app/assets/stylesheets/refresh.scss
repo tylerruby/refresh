@@ -1,8 +1,19 @@
-/*
- * Application level styles
- * (things that dont make sense in a toolkit :)
- * copyright @colossal 2015
- */
+/* store page makeup */
+div.container[data-grid="images"] div {
+    position: relative;
+}
+
+div.container[data-grid="images"] div h3 {
+    position: absolute;
+    top: 47%;
+    text-align: center;
+    color: #FFF;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+/* end store page makeup */
+
 
 /* docs overrides */
 .highlight {

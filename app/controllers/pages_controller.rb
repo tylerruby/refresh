@@ -5,4 +5,6 @@ class PagesController < ApplicationController
   end
   def city
   end
+  def notifications
+  end
 end
