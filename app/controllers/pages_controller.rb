@@ -7,4 +7,6 @@ class PagesController < ApplicationController
   end
   def notifications
   end
+  def landing
+  end
 end
