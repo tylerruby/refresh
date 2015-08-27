@@ -1,4 +1,8 @@
 <div class="stores">
+  <% if @stores.empty? %>
+    <h2>No stores found for this address.</h2>
+  <% end %>
+
   <% @stores.each do |store| %>
     <div class="store">
       <h3><%= store.name %></h3>
