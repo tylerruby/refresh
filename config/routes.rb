@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'notifications/' => 'pages#notifications'
   get 'landing/' => 'pages#landing'
 
+  post '/stores' => 'stores#index'
   get '/:city' => 'stores#search_by_city'
   post '/:city' => 'stores#search_by_coordinates'
 
