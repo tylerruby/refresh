@@ -11,7 +11,7 @@ function initGoogleMapsAutocomplete() {
 
   var form = $('#store-location-form');
   function submitLocation(places) {
-    form.attr('action', getCity(places[0]).toLowerCase()).submit();
+    form.attr('action', getCity(places[0]).replace(' ', '-').toLowerCase()).submit();
   }
 
   // Shamelessly copied from: https://github.com/alexreisner/geocoder/blob/017e06786c0a89905c50ff3c15bd7090c422a8f8/lib/geocoder/results/google.rb#L20

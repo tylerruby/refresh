@@ -10,5 +10,6 @@ Store.create!([
   { name: 'Express',             address: '230 18th Street',     city: 'Atlanta', state: 'GA' },
   { name: 'The Clothing Warehouse', address: '420 Moreland Ave NE', city: 'Atlanta', state: 'GA' },
   { name: 'Richards Variety Store', address: '2347 Peachtree Rd', city: 'Atlanta', state: 'GA' },
-  { name: 'Value Village Thrift Store', address: '1374 Moreland Ave SE', city: 'Atlanta', state: 'GA' }
+  { name: 'Value Village Thrift Store', address: '1374 Moreland Ave SE', city: 'Atlanta', state: 'GA' },
+  { name: "It's Fashion", address: '6385 Old National Hwy', city: 'Atlanta', state: 'GA' }
 ])
