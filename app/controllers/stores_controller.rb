@@ -1,19 +1,14 @@
 class StoresController < ApplicationController
-  DEFAULT_RADIUS = 10 # miles
-
-  def index
-    @stores = Store.near(params[:address], DEFAULT_RADIUS)
-  end
-
-  def search_by_city
-    @stores = Store.near(params[:city], DEFAULT_RADIUS)
+  def search_by_address
+    address = Geocoder.search(params[:address]).first
+    @city = address.city
+    @stores = Store.by_city(@city).order_by_distance(address.coordinates)
     render :index
   end
 
-  def search_by_coordinates
-    coordinates = [params[:latitude], params[:longitude]]
-    fail "Missing coordinates" if coordinates.any?(&:blank?)
-    @stores = Store.near(coordinates, DEFAULT_RADIUS)
+  def search_by_city
+    @city = params[:city]
+    @stores = Store.by_city(params[:city])
     render :index
   end
 end

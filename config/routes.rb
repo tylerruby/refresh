@@ -9,9 +9,8 @@ Rails.application.routes.draw do
   get 'notifications/' => 'pages#notifications'
   get 'landing/' => 'pages#landing'
 
-  post '/stores' => 'stores#index'
+  post '/:city' => 'stores#search_by_address'
   get '/:city' => 'stores#search_by_city'
-  post '/:city' => 'stores#search_by_coordinates'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

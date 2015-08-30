@@ -1,27 +1,60 @@
-var autocomplete;
-
 function initGoogleMapsAutocomplete() {
   // Create the autocomplete object, restricting the search to geographical
   // location types.
-  autocomplete = new google.maps.places.Autocomplete(
+  var autocomplete = new google.maps.places.Autocomplete(
       (document.getElementById('gmaps-autocomplete')),
       {types: ['geocode']});
 
-  // When the user selects an address from the dropdown, populate the address
-  // fields in the form.
-  autocomplete.addListener('place_changed', fillInCoordinates);
-}
+  function placeSelected() {
+    submitLocation([autocomplete.getPlace()]);
+  }
 
-function fillInCoordinates() {
-  var place = autocomplete.getPlace();
-  var loc = place.geometry.location;
-  setCoordinates(loc.lat(), loc.lng());
-  $('#store-location-form')
-    .attr('action', '/' + place.vicinity)
-    .submit();
-}
+  var form = $('#store-location-form');
+  function submitLocation(places) {
+    form.attr('action', getCity(places[0]).toLowerCase()).submit();
+  }
 
-function setCoordinates(latitude, longitude) {
-  $('#latitude').val(latitude);
-  $('#longitude').val(longitude);
+  // Shamelessly copied from: https://github.com/alexreisner/geocoder/blob/017e06786c0a89905c50ff3c15bd7090c422a8f8/lib/geocoder/results/google.rb#L20
+  function getCity(place) {
+    var fields = [
+      'locality',
+      'sublocality',
+      'administrative_area_level_3',
+      'administrative_area_level_2'
+    ];
+
+    for (var i = 0; i < fields.length; i++) {
+      var entity = addressComponentsOfType(fields[i], place)[0];
+      if (entity) {
+        return entity['long_name'];
+      }
+    }
+    return '';
+  }
+
+  function addressComponentsOfType(type, place) {
+    return place
+      .address_components
+      .filter(function filterByType(c) {
+        return c.types.indexOf(type) != -1;
+      });
+  }
+
+  // When the user selects an address from the dropdown, submits the form.
+  autocomplete.addListener('place_changed', placeSelected);
+
+  function definedAction() {
+    return !!form.attr('action');
+  }
+
+  function checkAddressBeforeSubmit(e) {
+    if (!definedAction()) {
+      e.preventDefault();
+      var geocoder = new google.maps.Geocoder();
+      var address = form.find('input[name=address]').val();
+      geocoder.geocode({ address: address }, submitLocation);
+    }
+  }
+
+  form.on('submit', checkAddressBeforeSubmit);
 }

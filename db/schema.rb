@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20150827161515) do
   create_table "stores", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
+    t.string   "city"
+    t.string   "state"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at", null: false
