@@ -28,6 +28,7 @@ gem 'rails_12factor', group: :production
 gem 'pg', group: :production
 
 gem 'geocoder', '1.2.9'
+gem 'friendly_id', '5.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

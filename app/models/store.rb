@@ -1,4 +1,7 @@
 class Store < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
   RADIUS = 10 # miles
   geocoded_by :full_address
   after_validation :geocode, if: -> { address.present? and address_changed? }
@@ -22,5 +25,14 @@ class Store < ActiveRecord::Base
     # calculation, so it may not be defined if the model was retrived 
     # in another way.
     false
+  end
+
+  def slug_candidates
+    [
+      :name,
+      [:name, :city],
+      [:name, :city, :state],
+      [:name, :city, :state, :id]
+    ]
   end
 end
