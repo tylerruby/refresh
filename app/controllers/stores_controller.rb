@@ -7,8 +7,12 @@ class StoresController < ApplicationController
   end
 
   def search_by_city
-    @city = params[:city]
+    @city = params[:city].titleize
     @stores = Store.by_city(params[:city])
     render :index
+  end
+
+  def show
+    @store = Store.find(params[:id])
   end
 end

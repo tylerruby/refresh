@@ -9,9 +9,6 @@ Rails.application.routes.draw do
   get 'notifications/' => 'pages#notifications'
   get 'landing/' => 'pages#landing'
 
-  post '/:city' => 'stores#search_by_address'
-  get '/:city' => 'stores#search_by_city'
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -60,4 +57,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :stores, only: [:show]
+
+  # These must be the last routes in the file, since they'll match anything
+  post '/:city' => 'stores#search_by_address'
+  get '/:city' => 'stores#search_by_city'
 end

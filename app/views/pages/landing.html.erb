@@ -25,5 +25,11 @@
   <div class="clearfix"></div>
 </div>
 
+<ul class="cities">
+  <% @cities.each do |city| %>
+    <li><%= link_to city, "/#{city.parameterize}" %></li>
+  <% end %>
+</ul>
+
 <!-- Loading Google Maps API only for this page -->
 <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&amp;libraries=places&amp;callback=initGoogleMapsAutocomplete" async="" defer=""></script>
