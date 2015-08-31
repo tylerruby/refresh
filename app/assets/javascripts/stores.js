@@ -1,54 +1,42 @@
-function initGoogleMapsAutocomplete() {
-  // Create the autocomplete object, restricting the search to geographical
-  // location types.
-  var autocomplete = new google.maps.places.Autocomplete(
-      (document.getElementById('gmaps-autocomplete')),
-      {types: ['geocode']});
-
-  function placeSelected() {
-    submitLocation([autocomplete.getPlace()]);
-  }
-
-  var form = $('#store-location-form');
-  function submitLocation(places) {
-    form.attr('action', getCity(places[0]).replace(' ', '-').toLowerCase()).submit();
-  }
-
+function PlaceWrapper(place) {
   // Shamelessly copied from: https://github.com/alexreisner/geocoder/blob/017e06786c0a89905c50ff3c15bd7090c422a8f8/lib/geocoder/results/google.rb#L20
-  function getCity(place) {
-    var fields = [
-      'locality',
-      'sublocality',
-      'administrative_area_level_3',
-      'administrative_area_level_2'
-    ];
+  var cityFields = [
+    'locality',
+    'sublocality',
+    'administrative_area_level_3',
+    'administrative_area_level_2'
+  ];
 
-    for (var i = 0; i < fields.length; i++) {
-      var entity = addressComponentsOfType(fields[i], place)[0];
+  this.getCity = function getCity() {
+    for (var i = 0; i < cityFields.length; i++) {
+      var entity = addressComponentsOfType(cityFields[i], place)[0];
       if (entity) {
         return entity['long_name'];
       }
     }
     return '';
-  }
+  };
 
-  function addressComponentsOfType(type, place) {
+  function addressComponentsOfType(type) {
     return place
       .address_components
       .filter(function filterByType(c) {
         return c.types.indexOf(type) != -1;
       });
   }
+}
 
-  // When the user selects an address from the dropdown, submits the form.
-  autocomplete.addListener('place_changed', placeSelected);
-
-  function definedAction() {
+function AddressSelector(form) {
+  function hasDefinedPath() {
     return !!form.attr('action');
   }
 
+  function parameterize(name) {
+    return name.replace(' ', '-').toLowerCase();
+  }
+
   function checkAddressBeforeSubmit(e) {
-    if (!definedAction()) {
+    if (!hasDefinedPath()) {
       e.preventDefault();
       var geocoder = new google.maps.Geocoder();
       var address = form.find('input[name=address]').val();
@@ -56,5 +44,30 @@ function initGoogleMapsAutocomplete() {
     }
   }
 
+  this.submitLocation = function submitLocation(places) {
+    var place = new PlaceWrapper(places[0]);
+    form.attr('action', parameterize(place.getCity())).submit();
+  };
+
   form.on('submit', checkAddressBeforeSubmit);
+}
+
+// This function is called when the Google Maps API finishes initializing.
+// Check the app/views/pages/landing.html.erb page.
+function initGoogleMapsAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  var autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById('gmaps-autocomplete'),
+      { types: ['geocode'] }
+  );
+
+  var addressSelector = new AddressSelector($('#store-location-form'));
+
+  function placeSelected() {
+    addressSelector.submitLocation([autocomplete.getPlace()]);
+  }
+
+  // When the user selects an address from the dropdown, submits the form.
+  autocomplete.addListener('place_changed', placeSelected);
 }
