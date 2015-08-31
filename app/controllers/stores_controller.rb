@@ -14,8 +14,13 @@ class StoresController < ApplicationController
   end
 
   def show
-    @store = Store.friendly.find(params[:id])
-    @store.calculate_distance_from!(session[:coordinates]) if session[:coordinates]
+    @store = Store.all.scoping do
+      if session[:coordinates]
+        Store.order_by_distance(session[:coordinates])
+      else
+        Store.all
+      end
+    end.friendly.find(params[:id])
   end
 
   private

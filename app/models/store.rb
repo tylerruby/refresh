@@ -22,10 +22,6 @@ class Store < ActiveRecord::Base
     distance_from_user <= RADIUS
   end
 
-  def calculate_distance_from!(point)
-    @distance_from_user = distance_from(point)
-  end
-
   def slug_candidates
     [
       :name,
@@ -38,7 +34,7 @@ class Store < ActiveRecord::Base
   private
 
   def distance_from_user
-    @distance_from_user || distance
+    distance
   rescue NameError => e
     # distance is a method defined when making a query with distance
     # calculation, so it may not be defined if the model was retrived
