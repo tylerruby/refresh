@@ -12,6 +12,8 @@
       <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-10">
         <%= form_tag '', method: :post, id: 'store-location-form' do %>
           <div class="input-group">
+            <%= hidden_field_tag :latitude %>
+            <%= hidden_field_tag :longitude %>
             <%= search_field_tag :address, nil, class: "form-control input-lg", id: "gmaps-autocomplete", placeholder: "Enter your address", required: true %>
             <span class="input-group-btn">
               <%= button_tag "Go!", value: "search", class: "btn btn-primary btn-lg" %>

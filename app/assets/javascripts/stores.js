@@ -1,11 +1,9 @@
 function PlaceWrapper(place) {
-  // Shamelessly copied from: https://github.com/alexreisner/geocoder/blob/017e06786c0a89905c50ff3c15bd7090c422a8f8/lib/geocoder/results/google.rb#L20
-  var cityFields = [
-    'locality',
-    'sublocality',
-    'administrative_area_level_3',
-    'administrative_area_level_2'
-  ];
+  var that = this;
+
+  this.hasAddress = function hasAddress() {
+    return !!place.address_components;
+  };
 
   this.getCity = function getCity() {
     for (var i = 0; i < cityFields.length; i++) {
@@ -17,6 +15,22 @@ function PlaceWrapper(place) {
     return '';
   };
 
+  this.getLatitude = function getLatitude() {
+    return place.geometry.location.lat();
+  };
+
+  this.getLongitude = function getLongitude() {
+    return place.geometry.location.lng();
+  };
+
+  // Shamelessly copied from: https://github.com/alexreisner/geocoder/blob/017e06786c0a89905c50ff3c15bd7090c422a8f8/lib/geocoder/results/google.rb#L20
+  var cityFields = [
+    'locality',
+    'sublocality',
+    'administrative_area_level_3',
+    'administrative_area_level_2'
+  ];
+
   function addressComponentsOfType(type) {
     return place
       .address_components
@@ -27,6 +41,8 @@ function PlaceWrapper(place) {
 }
 
 function AddressSelector(form) {
+  var that = this;
+
   function hasDefinedPath() {
     return !!form.attr('action');
   }
@@ -40,12 +56,17 @@ function AddressSelector(form) {
       e.preventDefault();
       var geocoder = new google.maps.Geocoder();
       var address = form.find('input[name=address]').val();
-      geocoder.geocode({ address: address }, submitLocation);
+      geocoder.geocode({ address: address }, that.submitLocation);
     }
   }
 
   this.submitLocation = function submitLocation(places) {
     var place = new PlaceWrapper(places[0]);
+    if (!place.hasAddress()) {
+      return;
+    }
+    form.find('input[name=latitude]').val(place.getLatitude());
+    form.find('input[name=longitude]').val(place.getLongitude());
     form.attr('action', parameterize(place.getCity())).submit();
   };
 
