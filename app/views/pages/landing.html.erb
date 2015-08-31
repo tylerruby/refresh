@@ -9,16 +9,27 @@
   	<br class="hidden-xs hidden-sm">
   	<br />
     <div class="row">
-    <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-10">
-        <div class="input-group">
-          <input type="text" class="form-control input-lg" placeholder="Enter your address">
-          <span class="input-group-btn">
-            <button class="btn btn-primary btn-lg" type="button">Go!</button>
-          </span>
-        </div><!-- /input-group -->
+      <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-10">
+        <%= form_tag '', method: :post, id: 'store-location-form' do %>
+          <div class="input-group">
+            <%= search_field_tag :address, nil, class: "form-control input-lg", id: "gmaps-autocomplete", placeholder: "Enter your address", required: true %>
+            <span class="input-group-btn">
+              <%= button_tag "Go!", value: "search", class: "btn btn-primary btn-lg" %>
+            </span>
+          </div><!-- /input-group -->
+        <% end %>
       </div>
     </div><!-- /.row -->
 
   </div>
   <div class="clearfix"></div>
 </div>
+
+<ul class="cities">
+  <% @cities.each do |city| %>
+    <li><%= link_to city, "/#{city.parameterize}" %></li>
+  <% end %>
+</ul>
+
+<!-- Loading Google Maps API only for this page -->
+<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&amp;libraries=places&amp;callback=initGoogleMapsAutocomplete" async="" defer=""></script>

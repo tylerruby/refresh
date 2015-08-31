@@ -1,0 +1,15 @@
+<h1><%= @city %></h1>
+<div class="stores">
+  <% if @stores.empty? %>
+    <h2>No stores found in this location</h2>
+  <% end %>
+  <% @stores.each do |store| %>
+    <div class="store">
+      <h3><%= link_to store.name, store_path(store) %></h3>
+      <p><%= store.address %></p>
+      <% if store.available_for_delivery? %>
+        <p>Available for delivery</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

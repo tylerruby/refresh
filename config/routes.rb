@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'pages#home'
-  get 'store/' => 'pages#store'
+  root 'pages#landing'
   get 'city/' => 'pages#city'
   get 'notifications/' => 'pages#notifications'
   get 'landing/' => 'pages#landing'
@@ -58,4 +57,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :stores, only: [:show]
+
+  # These must be the last routes in the file, since they'll match anything
+  post '/:city' => 'stores#search_by_address'
+  get '/:city' => 'stores#search_by_city'
 end
