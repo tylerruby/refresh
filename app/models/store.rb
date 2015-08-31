@@ -19,12 +19,11 @@ class Store < ActiveRecord::Base
   end
 
   def available_for_delivery?
-    distance <= RADIUS
-  rescue NameError => e
-    # distance is a method defined when making a query with distance 
-    # calculation, so it may not be defined if the model was retrived 
-    # in another way.
-    false
+    distance_from_user <= RADIUS
+  end
+
+  def calculate_distance_from!(point)
+    @distance_from_user = distance_from(point)
   end
 
   def slug_candidates
@@ -34,5 +33,16 @@ class Store < ActiveRecord::Base
       [:name, :city, :state],
       [:name, :city, :state, :id]
     ]
+  end
+
+  private
+
+  def distance_from_user
+    @distance_from_user || distance
+  rescue NameError => e
+    # distance is a method defined when making a query with distance
+    # calculation, so it may not be defined if the model was retrived
+    # in another way. In this case, we default to an infinite distance.
+    Float::INFINITY
   end
 end
