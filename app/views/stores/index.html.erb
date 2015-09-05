@@ -33,6 +33,7 @@
     <div class="store">
       <h3><%= link_to store.name, store_path(store) %></h3>
       <p><%= store.address %></p>
+      <%= image_tag store.image.url(:medium) %>
       <% if store.available_for_delivery? %>
         <p>Available for delivery</p>
       <% end %>
