@@ -10,8 +10,10 @@
 
 </head>
 <body class="with-top-navbar">
-<%= render 'layouts/header' %>
-<%= yield %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= render 'layouts/header' %>
+  <%= yield %>
 
 </body>
 </html>
