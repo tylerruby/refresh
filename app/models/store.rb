@@ -40,6 +40,27 @@ class Store < ActiveRecord::Base
     ]
   end
 
+  rails_admin do
+    edit do
+      field :name do
+        help "Optional - Will override the chain's name"
+      end
+
+      field :address
+      field :city
+      field :state
+      field :image
+      field :chain
+    end
+
+    list do
+      field :name
+      field :chain
+      field :full_address
+      field :image
+    end
+  end
+
   private
 
   def distance_from_user
