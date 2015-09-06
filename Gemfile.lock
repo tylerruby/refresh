@@ -208,6 +208,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise (= 3.5.1)
+  font-awesome-rails (= 4.4.0.0)
   friendly_id (= 5.1.0)
   geocoder (= 1.2.9)
   jbuilder (~> 2.0)

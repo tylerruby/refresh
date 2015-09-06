@@ -32,6 +32,7 @@ gem 'friendly_id', '5.1.0'
 gem 'devise', '3.5.1'
 gem 'rails_admin', '0.7.0'
 gem 'paperclip', '4.3.0'
+gem 'font-awesome-rails', '4.4.0.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

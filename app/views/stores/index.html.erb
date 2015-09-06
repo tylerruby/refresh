@@ -25,90 +25,19 @@
   </nav>
 </div>
 
-<div class="stores">
+<div class="stores container m-y-md" data-grid="images">
   <% if @stores.empty? %>
     <h2>No stores found in this location</h2>
   <% end %>
   <% @stores.each do |store| %>
     <div class="store">
-      <h3><%= link_to store.name, store_path(store) %></h3>
-      <p><%= store.address %></p>
-      <%= image_tag store.image.url(:medium) %>
-      <% if store.available_for_delivery? %>
-        <p>Available for delivery</p>
+      <%= link_to store_path(store) do %>
+        <%= image_tag store.image.url(:medium) %>
+        <h3><%= store.name %></h3>
+        <% if store.available_for_delivery? %>
+          <i class="available-for-delivery fa fa-truck"></i>
+        <% end %>
       <% end %>
     </div>
   <% end %>
-</div>
-
-<div class="container m-y-md" data-grid="images">
-  <div>
-    <a href="/store">
-      <img data-width="640" data-height="400" src="http://i.imgur.com/hUEDXoJ.png">
-      <h3>Junkman's Daughter</h3>
-    </a>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/3I5KlKI.png">
-    <h3>H and M</h3>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/Ra3w1ve.jpg">
-    <h3>American Apparel</h3>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/Sis8nUB.jpg">
-    <h3>Anthropology</h3>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://media2.fdncms.com/atlanta/imager/urban-outfitters/u/slideshow/11671935/urban_outfitters_poncey_teaser.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://2c2f06a14a9ade4267e6-fb8aac3b3bf42afe824f73b606f0aa4c.r92.cf1.rackcdn.com/tenantlogos/7.png">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="400" data-action="zoom" src="http://www.stushigalstyle.com/wp-content/uploads/2014/02/IMG_6104.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTu_5PyIqPDQPKNnbC2WOnT5CJLjsPnETfK5oFsxhQL-fzZ_OEz8w">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="400" data-action="zoom" src="http://wgcl.images.worldnow.com/images/20067338_BG2.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/pxEMEaP.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/fdGTWmc.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_16.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_17.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_18.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="400" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_1.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_2.jpg">
-  </div>
 </div>

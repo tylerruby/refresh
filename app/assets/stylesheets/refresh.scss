@@ -1,17 +1,34 @@
 /* store page makeup */
-div.container[data-grid="images"] div {
+.container[data-grid="images"] {
+  div {
     position: relative;
+
+    a {
+      color: #FFF;
+
+      img {
+        max-height: 165px;
+      }
+
+      h3 {
+        position: absolute;
+        top: 47%;
+        text-align: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .available-for-delivery {
+        position: absolute;
+        bottom: 2%;
+        right: 2%;
+        font-size: 2em;
+      }
+    }
+  }
 }
 
-div.container[data-grid="images"] div h3 {
-    position: absolute;
-    top: 47%;
-    text-align: center;
-    color: #FFF;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
 /* end store page makeup */
 
 
