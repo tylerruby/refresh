@@ -2,20 +2,26 @@ class Store < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" },
+    default_url: "https://placehold.it/1000x600"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   RADIUS = 10 # miles
   geocoded_by :full_address
   after_validation :geocode, if: -> { address.present? and address_changed? }
 
-  validates :name, :address, :city, :state, presence: true
+  belongs_to :chain
+  validates :address, :city, :state, :chain, presence: true
   scope :by_city, -> (city) { where('lower(city) = ?', city.downcase) }
   scope :order_by_distance, -> (location) { 
     select("#{table_name}.*")
     .select("(#{distance_from_sql(location)}) as distance")
     .order('distance')
   }
+
+  def name
+    super.present? ? super : chain.try(:name)
+  end
 
   def full_address
     [address, city, state].join(', ')
