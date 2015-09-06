@@ -1,6 +1,29 @@
-<h1><%= @store.name %></h1>
-<p><%= @store.address %></p>
-<%= image_tag @store.image.url(:medium) %>
-<% if @store.available_for_delivery? %>
-  <p>Available for delivery</p>
-<% end %>
+<div class="profile-header text-center"
+    style="background-image: url(<%= @store.image.url %>);">
+  <div class="container">
+    <div class="container-inner">
+      <img class="img-circle media-object" src="https://a1.lscdn.net/imgs/5f6f13ed-d99a-4cfc-8aea-ea973447c92f/200_q100.png">
+      <h1 class="profile-header-user"><%= @store.name %></h1>
+      <p class="profile-header-bio">
+      <%= @store.address %>
+      <% if @store.available_for_delivery? %>
+        <i class="available-for-delivery fa fa-truck"></i>
+      <% end %>
+      </p>
+    </div>
+  </div>
+
+  <nav class="profile-header-nav">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#">Stores</a>
+      </li>
+      <li>
+        <a href="#">Clothes</a>
+      </li>
+      <li>
+        <a href="#">New</a>
+      </li>
+    </ul>
+  </nav>
+</div>
