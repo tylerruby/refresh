@@ -15,4 +15,4 @@ Chain.create!([
   { name: "It's Fashion", stores: [Store.new(address: '6385 Old National Hwy', city: 'Atlanta', state: 'GA')] }
 ])
 
-User.create!(email: 'name@example.com', password: '12345678')
+User.create!(email: ENV['ADMIN_EMAIL'] || 'name@example.com', password: ENV['ADMIN_PASSWORD'] || '12345678')
