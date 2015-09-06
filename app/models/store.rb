@@ -11,6 +11,7 @@ class Store < ActiveRecord::Base
   after_validation :geocode, if: -> { address.present? and address_changed? }
 
   belongs_to :chain
+  has_many :clothes, through: :chain
   validates :address, :city, :state, :chain, presence: true
   scope :by_city, -> (city) { where('lower(city) = ?', city.downcase) }
   scope :order_by_distance, -> (location) { 

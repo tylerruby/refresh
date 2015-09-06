@@ -11,13 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906003431) do
+ActiveRecord::Schema.define(version: 20150906014235) do
 
   create_table "chains", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "clothes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price_cents",        default: 0,     null: false
+    t.string   "price_currency",     default: "USD", null: false
+    t.integer  "chain_id"
+    t.string   "color"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id"
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
