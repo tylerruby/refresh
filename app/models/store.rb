@@ -2,9 +2,12 @@ class Store < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" },
+  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" },
+    default_url: "https://placehold.it/300x300"
+  has_attached_file :background_image, styles: { medium: "300x300>", thumb: "100x100>" },
     default_url: "https://placehold.it/1000x600"
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :background_image, content_type: /\Aimage\/.*\Z/
 
   RADIUS = 10 # miles
   geocoded_by :full_address
@@ -47,10 +50,15 @@ class Store < ActiveRecord::Base
         help "Optional - Will override the chain's name"
       end
 
+      field :slug do
+        help "Optional - It'll be generated when the record is saved. It's the name that appears in the URL."
+      end
+
       field :address
       field :city
       field :state
-      field :image
+      field :thumbnail
+      field :background_image
       field :chain
     end
 
@@ -58,7 +66,7 @@ class Store < ActiveRecord::Base
       field :name
       field :chain
       field :full_address
-      field :image
+      field :thumbnail
     end
   end
 

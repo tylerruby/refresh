@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906014235) do
+ActiveRecord::Schema.define(version: 20150908000906) do
 
   create_table "chains", force: :cascade do |t|
     t.string   "name"
@@ -55,14 +55,18 @@ ActiveRecord::Schema.define(version: 20150906014235) do
     t.string   "state"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "slug"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
     t.integer  "chain_id"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+    t.string   "background_image_file_name"
+    t.string   "background_image_content_type"
+    t.integer  "background_image_file_size"
+    t.datetime "background_image_updated_at"
   end
 
   add_index "stores", ["chain_id"], name: "index_stores_on_chain_id"
