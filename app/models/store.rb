@@ -11,7 +11,14 @@ class Store < ActiveRecord::Base
 
   RADIUS = 10 # miles
   geocoded_by :full_address
-  after_validation :geocode, if: -> { address.present? and address_changed? }
+  before_validation :geocode, if: -> { address.present? and address_changed? }
+  validate :validate_geolocation
+  def validate_geolocation
+    return if latitude && longitude
+    message = "There was an error when trying to fetch the geolocation for this store. Please try again."
+    errors.add(:latitude, message)
+    errors.add(:longitude, message)
+  end
 
   belongs_to :chain
   has_many :clothes, through: :chain
