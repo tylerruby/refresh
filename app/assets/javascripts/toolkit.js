@@ -2500,11 +2500,22 @@
 
   // IMAGE GRID DATA-API
   // ===================
+  function setupImageGrid () {
+    var options = {
+      resize: true,
+      minMargin: 10,
+      maxMargin: 10,
+      itemSelector: ".item",
+      firstItemClass: "first-item"
+    };
 
-  $(function () {
-    $('[data-grid="images"]').imageGrid()
-  })
+    var grid = $("[data-grid=images]");
+    imagesLoaded(grid, function runRowGrid () {
+      grid.rowGrid(options);
+    });
+  }
 
+  $(setupImageGrid);
 
 }(jQuery);
 

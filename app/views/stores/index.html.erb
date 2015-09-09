@@ -30,7 +30,7 @@
     <h2>No stores found in this location</h2>
   <% end %>
   <% @stores.each do |store| %>
-    <div class="store">
+    <div class="store item">
       <%= link_to store_path(store) do %>
         <%= image_tag store.thumbnail.url %>
         <h3><%= store.name %></h3>
