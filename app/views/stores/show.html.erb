@@ -1,11 +1,19 @@
+<!-- Generating modals for clothes -->
+<% @store.clothes.each do |cloth| %>
+  <%= render 'cloth_modal', cloth: cloth %>
+<% end %>
+
 <div class="profile-header text-center"
-     style="background-image: url(https://res.cloudinary.com/taskrabbit-com/image/upload/b_black,c_fill,h_420,o_70,w_970/v1428972969/jnduwxalbmmgix9lgbbw.jpg);">
+    style="background-image: url(<%= @store.background_image.url %>);">
   <div class="container">
     <div class="container-inner">
       <img class="img-circle media-object" src="https://a1.lscdn.net/imgs/5f6f13ed-d99a-4cfc-8aea-ea973447c92f/200_q100.png">
       <h1 class="profile-header-user"><%= @store.name %></h1>
       <p class="profile-header-bio">
         <%= @store.address %>
+        <% if @store.available_for_delivery? %>
+          <i class="available-for-delivery fa fa-truck"></i>
+        <% end %>
       </p>
     </div>
   </div>
@@ -17,86 +25,29 @@
   <nav class="profile-header-nav">
     <ul class="nav nav-tabs">
       <li class="active">
-        <a href="#">Shirts</a>
+        <a href="#">Stores</a>
       </li>
       <li>
-        <a href="#">Pants</a>
+        <a href="#">Clothes</a>
       </li>
       <li>
-        <a href="#">Shoes</a>
+        <a href="#">New</a>
       </li>
     </ul>
   </nav>
 </div>
 
-<div class="container m-y-md" data-grid="images">
-  <div>
-    <a href="/store">
-      <img data-width="640" data-height="400" src="http://i.imgur.com/hUEDXoJ.png">
-      <h3>Junkman's Daughter</h3>
-    </a>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/3I5KlKI.png">
-    <h3>H and M</h3>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/Ra3w1ve.jpg">
-    <h3>American Apparel</h3>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/Sis8nUB.jpg">
-    <h3>Anthropology</h3>
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://media2.fdncms.com/atlanta/imager/urban-outfitters/u/slideshow/11671935/urban_outfitters_poncey_teaser.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://2c2f06a14a9ade4267e6-fb8aac3b3bf42afe824f73b606f0aa4c.r92.cf1.rackcdn.com/tenantlogos/7.png">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="400" data-action="zoom" src="http://www.stushigalstyle.com/wp-content/uploads/2014/02/IMG_6104.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTu_5PyIqPDQPKNnbC2WOnT5CJLjsPnETfK5oFsxhQL-fzZ_OEz8w">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="400" data-action="zoom" src="http://wgcl.images.worldnow.com/images/20067338_BG2.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/pxEMEaP.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://i.imgur.com/fdGTWmc.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_16.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_17.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_18.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="400" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_1.jpg">
-  </div>
-
-  <div>
-    <img data-width="640" data-height="640" data-action="zoom" src="http://bootstrap-themes.github.io/application/assets/img/instagram_2.jpg">
-  </div>
+<div class="clothes container m-y-md" data-grid="images">
+  <% if @store.clothes.empty? %>
+    <h2>No products registered for this store yet</h2>
+  <% end %>
+  <% @store.clothes.each do |cloth| %>
+    <div class="cloth item">
+      <%= link_to '#' + modal_id(cloth), 'data-toggle': 'modal' do%>
+        <%= image_tag cloth.image.url(:medium) %>
+        <h3><%= cloth.name %></h3>
+      <% end %>
+      <%= render 'cloth_modal', cloth: cloth %>
+    </div>
+  <% end %>
 </div>

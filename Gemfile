@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
@@ -29,6 +29,11 @@ gem 'pg', group: :production
 
 gem 'geocoder', '1.2.9'
 gem 'friendly_id', '5.1.0'
+gem 'devise', '3.5.1'
+gem 'rails_admin', '0.7.0'
+gem 'paperclip', '4.3.0'
+gem 'font-awesome-rails', '4.4.0.0'
+gem 'money-rails', '1.4.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -41,7 +46,7 @@ gem 'friendly_id', '5.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
