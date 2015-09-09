@@ -43,7 +43,7 @@
   <% end %>
   <% @store.clothes.each do |cloth| %>
     <div class="cloth item">
-      <%= link_to '#' + modal_id(cloth), 'data-toggle': 'modal' do%>
+      <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
         <%= image_tag cloth.image.url(:medium) %>
         <h3><%= cloth.name %></h3>
       <% end %>
