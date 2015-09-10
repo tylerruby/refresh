@@ -2509,10 +2509,12 @@
       firstItemClass: "first-item"
     };
 
-    var grid = $("[data-grid=images]");
+    var grid = $("[data-grid=rowGrid]");
     imagesLoaded(grid, function runRowGrid () {
       grid.rowGrid(options);
     });
+
+    $("[data-grid=images]").imageGrid();
   }
 
   $(setupImageGrid);
