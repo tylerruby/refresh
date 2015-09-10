@@ -11,18 +11,15 @@ class Store < ActiveRecord::Base
 
   RADIUS = 10 # miles
   geocoded_by :full_address
-  before_validation :geocode, if: -> { address.present? and address_changed? }
-  validate :validate_geolocation
-  def validate_geolocation
-    return if latitude && longitude
-    message = "There was an error when trying to fetch the geolocation for this store. Please try again."
-    errors.add(:latitude, message)
-    errors.add(:longitude, message)
-  end
 
   belongs_to :chain
   has_many :clothes, through: :chain
+
+  before_validation :geocode, if: -> { address.present? and address_changed? }
+
+  validate :validate_geolocation
   validates :address, :city, :state, :chain, presence: true
+
   scope :by_city, -> (city) { where('lower(city) = ?', city.downcase) }
   scope :order_by_distance, -> (location) { 
     select("#{table_name}.*")
@@ -86,5 +83,12 @@ class Store < ActiveRecord::Base
     # calculation, so it may not be defined if the model was retrived
     # in another way. In this case, we default to an infinite distance.
     Float::INFINITY
+  end
+
+  def validate_geolocation
+    return if latitude && longitude
+    message = "There was an error when trying to fetch the geolocation for this store. Please try again."
+    errors.add(:latitude, message)
+    errors.add(:longitude, message)
   end
 end
