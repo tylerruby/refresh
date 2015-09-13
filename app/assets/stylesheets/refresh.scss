@@ -157,5 +157,24 @@ input[type="color"]:focus,
 
 .home-header {
   background: #fff !important;
-  color: #000 !important;
+  color: #fff !important;
+    width: 100% !important;
+    background-color: #36454f !important;
+    background-image: url("http://i.imgur.com/yrQINfD.jpg?1");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height:400px;
+
+  h1 {
+  text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  font-size: 80px !important;
+  }
+  h2 {
+  text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  font-size: 45px !important;
+  }
+  h3 {
+  text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  }
 }

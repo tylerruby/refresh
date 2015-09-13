@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   root 'pages#landing'
   get 'city/' => 'pages#city'
   get 'notifications/' => 'pages#notifications'
-  get 'landing/' => 'pages#landing'
   get 'home/' => 'pages#home'
 
   # Example of regular route:

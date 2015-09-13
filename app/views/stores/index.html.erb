@@ -31,7 +31,7 @@
   <% @stores.each do |store| %>
     <div class="store item">
       <%= link_to store_path(store) do %>
-        <%= image_tag store.thumbnail.url %>
+        <%= image_tag store.thumbnail.url, class: "store-item" %>
         <h3><%= store.name %></h3>
         <% if store.available_for_delivery? %>
           <i class="available-for-delivery fa fa-truck"></i>
