@@ -1,3 +1,5 @@
+// http://brunjo.github.io/rowGrid.js/
+
 (function($){
   $.fn.rowGrid = function( options ) {
     return this.each(function() {
