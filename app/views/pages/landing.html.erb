@@ -14,7 +14,7 @@
           <div class="input-group">
             <%= hidden_field_tag :latitude %>
             <%= hidden_field_tag :longitude %>
-            <%= search_field_tag :address, nil, class: "form-control input-lg", id: "gmaps-autocomplete", placeholder: "Enter your address", required: true %>
+            <%= search_field_tag :address, nil, class: "form-control input-lg", id: "gmaps-autocomplete", autofocus: true, placeholder: "Enter your address", required: true %>
             <span class="input-group-btn">
               <%= button_tag "Go!", value: "search", class: "btn btn-primary btn-lg" %>
             </span>
@@ -35,36 +35,20 @@
         <a href="/profile/">
           <img
             class="panel-profile-img"
-            src="http://therandywhite.com/wp-content/uploads/2014/11/white.png">
+            src="https://o.quizlet.com/nWewxlKydOUi3Ma9tRVpGA_m.jpg">
         </a>
 
-        <h5 class="panel-title">
+        <h4 class="panel-title">
           <a class="text-inherit" href="/profile/">Type in your address</a>
-        </h5>
+        </h4>
 
-        <p class="m-b-md">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p>
-
-        <ul class="panel-menu">
-          <li class="panel-menu-item">
-            <a href="#userModal" class="text-inherit" data-toggle="modal">
-              Friends
-              <h5 class="m-y-0">12M</h5>
-            </a>
-          </li>
-
-          <li class="panel-menu-item">
-            <a href="#userModal" class="text-inherit" data-toggle="modal">
-              Enemies
-              <h5 class="m-y-0">1</h5>
-            </a>
-          </li>
-        </ul>
+        <p class="m-b-md">See what stores are available for delivery!</p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default panel-profile m-b-md">
-      <div class="panel-heading" style="background-image: url(https://c2.staticflickr.com/6/5258/5402344439_984df321b6_b.jpg);"></div>
+      <div class="panel-heading" style="background-image: url(http://www.c-heads.com/wp-content/uploads/2015/01/COPYRIGHT-2015-Summerville-by-Cameron-Mackie-for-C-Heads-23.jpg);"></div>
       <div class="panel-body text-center">
         <a href="/profile/">
           <img
@@ -73,32 +57,16 @@
         </a>
 
         <h5 class="panel-title">
-          <a class="text-inherit" href="/profile/">Dave Gamache</a>
+          <a class="text-inherit" href="/profile/">Find Clothes You Want</a>
         </h5>
 
-        <p class="m-b-md">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p>
-
-        <ul class="panel-menu">
-          <li class="panel-menu-item">
-            <a href="#userModal" class="text-inherit" data-toggle="modal">
-              Friends
-              <h5 class="m-y-0">12M</h5>
-            </a>
-          </li>
-
-          <li class="panel-menu-item">
-            <a href="#userModal" class="text-inherit" data-toggle="modal">
-              Enemies
-              <h5 class="m-y-0">1</h5>
-            </a>
-          </li>
-        </ul>
+        <p class="m-b-md">Choose from the hottest new styles in your area!</p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default panel-profile m-b-md">
-      <div class="panel-heading" style="background-image: url(https://c2.staticflickr.com/6/5258/5402344439_984df321b6_b.jpg);"></div>
+      <div class="panel-heading" style="background-image: url(http://2v6d6r273itb1maegw3lorhx.wpengine.netdna-cdn.com/wp-content/uploads/2015/07/clothing.jpg);"></div>
       <div class="panel-body text-center">
         <a href="/profile/">
           <img
@@ -107,33 +75,17 @@
         </a>
 
         <h5 class="panel-title">
-          <a class="text-inherit" href="/profile/">Dave Gamache</a>
+          <a class="text-inherit" href="/profile/">Answer Your Door</a>
         </h5>
 
-        <p class="m-b-md">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p>
-
-        <ul class="panel-menu">
-          <li class="panel-menu-item">
-            <a href="#userModal" class="text-inherit" data-toggle="modal">
-              Friends
-              <h5 class="m-y-0">12M</h5>
-            </a>
-          </li>
-
-          <li class="panel-menu-item">
-            <a href="#userModal" class="text-inherit" data-toggle="modal">
-              Enemies
-              <h5 class="m-y-0">1</h5>
-            </a>
-          </li>
-        </ul>
+        <p class="m-b-md">Ding dong. Your clothes have arrived!</p>
       </div>
     </div>
   </div>
 </div>
 
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-10 col-md-offset-2">
 <ul class="cities">
   <% @cities.each do |city| %>
     <li><%= link_to city, "/#{city.parameterize}" %></li>

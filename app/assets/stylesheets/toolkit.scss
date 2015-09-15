@@ -1615,19 +1615,19 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #ffffff;
-  background-color: #FB254F;
-  border-color: #FB254F;
+  background-color: #000;
+  border-color: #000;
 }
 .btn-primary:focus,
 .btn-primary.focus {
   color: #ffffff;
-  background-color: #2579a9;
-  border-color: #133d55;
+  background-color: #333;
+  border-color: #333;
 }
 .btn-primary:hover {
   color: #ffffff;
-  background-color: #2579a9;
-  border-color: #1f648b;
+  background-color: #333;
+  border-color: #333;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -1673,7 +1673,7 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
   background-color: #3097d1;
-  border-color: #FB254F;
+  border-color: #000;
 }
 .btn-primary .badge {
   color: #3097d1;
@@ -4630,7 +4630,7 @@ button.list-group-item-danger.active:focus {
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 25px;
   color: inherit;
 }
 .panel-title > a,
@@ -6011,9 +6011,9 @@ fieldset[disabled] .btn-default-outline.active {
   background-color: #536570;
 }
 .btn-primary-outline {
-  color: #FB254F;
+  color: #000;
   background-color: transparent;
-  border-color: #FB254F;
+  border-color: #000;
 }
 .btn-primary-outline:focus,
 .btn-primary-outline.focus,
@@ -6022,7 +6022,7 @@ fieldset[disabled] .btn-default-outline.active {
 .btn-primary-outline.active,
 .open > .dropdown-toggle.btn-primary-outline {
   color: #ffffff;
-  background-color: #FB254F;
+  background-color: #000;
   box-shadow: none;
 }
 .btn-primary-outline.disabled,
@@ -6043,11 +6043,11 @@ fieldset[disabled] .btn-primary-outline:active,
 .btn-primary-outline.disabled.active,
 .btn-primary-outline[disabled].active,
 fieldset[disabled] .btn-primary-outline.active {
-  border-color: #FB254F;
+  border-color: #000;
 }
 .btn-primary-outline .badge {
   color: #ffffff;
-  background-color: #FB254F;
+  background-color: #000;
 }
 .btn-success-outline {
   color: #44a762;
@@ -8258,7 +8258,7 @@ img.zoom-img {
   position: relative;
   display: table;
   width: 100%;
-  height: 300px;
+  height: 00px;
   padding-bottom: 48px;
   margin-bottom: 0;
   text-align: center;
@@ -8292,7 +8292,7 @@ img.zoom-img {
 }
 @media (min-width: 480px) {
   .profile-header {
-    height: 300px;
+    height: 200px;
   }
 }
 @media (min-width: 768px) {
@@ -8480,7 +8480,7 @@ img.zoom-img {
   background-size: cover;
 }
 .panel-profile-img {
-  max-width: 100px;
+  max-width: 60px;
   margin-top: -70px;
   margin-bottom: 5px;
   border-radius: 100%;
