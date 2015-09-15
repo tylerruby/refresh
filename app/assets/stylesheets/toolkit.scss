@@ -8288,16 +8288,16 @@ img.zoom-img {
 }
 .profile-header-user {
   margin-top: 20px;
-  color: #fff;
+  color: #000
 }
 @media (min-width: 480px) {
   .profile-header {
-    height: 400px;
+    height: 300px;
   }
 }
 @media (min-width: 768px) {
   .profile-header {
-    height: 350px;
+    height: 250px;
   }
   .profile-header .media-object {
     width: 110px;
@@ -8321,11 +8321,12 @@ img.zoom-img {
 }
 .profile-header-nav .nav-tabs > li > a {
   transition: color 0.2s ease-in-out;
+  color:#666
 }
 .profile-header-nav .nav-tabs > li > a:focus,
 .profile-header-nav .nav-tabs > li > a:hover,
 .profile-header-nav .nav > li.active > a {
-  color: #fff;
+  color: #000;
   background: transparent;
   border-color: transparent;
 }
@@ -8482,7 +8483,6 @@ img.zoom-img {
   max-width: 100px;
   margin-top: -70px;
   margin-bottom: 5px;
-  border: 3px solid #fff;
   border-radius: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
