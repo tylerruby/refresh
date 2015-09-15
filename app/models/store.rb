@@ -48,6 +48,13 @@ class Store < ActiveRecord::Base
     ]
   end
 
+  # Due to Rails Admin setting the slug to empty string
+  def slug=(value)
+    if value.present?
+      write_attribute(:slug, value)
+    end
+  end
+
   rails_admin do
     edit do
       field :name do
