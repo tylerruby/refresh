@@ -143,8 +143,8 @@
   width: 100%;
 }
 .landing-search {
-  border-bottom-left-radius: 3px !important;
-  border-top-left-radius: 3px !important;
+  border-bottom-left-radius: 4px !important;
+  border-top-left-radius: 4px !important;
   border-bottom-right-radius: 0px !important;
   border-top-right-radius: 0px !important;
   border: 1px solid #000 !important;
@@ -177,6 +177,18 @@ input[type="color"]:focus,
     transition: all 0.9s ease-in-out 0s;
 }
 
+@media (min-width: 480px) {
+  .home-header {
+    height: 300px;
+  }
+}
+@media (min-width: 768px) {
+  .home-header {
+    height:350px;
+  }
+}
+
+
 .home-header {
     color: #333 !important;
     width: 100% !important;
@@ -184,7 +196,6 @@ input[type="color"]:focus,
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    height:400px;
 
   h1 {
   font-size: 80px !important;
