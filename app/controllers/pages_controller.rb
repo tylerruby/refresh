@@ -5,9 +5,6 @@ class PagesController < ApplicationController
   def store
   end
 
-  def city
-  end
-
   def notifications
   end
 

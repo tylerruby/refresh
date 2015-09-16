@@ -142,6 +142,13 @@
 .app-brand img {
   width: 100%;
 }
+.landing-search {
+  border-bottom-left-radius: 3px !important;
+  border-top-left-radius: 3px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border: 1px solid #000 !important;
+}
 
 textarea:focus,
 input[type="text"]:focus,
@@ -171,25 +178,20 @@ input[type="color"]:focus,
 }
 
 .home-header {
-
-  color: #fff !important;
+    color: #333 !important;
     width: 100% !important;
-    background-color: #36454f !important;
-    background-image: url("http://i.huffpost.com/gen/2836136/images/o-CLOSET-facebook.jpg") !important;
+    background-color: #fff !important;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     height:400px;
 
   h1 {
-  text-shadow: 0 0 2px rgba(0,0,0,0.6);
   font-size: 80px !important;
   }
   h2 {
-  text-shadow: 0 0 2px rgba(0,0,0,0.6);
   font-size: 45px !important;
   }
   h3 {
-  text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
 }

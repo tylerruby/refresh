@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'pages#landing'
-  get 'city/' => 'pages#city'
   get 'notifications/' => 'pages#notifications'
   get 'home/' => 'pages#home'
 
