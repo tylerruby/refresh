@@ -147,7 +147,7 @@
   border-top-left-radius: 4px !important;
   border-bottom-right-radius: 0px !important;
   border-top-right-radius: 0px !important;
-  border: 1px solid #000 !important;
+  border: 1px solid rebeccapurple !important
 }
 
 textarea:focus,
@@ -173,7 +173,7 @@ input[type="color"]:focus,
 .spin:hover
 {
     cursor: default;
-    transform: rotate(360deg);
+    transform: rotate(90deg);
     transition: all 0.9s ease-in-out 0s;
 }
 
