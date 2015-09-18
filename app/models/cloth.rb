@@ -6,7 +6,8 @@ class Cloth < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   belongs_to :chain
-  validates :name, :price, :chain, presence: true
+  has_many :cloth_variants
+  validates :name, :chain, presence: true
 
   rails_admin do
     edit do
