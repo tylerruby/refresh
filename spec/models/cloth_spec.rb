@@ -9,14 +9,14 @@ RSpec.describe Cloth, type: :model do
     end
   end
 
-  it "has many cloth variants" do
+  it "has many cloth instances" do
     cloth = create(:cloth)
-    expect(cloth.cloth_variants).to eq []
+    expect(cloth.cloth_instances).to eq []
 
-    cloth_variant = build(:cloth_variant, cloth: nil)
-    expect { cloth.cloth_variants << cloth_variant }.not_to raise_error
+    cloth_instance = build(:cloth_instance, cloth: nil)
+    expect { cloth.cloth_instances << cloth_instance }.not_to raise_error
 
-    expect(cloth.cloth_variants.reload).to eq [cloth_variant]
+    expect(cloth.cloth_instances.reload).to eq [cloth_instance]
   end
 
   describe "#colors" do

@@ -6,7 +6,7 @@ class Cloth < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   belongs_to :chain
-  has_many :cloth_variants
+  has_many :cloth_instances
   validates :name, :chain, presence: true
 
   def colors=(values)

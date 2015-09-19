@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918141339) do
+ActiveRecord::Schema.define(version: 20150919232949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20150918141339) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cloth_variants", force: :cascade do |t|
+  create_table "cloth_instances", force: :cascade do |t|
     t.integer  "cloth_id"
     t.integer  "gender"
     t.string   "size"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150918141339) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "cloth_variants", ["cloth_id"], name: "index_cloth_variants_on_cloth_id", using: :btree
+  add_index "cloth_instances", ["cloth_id"], name: "index_cloth_instances_on_cloth_id", using: :btree
 
   create_table "clothes", force: :cascade do |t|
     t.string   "name"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150918141339) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "cloth_variants", "clothes"
+  add_foreign_key "cloth_instances", "clothes"
   add_foreign_key "clothes", "chains"
   add_foreign_key "stores", "chains"
 end
