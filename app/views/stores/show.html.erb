@@ -1,17 +1,18 @@
+<%= render 'layouts/header' %>
+
 <!-- Generating modals for clothes -->
 <% @store.clothes.each do |cloth| %>
   <%= render 'cloth_modal', cloth: cloth %>
 <% end %>
 
-<div class="profile-header text-center"
-    style="background-image: url(<%= @store.background_image.url %>);">
+<div class="profile-header text-center">
   <div class="container">
     <div class="container-inner">
       <img class="img-circle media-object" style="margin-top:50px;" src="http://i.imgur.com/mVi6JGA.png">
 
       <p class="profile-header-bio">
         <br />
-        <%= link_to @store.address, "https://www.google.com/maps/place/" + @store.address + ", " + @store.city, target: "_blank" %>
+        <%= link_to @store.address + ", " + @store.city, "https://www.google.com/maps/place/" + @store.address + ", " + @store.city, target: "_blank" %>
         <% if @store.available_for_delivery? %>
           <i class="available-for-delivery fa fa-truck"></i>
         <% end %>
@@ -43,6 +44,7 @@
       <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
         <%= image_tag cloth.image.url(:medium) %>
         <h3><%= cloth.name %></h3>
+        <i class="heart-this fa fa-heart-o"></i>
       <% end %>
       <%= render 'cloth_modal', cloth: cloth %>
     </div>

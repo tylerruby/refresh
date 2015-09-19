@@ -25,7 +25,17 @@
       right: 2%;
       font-size: 2em;
     }
+    .heart-this {
+      position: absolute;
+      top: 2%;
+      left: 2%;
+      font-size: 1.5em;
+    }
+    .heart-this:hover {
+      color:#00bf8f;
+    }
   }
+
 
   /* clearfix */
   &:before, &:after {
@@ -53,6 +63,9 @@
       background-size: 100% 100%;
       pointer-events: none;
     }
+  }
+  .item:hover {
+    background-color:transparent;
   }
   .item img {
     max-width: 100%;
@@ -147,7 +160,27 @@
   border-top-left-radius: 4px !important;
   border-bottom-right-radius: 0px !important;
   border-top-right-radius: 0px !important;
-  border: 1px solid #00bf8f !important
+  border: 1px solid #00bf8f !important;
+  height:60px !important;
+  font-size:23px !important;
+}
+.landing-button {
+  height:60px !important;
+  width:80px !important;
+}
+.landing-login {
+  position:absolute;
+  top:10px;
+  right:80px;
+  color:#fff;
+  font-size: 25px;
+}
+.landing-logo {
+  position:absolute;
+  width:36px;
+  height:40px;
+  left:80px;
+  top:10px;
 }
 
 textarea:focus,
@@ -166,7 +199,7 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {   
-  border-color: #000;
+  border-color: #00bf8f;
   outline: 0 none;
 }
 
@@ -184,26 +217,40 @@ input[type="color"]:focus,
 }
 @media (min-width: 768px) {
   .home-header {
-    height:550px;
+    height:650px;
   }
 }
 
-
 .home-header {
-    color: #000 !important;
-    width: 100% !important;
-    background-color: #fff !important;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    border-shadow:1px grey solid;
-
+  color: #fff !important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-shadow:1px grey solid;
+  background-image: url('http://i.imgur.com/RZua092.jpg') !important;
   h1 {
-  font-size: 60px !important;
+    font-size: 80px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
+    opacity:1;
   }
   h2 {
-  font-size: 45px !important;
+    font-size: 50px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
   h3 {
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
+}
+.numeral {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding-top: 10px;
+    color: white;
+    font-size: 40px;
+    line-height: 43px;
+    background-color: #333;
+    border-radius: 40px;
+    margin-bottom: 20px;
 }

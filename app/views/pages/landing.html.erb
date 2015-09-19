@@ -1,15 +1,16 @@
-<div id="jumbotron" class="jumbotron home-header">
-  <div class="col-md-12">
-  <br class="hidden-xs">
-  <br class="hidden-xs">
-  <br class="hidden-xs">
-  <br class="hidden-xs">
-
-    <h1 class="text-center hidden-sm hidden-xs">Clothing On-Demand</h1>
-    <h2 class="text-center hidden-md hidden-lg text-center">Clothing On-Demand</h2>
-    <h3 class="text-center hidden-sm hidden-xs">Get clothes delivered in an hour</h3>
-    <h3 class="text-center hidden-md hidden-lg text-center">Get clothes delivered in an hour</h3>
-  </div>
+  <%= render 'layouts/logo' %>
+  <div id="jumbotron" class="jumbotron home-header">
+    <div class="col-md-12">
+      <br class="hidden-xs">
+      <br class="hidden-xs">
+      <br class="hidden-xs">
+      <br class="hidden-xs">
+      <br class="hidden-xs ">
+      <h1 class="text-center hidden-sm hidden-xs">Clothing On-Demand</h1>
+      <h2 class="text-center hidden-md hidden-lg text-center">Clothing On-Demand</h2>
+      <h3 class="text-center hidden-sm hidden-xs">Get clothes delivered in an hour</h3>
+      <h3 class="text-center hidden-md hidden-lg text-center">Get clothes delivered in an hour</h3>
+    </div>
   <div class="col-md-4 col-md-offset-4">
   	<br class="hidden-xs hidden-sm">
   	<br />
@@ -21,7 +22,7 @@
             <%= hidden_field_tag :longitude %>
             <%= search_field_tag :address, nil, class: "form-control input-lg landing-search", id: "gmaps-autocomplete", autofocus: true, placeholder: "Enter your address", required: true %>
             <span class="input-group-btn">
-              <%= button_tag "Go!", value: "search", class: "btn btn-primary btn-lg" %>
+              <%= button_tag "Go!", value: "search", class: "btn btn-primary btn-lg landing-button" %>
             </span>
           </div><!-- /input-group -->
         <% end %>
@@ -32,72 +33,57 @@
   <div class="clearfix"></div>
 </div>
 
-<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-10 col-md-offset-1">
+<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1">
   <div class="col-md-4">
     <div class="panel panel-default panel-profile m-b-md">
-      <div class="panel-heading" style="background-image: url(http://www.clickinmoms.com/blog/wp-content/uploads/2012/09/DSC7121.jpg);"></div>
       <div class="panel-body text-center">
         <a href="/profile/">
-          <img
-            class="panel-profile-img"
-            src="http://i.imgur.com/llCLu6u.png">
+          <div class="numeral">1</div>
         </a>
-
         <h4 class="panel-title">
           <a class="text-inherit" href="/profile/">Type in your address</a>
         </h4>
-
         <p class="m-b-md">See what stores are available for delivery!</p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default panel-profile m-b-md">
-      <div class="panel-heading" style="background-image: url(http://thingd-media-ec5.thefancy.com/default/261034337_b4263ab324f1.jpg);"></div>
       <div class="panel-body text-center">
         <a href="/profile/">
-          <img
-            class="panel-profile-img"
-            src="http://i.imgur.com/oyivRgS.png">
+          <div class="numeral">2</div>
         </a>
-
         <h5 class="panel-title">
           <a class="text-inherit" href="/profile/">Find Clothes You Want</a>
         </h5>
-
         <p class="m-b-md">Choose from the hottest new styles in your area!</p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default panel-profile m-b-md">
-      <div class="panel-heading" style="background-image: url(http://images2.fanpop.com/images/photos/4500000/The-door-photography-4539285-2560-1920.jpg);"></div>
       <div class="panel-body text-center">
         <a href="/profile/">
-          <img
-            class="panel-profile-img"
-            src="http://i.imgur.com/v5VdO5q.png">
+          <div class="numeral">3</div>
         </a>
-
         <h5 class="panel-title">
           <a class="text-inherit" href="/profile/">Answer Your Door</a>
         </h5>
-
         <p class="m-b-md">Try on those new clothes!</p>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row">
-<div class="col-md-10 col-md-offset-2">
-<ul class="cities">
-  <% @cities.each do |city| %>
-    <li><%= link_to city, "/#{city.parameterize}" %></li>
-  <% end %>
-</ul>
-</div>
-</div>
+
+  <div class="col-md-10 col-md-offset-2">
+    <ul class="cities">
+      <% @cities.each do |city| %>
+        <li><%= link_to city, "/#{city.parameterize}" %></li>
+      <% end %>
+    </ul>
+  </div>
+
 
 <!-- Loading Google Maps API only for this page -->
 <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&amp;libraries=places&amp;callback=initGoogleMapsAutocomplete" async="" defer=""></script>
