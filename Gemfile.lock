@@ -258,7 +258,7 @@ DEPENDENCIES
   jquery-turbolinks
   money-rails (= 1.4.1)
   paperclip (= 4.3.0)
-  pg
+  pg (= 0.18.2)
   pry
   rails (= 4.2.3)
   rails_12factor

@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'jquery-turbolinks'
 gem 'rails_12factor', group: :production
-gem 'pg', group: :production
+gem 'pg', '0.18.2'
 
 gem 'geocoder', '1.2.9'
 gem 'friendly_id', '5.1.0'

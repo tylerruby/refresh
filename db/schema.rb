@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150918053518) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cart_items", force: :cascade do |t|
     t.integer  "owner_id"
     t.string   "owner_type"
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150918053518) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "cloth_variants", ["cloth_id"], name: "index_cloth_variants_on_cloth_id"
+  add_index "cloth_variants", ["cloth_id"], name: "index_cloth_variants_on_cloth_id", using: :btree
 
   create_table "clothes", force: :cascade do |t|
     t.string   "name"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 20150918053518) do
     t.datetime "image_updated_at"
   end
 
-  add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id"
+  add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -70,10 +73,10 @@ ActiveRecord::Schema.define(version: 20150918053518) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "stores", force: :cascade do |t|
     t.string   "name"
@@ -96,8 +99,8 @@ ActiveRecord::Schema.define(version: 20150918053518) do
     t.datetime "background_image_updated_at"
   end
 
-  add_index "stores", ["chain_id"], name: "index_stores_on_chain_id"
-  add_index "stores", ["slug"], name: "index_stores_on_slug", unique: true
+  add_index "stores", ["chain_id"], name: "index_stores_on_chain_id", using: :btree
+  add_index "stores", ["slug"], name: "index_stores_on_slug", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -114,7 +117,10 @@ ActiveRecord::Schema.define(version: 20150918053518) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "cloth_variants", "clothes"
+  add_foreign_key "clothes", "chains"
+  add_foreign_key "stores", "chains"
 end
