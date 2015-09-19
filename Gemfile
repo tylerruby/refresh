@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
@@ -34,6 +34,7 @@ gem 'rails_admin', '0.7.0'
 gem 'paperclip', '4.3.0'
 gem 'font-awesome-rails', '4.4.0.0'
 gem 'money-rails', '1.4.1'
+gem 'acts_as_shopping_cart', '0.3.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -55,4 +56,5 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails', '3.3.3'
+  gem 'factory_girl_rails', '4.5.0'
 end
