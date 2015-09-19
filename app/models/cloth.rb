@@ -9,10 +9,21 @@ class Cloth < ActiveRecord::Base
   has_many :cloth_variants
   validates :name, :chain, presence: true
 
+  def colors=(values)
+    values = values.split(',') if values.is_a? String
+    write_attribute(:colors, values.map(&:strip))
+  end
+
   rails_admin do
     edit do
       field :name
       field :price
+      field :colors do
+        help "Optional - Type a list of colors separated by comma. Ex: red, blue"
+        formatted_value do
+          value.join(', ')
+        end
+      end
       field :image
       field :chain
     end
@@ -26,6 +37,7 @@ class Cloth < ActiveRecord::Base
         end
       end
 
+      field :colors
       field :image
       field :chain
     end

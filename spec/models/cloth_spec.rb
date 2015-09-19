@@ -18,4 +18,28 @@ RSpec.describe Cloth, type: :model do
 
     expect(cloth.cloth_variants.reload).to eq [cloth_variant]
   end
+
+  describe "#colors" do
+    let(:cloth) { build(:cloth) }
+
+    it "splits string containing colors" do
+      cloth.colors = "red,blue"
+      expect(cloth.colors).to eq %w(red blue)
+    end
+
+    it "removes whitespace from colors" do
+      cloth.colors = "  red  ,  blue  "
+      expect(cloth.colors).to eq %w(red blue)
+    end
+
+    it "accepts an array" do
+      cloth.colors = %w(red blue)
+      expect(cloth.colors).to eq %w(red blue)
+    end
+
+    it "removes whitepsace from colors in array" do
+      cloth.colors = ["  red  ", "  blue  "]
+      expect(cloth.colors).to eq %w(red blue)
+    end
+  end
 end
