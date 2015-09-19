@@ -11,4 +11,7 @@ class PagesController < ApplicationController
   def landing
     @cities = Store.select(:city).distinct.map(&:city)
   end
+
+  def login
+  end
 end
