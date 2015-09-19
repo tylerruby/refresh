@@ -184,12 +184,26 @@
 }
 
 @media (max-width: 480px) {
+  .landing-search {
+    border-bottom-left-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border: 1px solid #00bf8f !important;
+    height:45px !important;
+    font-size:23px !important;
+  }
+  .landing-button {
+    height:45px !important;
+    width:60px !important;
+  }
   .landing-login {
     position:absolute;
     top:10px;
     right:20px;
     color:#fff;
-    font-size: 15px;
+    font-size: 17px;
+    text-decoration:underline;
   }
   .landing-logo {
     position:absolute;
@@ -286,4 +300,14 @@ input[type="color"]:focus,
     background-color: #333;
     border-radius: 40px;
     margin-bottom: 20px;
+}
+.footer {
+  background:#fff;
+  height:50px;
+}
+.footer-text {
+  padding-top:12px;
+}
+.footer-link {
+  padding:10px;
 }
