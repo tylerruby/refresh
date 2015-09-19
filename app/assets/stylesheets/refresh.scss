@@ -327,4 +327,18 @@ input[type="color"]:focus,
     letter-spacing: 2px;
     color: #fff;
     cursor: pointer;
+    border-radius: 4px;
+}
+.facebook {
+    margin-right: 10px;
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    background-image: url("http://i.imgur.com/YKTsYzt.png");
+    background-repeat: no-repeat;
+    background-size: 10px 20px;
 }

@@ -3,7 +3,13 @@
 <div class="profile-header text-center">
   <div class="container">
     <div class="container-inner">
-      <h1 class="profile-header-user" style=""><%= @city %></h1>
+      <h1 class="profile-header-user" style="">
+        <% if @stores.empty? %>
+          <h2>We'll be in <%= @city %> soon!</h2>
+        <% else %>
+        <%= @city %>
+        <% end %>
+      </h1>
     </div>
   </div>
   <nav class="profile-header-nav">
@@ -87,8 +93,11 @@
 
 <div class="stores container m-y-md" data-grid="rowGrid">
   <% if @stores.empty? %>
-    <h2>No stores found in this location</h2>
+    <a href="/atlanta">
+      <img src="http://www.hilton.com/top-destinations/assets/uploads/hero-images/Destinations_Header_Atlanta_2.jpg" class="col-md-6" />
+    </a>
   <% end %>
+
   <% @stores.each do |store| %>
     <div class="store item">
       <%= link_to store_path(store) do %>
