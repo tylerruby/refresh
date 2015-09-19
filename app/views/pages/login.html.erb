@@ -7,6 +7,14 @@
       </a>
 
       <div class="form-group">
+        <a id="facebook-button" ng-click="startLogin()" ng-disabled="!facebookReady || isSubmitting" class="fb-button">
+            <span class="facebook"></span> Connect with Facebook
+          </a>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
         <input class="form-control" placeholder="Username">
       </div>
 

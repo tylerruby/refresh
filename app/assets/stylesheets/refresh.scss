@@ -311,3 +311,20 @@ input[type="color"]:focus,
 .footer-link {
   padding:10px;
 }
+.fb-button {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 15px;
+    background-color: #4660a4;
+    text-align: center;
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: pointer;
+}
