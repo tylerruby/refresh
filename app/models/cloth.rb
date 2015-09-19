@@ -13,7 +13,6 @@ class Cloth < ActiveRecord::Base
     edit do
       field :name
       field :price
-      field :color
       field :image
       field :chain
     end
@@ -27,7 +26,6 @@ class Cloth < ActiveRecord::Base
         end
       end
 
-      field :color
       field :image
       field :chain
     end
