@@ -94,6 +94,16 @@ RSpec.describe CartController, type: :controller do
       do_action
       expect(cart.reload.shopping_cart_items.last.item).to eq ClothInstance.last
     end
+
+    it "adds equal cloth instance to the existing cart item" do
+      do_action
+      do_action
+
+      cart_item = CartItem.last
+      expect(Cart.last.shopping_cart_items).to eq [cart_item]
+      expect(cart_item.quantity).to eq quantity * 2
+      expect(cart_item.price).to eq cloth.price * quantity * 2
+    end
   end
 
   describe "GET #remove" do
@@ -103,7 +113,7 @@ RSpec.describe CartController, type: :controller do
 
     before do
       request.env["HTTP_REFERER"] = previous_url
-      cart.add(cloth_instance, cloth_instance.cloth.price)
+      cart.add(cloth_instance, cloth_instance.cloth.price, 3)
       session[:cart_id] = cart.id
     end
 

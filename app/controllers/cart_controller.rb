@@ -4,14 +4,22 @@ class CartController < ApplicationController
   end
 
   def add
-    cloth_instance = ClothInstance.create!(cloth_instance_params)
-    cart.add(cloth_instance, cloth_instance.cloth.price * quantity, quantity)
+    cloth_instance = ClothInstance.find_or_create_by!(cloth_instance_params)
+    price = cloth_instance.cloth.price * quantity
+    cart_item = cart.item_for cloth_instance
+    if cart_item
+      price += cart_item.price
+      new_quantity = quantity + cart_item.quantity
+      cart_item.update!(price: price, quantity: new_quantity)
+    else
+      cart.add(cloth_instance, price, quantity)
+    end
     flash[:success] = 'Item added to the cart!'
     redirect_to :back
   end
 
   def remove
-    cart.remove(cloth_instance)
+    cart.remove(cloth_instance, cart.item_for(cloth_instance).quantity)
     flash[:success] = 'Item removed from the cart.'
     redirect_to :back
   end
@@ -31,7 +39,12 @@ class CartController < ApplicationController
     end
 
     def cloth_instance_params
-      params.require(:cloth_instance).permit(:color, :size, :gender, :cloth_id)
+      params
+      .require(:cloth_instance)
+      .permit(:color, :size, :gender, :cloth_id)
+      .tap do |hash|
+        hash[:gender] = ClothInstance.genders[hash[:gender]]
+      end
     end
 
     def quantity
