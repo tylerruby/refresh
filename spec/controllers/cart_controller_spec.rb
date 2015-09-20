@@ -142,8 +142,10 @@ RSpec.describe CartController, type: :controller do
     let(:cart) { Cart.create! }
     let(:quantity) { 3 }
     let(:cloth_instance) { create(:cloth_instance) }
+    let(:cart_item) { cart.add cloth_instance, cloth_instance.cloth.price, 2 }
 
     def do_action
+      cart_item
       patch :update, quantity: quantity, cloth_instance_id: cloth_instance.id
     end
 
@@ -153,9 +155,9 @@ RSpec.describe CartController, type: :controller do
     end
 
     it "updates the cart item's quantity" do
-      cart_item = cart.add cloth_instance, cloth_instance.cloth.price, 2
       do_action
       expect(cart_item.reload.quantity).to eq quantity
+      expect(cart_item.reload.price).to eq cloth_instance.cloth.price * quantity
     end
 
     it "redirects the user back to the the previous page" do
