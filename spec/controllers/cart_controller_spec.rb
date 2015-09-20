@@ -11,14 +11,16 @@ RSpec.describe CartController, type: :controller do
       do_action
       cart = Cart.last
       expect(session[:cart_id]).to eq cart.id
-      expect(assigns[:cart]).to eq cart
+      expect(assigns[:cart_items]).to eq []
     end
 
     it "sets an existing cart" do
       cart = Cart.create!
+      cloth_instance = create(:cloth_instance)
+      cart_item = cart.add(cloth_instance, cloth_instance.cloth.price)
       session[:cart_id] = cart.id
       do_action
-      expect(assigns[:cart]).to eq cart
+      expect(assigns[:cart_items]).to eq [cart_item]
     end
   end
 

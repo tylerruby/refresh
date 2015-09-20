@@ -1,6 +1,6 @@
 class CartController < ApplicationController
   def index
-    @cart = cart
+    @cart_items = cart.shopping_cart_items.order(:created_at)
   end
 
   def add

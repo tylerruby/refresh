@@ -9,18 +9,23 @@
       <th>Size</th>
       <th>Gender</th>
       <th>Store</th>
+      <th></th>
       <th>Quantity</th>
+      <th></th>
       <th>Price</th>
+      <th></th>
     </thead>
     <tbody>
-      <% @cart.shopping_cart_items.each do |cart_item| %>
+      <% @cart_items.each do |cart_item| %>
         <tr>
           <td><%= cart_item.item.cloth.name %></td>
           <td><%= cart_item.item.color %></td>
           <td><%= cart_item.item.size %></td>
           <td><%= cart_item.item.gender %></td>
           <td><%= cart_item.item.cloth.chain.name %></td>
+          <td><%= button_to '-', { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-danger' if cart_item.quantity > 1 %></td>
           <td><%= cart_item.quantity %></td>
+          <td><%= button_to '+', { controller: :cart, action: :update, quantity: cart_item.quantity + 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-success' %></td>
           <td><%= cart_item.price %></td>
           <td><%= button_to 'Remove', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'btn btn-danger' %></td>
         </tr>
