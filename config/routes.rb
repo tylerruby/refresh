@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'notifications/' => 'pages#notifications'
   get 'home/' => 'pages#home'
   get 'login/' => 'pages#login'
+  get 'terms/' => 'pages#terms'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

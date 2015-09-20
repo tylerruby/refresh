@@ -273,6 +273,15 @@ textarea {
   font-size: inherit;
   line-height: inherit;
 }
+
+.footer a {
+  color: #000;
+}
+.footer a:hover, a:focus {
+  color: #000;
+  text-decoration:underline;
+}
+
 a {
   color: #00bf8f;
   text-decoration: none;
@@ -6011,7 +6020,7 @@ fieldset[disabled] .btn-default-outline.active {
   background-color: #536570;
 }
 .btn-primary-outline {
-  color: #00bf8f;
+  color: #333;
   background-color: #fff;
   border-color: transparent;
 }
@@ -6021,7 +6030,7 @@ fieldset[disabled] .btn-default-outline.active {
 .btn-primary-outline:active,
 .btn-primary-outline.active,
 .open > .dropdown-toggle.btn-primary-outline {
-  color: #00a67c;
+  color: #000;
   background-color: #fff;
   box-shadow: none;
 }
@@ -7867,7 +7876,7 @@ fieldset[disabled] .btn-danger-outline.active {
   margin-left: 30px !important;
 }
 .m-y-md {
-  margin-top: 30px !important;
+  margin-top: 20px !important;
   margin-bottom: 30px !important;
 }
 .m-a-lg {
@@ -8343,7 +8352,7 @@ img.zoom-img {
   margin-left: -10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #f0f0f0;
+  border-bottom: 10px solid #00bf8f;
 }
 @media (min-width: 768px) {
   .profile-header-nav .nav > li > a {
