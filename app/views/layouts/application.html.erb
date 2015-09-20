@@ -12,6 +12,11 @@
 
 
 </head>
+  <% flash.each do |key, message| %>
+    <div class="alert alert-<%= key %> autoclose fade in" role="alert">
+      <p><%= message %>
+    </div>
+  <% end %>
   <%= yield %>
   <%= render 'layouts/footer' %>
 

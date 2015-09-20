@@ -24,7 +24,16 @@
             <p>Price: <%= humanized_money_with_symbol cloth.price %></p>
           </div>
           <div class="col-xs-3">
-            <button name="button" type="submit" value="search" class="btn btn-primary"><i class="fa fa-plus"></i> Add</button>
+            <%= form_for cloth.cloth_instances.build, url: cart_add_path, method: :patch do |f| %>
+              <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+              <%= f.hidden_field :cloth_id %>
+              <%= f.hidden_field :color, value: 'red' %>
+              <%= f.hidden_field :size, value: 'L' %>
+              <%= f.hidden_field :gender, value: 'female' %>
+              <%= f.button class: 'btn btn-primary' do %>
+                <i class="fa fa-plus"></i> Add
+              <% end %>
+            <% end %>
           </div>
         </div>
 
