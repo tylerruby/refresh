@@ -17,7 +17,7 @@ RSpec.describe CartController, type: :controller do
     it "sets an existing cart" do
       cart = Cart.create!
       cloth_instance = create(:cloth_instance)
-      cart_item = cart.add(cloth_instance, cloth_instance.cloth.price)
+      cart_item = cart.add(cloth_instance, cloth_instance.price)
       session[:cart_id] = cart.id
       do_action
       expect(assigns[:cart_items]).to eq [cart_item]
@@ -113,7 +113,7 @@ RSpec.describe CartController, type: :controller do
 
     before do
       request.env["HTTP_REFERER"] = previous_url
-      cart.add(cloth_instance, cloth_instance.cloth.price, 3)
+      cart.add(cloth_instance, cloth_instance.price, 3)
       session[:cart_id] = cart.id
     end
 
@@ -142,7 +142,7 @@ RSpec.describe CartController, type: :controller do
     let(:cart) { Cart.create! }
     let(:quantity) { 3 }
     let(:cloth_instance) { create(:cloth_instance) }
-    let(:cart_item) { cart.add cloth_instance, cloth_instance.cloth.price, 2 }
+    let(:cart_item) { cart.add cloth_instance, cloth_instance.price, 2 }
 
     def do_action
       cart_item
@@ -157,7 +157,7 @@ RSpec.describe CartController, type: :controller do
     it "updates the cart item's quantity" do
       do_action
       expect(cart_item.reload.quantity).to eq quantity
-      expect(cart_item.reload.price).to eq cloth_instance.cloth.price * quantity
+      expect(cart_item.reload.price).to eq cloth_instance.price * quantity
     end
 
     it "redirects the user back to the the previous page" do

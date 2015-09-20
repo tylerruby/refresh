@@ -8,10 +8,10 @@ class CartController < ApplicationController
     cart_item = cart.item_for cloth_instance
     if cart_item
       new_quantity = quantity + cart_item.quantity
-      new_price = cloth_instance.cloth.price * new_quantity
+      new_price = cloth_instance.price * new_quantity
       cart_item.update!(price: new_price, quantity: new_quantity)
     else
-      price = cloth_instance.cloth.price * quantity
+      price = cloth_instance.price * quantity
       cart.add(cloth_instance, price, quantity)
     end
     flash[:success] = 'Item added to the cart!'
@@ -25,7 +25,7 @@ class CartController < ApplicationController
   end
 
   def update
-    cart.item_for(cloth_instance).update(quantity: quantity, price: cloth_instance.cloth.price * quantity)
+    cart.item_for(cloth_instance).update(quantity: quantity, price: cloth_instance.price * quantity)
     flash[:success] = "Item's quantity updated to #{quantity}."
     redirect_to :back
   end
