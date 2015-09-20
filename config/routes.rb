@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'cart/index'
+  get 'cart' => 'cart#index'
   patch 'cart/add'
   delete 'cart/remove'
   patch 'cart/update'
