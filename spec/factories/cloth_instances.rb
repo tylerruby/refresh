@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :cloth_variant do
+  factory :cloth_instance do
     cloth
     gender "male"
     color "red"
