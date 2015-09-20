@@ -27,9 +27,9 @@
             <%= form_for cloth.cloth_instances.build, url: cart_add_path, method: :patch do |f| %>
               <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
               <%= f.hidden_field :cloth_id %>
-              <%= f.hidden_field :color, value: 'red' %>
-              <%= f.hidden_field :size, value: 'L' %>
-              <%= f.hidden_field :gender, value: 'female' %>
+              <%= f.select :color, %w(red blue green) %>
+              <%= f.select :size, %w(S M L XL) %>
+              <%= f.select :gender, %w(male female) %>
               <%= f.button class: 'btn btn-primary' do %>
                 <i class="fa fa-plus"></i> Add
               <% end %>
