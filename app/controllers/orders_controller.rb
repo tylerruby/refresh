@@ -16,6 +16,11 @@ class OrdersController < ApplicationController
         cart_item.update!(owner: @order)
       end
       cart.destroy!
+      Stripe::Charge.create(
+        :amount   => @order.amount_cents,
+        :currency => "usd",
+        :customer => current_user.customer_id
+      )
     end
 
     flash[:success] = "Checkout was successful!"

@@ -35,6 +35,7 @@ gem 'paperclip', '4.3.0'
 gem 'font-awesome-rails', '4.4.0.0'
 gem 'money-rails', '1.4.1'
 gem 'acts_as_shopping_cart', '0.3.0'
+gem 'stripe', '1.24.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
