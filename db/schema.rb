@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919232949) do
+ActiveRecord::Schema.define(version: 20150921024859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,17 @@ ActiveRecord::Schema.define(version: 20150919232949) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "status"
+    t.integer  "amount_cents",    default: 0,     null: false
+    t.string   "amount_currency", default: "USD", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
   create_table "stores", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
@@ -123,5 +134,6 @@ ActiveRecord::Schema.define(version: 20150919232949) do
 
   add_foreign_key "cloth_instances", "clothes"
   add_foreign_key "clothes", "chains"
+  add_foreign_key "orders", "users"
   add_foreign_key "stores", "chains"
 end
