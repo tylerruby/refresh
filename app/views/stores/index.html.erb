@@ -5,7 +5,8 @@
     <div class="container-inner">
       <h1 class="profile-header-user" style="">
         <% if @stores.empty? %>
-          <h2>We'll be in <%= @city %> soon!</h2>
+          Wait Up!
+          <h4>We'll be in <%= @city %> soon.</h4>
         <% else %>
         <%= @city %>
         <% end %>
@@ -28,7 +29,7 @@
 </div>
 
     <div class="row" style="padding-top:15px;">
-      <div class="col-xs-2 col-xs-offset-2 col-sm-offset-0 col-md-1 col-md-offset-3">
+      <div class="col-xs-2 col-xs-offset-2 col-sm-offset-0 col-md-1 col-md-offset-4">
         <div class="dropdown">
           <button class="btn btn-primary-outline dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Men
@@ -81,21 +82,11 @@
       </div>
       <br class="hidden-sm hidden-md hidden-lg" />
       <br class="hidden-sm hidden-md hidden-lg" />
-      <div class="col-xs-8 col-xs-offset-2 col-sm-offset-0 col-sm-3 col-md-2">
-        <div class="input-group">
-          <input type="search" name="address" class="form-control" autofocus="autofocus" placeholder="Search Stores" required="required" autocomplete="off">
-          <span class="input-group-btn">
-            <button name="button" type="submit" value="search" class="btn btn-primary" style="border:1px solid #00bf8f;box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075)">Go!</button>
-          </span>
-        </div>
-      </div>
     </div>
 
 <div class="stores container m-y-md" data-grid="rowGrid">
   <% if @stores.empty? %>
-    <a href="/atlanta">
-      <img src="http://www.hilton.com/top-destinations/assets/uploads/hero-images/Destinations_Header_Atlanta_2.jpg" class="col-md-6" />
-    </a>
+    In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
   <% end %>
 
   <% @stores.each do |store| %>

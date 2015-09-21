@@ -1,35 +1,51 @@
-<div class="cart">
-  <h1>Shopping cart</h1>
+<%= render 'layouts/header' %>
+<div class="container p-t-md">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <ul class="list-group media-list media-list-stream">
+        <li class="list-group-item p-a">
+          <h2 class="m-a-0">Shopping Cart</h2>
+        </li>
 
-  <h2>Clothes</h2>
-  <table class="table">
-    <thead>
-      <th>Cloth</th>
-      <th>Color</th>
-      <th>Size</th>
-      <th>Gender</th>
-      <th>Store</th>
-      <th></th>
-      <th>Quantity</th>
-      <th></th>
-      <th>Price</th>
-      <th></th>
-    </thead>
-    <tbody>
-      <% @cart_items.each do |cart_item| %>
-        <tr>
-          <td><%= cart_item.item.cloth.name %></td>
-          <td><%= cart_item.item.color %></td>
-          <td><%= cart_item.item.size %></td>
-          <td><%= cart_item.item.gender %></td>
-          <td><%= cart_item.item.cloth.chain.name %></td>
-          <td><%= button_to '-', { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-danger' if cart_item.quantity > 1 %></td>
-          <td><%= cart_item.quantity %></td>
-          <td><%= button_to '+', { controller: :cart, action: :update, quantity: cart_item.quantity + 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-success' %></td>
-          <td><%= cart_item.price %></td>
-          <td><%= button_to 'Remove', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'btn btn-danger' %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <li class="media list-group-item p-a">
+          <div class="media-body">
+          <div class="cart">
+
+            <table class="table">
+              <thead>
+                <th>Cloth</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Gender</th>
+                <th>Store</th>
+                <th></th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Price</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <% @cart_items.each do |cart_item| %>
+                  <tr>
+                    <td><%= cart_item.item.cloth.name %></td>
+                    <td><%= cart_item.item.color %></td>
+                    <td><%= cart_item.item.size %></td>
+                    <td><%= cart_item.item.gender %></td>
+                    <td><%= cart_item.item.cloth.chain.name %></td>
+                    <td><%= button_to '-', { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-danger' if cart_item.quantity > 1 %></td>
+                    <td><%= cart_item.quantity %></td>
+                    <td><%= button_to '+', { controller: :cart, action: :update, quantity: cart_item.quantity + 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-success' %></td>
+                    <td><%= cart_item.price %></td>
+                    <td><%= button_to 'Remove', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'btn btn-danger' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
