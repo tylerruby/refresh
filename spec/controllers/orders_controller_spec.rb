@@ -8,7 +8,8 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "GET #index" do
-    let!(:order) { create(:order, user: user) }
+    let!(:old_order) { create(:order, user: user, created_at: 2.days.ago) }
+    let!(:new_order) { create(:order, user: user) }
     let!(:another_user_order) { create(:order) }
 
     def do_action
@@ -22,7 +23,7 @@ RSpec.describe OrdersController, type: :controller do
 
       it "returns all the orders for the user" do
         do_action
-        expect(assigns[:orders]).to eq [order]
+        expect(assigns[:orders]).to eq [new_order, old_order]
       end
     end
 
