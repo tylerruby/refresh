@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let(:user) { create(:user, customer_id: 1) }
+  let(:user) { create(:user) }
 
   before do
     @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -55,8 +55,11 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "POST #create" do
+    let(:token) { 'some token' }
+    let(:customer_double) { double('Stripe::Customer', id: 'some id') }
+
     def do_action
-      post :create
+      post :create, stripeToken: token
     end
 
     context "authenticated" do
@@ -66,10 +69,17 @@ RSpec.describe OrdersController, type: :controller do
       before do
         session[:cart_id] = cart.id
         sign_in user
+
+        allow(Stripe::Customer).to receive(:create).with(
+          card: token,
+          description: 'Paying user',
+          email: user.email
+        ).and_return(customer_double)
+
         allow(Stripe::Charge).to receive(:create).with(
           :amount   => cart.total.cents,
           :currency => "usd",
-          :customer => user.customer_id
+          :customer => customer_double.id
         )
       end
 
@@ -92,6 +102,7 @@ RSpec.describe OrdersController, type: :controller do
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq cart.total }
         it { expect(Cart.exists? cart.id).to be false }
+        it { expect(Stripe::Customer).to have_received(:create) }
         it { expect(Stripe::Charge).to have_received(:create) }
 
         it "redirects to root path" do

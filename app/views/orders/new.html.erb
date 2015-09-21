@@ -1,0 +1,41 @@
+<div class="checkout">
+  <h1>Checkout</h1>
+
+  <h2>Clothes</h2>
+  <table class="table">
+    <thead>
+      <th>Cloth</th>
+      <th>Color</th>
+      <th>Size</th>
+      <th>Gender</th>
+      <th>Store</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </thead>
+    <tbody>
+      <% @cart.shopping_cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.item.cloth.name %></td>
+          <td><%= cart_item.item.color %></td>
+          <td><%= cart_item.item.size %></td>
+          <td><%= cart_item.item.gender %></td>
+          <td><%= cart_item.item.cloth.chain.name %></td>
+          <td><%= cart_item.quantity %></td>
+          <td><%= cart_item.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <h3>Total: <%= @cart.total %></h3>
+
+  <%= form_tag orders_path, method: :post do %>
+    <script
+      src="https://checkout.stripe.com/checkout.js"
+      class="stripe-button"
+      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+      data-name="Refresh"
+      data-description="<%= @cart.description %>"
+      data-amount="<%= @cart.total.cents %>">
+    </script>
+  <% end %>
+</div>

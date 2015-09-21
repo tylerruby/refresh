@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
     def cart
       cart = Cart.find_by(id: session[:cart_id]) || Cart.create!
-      session[:cart_id] ||= cart.id
+      session[:cart_id] = cart.id
       cart
     end
 end

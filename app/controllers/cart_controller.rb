@@ -6,7 +6,7 @@ class CartController < ApplicationController
   def add
     Cart.transaction do
       cloth_instance = ClothInstance.find_or_create_by!(cloth_instance_params)
-      AddToCart.new(cart, cloth_instance, quantity).add!
+      cart.add(cloth_instance, cloth_instance.price, quantity)
     end
     flash[:success] = 'Item added to the cart!'
     redirect_to :back

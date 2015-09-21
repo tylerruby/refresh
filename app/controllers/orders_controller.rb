@@ -16,6 +16,15 @@ class OrdersController < ApplicationController
         cart_item.update!(owner: @order)
       end
       cart.destroy!
+
+      customer = Stripe::Customer.create(
+        card: params[:stripeToken],
+        description: 'Paying user',
+        email: current_user.email
+      )
+
+      current_user.update!(customer_id: customer.id)
+
       Stripe::Charge.create(
         :amount   => @order.amount_cents,
         :currency => "usd",

@@ -54,6 +54,13 @@ RSpec.describe CartController, type: :controller do
       expect(session[:cart_id]).to eq Cart.last.id
     end
 
+    it "recreates a cart" do
+      do_action
+      Cart.last.destroy!
+      do_action
+      expect(session[:cart_id]).to eq Cart.last.id
+    end
+
     it "creates a cloth instance with the correct attributes" do
       expect { do_action }.to change { ClothInstance.count }.by(1)
       cloth_instance = ClothInstance.last
@@ -71,10 +78,12 @@ RSpec.describe CartController, type: :controller do
 
     it "adds the cloth instance to the cart with the cloth's price and with the correct quantity" do
       do_action
+      cart = Cart.last
       cart_item = CartItem.last
-      expect(Cart.last.shopping_cart_items).to eq [cart_item]
+      expect(cart.total).to eq cloth.price * quantity
+      expect(cart.shopping_cart_items).to eq [cart_item]
       expect(cart_item.quantity).to eq quantity
-      expect(cart_item.price).to eq cloth.price * quantity
+      expect(cart_item.price).to eq cloth.price
       expect(cart_item.item).to eq ClothInstance.last
     end
 
@@ -99,10 +108,11 @@ RSpec.describe CartController, type: :controller do
       do_action
       do_action
 
+      cart = Cart.last
       cart_item = CartItem.last
-      expect(Cart.last.shopping_cart_items).to eq [cart_item]
+      expect(cart.shopping_cart_items).to eq [cart_item]
       expect(cart_item.quantity).to eq quantity * 2
-      expect(cart_item.price).to eq cloth.price * quantity * 2
+      expect(cart.total).to eq cloth.price * quantity * 2
     end
   end
 
