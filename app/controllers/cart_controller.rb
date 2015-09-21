@@ -19,7 +19,7 @@ class CartController < ApplicationController
   end
 
   def update
-    cart.item_for(cloth_instance).update!(quantity: quantity, price: cloth_instance.price * quantity)
+    cart.item_for(cloth_instance).update!(quantity: quantity)
     flash[:success] = "Item's quantity updated to #{quantity}."
     redirect_to :back
   end

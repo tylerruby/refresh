@@ -35,7 +35,7 @@
                     <td><%= button_to '-', { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-danger' if cart_item.quantity > 1 %></td>
                     <td><%= cart_item.quantity %></td>
                     <td><%= button_to '+', { controller: :cart, action: :update, quantity: cart_item.quantity + 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-success' %></td>
-                    <td><%= cart_item.price %></td>
+                    <td><%= cart_item.subtotal %></td>
                     <td><%= button_to 'Remove', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'btn btn-danger' %></td>
                   </tr>
                 <% end %>

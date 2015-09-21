@@ -167,7 +167,7 @@ RSpec.describe CartController, type: :controller do
     it "updates the cart item's quantity" do
       do_action
       expect(cart_item.reload.quantity).to eq quantity
-      expect(cart_item.reload.price).to eq cloth_instance.price * quantity
+      expect(cart.reload.total).to eq cloth_instance.price * quantity
     end
 
     it "redirects the user back to the the previous page" do
