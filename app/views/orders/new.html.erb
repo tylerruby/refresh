@@ -1,41 +1,55 @@
-<div class="checkout">
-  <h1>Checkout</h1>
+<%= render 'layouts/header' %>
+<div class="container p-t-md">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <ul class="list-group media-list media-list-stream">
+        <li class="list-group-item p-a">
+          <h2 class="m-a-0">Checkout</h2>
+        </li>
 
-  <h2>Clothes</h2>
-  <table class="table">
-    <thead>
-      <th>Cloth</th>
-      <th>Color</th>
-      <th>Size</th>
-      <th>Gender</th>
-      <th>Store</th>
-      <th>Quantity</th>
-      <th>Price</th>
-    </thead>
-    <tbody>
-      <% @cart.shopping_cart_items.each do |cart_item| %>
-        <tr>
-          <td><%= cart_item.item.cloth.name %></td>
-          <td><%= cart_item.item.color %></td>
-          <td><%= cart_item.item.size %></td>
-          <td><%= cart_item.item.gender %></td>
-          <td><%= cart_item.item.cloth.chain.name %></td>
-          <td><%= cart_item.quantity %></td>
-          <td><%= cart_item.price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <h3>Total: <%= @cart.total %></h3>
+        <li class="media list-group-item p-a">
+          <div class="media-body">
+            <div class="checkout">
+              <table class="table">
+                <thead>
+                  <th>Cloth</th>
+                  <th>Color</th>
+                  <th>Size</th>
+                  <th>Gender</th>
+                  <th>Store</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </thead>
+                <tbody>
+                  <% @cart.shopping_cart_items.each do |cart_item| %>
+                    <tr>
+                      <td><%= cart_item.item.cloth.name %></td>
+                      <td><%= cart_item.item.color %></td>
+                      <td><%= cart_item.item.size %></td>
+                      <td><%= cart_item.item.gender %></td>
+                      <td><%= cart_item.item.cloth.chain.name %></td>
+                      <td><%= cart_item.quantity %></td>
+                      <td><%= cart_item.price %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <h3>Total: <%= @cart.total %></h3>
 
-  <%= form_tag orders_path, method: :post do %>
-    <script
-      src="https://checkout.stripe.com/checkout.js"
-      class="stripe-button"
-      data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
-      data-name="Refresh"
-      data-description="<%= @cart.description %>"
-      data-amount="<%= @cart.total.cents %>">
-    </script>
-  <% end %>
+              <%= form_tag orders_path, method: :post do %>
+                <script
+                  src="https://checkout.stripe.com/checkout.js"
+                  class="stripe-button"
+                  data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+                  data-name="Refresh"
+                  data-description="<%= @cart.description %>"
+                  data-amount="<%= @cart.total.cents %>">
+                </script>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
