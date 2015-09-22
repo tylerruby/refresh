@@ -52,4 +52,17 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Devise::TestHelpers, :type => :controller
+
+  Geocoder.configure(:lookup => :test)
+  Geocoder::Lookup::Test.add_stub("4th Av., St. Nowhere, GA", [
+    {
+      'latitude'     => 40.7143528,
+      'longitude'    => -74.0059731,
+      'address'      => '4th Av., St. Nowhere, GA',
+      'state'        => 'Georgia',
+      'state_code'   => 'GA',
+      'country'      => 'United States',
+      'country_code' => 'US'
+    }
+  ])
 end
