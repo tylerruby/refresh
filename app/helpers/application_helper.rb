@@ -11,4 +11,14 @@ module ApplicationHelper
       end
     end
   end
+
+  def alert_class_for(key)
+    case key.to_s
+    when 'notice' then 'alert-info'
+    when 'alert' then 'alert-warning'
+    when 'errors' then 'alert-danger'
+    else
+      "alert-#{key}"
+    end
+  end
 end

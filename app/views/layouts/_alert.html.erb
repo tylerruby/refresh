@@ -1,0 +1,5 @@
+<% flash.each do |key, message| %>
+  <div class="alert <%= alert_class_for key %> autoclose fade in" role="alert">
+    <p><%= message %>
+  </div>
+<% end %>
