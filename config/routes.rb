@@ -14,8 +14,13 @@ Rails.application.routes.draw do
   root 'pages#landing'
   get 'notifications/' => 'pages#notifications'
   get 'home/' => 'pages#home'
+  get 'profile/' => 'pages#profile'
   get 'login/' => 'pages#login'
+  get 'help/' => 'pages#help'
+  get 'about/' => 'pages#about'
   get 'terms/' => 'pages#terms'
+  get 'blog/' => 'pages#blog'
+  get 'privacy/' => 'pages#privacy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
