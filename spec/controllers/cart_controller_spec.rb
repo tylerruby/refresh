@@ -11,21 +11,25 @@ RSpec.describe CartController, type: :controller do
       do_action
       cart = Cart.last
       expect(session[:cart_id]).to eq cart.id
+      expect(assigns[:cart]).to eq cart
       expect(assigns[:cart_items]).to eq []
     end
 
     it "sets an existing cart" do
       cart = Cart.create!
-      cloth_instance = create(:cloth_instance)
-      cart_item = cart.add(cloth_instance, cloth_instance.price)
+      old_cart_item = cart.add(create(:cloth_instance), 1)
+      new_cart_item = cart.add(create(:cloth_instance), 1)
+      old_cart_item.touch
       session[:cart_id] = cart.id
       do_action
-      expect(assigns[:cart_items]).to eq [cart_item]
+      expect(assigns[:cart]).to eq cart
+      expect(assigns[:cart_items]).to eq [old_cart_item, new_cart_item]
     end
   end
 
   describe "GET #add" do
     let(:previous_url) { '/previous_url' }
+    let(:store) { create(:store) }
 
     before do
       request.env["HTTP_REFERER"] = previous_url
@@ -41,7 +45,8 @@ RSpec.describe CartController, type: :controller do
         color: color,
         size: size,
         gender: gender,
-        cloth_id: cloth.id
+        cloth_id: cloth.id,
+        store_id: store.id
       }
     end
 
@@ -68,6 +73,7 @@ RSpec.describe CartController, type: :controller do
       expect(cloth_instance.size).to eq size
       expect(cloth_instance.gender).to eq gender
       expect(cloth_instance.cloth).to eq cloth
+      expect(cloth_instance.store).to eq store
     end
 
     it "doesn't allow a cloth instance that references an inexistent cloth id" do

@@ -42,5 +42,4 @@ class Cloth < ActiveRecord::Base
       field :chain
     end
   end
-
 end

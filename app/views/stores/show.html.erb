@@ -2,7 +2,7 @@
 
 <!-- Generating modals for clothes -->
 <% @store.clothes.each do |cloth| %>
-  <%= render 'cloth_modal', cloth: cloth %>
+  <%= render 'cloth_modal', cloth: cloth, store: @store %>
 <% end %>
 
 <div class="profile-header text-center">
@@ -97,7 +97,6 @@
         <i class="heart-this fa fa-heart-o"></i>
         <h3><%= cloth.name %></h3>
       <% end %>
-      <%= render 'cloth_modal', cloth: cloth %>
     </div>
   <% end %>
 </div>

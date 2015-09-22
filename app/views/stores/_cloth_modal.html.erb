@@ -27,6 +27,7 @@
             <%= form_for cloth.cloth_instances.build, url: cart_add_path, method: :patch do |f| %>
               <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
               <%= f.hidden_field :cloth_id %>
+              <%= f.hidden_field :store_id, value: store.id %>
               <div class="col-xs-4">
                 <%= f.select :color, %w(red blue green),{}, {class: 'form-control'} %>
               </div>

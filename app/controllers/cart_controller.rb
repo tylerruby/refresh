@@ -1,6 +1,7 @@
 class CartController < ApplicationController
   def index
-    @cart_items = cart.shopping_cart_items.order(:created_at)
+    @cart = cart
+    @cart_items = @cart.shopping_cart_items.order(:created_at)
   end
 
   def add
@@ -29,7 +30,7 @@ class CartController < ApplicationController
     def cloth_instance_params
       params
       .require(:cloth_instance)
-      .permit(:color, :size, :gender, :cloth_id)
+      .permit(:color, :size, :gender, :cloth_id, :store_id)
       .tap do |hash|
         hash[:gender] = ClothInstance.genders[hash[:gender]]
       end

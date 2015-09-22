@@ -27,14 +27,14 @@
                       <td><%= cart_item.item.color %></td>
                       <td><%= cart_item.item.size %></td>
                       <td><%= cart_item.item.gender %></td>
-                      <td><%= cart_item.item.cloth.chain.name %></td>
+                      <td><%= link_to cart_item.item.store.name, cart_item.item.store %></td>
                       <td><%= cart_item.quantity %></td>
-                      <td><%= cart_item.price %></td>
+                      <td><%= humanized_money_with_symbol cart_item.price %></td>
                     </tr>
                   <% end %>
                 </tbody>
               </table>
-              <h3>Total: <%= @cart.total %></h3>
+              <h3>Total: <%= humanized_money_with_symbol @cart.total %></h3>
 
               <%= form_tag orders_path, method: :post do %>
                 <script
