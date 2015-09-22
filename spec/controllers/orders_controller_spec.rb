@@ -44,6 +44,7 @@ RSpec.describe OrdersController, type: :controller do
       let(:cart) { Cart.create! }
 
       before do
+        cart.add(create(:cloth_instance), 1)
         session[:cart_id] = cart.id
         sign_in user
       end
@@ -51,6 +52,26 @@ RSpec.describe OrdersController, type: :controller do
       it "sets the cart for the user" do
         do_action
         expect(assigns[:cart]).to eq cart
+      end
+
+      it "renders the correct page" do
+        expect(do_action).to render_template 'orders/new'
+      end
+
+      context "cart is empty" do
+        before do
+          cart.clear
+        end
+
+        it "redirects the user to the root page" do
+          do_action
+          expect(response).to redirect_to root_path
+        end
+
+        it "sets a message" do
+          do_action
+          expect(flash[:info]).to eq 'Your cart is empty, cannot checkout yet.'
+        end
       end
     end
   end

@@ -7,6 +7,10 @@ class OrdersController < ApplicationController
 
   def new
     @cart = cart
+    if @cart.empty?
+      flash[:info] = 'Your cart is empty, cannot checkout yet.'
+      redirect_to root_path
+    end
   end
 
   def create
