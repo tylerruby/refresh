@@ -43,13 +43,19 @@
                     <% end %>
                     <tr>
                       <td colspan="7"</td>
-                      <td>Total:</td>
+                      <td>Subtotal:</td>
                       <td><%= humanized_money_with_symbol @cart.subtotal %></td>
                       <td></td>
                     </tr>
                   </tbody>
                 </table>
-                <%= link_to 'Proceed to checkout', new_order_path, class: 'btn btn-primary' %>
+                <div class="shipping">
+                  <%= form_tag new_order_path, method: :get do %>
+                    <%= shipping_cost_radio_button @cart, 1 %>
+                    <%= shipping_cost_radio_button @cart, 2 %>
+                    <%= button_tag 'Proceed to checkout', class: 'btn btn-primary' %>
+                  <% end %>
+                </div>
               <% end %>
             </div>
           </div>

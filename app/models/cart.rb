@@ -6,6 +6,7 @@ class Cart < ActiveRecord::Base
   class InvalidDeliveryTime < StandardError; end
 
   acts_as_shopping_cart_using :cart_item
+  attr_accessor :delivery_time
 
   def description
     "#{total_unique_items} #{'cloth'.pluralize(total_unique_items)} (#{total.format})"
@@ -13,6 +14,10 @@ class Cart < ActiveRecord::Base
 
   def taxes
     0
+  end
+
+  def shipping_cost
+    shipping_cost_for delivery_time
   end
 
   def shipping_cost_for(delivery_time)

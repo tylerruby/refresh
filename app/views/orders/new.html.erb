@@ -32,11 +32,22 @@
                       <td><%= humanized_money_with_symbol cart_item.price %></td>
                     </tr>
                   <% end %>
+                  <tr>
+                    <td colspan="5"</td>
+                    <td>Subtotal:</td>
+                    <td><%= humanized_money_with_symbol @cart.subtotal %></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5"</td>
+                    <td>Shipping cost:</td>
+                    <td><%= humanized_money_with_symbol @cart.shipping_cost  %></td>
+                  </tr>
                 </tbody>
               </table>
               <h3>Total: <%= humanized_money_with_symbol @cart.total %></h3>
 
               <%= form_tag orders_path, method: :post do %>
+                <%= hidden_field_tag :delivery_time, @cart.delivery_time %>
                 <script
                   src="https://checkout.stripe.com/checkout.js"
                   class="stripe-button"

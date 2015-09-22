@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
 
   def new
     @cart = cart
+    @cart.delivery_time = params.require(:delivery_time).to_i
     if @cart.empty?
       flash[:info] = 'Your cart is empty, cannot checkout yet.'
       redirect_to root_path
@@ -14,6 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    cart.delivery_time = params.require(:delivery_time).to_i
     order = Order.create!(
       user: current_user,
       amount: cart.total,
@@ -23,7 +25,7 @@ class OrdersController < ApplicationController
     begin
       Order.transaction do
         order.update!(cart_items: cart.shopping_cart_items)
-        cart.destroy!
+        cart.reload.destroy!
 
         customer = Stripe::Customer.create(
           card: params[:stripeToken],

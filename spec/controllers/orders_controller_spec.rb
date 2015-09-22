@@ -36,8 +36,10 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "GET #new" do
+    let(:delivery_time) { 1 }
+
     def do_action
-      get :new
+      get :new, delivery_time: delivery_time
     end
 
     describe "authenticated" do
@@ -52,6 +54,7 @@ RSpec.describe OrdersController, type: :controller do
       it "sets the cart for the user" do
         do_action
         expect(assigns[:cart]).to eq cart
+        expect(assigns[:cart].delivery_time).to eq delivery_time
       end
 
       it "renders the correct page" do
@@ -79,9 +82,10 @@ RSpec.describe OrdersController, type: :controller do
   describe "POST #create" do
     let(:token) { 'some token' }
     let(:customer_double) { double('Stripe::Customer', id: 'some id') }
+    let(:delivery_time) { 1 }
 
     def do_action
-      post :create, stripeToken: token
+      post :create, stripeToken: token, delivery_time: delivery_time
     end
 
     def order
@@ -91,21 +95,22 @@ RSpec.describe OrdersController, type: :controller do
     context "authenticated" do
       let!(:cart) { Cart.create! }
       let!(:cart_items) { 2.times.map { cart.add(create(:cloth_instance), 1) } }
+      let(:total_cost) { cart.subtotal + cart.shipping_cost_for(delivery_time) }
 
       before do
         session[:cart_id] = cart.id
         sign_in user
 
         allow(Stripe::Customer).to receive(:create).with(
-          card: token,
+          card:        token,
           description: 'Paying user',
-          email: user.email
+          email:       user.email
         ).and_return(customer_double)
 
         allow(Stripe::Charge).to receive(:create).with(
-          :amount   => cart.total.cents,
-          :currency => "usd",
-          :customer => customer_double.id
+          amount:   total_cost.cents,
+          currency: "usd",
+          customer: customer_double.id
         )
       end
 
@@ -122,7 +127,7 @@ RSpec.describe OrdersController, type: :controller do
 
         it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
-        it { expect(order.amount).to eq cart.total }
+        it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'waiting_confirmation' }
         it { expect(Cart.exists? cart.id).to be false }
         it { expect(Stripe::Customer).to have_received(:create) }
