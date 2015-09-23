@@ -8,26 +8,30 @@
 
       <div class="form-group">
         <a id="facebook-button" ng-click="startLogin()" ng-disabled="!facebookReady || isSubmitting" class="fb-button">
-            <span class="facebook"></span> Connect with Facebook
+            <span class="facebook"></span> Sign up with Facebook
           </a>
       </div>
 
       <hr />
 
       <div class="form-group">
-        <input class="form-control" placeholder="Username">
+        <input class="form-control" placeholder="First Name">
       </div>
 
-      <div class="form-group m-b-md">
-        <input type="password" class="form-control" placeholder="Password">
+      <div class="form-group">
+        <input class="form-control" placeholder="Last Name">
+      </div>
+
+      <div class="form-group">
+        <input class="form-control" placeholder="Email">
       </div>
 
       <div class="m-b-lg">
-        <button class="btn btn-block btn-primary">Log In</button>
+        <button class="btn btn-block btn-primary">Sign Up</button>
       </div>
 
       <footer class="screen-login">
-        <%= link_to "Sign up", register_path %> | 
+        <%= link_to "Log in", login_path %> | 
         <%= link_to "Forgot password", forgot_path %>
       </footer>
     </form>

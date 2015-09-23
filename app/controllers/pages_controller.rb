@@ -15,9 +15,6 @@ class PagesController < ApplicationController
   def profile
   end
 
-  def login
-  end
-
   def help
   end
 
@@ -37,6 +34,12 @@ class PagesController < ApplicationController
   end
 
   def partners
+  end
+
+  def forgot
+  end
+
+  def register
   end
 
 end

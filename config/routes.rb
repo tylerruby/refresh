@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get 'notifications/' => 'pages#notifications'
   get 'home/' => 'pages#home'
   get 'profile/' => 'pages#profile'
-  get 'login/' => 'pages#login'
   get 'help/' => 'pages#help'
   get 'about/' => 'pages#about'
   get 'terms/' => 'pages#terms'
@@ -23,6 +22,10 @@ Rails.application.routes.draw do
   get 'privacy/' => 'pages#privacy'
   get 'contact' => 'pages#contact'
   get 'partners' => 'pages#partners'
+
+  get 'login/' => 'pages#login'
+  get 'forgot/' => 'pages#forgot'
+  get 'register/' => 'pages#register'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

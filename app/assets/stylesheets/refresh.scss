@@ -331,6 +331,11 @@ input[type="color"]:focus,
     cursor: pointer;
     border-radius: 4px;
 }
+.fb-button:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #3f5693;
+}
 .facebook {
     margin-right: 10px;
     position: relative;
@@ -344,6 +349,7 @@ input[type="color"]:focus,
     background-repeat: no-repeat;
     background-size: 10px 20px;
 }
+
 
 
 .material-switch > input[type="checkbox"] {
