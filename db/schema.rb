@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922004559) do
+ActiveRecord::Schema.define(version: 20150922143715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20150922004559) do
 
   create_table "cloth_instances", force: :cascade do |t|
     t.integer  "cloth_id"
-    t.integer  "gender"
     t.string   "size"
     t.string   "color"
     t.datetime "created_at", null: false
@@ -64,6 +63,7 @@ ActiveRecord::Schema.define(version: 20150922004559) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "colors",             default: [],                 array: true
+    t.integer  "gender"
   end
 
   add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id", using: :btree

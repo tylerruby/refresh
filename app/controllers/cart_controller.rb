@@ -30,10 +30,7 @@ class CartController < ApplicationController
     def cloth_instance_params
       params
       .require(:cloth_instance)
-      .permit(:color, :size, :gender, :cloth_id, :store_id)
-      .tap do |hash|
-        hash[:gender] = ClothInstance.genders[hash[:gender]]
-      end
+      .permit(:color, :size, :cloth_id, :store_id)
     end
 
     def quantity

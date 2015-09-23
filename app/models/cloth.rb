@@ -1,5 +1,6 @@
 class Cloth < ActiveRecord::Base
   monetize :price_cents
+  enum gender: %w(male female unisex)
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" },
     default_url: "https://placehold.it/1000x600"

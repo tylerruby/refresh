@@ -37,14 +37,12 @@ RSpec.describe CartController, type: :controller do
 
     let(:color) { 'red' }
     let(:size) { 'L' }
-    let(:gender) { 'male' }
     let(:cloth) { create(:cloth) }
     let(:quantity) { 3 }
     let(:cloth_instance_attributes) do
       {
         color: color,
         size: size,
-        gender: gender,
         cloth_id: cloth.id,
         store_id: store.id
       }
@@ -71,7 +69,6 @@ RSpec.describe CartController, type: :controller do
       cloth_instance = ClothInstance.last
       expect(cloth_instance.color).to eq color
       expect(cloth_instance.size).to eq size
-      expect(cloth_instance.gender).to eq gender
       expect(cloth_instance.cloth).to eq cloth
       expect(cloth_instance.store).to eq store
     end
@@ -86,7 +83,7 @@ RSpec.describe CartController, type: :controller do
       do_action
       cart = Cart.last
       cart_item = CartItem.last
-      expect(cart.total).to eq cloth.price * quantity
+      expect(cart.subtotal).to eq cloth.price * quantity
       expect(cart.shopping_cart_items).to eq [cart_item]
       expect(cart_item.quantity).to eq quantity
       expect(cart_item.price).to eq cloth.price
@@ -118,7 +115,7 @@ RSpec.describe CartController, type: :controller do
       cart_item = CartItem.last
       expect(cart.shopping_cart_items).to eq [cart_item]
       expect(cart_item.quantity).to eq quantity * 2
-      expect(cart.total).to eq cloth.price * quantity * 2
+      expect(cart.subtotal).to eq cloth.price * quantity * 2
     end
   end
 
@@ -173,7 +170,7 @@ RSpec.describe CartController, type: :controller do
     it "updates the cart item's quantity" do
       do_action
       expect(cart_item.reload.quantity).to eq quantity
-      expect(cart.reload.total).to eq cloth_instance.price * quantity
+      expect(cart.reload.subtotal).to eq cloth_instance.price * quantity
     end
 
     it "redirects the user back to the the previous page" do

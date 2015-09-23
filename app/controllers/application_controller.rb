@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   protected
 
     def cart
-      @cart ||= Cart.find_by(id: session[:cart_id]) || Cart.create!
+      @cart = Cart.exists?(@cart.try(:id)) && @cart  \
+              || Cart.find_by(id: session[:cart_id]) \
+              || Cart.create!
       session[:cart_id] = @cart.id
       @cart
     end

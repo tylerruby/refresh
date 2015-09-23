@@ -13,6 +13,6 @@ RSpec.describe Order, type: :model do
       expect { order.status = status }.not_to raise_error
       expect(order).to be_valid
     end
-    expect { order.status = 'some invalid status' }.to raise_error
+    expect { order.status = 'some invalid status' }.to raise_error(ArgumentError)
   end
 end
