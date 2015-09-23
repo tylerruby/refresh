@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'terms/' => 'pages#terms'
   get 'blog/' => 'pages#blog'
   get 'privacy/' => 'pages#privacy'
+  get 'contact' => 'pages#contact'
+  get 'partners' => 'pages#partners'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

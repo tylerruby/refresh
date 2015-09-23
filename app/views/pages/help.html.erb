@@ -19,11 +19,15 @@
           <span class="icon icon-chevron-thin-right pull-right"></span>
           Privacy Policy
         <% end %>
+        <%= link_to partners_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Partners
+        <% end %>
         <%= link_to blog_path, class: "list-group-item" do %>
           <span class="icon icon-chevron-thin-right pull-right"></span>
           Blog
         <% end %>
-        <%= link_to help_path, class: "list-group-item" do %>
+        <%= link_to contact_path, class: "list-group-item" do %>
           <span class="icon icon-chevron-thin-right pull-right"></span>
           Contact
         <% end %>
@@ -39,16 +43,32 @@
           <div class="media-body">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
               <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Why use Refresh?
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    Refresh helps you find hot local clothing items and get them delivered in an hour so you save time and money.  No more waiting weeks for packages, paying outrageous shipping fees, or driving from store to store looking for what you want.
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingTwo">
                   <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      Why use Refresh?
+                      What are your hours?
                     </a>
                   </h4>
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                   <div class="panel-body">
-                    Refresh helps you find hot local clothing items and get them delivered in an hour so you save time and money.  No more waiting weeks for packages, paying outrageous shipping fees, or driving from store to store looking for what you want.
+                    We deliver from 9am to Midnight every day, depending on local store hours. On holidays, our delivery hours are subject to store holiday hours. You can view available delivery times for your area from the shopping cart.
+
+                    Our fastest delivery was just 12 minutes! Most customers choose to have delivery in the next 2 hours, and you can also schedule for a later date or time during checkout.
                   </div>
                 </div>
               </div>

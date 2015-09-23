@@ -1,0 +1,37 @@
+<%= render 'layouts/header' %>
+<div class="container p-t-md">
+  <div class="row">
+  	<div class="col-sm-3 col-md-3">
+  	  <div class="list-group m-b-md">
+      	<%= link_to help_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Help
+        <% end %>
+        <%= link_to about_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          About
+        <% end %>
+        <%= link_to terms_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Terms
+        <% end %>
+        <%= link_to privacy_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Privacy Policy
+        <% end %>
+        <%= link_to partners_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Partners
+        <% end %>
+        <%= link_to blog_path, class: "list-group-item active" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Blog
+        <% end %>
+        <%= link_to contact_path, class: "list-group-item" do %>
+          <span class="icon icon-chevron-thin-right pull-right"></span>
+          Contact
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
