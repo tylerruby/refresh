@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922143715) do
+ActiveRecord::Schema.define(version: 20150923054309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,16 +40,26 @@ ActiveRecord::Schema.define(version: 20150922143715) do
   end
 
   create_table "cloth_instances", force: :cascade do |t|
-    t.integer  "cloth_id"
     t.string   "size"
     t.string   "color"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "store_id"
+    t.integer  "cloth_variant_id"
   end
 
-  add_index "cloth_instances", ["cloth_id"], name: "index_cloth_instances_on_cloth_id", using: :btree
+  add_index "cloth_instances", ["cloth_variant_id"], name: "index_cloth_instances_on_cloth_variant_id", using: :btree
   add_index "cloth_instances", ["store_id"], name: "index_cloth_instances_on_store_id", using: :btree
+
+  create_table "cloth_variants", force: :cascade do |t|
+    t.string   "size"
+    t.string   "color"
+    t.integer  "cloth_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cloth_variants", ["cloth_id"], name: "index_cloth_variants_on_cloth_id", using: :btree
 
   create_table "clothes", force: :cascade do |t|
     t.string   "name"
@@ -135,8 +145,9 @@ ActiveRecord::Schema.define(version: 20150922143715) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "cloth_instances", "clothes"
+  add_foreign_key "cloth_instances", "cloth_variants"
   add_foreign_key "cloth_instances", "stores"
+  add_foreign_key "cloth_variants", "clothes"
   add_foreign_key "clothes", "chains"
   add_foreign_key "orders", "users"
   add_foreign_key "stores", "chains"

@@ -30,7 +30,7 @@ class CartController < ApplicationController
     def cloth_instance_params
       params
       .require(:cloth_instance)
-      .permit(:color, :size, :cloth_id, :store_id)
+      .permit(:color, :size, :cloth_variant_id, :store_id)
     end
 
     def quantity

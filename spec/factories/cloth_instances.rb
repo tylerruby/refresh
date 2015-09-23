@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :cloth_instance do
-    cloth
+    cloth_variant
     store
     color "red"
     size "L"

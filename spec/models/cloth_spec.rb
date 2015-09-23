@@ -26,15 +26,14 @@ RSpec.describe Cloth, type: :model do
     expect(cloth.reload.gender).to eq 'male'
   end
 
-
-  it "has many cloth instances" do
+  it "has many cloth variants" do
     cloth = create(:cloth)
-    expect(cloth.cloth_instances).to eq []
+    expect(cloth.cloth_variants).to eq []
 
-    cloth_instance = build(:cloth_instance, cloth: nil)
-    expect { cloth.cloth_instances << cloth_instance }.not_to raise_error
+    cloth_variant = build(:cloth_variant, cloth: nil)
+    expect { cloth.cloth_variants << cloth_variant }.not_to raise_error
 
-    expect(cloth.cloth_instances.reload).to eq [cloth_instance]
+    expect(cloth.cloth_variants.reload).to eq [cloth_variant]
   end
 
   describe "#colors" do
@@ -59,5 +58,14 @@ RSpec.describe Cloth, type: :model do
       cloth.colors = ["  red  ", "  blue  "]
       expect(cloth.colors).to eq %w(red blue)
     end
+  end
+
+  it "creates cloth variants" do
+    cloth.cloth_variants_configuration = '{ "L": ["red", "blue"], "M": ["blue", "green"] }'
+    cloth.save!
+    expect(cloth.cloth_variants.find_by(size: "L", color: "red")).not_to be_nil
+    expect(cloth.cloth_variants.find_by(size: "L", color: "blue")).not_to be_nil
+    expect(cloth.cloth_variants.find_by(size: "M", color: "blue")).not_to be_nil
+    expect(cloth.cloth_variants.find_by(size: "M", color: "green")).not_to be_nil
   end
 end

@@ -37,13 +37,13 @@ RSpec.describe CartController, type: :controller do
 
     let(:color) { 'red' }
     let(:size) { 'L' }
-    let(:cloth) { create(:cloth) }
+    let(:cloth_variant) { create(:cloth_variant) }
     let(:quantity) { 3 }
     let(:cloth_instance_attributes) do
       {
         color: color,
         size: size,
-        cloth_id: cloth.id,
+        cloth_variant_id: cloth_variant.id,
         store_id: store.id
       }
     end
@@ -69,13 +69,13 @@ RSpec.describe CartController, type: :controller do
       cloth_instance = ClothInstance.last
       expect(cloth_instance.color).to eq color
       expect(cloth_instance.size).to eq size
-      expect(cloth_instance.cloth).to eq cloth
+      expect(cloth_instance.cloth_variant).to eq cloth_variant
       expect(cloth_instance.store).to eq store
     end
 
-    it "doesn't allow a cloth instance that references an inexistent cloth id" do
+    it "doesn't allow a cloth instance that references an inexistent cloth variant id" do
       expect do
-        patch :add, cloth_instance: cloth_instance_attributes.merge(cloth_id: -1)
+        patch :add, quantity: 0, cloth_instance: cloth_instance_attributes.merge(cloth_variant_id: -1)
       end.to raise_error(ActiveRecord::RecordInvalid)
     end
 
@@ -83,10 +83,10 @@ RSpec.describe CartController, type: :controller do
       do_action
       cart = Cart.last
       cart_item = CartItem.last
-      expect(cart.subtotal).to eq cloth.price * quantity
+      expect(cart.subtotal).to eq cloth_variant.price * quantity
       expect(cart.shopping_cart_items).to eq [cart_item]
       expect(cart_item.quantity).to eq quantity
-      expect(cart_item.price).to eq cloth.price
+      expect(cart_item.price).to eq cloth_variant.price
       expect(cart_item.item).to eq ClothInstance.last
     end
 
@@ -115,7 +115,7 @@ RSpec.describe CartController, type: :controller do
       cart_item = CartItem.last
       expect(cart.shopping_cart_items).to eq [cart_item]
       expect(cart_item.quantity).to eq quantity * 2
-      expect(cart.subtotal).to eq cloth.price * quantity * 2
+      expect(cart.subtotal).to eq cloth_variant.price * quantity * 2
     end
   end
 

@@ -7,7 +7,7 @@ class Cloth < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   belongs_to :chain
-  has_many :cloth_instances
+  has_many :cloth_variants
   validates :name, :chain, presence: true
 
   def colors=(values)
@@ -15,14 +15,33 @@ class Cloth < ActiveRecord::Base
     write_attribute(:colors, values.map(&:strip))
   end
 
+  attr_accessor :cloth_variants_configuration
+
+  after_create do
+    next unless cloth_variants_configuration.present?
+    JSON.parse(cloth_variants_configuration).each do |size, colors|
+      colors.each do |color|
+        ClothVariant.create!(cloth: self, size: size, color: color)
+      end
+    end
+  end
+
   rails_admin do
     edit do
       field :name
       field :price
-      field :colors do
-        help "Optional - Type a list of colors separated by comma. Ex: red, blue"
-        formatted_value do
-          value.join(', ')
+      field :gender do
+        enum Cloth.genders
+      end
+      field :cloth_variants_configuration do
+        help <<-EOS
+          Required - Configure the cloth variants that will be created.\n
+          Please use the following format, including quotes:\n
+          { \"L\": [\"red\", \"blue\"], \"M\": [\"blue\", \"green\"] }
+        EOS
+        required true
+        visible do
+          bindings[:object].new_record?
         end
       end
       field :image
