@@ -23,7 +23,7 @@
                 <tbody>
                   <% @cart.shopping_cart_items.each do |cart_item| %>
                     <tr>
-                      <td><%= cart_item.item.cloth.name %></td>
+                      <td><%= cart_item.item.name %></td>
                       <td><%= cart_item.item.color %></td>
                       <td><%= cart_item.item.size %></td>
                       <td><%= cart_item.item.gender %></td>

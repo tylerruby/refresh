@@ -28,13 +28,7 @@
               <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
               <%= f.hidden_field :store_id, value: store.id %>
               <div class="col-xs-2">
-                <%= f.select :size, nil, {}, class: 'form-control js-size-select' do %>
-                  <% capture do %>
-                    <% cloth.cloth_variants.group_by(&:size).map do |size, cloth_variants| %>
-                      <option value="<%= size %>" data-cloth-variants="<%= serialize_colors(cloth_variants) %>"><%= size %></option>
-                    <% end %>
-                  <% end %>
-                <% end %>
+                <%= select_tag :size, size_options_for(cloth), class: 'form-control js-size-select' %>
               </div>
               <div class="col-xs-4">
                 <%= f.select :cloth_variant_id, [], {}, class: 'form-control js-color-select' %>

@@ -35,14 +35,11 @@ RSpec.describe CartController, type: :controller do
       request.env["HTTP_REFERER"] = previous_url
     end
 
-    let(:color) { 'red' }
-    let(:size) { 'L' }
     let(:cloth_variant) { create(:cloth_variant) }
     let(:quantity) { 3 }
     let(:cloth_instance_attributes) do
       {
-        color: color,
-        size: size,
+        size: "doesn't even matter",
         cloth_variant_id: cloth_variant.id,
         store_id: store.id
       }
@@ -67,8 +64,8 @@ RSpec.describe CartController, type: :controller do
     it "creates a cloth instance with the correct attributes" do
       expect { do_action }.to change { ClothInstance.count }.by(1)
       cloth_instance = ClothInstance.last
-      expect(cloth_instance.color).to eq color
-      expect(cloth_instance.size).to eq size
+      expect(cloth_instance.color).to eq cloth_variant.color
+      expect(cloth_instance.size).to eq cloth_variant.size
       expect(cloth_instance.cloth_variant).to eq cloth_variant
       expect(cloth_instance.store).to eq store
     end
