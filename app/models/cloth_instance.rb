@@ -1,6 +1,6 @@
 class ClothInstance < ActiveRecord::Base
-  enum gender: %w(male female)
-  belongs_to :cloth
-  validates :cloth, presence: true
-  delegate :price, to: :cloth
+  belongs_to :cloth_variant
+  belongs_to :store
+  validates :cloth_variant, :store, presence: true
+  delegate :color, :size, :price, :name, :gender, to: :cloth_variant
 end

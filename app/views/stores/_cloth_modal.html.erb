@@ -24,17 +24,14 @@
             <div class="col-xs-2">
               <h3><%= humanized_money_with_symbol cloth.price %></h3>
             </div>
-            <%= form_for cloth.cloth_instances.build, url: cart_add_path, method: :patch do |f| %>
+            <%= form_for ClothInstance.new, url: cart_add_path, method: :patch do |f| %>
               <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
-              <%= f.hidden_field :cloth_id %>
-              <div class="col-xs-4">
-                <%= f.select :color, %w(red blue green),{}, {class: 'form-control'} %>
-              </div>
-              <div class="col-xs-3">
-                <%= f.select :gender, %w(male female),{}, {class: 'form-control'}  %>
-              </div>
+              <%= f.hidden_field :store_id, value: store.id %>
               <div class="col-xs-2">
-                <%= f.select :size, %w(S M L XL),{}, {class: 'form-control'}  %>
+                <%= select_tag :size, size_options_for(cloth), class: 'form-control js-size-select' %>
+              </div>
+              <div class="col-xs-4">
+                <%= f.select :cloth_variant_id, [], {}, class: 'form-control js-color-select' %>
               </div>
               <br /><br />
               <div class="col-xs-12">

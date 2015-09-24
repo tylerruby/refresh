@@ -1,0 +1,38 @@
+<%= render 'layouts/header' %>
+<div class="container p-t-md">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <ul class="list-group media-list media-list-stream">
+        <li class="list-group-item p-a">
+          <h2 class="m-a-0">Previous orders</h2>
+        </li>
+
+        <li class="media list-group-item p-a">
+          <div class="media-body">
+            <div class="orders">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Checked out at</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @orders.each do |order| %>
+                    <tr>
+                      <td><%= order.created_at.strftime('%c') %></td>
+                      <td><%= humanized_money_with_symbol order.amount %></td>
+                      <td><%= status_for(order) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

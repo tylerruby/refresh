@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :orders, only: [:index, :new, :create], path_names: { new: 'checkout' }
   get 'cart' => 'cart#index'
   patch 'cart/add'
   delete 'cart/remove'

@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'devise'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -49,4 +50,19 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.include Devise::TestHelpers, :type => :controller
+
+  Geocoder.configure(:lookup => :test)
+  Geocoder::Lookup::Test.add_stub("4th Av., St. Nowhere, GA", [
+    {
+      'latitude'     => 40.7143528,
+      'longitude'    => -74.0059731,
+      'address'      => '4th Av., St. Nowhere, GA',
+      'state'        => 'Georgia',
+      'state_code'   => 'GA',
+      'country'      => 'United States',
+      'country_code' => 'US'
+    }
+  ])
 end
