@@ -291,6 +291,43 @@ input[type="color"]:focus,
     text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
 }
+
+@media (min-width: 480px) {
+  .partner-header {
+    height: 400px;
+  }
+}
+@media (min-width: 768px) {
+  .partner-header {
+    height:650px;
+  }
+}
+
+.partner-header {
+  color: #fff !important;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-shadow:1px grey solid;
+  background-image: url('http://i.imgur.com/y7ZJlX2.jpg') !important;
+  h1 {
+    font-size: 60px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
+    opacity:1;
+  }
+  h2 {
+    font-size: 30px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  }
+  h3 {
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
+    font-size: 20px !important;
+  }
+}
+
+
+
+
 .numeral {
     display: inline-block;
     width: 60px;
