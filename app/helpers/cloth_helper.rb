@@ -1,7 +1,7 @@
 module ClothHelper
   def size_options_for(cloth)
     cloth.cloth_variants.group_by(&:size).map do |size, cloth_variants|
-      content_tag(:option, size, value: size, data: { 'cloth-variants': serialize_colors(cloth_variants) })
+      content_tag(:option, size, value: size, data: { 'cloth-variants' => serialize_colors(cloth_variants) })
     end.join.html_safe
   end
 
