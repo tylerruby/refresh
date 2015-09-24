@@ -59,3 +59,7 @@ group :development, :test do
   gem 'rspec-rails', '3.3.3'
   gem 'factory_girl_rails', '4.5.0'
 end
+
+group :production do
+  gem 'aws-sdk', '2.1.23'
+end
