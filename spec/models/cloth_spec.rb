@@ -36,36 +36,15 @@ RSpec.describe Cloth, type: :model do
     expect(cloth.cloth_variants.reload).to eq [cloth_variant]
   end
 
-  describe "#colors" do
-    let(:cloth) { build(:cloth) }
-
-    it "splits string containing colors" do
-      cloth.colors = "red,blue"
-      expect(cloth.colors).to eq %w(red blue)
-    end
-
-    it "removes whitespace from colors" do
-      cloth.colors = "  red  ,  blue  "
-      expect(cloth.colors).to eq %w(red blue)
-    end
-
-    it "accepts an array" do
-      cloth.colors = %w(red blue)
-      expect(cloth.colors).to eq %w(red blue)
-    end
-
-    it "removes whitepsace from colors in array" do
-      cloth.colors = ["  red  ", "  blue  "]
-      expect(cloth.colors).to eq %w(red blue)
-    end
-  end
-
   it "creates cloth variants" do
-    cloth.cloth_variants_configuration = '{ "L": ["red", "blue"], "M": ["blue", "green"] }'
+    cloth.cloth_variants_configuration = {
+      "0" => { "color" => "red", "sizes" => "L,M" },
+      "1" => { "color" => "blue", "sizes" => " S, M " },
+    }
     cloth.save!
     expect(cloth.cloth_variants.find_by(size: "L", color: "red")).not_to be_nil
-    expect(cloth.cloth_variants.find_by(size: "L", color: "blue")).not_to be_nil
+    expect(cloth.cloth_variants.find_by(size: "M", color: "red")).not_to be_nil
+    expect(cloth.cloth_variants.find_by(size: "S", color: "blue")).not_to be_nil
     expect(cloth.cloth_variants.find_by(size: "M", color: "blue")).not_to be_nil
-    expect(cloth.cloth_variants.find_by(size: "M", color: "green")).not_to be_nil
   end
 end

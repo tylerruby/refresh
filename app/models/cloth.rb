@@ -8,19 +8,19 @@ class Cloth < ActiveRecord::Base
 
   belongs_to :chain
   has_many :cloth_variants
-  validates :name, :chain, presence: true
+  validates :name, :gender, :price, :chain, presence: true
 
-  def colors=(values)
-    values = values.split(',') if values.is_a? String
-    write_attribute(:colors, values.map(&:strip))
-  end
+  attr_accessor :colors
 
   attr_accessor :cloth_variants_configuration
 
   after_create do
     next unless cloth_variants_configuration.present?
-    JSON.parse(cloth_variants_configuration).each do |size, colors|
-      colors.each do |color|
+    cloth_variants_configuration.values.each do |color_sizes|
+      color = color_sizes["color"]
+      sizes = color_sizes["sizes"].split(',').map(&:strip)
+
+      sizes.each do |size|
         ClothVariant.create!(cloth: self, size: size, color: color)
       end
     end
@@ -34,12 +34,7 @@ class Cloth < ActiveRecord::Base
         enum Cloth.genders
       end
       field :cloth_variants_configuration do
-        help <<-EOS
-          Required - Configure the cloth variants that will be created.\n
-          Please use the following format, including quotes:\n
-          { \"L\": [\"red\", \"blue\"], \"M\": [\"blue\", \"green\"] }
-        EOS
-        required true
+        partial :cloth_variants_configuration
         visible do
           bindings[:object].new_record?
         end
