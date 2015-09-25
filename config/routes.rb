@@ -16,13 +16,15 @@ Rails.application.routes.draw do
   get 'notifications/' => 'pages#notifications'
   get 'home/' => 'pages#home'
   get 'profile/' => 'pages#profile'
+  
   get 'help/' => 'pages#help'
   get 'about/' => 'pages#about'
-  get 'terms/' => 'pages#terms'
-  get 'blog/' => 'pages#blog'
-  get 'privacy/' => 'pages#privacy'
-  get 'contact' => 'pages#contact'
   get 'partners' => 'pages#partners'
+  get 'terms/' => 'pages#terms'
+  get 'privacy/' => 'pages#privacy'
+  get 'blog/' => 'pages#blog'
+  get 'contact' => 'pages#contact'
+ 
 
   get 'login/' => 'pages#login'
   get 'forgot/' => 'pages#forgot'
