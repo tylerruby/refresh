@@ -36,6 +36,7 @@ gem 'font-awesome-rails', '4.4.0.0'
 gem 'money-rails', '1.4.1'
 gem 'acts_as_shopping_cart', '0.3.0'
 gem 'stripe', '1.24.0'
+gem 'aws-sdk', '< 2.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -58,8 +59,4 @@ group :development, :test do
 
   gem 'rspec-rails', '3.3.3'
   gem 'factory_girl_rails', '4.5.0'
-end
-
-group :production do
-  gem 'aws-sdk', '2.1.23'
 end
