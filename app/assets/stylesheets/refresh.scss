@@ -116,7 +116,7 @@
   max-height: inherit;
 }
 .app-navbar .navbar-collapse:after {
-  height: 100vh;
+  /*height: 100vh;*/  /* what is this */
 }
 .app-navbar .form-control {
   border-color: #d4dbe0;
@@ -549,3 +549,33 @@ h4.panel-title {
      }
 }
 /* END scrollable for Secondary Nav*/
+
+/* center logo on small screen */
+@media (max-width: 767px) {
+  .navbar-header {
+      text-align: center;
+      position: relative
+  }
+  .navbar-brand {
+     float: none !important;
+     /*width: 45px;*/
+     display: inline-block;
+     /*padding-top: 16px;*/
+  }
+  .navbar-brand img {
+    margin-top: 1px !important;
+  }
+  .navbar-toggle {
+      margin-right: 0 !important;
+      right: 15px !important;
+      position: absolute!important
+  }
+  h3 {
+    font-size: 17px !important;
+    margin-top:10px !important
+  }
+  body {
+    font-size: 12px !important
+  }
+}
+/* END center logo on small screen */
