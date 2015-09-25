@@ -42,4 +42,7 @@ class PagesController < ApplicationController
   def register
   end
 
+  def search
+  end
+
 end
