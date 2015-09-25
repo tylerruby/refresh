@@ -462,3 +462,90 @@ h4.panel-title {
 .content-section-a {
     padding: 50px 0;
 }
+
+/* scrollable for Secondary Nav */
+#nav-wrapper {
+  z-index: 2;
+}
+#nav-wrapper.affix {
+    position: fixed;
+    top: 50px;
+    width: 100%
+}
+
+@media (max-width: 767px) {
+     #nav-wrapper {
+        /*position: relative;*/
+        width: 100%;
+        overflow: hidden;
+        height: 3.55557em;
+        text-align: left;
+    }
+    #nav-wrapper .navbar:before, #nav-wrapper .navbar:after {
+      display: none !important;
+    }
+
+    #nav-wrapper .container-fluid:before, #nav-wrapper .container-fluid:after {
+      display: none !important;
+    }
+
+    #nav-wrapper .container-fluid {
+        width: 102%;
+        white-space: nowrap;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+        display: inline-block;
+    }
+
+    #nav-wrapper .nav:before, #nav-wrapper .nav:after {
+      display: none !important;
+    }
+
+    #nav-wrapper .navbar-nav {
+        min-width:100%;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 3.55557em !important;
+    }
+
+    #nav-wrapper .nav > li  {
+      float: none !important;
+      display: inline-block !important;
+    }
+
+    #nav-wrapper a { font-size:14px !important; }
+    
+    #nav-wrapper .nav > li > a {}
+
+    /* expand dropdown */
+    #nav-wrapper .dropdown {
+        padding: 0 !important; margin: 0 !important;
+        position: relative;
+    }
+
+    #nav-wrapper a.dropdown-toggle {
+        display: none!important;
+    }
+    #nav-wrapper ul.dropdown-menu {
+      display: inline;
+      border: none;
+      background-color: transparent !important;
+      box-shadow: none !important;
+      top: -20px !important;
+      padding: 0!important;
+      margin: 0!important;
+    }
+    #nav-wrapper ul.dropdown-menu li {
+      display: inline-block;
+      padding: 0 !important;
+      margin: 0!important;
+    }
+     #nav-wrapper ul.dropdown-menu a{
+      color: #9d9d9d!important;
+     }
+     #nav-wrapper ul.dropdown-menu a:hover {
+      background-color: transparent!important;
+      color:#000!important;
+     }
+}
+/* END scrollable for Secondary Nav*/

@@ -18,7 +18,6 @@
                     <th>Item</th>
                     <th>Color</th>
                     <th>Size</th>
-                    <th>Gender</th>
                     <th>Store</th>
                     <th></th>
                     <th>Quantity</th>
@@ -32,7 +31,6 @@
                         <td><%= cart_item.item.name %></td>
                         <td><%= cart_item.item.color %></td>
                         <td><%= cart_item.item.size %></td>
-                        <td><%= cart_item.item.gender %></td>
                         <td><%= link_to cart_item.item.store.name, cart_item.item.store %></td>
                         <td><%= button_to '-', { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-danger' if cart_item.quantity > 1 %></td>
                         <td><%= cart_item.quantity %></td>
