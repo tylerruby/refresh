@@ -17,6 +17,12 @@ RSpec.describe Cloth, type: :model do
     end
   end
 
+  it "destroys child cloth variants when destroying cloth" do
+    cloth.save!
+    create(:cloth_variant, cloth: cloth)
+    expect { cloth.destroy }.to change { ClothVariant.count }.by(-1)
+  end
+
   it "doesn't accept invalid values for gender" do
     expect { cloth.gender = 'other' }.to raise_error(ArgumentError)
   end

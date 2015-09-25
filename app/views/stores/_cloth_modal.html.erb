@@ -27,7 +27,7 @@
             <%= form_for ClothInstance.new, url: cart_add_path, method: :patch do |f| %>
               <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
               <%= f.hidden_field :store_id, value: store.id %>
-              <div class="col-xs-2">
+              <div class="col-xs-3">
                 <%= select_tag :size, size_options_for(cloth), class: 'form-control js-size-select' %>
               </div>
               <div class="col-xs-4">
