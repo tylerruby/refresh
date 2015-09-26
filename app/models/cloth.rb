@@ -10,9 +10,7 @@ class Cloth < ActiveRecord::Base
   has_many :cloth_variants, dependent: :destroy
   validates :name, :gender, :price, :chain, presence: true
 
-  attr_accessor :colors
-
-  attr_accessor :cloth_variants_configuration
+  attr_accessor :colors, :cloth_variants_configuration, :store
 
   after_create do
     next unless cloth_variants_configuration.present?

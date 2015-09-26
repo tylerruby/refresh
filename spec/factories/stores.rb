@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :store do
     address "4th Av."
-    city "St. Nowhere"
+    city "Atlanta"
     state "GA"
     chain
   end

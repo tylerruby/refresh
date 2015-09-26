@@ -54,11 +54,11 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
 
   Geocoder.configure(:lookup => :test)
-  Geocoder::Lookup::Test.add_stub("4th Av., St. Nowhere, GA", [
+  Geocoder::Lookup::Test.add_stub("4th Av., Atlanta, GA", [
     {
       'latitude'     => 40.7143528,
       'longitude'    => -74.0059731,
-      'address'      => '4th Av., St. Nowhere, GA',
+      'address'      => '4th Av., Atlanta, GA',
       'state'        => 'Georgia',
       'state_code'   => 'GA',
       'country'      => 'United States',

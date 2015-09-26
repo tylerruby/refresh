@@ -7,7 +7,13 @@ class StoresController < ApplicationController
 
   def search_by_city
     @city = city
-    @stores = stores_in(@city)
+    @stores = stores_in(@city).joins(chain: :clothes).uniq
+    @clothes = @stores.flat_map do |store|
+      store.clothes.map do |cloth|
+        cloth.store = store
+        cloth
+      end
+    end.uniq
     render :index
   end
 
