@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924125339) do
+ActiveRecord::Schema.define(version: 20150926213850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,12 @@ ActiveRecord::Schema.define(version: 20150924125339) do
 
   create_table "chains", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "cloth_instances", force: :cascade do |t|
@@ -107,18 +111,14 @@ ActiveRecord::Schema.define(version: 20150924125339) do
     t.string   "state"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "slug"
     t.integer  "chain_id"
     t.string   "thumbnail_file_name"
     t.string   "thumbnail_content_type"
     t.integer  "thumbnail_file_size"
     t.datetime "thumbnail_updated_at"
-    t.string   "background_image_file_name"
-    t.string   "background_image_content_type"
-    t.integer  "background_image_file_size"
-    t.datetime "background_image_updated_at"
   end
 
   add_index "stores", ["chain_id"], name: "index_stores_on_chain_id", using: :btree

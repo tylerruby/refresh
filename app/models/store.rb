@@ -4,10 +4,7 @@ class Store < ActiveRecord::Base
 
   has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" },
     default_url: "https://placehold.it/300x300"
-  has_attached_file :background_image, styles: { medium: "300x300>", thumb: "100x100>" },
-    default_url: "https://placehold.it/1000x600"
   validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\Z/
-  validates_attachment_content_type :background_image, content_type: /\Aimage\/.*\Z/
 
   RADIUS = 10 # miles
   geocoded_by :full_address
@@ -19,6 +16,8 @@ class Store < ActiveRecord::Base
 
   validate :validate_geolocation
   validates :address, :city, :state, :chain, presence: true
+
+  delegate :logo, to: :chain
 
   scope :by_city, -> (city) { where('lower(city) = ?', city.downcase) }
   scope :order_by_distance, -> (location) { 
@@ -69,7 +68,6 @@ class Store < ActiveRecord::Base
       field :city
       field :state
       field :thumbnail
-      field :background_image
       field :chain
     end
 
