@@ -5,4 +5,20 @@ class Chain < ActiveRecord::Base
   has_many :stores, dependent: :destroy
   has_many :clothes, dependent: :destroy
   validates :name, presence: true
+
+  rails_admin do
+    edit do
+      field :name
+      field :logo
+      field :stores
+      field :clothes
+    end
+
+    list do
+      field :name
+      field :logo
+      field :stores
+      field :clothes
+    end
+  end
 end
