@@ -13,7 +13,9 @@ class StoresController < ApplicationController
         cloth.store = store
         cloth
       end
-    end.uniq.sort_by do |cloth|
+    end.uniq
+    .select { |cloth| cloth.store.available_for_delivery? }
+    .sort_by do |cloth|
       cloth.impressionist_count(filter: :all, start_date: 1.weeks.ago)
     end.reverse!
 

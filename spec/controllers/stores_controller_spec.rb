@@ -29,6 +29,10 @@ RSpec.describe StoresController, type: :controller do
       get :search_by_city, city: 'augusta'
     end
 
+    before do
+      allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(true)
+    end
+
     it "sets the city's name" do
       do_action
       expect(assigns[:city]).to eq 'Augusta'
@@ -55,6 +59,12 @@ RSpec.describe StoresController, type: :controller do
     it "sets respective store for each cloth" do
       do_action
       expect(assigns[:clothes].first.store).to eq first_store
+    end
+
+    it "shows only clothes from stores available for delivery" do
+      allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(false)
+      do_action
+      expect(assigns[:clothes]).to eq []
     end
 
     pending "order by distance"
