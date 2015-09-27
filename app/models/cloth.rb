@@ -1,4 +1,6 @@
 class Cloth < ActiveRecord::Base
+  is_impressionable
+
   monetize :price_cents
   enum gender: %w(male female unisex)
 

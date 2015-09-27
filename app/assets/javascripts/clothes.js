@@ -1,5 +1,6 @@
 (function initializeClothVariantSelection () {
   $(SelectClothVariant);
+  $(TrackClothViews);
 
   function SelectClothVariant () {
     var sizeSelect = $('.js-size-select');
@@ -16,6 +17,15 @@
 
       var options = clothVariants.map(generateOptions);
       clothVariantSelect.html(options.join(''));
+    }
+  }
+
+  function TrackClothViews () {
+    $('.js-cloth-modal').on('show.bs.modal', track);
+
+    function track (event) {
+      var clothId = $(event.target).data('cloth-id');
+      $.get('/clothes/' + clothId);
     }
   }
 })();

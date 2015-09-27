@@ -37,6 +37,7 @@ gem 'money-rails', '1.4.1'
 gem 'acts_as_shopping_cart', '0.3.0'
 gem 'stripe', '1.24.0'
 gem 'aws-sdk', '< 2.0'
+gem 'impressionist', '1.5.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
