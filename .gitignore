@@ -18,3 +18,5 @@
 
 # Ignore uploaded images in development
 /public/system
+
+.env
