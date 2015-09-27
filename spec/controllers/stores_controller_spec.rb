@@ -29,12 +29,33 @@ RSpec.describe StoresController, type: :controller do
       get :search_by_city, city: 'augusta'
     end
 
-    before { do_action }
+    it "sets the city's name" do
+      do_action
+      expect(assigns[:city]).to eq 'Augusta'
+    end
 
-    it { expect(assigns[:city]).to eq 'Augusta' }
-    it { expect(assigns[:stores]).to eq [first_store, second_store] }
-    it { expect(assigns[:clothes]).to eq [first_cloth, second_cloth] }
-    it { expect(assigns[:clothes].first.store).to eq first_store }
+    it "sets the stores" do
+      do_action
+      expect(assigns[:stores]).to eq [first_store, second_store]
+    end
+
+    it "orders clothes by views" do
+      Impression.create!(impressionable: second_cloth)
+      do_action
+      expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
+    end
+
+    it "orders clothes by views in the last week" do
+      2.times { Impression.create!(impressionable: first_cloth, created_at: 2.weeks.ago) }
+      Impression.create!(impressionable: second_cloth)
+      do_action
+      expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
+    end
+
+    it "sets respective store for each cloth" do
+      do_action
+      expect(assigns[:clothes].first.store).to eq first_store
+    end
 
     pending "order by distance"
   end
