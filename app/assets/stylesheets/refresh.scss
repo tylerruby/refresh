@@ -556,3 +556,17 @@ h4.panel-title {
   padding-bottom: 30px !important;
 }
 
+/* Green Label on Cart in Header*/
+.cart-label {
+  width: 17px;
+  height: 17px;
+  font-size: 10px;
+  line-height: 17px;
+  padding: 0;
+  text-align: center;
+  position: absolute;
+  background: #00bf8f;
+  top: 8px;
+  right: 8px;
+  border-radius: 50%;
+}

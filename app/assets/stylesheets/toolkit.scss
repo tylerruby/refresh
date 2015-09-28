@@ -3504,10 +3504,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid transparent;
   border-radius: 4px;
 }
-.navbar-toggle:hover {
-  background: #fff;
-  color:#00bf8f;
-}
 .navbar-toggle:focus {
   outline: 0;
 }
@@ -3695,8 +3691,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #00bf8f;
-  border-color: #00bf8f;
+  background-color: #666;
+  border-color: #666;
 }
 .navbar-default .navbar-brand {
   color: #fff;
