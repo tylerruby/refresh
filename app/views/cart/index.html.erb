@@ -28,16 +28,19 @@
                     </div>
                   </td>
                   <td>
-                    <%= image_tag cart_item.item.image.url(:medium), class: 'img-responsive center-block' %>
+                    <%= image_tag cart_item.item.image.url(:thumb), class: 'img-responsive center-block' %>
                   </td>
                   <td>
                     <h4><%= cart_item.item.name %></h4>
                     <%= cart_item.item.color %> - 
                     <%= cart_item.item.size %>
                   </td>
-                  <td><%= link_to cart_item.item.store.name, cart_item.item.store %></td>
-                  <td><%= humanized_money_with_symbol cart_item.subtotal %>
-                  <%= button_to 'X', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'btn btn-primary-outline' %></td>
+                  <td>
+                    <h4><%= humanized_money_with_symbol cart_item.subtotal %></h4>
+                    <%= link_to cart_item.item.store.name, cart_item.item.store %>
+                  </td>
+                  <td><%= button_to 'x', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'remove-item' %></td>
+
                 </tr>
                 <% end %>
                 <tr>
