@@ -3504,6 +3504,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+.navbar-toggle:hover {
+  background: #fff;
+  color:#00bf8f;
+}
 .navbar-toggle:focus {
   outline: 0;
 }
@@ -8270,6 +8274,7 @@ img.zoom-img {
   width: 100%;
   height: 00px;
   padding-bottom: 48px;
+  padding-top: 10px;
   margin-bottom: 0;
   text-align: center;
   background-size: cover;
