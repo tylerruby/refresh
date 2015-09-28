@@ -1,5 +1,4 @@
 class Cart < ActiveRecord::Base
-  FEE_RATE = 0.15
   EXTRA_STORE_FEE  = '$3.00'.to_money
   LOW_SUBTOTAL_FEE = '$4.00'.to_money
 
@@ -22,8 +21,7 @@ class Cart < ActiveRecord::Base
 
   def shipping_cost_for(delivery_time)
     raise InvalidDeliveryTime, 'Delivery time must be 1 or 2' unless [1, 2].include? delivery_time
-    subtotal * FEE_RATE               \
-    + shipping_fee_for(delivery_time) \
+    shipping_fee_for(delivery_time)   \
     + subtotal_fee                    \
     + EXTRA_STORE_FEE * extra_stores
   end

@@ -6,7 +6,7 @@ RSpec.describe Cart, type: :model do
     cart.delivery_time = 1
     cloth_instance = create(:cloth_instance)
     cart.add(cloth_instance, 10.to_money, 1)
-    expect(cart.description).to eq '1 cloth ($21.49)'
+    expect(cart.description).to eq '1 cloth ($19.99)'
   end
 
   it "describes more than one item" do
@@ -14,7 +14,7 @@ RSpec.describe Cart, type: :model do
     cart.delivery_time = 1
     cloth_instance = create(:cloth_instance)
     cart.add(cloth_instance, 10.to_money, 2)
-    expect(cart.description).to eq '2 clothes ($32.99)'
+    expect(cart.description).to eq '2 clothes ($29.99)'
   end
 
   it "calculates #shipping_cost with #shipping_cost_for" do
@@ -45,7 +45,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_some_store), 100)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$20.99'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$5.99'.to_money }
         end
 
         context "under $35.00" do
@@ -53,7 +53,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_some_store), 10)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$11.49'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$9.99'.to_money }
         end
       end
 
@@ -65,7 +65,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_some_store), 100)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$18.99'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$3.99'.to_money }
         end
 
         context "under $35.00" do
@@ -73,7 +73,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_some_store), 10)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$9.49'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$7.99'.to_money }
         end
       end
     end
@@ -93,7 +93,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_third_store), 1)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$26.99'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$11.99'.to_money }
         end
 
         context "under $35.00" do
@@ -103,7 +103,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_third_store), 1)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$17.49'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$15.99'.to_money }
         end
       end
 
@@ -117,7 +117,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_third_store), 1)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$24.99'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$9.99'.to_money }
         end
 
         context "under $35.00" do
@@ -127,7 +127,7 @@ RSpec.describe Cart, type: :model do
             cart.add(create(:cloth_instance, cloth_variant: cloth_from_third_store), 1)
           end
 
-          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$15.49'.to_money }
+          it { expect(cart.shipping_cost_for(delivery_time)).to eq '$13.99'.to_money }
         end
       end
     end
