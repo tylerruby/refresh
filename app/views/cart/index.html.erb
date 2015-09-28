@@ -55,7 +55,7 @@
                   <%= form_tag new_order_path, method: :get do %>
                     <%= shipping_cost_radio_button @cart, 1 %>
                     <%= shipping_cost_radio_button @cart, 2 %>
-                    <%= button_tag 'Checkout', class: 'btn btn-primary' %>
+                    <%= button_tag 'Checkout', class: 'btn btn-block btn-primary' %>
                   <% end %>
                 </div>
             <% end %>
