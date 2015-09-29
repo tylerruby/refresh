@@ -94,6 +94,7 @@
   <% if @store.clothes.empty? %>
     <h2>No products registered for this store yet</h2>
   <% end %>
+
   <% @store.clothes.each do |cloth| %>
     <div class="cloth item">
       <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>

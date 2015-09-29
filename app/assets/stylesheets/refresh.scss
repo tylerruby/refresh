@@ -20,7 +20,7 @@
     }
     h4 {
       position: absolute;
-      color: #666;
+      color: #fff;
       top: 2%;
       right: 2%;
       text-align: right;
@@ -558,14 +558,14 @@ h4.panel-title {
 
 /* Green Label on Cart in Header*/
 .cart-label {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   font-size: 10px;
-  line-height: 17px;
+  line-height: 15px;
   padding: 0;
   text-align: center;
   position: absolute;
-  background: #00bf8f;
+  background: #333;
   top: 8px;
   right: 8px;
   border-radius: 50%;
