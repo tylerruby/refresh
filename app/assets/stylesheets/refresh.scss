@@ -27,6 +27,7 @@
       width: 100%;
       padding: 0;
       margin: 0;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
     }
 
     .available-for-delivery {
@@ -152,8 +153,11 @@
 
 /* misc */
 .app-login-form {
-  max-width: 280px;
+  max-width: 380px;
   margin-top: -60px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius:3px;
 }
 .app-new-msg {
   margin-right: 10px;
@@ -173,6 +177,7 @@
   border: 1px solid #00bf8f !important;
   height:60px !important;
   font-size:23px !important;
+  background-color: rgba(255,255,255, .9) !important;
 }
 .landing-button {
   height:60px !important;
@@ -190,7 +195,7 @@
 }
 .landing-logo {
   position:absolute;
-  width:36px;
+  width:40px;
   height:40px;
   left:80px;
   top:10px;
@@ -220,8 +225,8 @@
   }
   .landing-logo {
     position:absolute;
-    width:27px;
-    height:28px;
+    width:40px;
+    height:40px;
     left:20px;
     top:10px;
   }
@@ -236,8 +241,8 @@
   }
   .landing-logo {
     position:absolute;
-    width:27px;
-    height:30px;
+    width:40px;
+    height:40px;
     left:80px;
     top:10px;
   }
@@ -261,13 +266,6 @@ input[type="color"]:focus,
 .uneditable-input:focus {   
   border-color: #00bf8f;
   outline: 0 none;
-}
-
-.spin:hover
-{
-    cursor: default;
-    transform: rotate(90deg);
-    transition: all 0.9s ease-in-out 0s;
 }
 
 @media only screen and (min-width : 320px) {
@@ -569,4 +567,10 @@ h4.panel-title {
   top: 8px;
   right: 8px;
   border-radius: 50%;
+}
+
+.back-to-city {
+  position: absolute;
+  top: 10%;
+  left:2%;
 }

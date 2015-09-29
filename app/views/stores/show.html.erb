@@ -7,6 +7,9 @@
 
 <div class="profile-header text-center">
   <div class="container">
+    <%= link_to "/" + @store.city, class: "back-to-city" do %>
+      <i class="fa fa-chevron-left"></i> <%=@store.city%>
+    <% end %>
     <div class="container-inner">
       <%= image_tag @store.logo.url, class: 'img-circle media-object' %>
 
@@ -23,13 +26,16 @@
   <nav class="profile-header-nav">
     <ul class="nav nav-tabs">
       <li class="active">
-        <a href="#">Mens</a>
+        <a href="#">All</a>
       </li>
       <li>
-        <a href="#">Womens</a>
+        <a href="#">New</a>
       </li>
       <li>
-        <a href="#">Both</a>
+        <a href="#">Popular</a>
+      </li>
+      <li>
+        <a href="#">Deals</a>
       </li>
     </ul>
   </nav>
@@ -89,6 +95,7 @@
       <br class="hidden-md hidden-lg" />
       <br class="hidden-md hidden-lg" />
     </div>
+
 
 <div class="clothes container m-y-md col-md-10 col-md-offset-1" data-grid="rowGrid">
   <% if @store.clothes.empty? %>
