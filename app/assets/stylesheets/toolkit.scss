@@ -3786,8 +3786,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #cccccc;
 }
 .navbar-inverse {
-  background-color: #fff;
-  border-color: #f0f0f0;
+  background-color: #abadaf;
+  border-color: #abadaf;
 }
 .navbar-inverse .navbar-brand {
   color: rgba(255, 255, 255, 0.8);
@@ -3801,7 +3801,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ffffff;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #333;
+  color: #fff;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -8351,7 +8351,7 @@ img.zoom-img {
   margin-left: -10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #333;
+  border-bottom: 10px solid #abadaf;
 }
 @media (min-width: 768px) {
   .profile-header-nav .nav > li > a {
