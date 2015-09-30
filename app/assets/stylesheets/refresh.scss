@@ -10,6 +10,7 @@
     }
 
     h3 {
+      font-family: 'Droid Sans', sans-serif;
       position: absolute;
       top: 45%;
       text-align: center;
@@ -122,7 +123,7 @@
 }
 .app-navbar .navbar-brand img {
   width: 85px;
-  
+
 }
 .app-navbar .navbar-collapse {
   max-height: inherit;
@@ -276,7 +277,7 @@ input[type="color"]:focus,
 }
 @media (min-width: 768px) {
   .home-header {
-    height:650px;
+    height:750px;
   }
 }
 

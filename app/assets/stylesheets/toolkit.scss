@@ -3786,8 +3786,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #cccccc;
 }
 .navbar-inverse {
-  background-color: #abadaf;
-  border-color: #abadaf;
+  background-color: #333;
+  border-color: #333;
 }
 .navbar-inverse .navbar-brand {
   color: rgba(255, 255, 255, 0.8);
@@ -8351,7 +8351,7 @@ img.zoom-img {
   margin-left: -10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #abadaf;
+  border-bottom: 10px solid #333;
 }
 @media (min-width: 768px) {
   .profile-header-nav .nav > li > a {
