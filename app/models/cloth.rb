@@ -47,6 +47,14 @@ class Cloth < ActiveRecord::Base
     self.image_dimensions = [geometry.width.to_i, geometry.height.to_i]
   end
 
+  def total_views
+    impressionist_count
+  end
+
+  def last_week_views
+    impressionist_count(filter: :all, start_date: 1.weeks.ago)
+  end
+
   rails_admin do
     edit do
       field :name
@@ -76,6 +84,8 @@ class Cloth < ActiveRecord::Base
       field :colors
       field :image
       field :chain
+      field :total_views
+      field :last_week_views
     end
   end
 end
