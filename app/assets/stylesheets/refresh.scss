@@ -40,14 +40,29 @@
       right: 2%;
       font-size: 2em;
     }
+
     .heart-this {
       position: absolute;
       top: 2%;
       left: 2%;
       font-size: 1.5em;
     }
+
     .heart-this:hover {
       color:#00bf8f;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0.3;
+      background-color: #666;
+      background-size: 100% 100%;
+      pointer-events: none;
     }
   }
 }
