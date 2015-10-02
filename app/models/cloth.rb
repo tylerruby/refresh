@@ -4,7 +4,7 @@ class Cloth < ActiveRecord::Base
   monetize :price_cents
   enum gender: %w(male female unisex)
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" },
+  has_attached_file :image, styles: { medium: "x300>" },
     default_url: "https://placehold.it/1000x600"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
@@ -13,6 +13,9 @@ class Cloth < ActiveRecord::Base
   validates :name, :gender, :price, :chain, presence: true
 
   attr_accessor :colors, :cloth_variants_configuration, :store
+
+  before_save :extract_dimensions
+  serialize :image_dimensions
 
   after_create do
     next unless cloth_variants_configuration.present?
@@ -24,6 +27,24 @@ class Cloth < ActiveRecord::Base
         ClothVariant.create!(cloth: self, size: size, color: color)
       end
     end
+  end
+
+  def image_url
+    image.url(:medium)
+  end
+
+  def image_dimensions
+    Dimensions.new(*super)
+  end
+
+  def extract_dimensions
+    tempfile = image.queued_for_write[:medium]
+    extract_from(tempfile) unless tempfile.nil?
+  end
+
+  def extract_from(file)
+    geometry = Paperclip::Geometry.from_file(file)
+    self.image_dimensions = [geometry.width.to_i, geometry.height.to_i]
   end
 
   rails_admin do

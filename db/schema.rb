@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928035917) do
+ActiveRecord::Schema.define(version: 20151002051011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20150928035917) do
     t.datetime "image_updated_at"
     t.string   "colors",             default: [],                 array: true
     t.integer  "gender"
+    t.string   "image_dimensions"
   end
 
   add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id", using: :btree
@@ -144,6 +145,7 @@ ActiveRecord::Schema.define(version: 20150928035917) do
     t.string   "thumbnail_content_type"
     t.integer  "thumbnail_file_size"
     t.datetime "thumbnail_updated_at"
+    t.string   "thumbnail_dimensions"
   end
 
   add_index "stores", ["chain_id"], name: "index_stores_on_chain_id", using: :btree

@@ -1,12 +1,15 @@
 /* store page makeup */
-.container[data-grid="rowGrid"] {
+.js-image-grid {
   .item {
     position: relative;
     color: #FFF;
-    margin-bottom: 10px;
 
     a {
       color: #FFF;
+    }
+
+    img {
+      vertical-align:bottom;
     }
 
     h3 {
@@ -46,51 +49,6 @@
     .heart-this:hover {
       color:#00bf8f;
     }
-  }
-
-
-  /* clearfix */
-  &:before, &:after {
-    content: "";
-    display: table;
-  }
-
-  &:after {
-    clear: both;
-  }
-
-  .item {
-    float: left;
-    margin-bottom: 10px;
-
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      opacity: 0.3;
-      background-color: #666;
-      background-size: 100% 100%;
-      pointer-events: none;
-    }
-  }
-  .item:hover {
-    background-color:transparent;
-  }
-  .item img {
-    max-width: 100%;
-    max-height: 100%;
-    height: 300px;
-    vertical-align: bottom;
-  }
-  .first-item {
-    clear: both;
-  }
-  /* remove margin bottom on last row */
-  .last-row, .last-row ~ .item {
-    margin-bottom: 0;
   }
 }
 
