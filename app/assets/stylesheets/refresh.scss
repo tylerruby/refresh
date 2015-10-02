@@ -184,6 +184,8 @@
 .landing-button {
   height:60px !important;
   width:80px !important;
+  background: #00bf8f !important;
+  border-color: #00bf8f !important;
 }
 .landing-login {
   position:absolute;
@@ -236,10 +238,10 @@
 @media (min-width: 768px) {
   .landing-login {
     position:absolute;
-    top:10px;
+    top:12px;
     right:80px;
     color:#fff;
-    font-size: 18px;
+    font-size: 17px;
   }
   .landing-logo {
     position:absolute;
@@ -334,8 +336,6 @@ input[type="color"]:focus,
     font-size: 20px !important;
   }
 }
-
-
 
 
 .numeral {
@@ -489,7 +489,7 @@ h4.panel-title {
       margin: 0!important;
     }
      #nav-wrapper ul.dropdown-menu a{
-      color: #333 !important;
+      color: #f0f0f0 !important;
      }
      #nav-wrapper ul.dropdown-menu a:hover {
       background-color: transparent!important;
@@ -565,14 +565,16 @@ h4.panel-title {
   padding: 0;
   text-align: center;
   position: absolute;
-  background: #333;
+  background: #00bf8f;
   top: 8px;
   right: 8px;
   border-radius: 50%;
+  color: #fff;
 }
 
 .back-to-city {
   position: absolute;
   top: 10%;
   left:2%;
+  color:#666;
 }
