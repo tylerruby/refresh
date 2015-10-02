@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
@@ -37,6 +37,8 @@ gem 'money-rails', '1.4.1'
 gem 'acts_as_shopping_cart', '0.3.0'
 gem 'stripe', '1.24.0'
 gem 'aws-sdk', '< 2.0'
+gem 'impressionist', '1.5.1'
+gem 'omniauth-facebook', '2.0.1'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

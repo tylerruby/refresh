@@ -14,6 +14,11 @@ class StoresController < ApplicationController
         cloth
       end
     end.uniq
+    .select { |cloth| cloth.store.available_for_delivery? }
+    .sort_by do |cloth|
+      cloth.impressionist_count(filter: :all, start_date: 1.weeks.ago)
+    end.reverse!
+
     render :index
   end
 
