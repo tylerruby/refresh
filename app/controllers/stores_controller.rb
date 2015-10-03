@@ -26,6 +26,9 @@ class StoresController < ApplicationController
     # We order by distance here to expose the distance method,
     # since the distance to the user is calculated via query.
     @store = try_to_order_by_distance(Store.all).friendly.find(params[:id])
+    @clothes = @store.clothes.sort_by do |cloth|
+                 cloth.last_week_views
+               end.reverse!
   end
 
   private
