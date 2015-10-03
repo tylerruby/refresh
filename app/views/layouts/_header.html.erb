@@ -311,6 +311,8 @@
   </div>
 </div>
 
+
+
 <div class="growl" id="app-growl"></div>
 
 <nav class="navbar navbar-default navbar-fixed-top app-navbar">
@@ -335,9 +337,15 @@
             </a>
           </li>
           <li>
+          <% if user_signed_in? %>
             <button class="btn btn-default navbar-btn navbar-btn-avitar" data-toggle="popover">
               <img class="img-circle" src="http://bootstrap-themes.github.io/application/assets/img/avatar-dhg.png">
             </button>
+          <% else %>
+            <li class="active">
+            <a href="index.html">Login</a>
+            </li>
+          <% end %>
           </li>
         </ul>
 
