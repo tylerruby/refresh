@@ -72,7 +72,7 @@
       <% @stores.each do |store| %>
         <div class="store item" >
           <%= link_to store_path(store) do %>
-            <%= image_tag store.thumbnail_url, class: "store-item", width: store.thumbnail_dimensions.width, height: store.thumbnail_dimensions.height %>
+            <%= image_tag store.image_url, class: "store-item", width: store.image_dimensions.width, height: store.image_dimensions.height %>
             <h3><%= store.name %></h3>
             <% if store.available_for_delivery? %>
               <i class="available-for-delivery fa fa-truck"></i>

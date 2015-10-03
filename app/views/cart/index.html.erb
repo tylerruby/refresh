@@ -18,27 +18,27 @@
                 <tr>
                   <td>
                     <div class="btn-group-vertical" role="group">
-                      <%= link_to raw("<i class=\"fa fa-chevron-up\"></i>"), { controller: :cart, action: :update, quantity: cart_item.quantity + 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-sm btn-default' %>
+                      <%= link_to raw("<i class=\"fa fa-chevron-up\"></i>"), { controller: :cart, action: :update, quantity: cart_item.quantity + 1, cloth_instance_id: cart_item.item_id }, method: :patch, class: 'btn btn-sm btn-default' %>
                       <button type="button" class="btn btn-sm btn-default" aria-label="Right Align">
                         <strong><%= cart_item.quantity %></strong>
                       </button>
 
-                      <%= link_to raw("<i class=\"fa fa-chevron-down\"></i>"), { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item.id }, method: :patch, class: 'btn btn-sm btn-default' if cart_item.quantity > 1 %>
+                      <%= link_to raw("<i class=\"fa fa-chevron-down\"></i>"), { controller: :cart, action: :update, quantity: cart_item.quantity - 1, cloth_instance_id: cart_item.item_id }, method: :patch, class: 'btn btn-sm btn-default' if cart_item.quantity > 1 %>
                     </div>
                   </td>
                   <td>
-                    <%= image_tag cart_item.item.image.url(:thumb), class: 'img-responsive center-block' %>
+                    <%= image_tag cart_item.image.url(:thumb), class: 'img-responsive center-block' %>
                   </td>
                   <td>
-                    <h4><%= cart_item.item.name %></h4>
-                    <%= cart_item.item.color %> - 
-                    <%= cart_item.item.size %>
+                    <h4><%= cart_item.name %></h4>
+                    <%= cart_item.color %> - 
+                    <%= cart_item.size %>
                   </td>
                   <td>
                     <h4><%= humanized_money_with_symbol cart_item.subtotal %></h4>
-                    <%= link_to cart_item.item.store.name, cart_item.item.store %>
+                    <%= link_to cart_item.store.name, cart_item.store %>
                   </td>
-                  <td><%= button_to 'x', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item.id }, method: :delete, class: 'remove-item' %></td>
+                  <td><%= button_to 'x', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item_id }, method: :delete, class: 'remove-item' %></td>
 
                 </tr>
                 <% end %>
