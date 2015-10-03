@@ -1,5 +1,3 @@
-<%= render 'layouts/header' %>
-
 <!-- Generating modals for clothes -->
 <% @store.clothes.each do |cloth| %>
   <%= render 'cloth_modal', cloth: cloth, store: @store %>
