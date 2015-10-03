@@ -1,5 +1,5 @@
 <!-- Generating modals for clothes -->
-<% @store.clothes.each do |cloth| %>
+<% @clothes.each do |cloth| %>
   <%= render 'cloth_modal', cloth: cloth, store: @store %>
 <% end %>
 
@@ -85,11 +85,11 @@
 
 
 <div class="js-image-grid container m-y-md col-md-8 col-md-offset-2">
-  <% if @store.clothes.empty? %>
+  <% if @clothes.empty? %>
     <h2>No products registered for this store yet</h2>
   <% end %>
 
-  <% @store.clothes.shuffle.each do |cloth| %>
+  <% @clothes.each do |cloth| %>
     <div class="cloth item">
       <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
         <%= image_tag cloth.image_url, width: cloth.image_dimensions.width, height: cloth.image_dimensions.height %>
