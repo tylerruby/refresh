@@ -21,4 +21,5 @@ module ApplicationHelper
       "alert-#{key}"
     end
   end
+
 end

@@ -6,6 +6,7 @@ html {
 }
 body {
   margin: 0;
+  margin-top: 50px !important;
 }
 article,
 aside,
@@ -227,6 +228,7 @@ th {
   }
   .navbar {
     display: none;
+    margin-bottom:200px !important;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -5138,7 +5140,7 @@ button.close {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
   .modal-sm {
-    width: 300px;
+    width: 400px;
   }
 }
 @media (min-width: 992px) {
@@ -7888,7 +7890,7 @@ fieldset[disabled] .btn-danger-outline.active {
   margin-right: 60px !important;
 }
 .m-b-lg {
-  margin-bottom: 60px !important;
+  margin-bottom: 40px !important;
 }
 .m-l-lg {
   margin-left: 60px !important;

@@ -22,11 +22,6 @@ Rails.application.routes.draw do
   get 'privacy/' => 'pages#privacy'
   get 'blog/' => 'pages#blog'
   get 'contact' => 'pages#contact'
- 
-
-  get 'login/' => 'pages#login'
-  get 'forgot/' => 'pages#forgot'
-  get 'register/' => 'pages#register'
 
   resources :stores, only: [:show]
 

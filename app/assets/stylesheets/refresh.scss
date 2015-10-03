@@ -128,10 +128,10 @@
 
 /* misc */
 .app-login-form {
-  max-width: 380px;
-  margin-top: -60px;
   background-color: #fff;
-  padding: 40px;
+  padding-top: 40px;
+  padding-left:30px;
+  padding-right:30px;
   border-radius:3px;
 }
 .app-new-msg {
@@ -369,6 +369,11 @@ input[type="color"]:focus,
     background-repeat: no-repeat;
     background-size: 10px 20px;
 }
+@media (max-width: 480px) {
+.fb-button {
+    font-size: 10px;
+  }
+}
 
 h4.panel-title {
   font-size:18px;
@@ -485,7 +490,7 @@ h4.panel-title {
      /*padding-top: 16px;*/
   }
   .navbar-brand img {
-    margin-top: 1px !important;
+    margin-top: -6px !important;
   }
   .navbar-toggle {
       margin-right: 0 !important;
