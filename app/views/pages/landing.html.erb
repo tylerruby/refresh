@@ -31,20 +31,7 @@
     </div><!-- /.row -->
 
   </div>
-  <div class="clearfix"></div>
 </div>
-
-
-
-
-  <div class="col-md-10 col-md-offset-2">
-    <ul class="cities">
-      <% @cities.each do |city| %>
-        <li><%= link_to city, "/#{city.parameterize}" %></li>
-      <% end %>
-    </ul>
-  </div>
-
 
 <!-- Loading Google Maps API only for this page -->
 <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&amp;libraries=places&amp;callback=initGoogleMapsAutocomplete" async="" defer=""></script>

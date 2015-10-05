@@ -70,9 +70,9 @@
       <% end %>
 
       <% @stores.each do |store| %>
-        <div class="store item" >
+        <div class="store item">
           <%= link_to store_path(store) do %>
-            <%= image_tag store.image_url, class: "store-item", width: store.image_dimensions.width, height: store.image_dimensions.height %>
+            <%= image_tag store.image_url, class: "store-item", width: store.image_dimensions.width, height: store.image_dimensions.height  %>
             <h3><%= store.name %></h3>
             <% if store.available_for_delivery? %>
               <i class="available-for-delivery fa fa-truck"></i>
@@ -84,7 +84,7 @@
   </div>
 
   <div id="clothes" class="tab-pane">
-    <div class="js-image-grid clothes col-md-8 col-md-offset-2">
+    <div class="js-image-grid clothes col-md-10 col-md-offset-1">
       <% if @clothes.empty? %>
         In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
       <% end %>
