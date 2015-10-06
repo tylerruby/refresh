@@ -9,7 +9,7 @@
       <ul class="nav navbar-nav">
         <li class="active">
           <%= link_to "/" + @store.city do %>
-            <i class="fa fa-chevron-left"></i> <%=@store.city%>
+            <i class="fa fa-map-pin"></i> <%=@store.city%> > <%=@store.name%>
           <% end %>
         </li>
       </ul>
@@ -57,7 +57,7 @@
 
     <p class="profile-header-bio">
       <br />
-      <%= link_to @store.address + ", " + @store.city, "https://www.google.com/maps/place/" + @store.address + ", " + @store.city, target: "_blank" %>
+      <%= link_to @store.address + ", " + @store.city, "https://www.google.com/maps/place/" + @store.address + ", " + @store.city, style: "font-size: 14px;", target: "_blank" %>
       <% if @store.available_for_delivery? %>
         <i class="available-for-delivery fa fa-truck"></i>
       <% end %>
@@ -82,7 +82,7 @@
 </div>
 
 
-<div class="js-image-grid container m-y-md col-md-10 col-md-offset-1">
+<div class="js-image-grid container m-y-md col-md-8 col-md-offset-2">
   <% if @clothes.empty? %>
     <h2>No products registered for this store yet</h2>
   <% end %>
