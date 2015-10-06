@@ -38,7 +38,7 @@
                     <h4><%= humanized_money_with_symbol cart_item.subtotal %></h4>
                     <%= link_to cart_item.store.name, cart_item.store %>
                   </td>
-                  <td><%= button_to 'x', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item_id }, method: :delete, class: 'remove-item' %></td>
+                  <td><%= button_to 'x', { controller: :cart, action: :remove, cloth_instance_id: cart_item.item_id }, method: :delete, class: 'remove-item pull-right' %></td>
 
                 </tr>
                 <% end %>
