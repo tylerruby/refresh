@@ -3,35 +3,6 @@
   <%= render 'cloth_modal', cloth: cloth, store: cloth.store %>
 <% end %>
 
-<div class="profile-header text-center">
-  <div class="container">
-    <div class="container-inner">
-      <h1 class="profile-header-user" style="">
-        <% if @stores.empty? %>
-          Wait Up!
-          <h4>We'll be in <%= @city %> soon.</h4>
-        <% else %>
-        <%= @city %>
-        <% end %>
-      </h1>
-    </div>
-  </div>
-  <% unless @stores.empty? %>
-  <nav class="profile-header-nav">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#stores" data-toggle="tab">Stores</a>
-      </li>
-      <li>
-        <a href="#clothes" data-toggle="tab">Clothes</a>
-      </li>
-    </ul>
-  </nav>
-  <% end %>
-</div>
-
-
-
 
 <div id="nav-wrapper" class="js-affix-wrapper">
   <nav class="navbar navbar-inverse js-affix" >
@@ -43,10 +14,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#"> TEST </a>
       </div>
       <div class="collapse navbar-collapse" id="secondary-nav-bar">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mens <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -60,7 +30,32 @@
   </nav>
 </div>
 
-
+<div class="profile-header text-center">
+  <% unless @stores.empty? %>
+  <nav class="profile-header-nav">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#stores" data-toggle="tab">Stores</a>
+      </li>
+      <li>
+        <a href="#clothes" data-toggle="tab">Clothes</a>
+      </li>
+    </ul>
+  </nav>
+  <% end %>
+  <div class="container">
+    <div class="container-inner">
+      <h1 class="profile-header-user" style="">
+        <% if @stores.empty? %>
+          Wait Up!
+          <h4>We'll be in <%= @city %> soon.</h4>
+        <% else %>
+        <%= @city %>
+        <% end %>
+      </h1>
+    </div>
+  </div>
+</div>
 
 <div class="container m-y-md tab-content">
   <div id="stores" class="tab-pane active">
