@@ -9,7 +9,10 @@ $(document).on('click', '.js-msgGroup', function () {
 
 $(function () {
   function getRight() {
-    return ($(window).width() - ($('[data-toggle="popover"]').offset().left + $('[data-toggle="popover"]').outerWidth()))
+    var el = $('[data-toggle="popover"]');
+    if (el.length > 0) {
+      return ($(window).width() - (el.offset().left + el.outerWidth()));
+    }
   }
 
   $(window).on('resize', function () {
