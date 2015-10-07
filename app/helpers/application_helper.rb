@@ -22,4 +22,7 @@ module ApplicationHelper
     end
   end
 
+  def modal_to(title, href)
+    link_to title, href, data: { toggle: :modal, dismiss: :modal }
+  end
 end
