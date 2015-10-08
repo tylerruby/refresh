@@ -4,6 +4,7 @@ FactoryGirl.define do
     price "30.00"
     gender "unisex"
     chain
+    category
   end
 
 end
