@@ -3,13 +3,31 @@ require 'rails_helper'
 RSpec.describe ClothesController, type: :controller do
 
   describe "GET #index" do
+    let(:chain) { create(:chain, stores: [create(:store)]) }
+
     def do_action
       get :index, search_parameters
     end
 
+    before do
+      session[:coordinates] = ["40.7143528", "-74.0059731"]
+
+      Geocoder::Lookup::Test.add_stub("4th Av., Augusta, GA", [
+        {
+          'latitude'     => 40.7143528,
+          'longitude'    => -74.0059731,
+          'address'      => '4th Av., Augusta, GA',
+          'state'        => 'Georgia',
+          'state_code'   => 'GA',
+          'country'      => 'United States',
+          'country_code' => 'US'
+        }
+      ])
+    end
+
     describe "without any filter" do
-      let!(:cloth1) { create(:cloth) }
-      let!(:cloth2) { create(:cloth) }
+      let!(:first_cloth) { create(:cloth, chain: chain) }
+      let!(:second_cloth) { create(:cloth, chain: chain) }
 
       let(:search_parameters) do
         {}
@@ -17,7 +35,7 @@ RSpec.describe ClothesController, type: :controller do
 
       it "returns all the clothes" do
         do_action
-        expect(assigns[:clothes]).to eq [cloth1, cloth2]
+        expect(assigns[:clothes]).to match_array [first_cloth, second_cloth]
       end
 
       it "doesn't return sizes" do
@@ -26,9 +44,46 @@ RSpec.describe ClothesController, type: :controller do
       end
     end
 
-    describe "filtering by chain" do
-      let!(:chain) { create(:chain) }
+    describe "filtering by city" do
+      let!(:first_store) { create(:store, city: 'Augusta') }
+      let!(:first_cloth) { create(:cloth, chain: first_store.chain) }
+
+      let!(:second_store) { create(:store, chain: first_store.chain, city: 'Augusta') }
+      let!(:second_cloth) { create(:cloth, chain: second_store.chain) }
+
+      let!(:store_in_another_city) { create(:store, city: 'Atlanta') }
+      let!(:cloth_from_store_in_another_city) { create(:cloth, chain: store_in_another_city.chain) }
+
+      let(:search_parameters) do
+        {
+          city: 'augusta'
+        }
+      end
+
+      it "orders clothes by views" do
+        Impression.create!(impressionable: second_cloth)
+        do_action
+        expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
+      end
+
+      it "orders clothes by views in the last week" do
+        2.times { Impression.create!(impressionable: first_cloth, created_at: 2.weeks.ago) }
+        Impression.create!(impressionable: second_cloth)
+        do_action
+        expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
+      end
+
+      it "shows only clothes from stores available for delivery" do
+        session[:coordinates] = ["0", "0"]
+        do_action
+        expect(assigns[:clothes]).to eq []
+      end
+    end
+
+    describe "filtering by chain ignores distance" do
+      let(:chain) { create(:chain) }
       let!(:cloth) { create(:cloth, chain: chain) }
+      let!(:another_chain) { create(:chain, stores: [create(:store)]) }
       let!(:cloth_from_another_chain) { create(:cloth) }
 
       let(:search_parameters) do
@@ -50,9 +105,9 @@ RSpec.describe ClothesController, type: :controller do
 
     describe "filtering by category" do
       let!(:category) { create(:category) }
-      let!(:cloth) { create(:cloth, category: category) }
+      let!(:cloth) { create(:cloth, category: category, chain: chain) }
       let!(:cloth_variant) { create(:cloth_variant, cloth: cloth, size: 'M') }
-      let!(:cloth_from_another_category) { create(:cloth) }
+      let!(:cloth_from_another_category) { create(:cloth, chain: chain) }
 
       let(:search_parameters) do
         {
@@ -72,7 +127,7 @@ RSpec.describe ClothesController, type: :controller do
       end
 
       describe "filtering by size" do
-        let!(:another_cloth) { create(:cloth, category: category) }
+        let!(:another_cloth) { create(:cloth, category: category, chain: chain) }
         let!(:cloth_variant_from_another_size) { create(:cloth_variant, cloth: cloth, size: 'S') }
 
         let(:search_parameters) do
@@ -95,8 +150,8 @@ RSpec.describe ClothesController, type: :controller do
     end
 
     describe "filtering by price" do
-      let!(:cloth) { create(:cloth, price: 30) }
-      let!(:expensive_cloth) { create(:cloth, price: 50) }
+      let!(:cloth) { create(:cloth, price: 30, chain: chain) }
+      let!(:expensive_cloth) { create(:cloth, price: 50, chain: chain) }
 
       let(:search_parameters) do
         {

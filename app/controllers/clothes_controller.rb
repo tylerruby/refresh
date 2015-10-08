@@ -2,9 +2,8 @@ class ClothesController < ApplicationController
   impressionist only: [:show]
 
   def index
-    searcher = ClothSearcher.new(params)
-    @clothes = searcher.clothes
-    @sizes = searcher.sizes
+    @clothes = cloth_searcher.clothes
+    @sizes = cloth_searcher.sizes
 
     render nothing: true
   end
@@ -12,4 +11,14 @@ class ClothesController < ApplicationController
   def show
     render nothing: true
   end
+
+  private
+
+    def cloth_searcher
+      ClothSearcher.new(params.merge(stores: store_searcher.available_for_delivery))
+    end
+
+    def store_searcher
+      StoreSearcher.new(city: params[:city], coordinates: session[:coordinates])
+    end
 end

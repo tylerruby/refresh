@@ -1,18 +1,19 @@
 class ClothSearcher
   def initialize(search_params)
-    self.chain_id = search_params.fetch(:chain_id, nil)
+    self.chain_id    = search_params.fetch(:chain_id, nil)
     self.category_id = search_params.fetch(:category_id, nil)
-    self.size = search_params.fetch(:size, nil)
-    self.max_price = search_params.fetch(:max_price, nil)
+    self.size        = search_params.fetch(:size, nil)
+    self.max_price   = search_params.fetch(:max_price, nil)
+    self.stores      = search_params.fetch(:stores) { Store.none }
   end
 
   def clothes
     return @clothes unless @clothes.nil?
 
-    @clothes = Cloth.all
-
     if by_chain?
-      @clothes = @clothes.where(chain_id: chain_id)
+      @clothes = Cloth.where(chain_id: chain_id)
+    else
+      @clothes = available_for_delivery
     end
 
     if by_category?
@@ -28,7 +29,7 @@ class ClothSearcher
       @clothes = @clothes.where(price_cents: 0..max_price)
     end
 
-    @clothes
+    @clothes.includes(:impressions).sort_by(&:last_week_views).reverse!
   end
 
   def sizes
@@ -44,7 +45,7 @@ class ClothSearcher
 
   private
 
-    attr_accessor :chain_id, :category_id, :size, :max_price
+    attr_accessor :chain_id, :category_id, :size, :max_price, :stores
 
     def max_price
       @max_price.present? && @max_price.to_money.cents
@@ -68,5 +69,16 @@ class ClothSearcher
 
     def show_sizes?
       category_id.present? && size.blank?
+    end
+
+    def available_for_delivery
+      clothes_ids = stores
+                    .includes(:chain)
+                    .map(&:chain)
+                    .uniq
+                    .map(&:clothes)
+                    .flat_map {|q| q.select(:id).map(&:id) }
+
+      Cloth.where(id: clothes_ids)
     end
 end

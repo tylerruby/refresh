@@ -43,30 +43,6 @@ RSpec.describe StoresController, type: :controller do
       expect(assigns[:stores]).to eq [first_store, second_store]
     end
 
-    it "orders clothes by views" do
-      Impression.create!(impressionable: second_cloth)
-      do_action
-      expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
-    end
-
-    it "orders clothes by views in the last week" do
-      2.times { Impression.create!(impressionable: first_cloth, created_at: 2.weeks.ago) }
-      Impression.create!(impressionable: second_cloth)
-      do_action
-      expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
-    end
-
-    it "sets respective store for each cloth" do
-      do_action
-      expect(assigns[:clothes].first.store).to eq first_store
-    end
-
-    it "shows only clothes from stores available for delivery" do
-      allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(false)
-      do_action
-      expect(assigns[:clothes]).to eq []
-    end
-
     pending "order by distance"
   end
 
