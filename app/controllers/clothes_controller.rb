@@ -1,5 +1,5 @@
 class ClothesController < ApplicationController
-  impressionist only: [:show]
+  impressionist actions: [:show]
 
   def index
     @clothes = cloth_searcher.clothes
@@ -20,10 +20,15 @@ class ClothesController < ApplicationController
   private
 
     def cloth_searcher
-      @cloth_searcher ||= ClothSearcher.new(params.merge(stores: store_searcher.available_for_delivery))
+      @cloth_searcher ||= ClothSearcher.new(
+        params.merge(stores: store_searcher.available_for_delivery)
+      )
     end
 
     def store_searcher
-      @store_searcher ||= StoreSearcher.new(city: params[:city], coordinates: session[:coordinates])
+      @store_searcher ||= StoreSearcher.new(
+        city: params[:city],
+        coordinates: session[:coordinates]
+      )
     end
 end

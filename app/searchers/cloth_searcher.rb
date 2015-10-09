@@ -4,7 +4,8 @@ class ClothSearcher
     self.category_id = search_params[:category_id]
     self.size        = search_params[:size]
     self.max_price   = search_params[:max_price]
-    self.stores      = search_params.fetch(:stores) { Store.none }
+    self.stores      = Store.where(id: search_params[:stores].map(&:id) || [])
+                       .includes(chain: :clothes)
   end
 
   def clothes
@@ -29,10 +30,11 @@ class ClothSearcher
       @clothes = @clothes.where(price_cents: 0..max_price)
     end
 
-    @clothes = @clothes.includes(:impressions).sort_by(&:last_week_views).reverse!
-
+    @clothes = @clothes.includes(:cloth_variants).sort_by(&:last_week_views).reverse!
     @clothes.each do |cloth|
-      cloth.store = stores.where(chain: cloth.chain).first
+      cloth.store = stores.find do |store|
+        store.chain == cloth.chain
+      end
     end
 
     @clothes
@@ -79,7 +81,6 @@ class ClothSearcher
 
     def available_for_delivery
       clothes_ids = stores
-                    .includes(:chain)
                     .map(&:chain)
                     .uniq
                     .map(&:clothes)
