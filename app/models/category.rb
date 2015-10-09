@@ -4,6 +4,15 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
   validate :assert_at_least_one_gender
 
+  # TODO: Find a way to show this on admin
+  def gender
+    case
+    when male && female then :unisex
+    when male then :male
+    when female then :female
+    end
+  end
+
   private
 
     def assert_at_least_one_gender

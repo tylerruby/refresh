@@ -27,4 +27,24 @@ RSpec.describe Category, type: :model do
   describe "associations" do
     it { is_expected.to have_many(:clothes) }
   end
+
+  describe "#gender" do
+    let(:category) { build(:category, male: false, female: false) }
+
+    it do
+      category.male = true
+      expect(category.gender).to eq :male
+    end
+
+    it do
+      category.female = true
+      expect(category.gender).to eq :female
+    end
+
+    it do
+      category.male = true
+      category.female = true
+      expect(category.gender).to eq :unisex
+    end
+  end
 end

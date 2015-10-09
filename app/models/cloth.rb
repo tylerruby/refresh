@@ -71,6 +71,7 @@ class Cloth < ActiveRecord::Base
       end
       field :image
       field :chain
+      field :category
     end
 
     list do
@@ -85,6 +86,7 @@ class Cloth < ActiveRecord::Base
       field :colors
       field :image
       field :chain
+      field :category
       field :total_views
       field :last_week_views
     end

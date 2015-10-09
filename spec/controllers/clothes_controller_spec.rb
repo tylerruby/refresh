@@ -38,6 +38,13 @@ RSpec.describe ClothesController, type: :controller do
         expect(assigns[:female_categories]).to eq [female_category, unisex_category]
         expect(assigns[:male_categories]).to eq [male_category, unisex_category]
       end
+
+      it "assigns a non-persisted category" do
+        do_action
+        category = assigns[:category]
+        expect(category).to be_a Category
+        expect(category).not_to be_persisted
+      end
     end
 
     describe "without any filter" do
@@ -136,6 +143,11 @@ RSpec.describe ClothesController, type: :controller do
         }
       end
 
+      it "assigns the category" do
+        do_action
+        expect(assigns[:category]).to eq category
+      end
+
       it "returns only clothes from that category" do
         do_action
         expect(assigns[:clothes]).to eq [cloth]
@@ -158,6 +170,16 @@ RSpec.describe ClothesController, type: :controller do
           }
         end
 
+        it "assigns the category" do
+          do_action
+          expect(assigns[:category]).to eq category
+        end
+
+        it "assigns the size" do
+          do_action
+          expect(assigns[:size]).to eq 'M'
+        end
+
         it "returns only clothes from that category and size" do
           do_action
           expect(assigns[:clothes]).to eq [cloth]
@@ -178,6 +200,11 @@ RSpec.describe ClothesController, type: :controller do
         {
           max_price: 49
         }
+      end
+
+      it "assigns the max price" do
+        do_action
+        expect(assigns[:max_price]).to eq "49"
       end
 
       it "returns only clothes up to that price" do

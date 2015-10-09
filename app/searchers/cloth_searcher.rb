@@ -1,9 +1,9 @@
 class ClothSearcher
   def initialize(search_params)
-    self.chain_id    = search_params.fetch(:chain_id, nil)
-    self.category_id = search_params.fetch(:category_id, nil)
-    self.size        = search_params.fetch(:size, nil)
-    self.max_price   = search_params.fetch(:max_price, nil)
+    self.chain_id    = search_params[:chain_id]
+    self.category_id = search_params[:category_id]
+    self.size        = search_params[:size]
+    self.max_price   = search_params[:max_price]
     self.stores      = search_params.fetch(:stores) { Store.none }
   end
 
