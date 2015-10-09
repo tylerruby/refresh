@@ -29,7 +29,13 @@ class ClothSearcher
       @clothes = @clothes.where(price_cents: 0..max_price)
     end
 
-    @clothes.includes(:impressions).sort_by(&:last_week_views).reverse!
+    @clothes = @clothes.includes(:impressions).sort_by(&:last_week_views).reverse!
+
+    @clothes.each do |cloth|
+      cloth.store = stores.where(chain: cloth.chain).first
+    end
+
+    @clothes
   end
 
   def sizes

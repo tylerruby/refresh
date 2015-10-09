@@ -25,6 +25,21 @@ RSpec.describe ClothesController, type: :controller do
       ])
     end
 
+    describe "categories" do
+      let(:search_parameters) do
+        {}
+      end
+
+      it "returns all the categories separated by gender" do
+        female_category = create(:category, male: false, female: true)
+        male_category = create(:category, male: true, female: false)
+        unisex_category = create(:category, male: true, female: true)
+        do_action
+        expect(assigns[:female_categories]).to eq [female_category, unisex_category]
+        expect(assigns[:male_categories]).to eq [male_category, unisex_category]
+      end
+    end
+
     describe "without any filter" do
       let!(:first_cloth) { create(:cloth, chain: chain) }
       let!(:second_cloth) { create(:cloth, chain: chain) }
@@ -48,7 +63,7 @@ RSpec.describe ClothesController, type: :controller do
       let!(:first_store) { create(:store, city: 'Augusta') }
       let!(:first_cloth) { create(:cloth, chain: first_store.chain) }
 
-      let!(:second_store) { create(:store, chain: first_store.chain, city: 'Augusta') }
+      let!(:second_store) { create(:store, city: 'Augusta') }
       let!(:second_cloth) { create(:cloth, chain: second_store.chain) }
 
       let!(:store_in_another_city) { create(:store, city: 'Atlanta') }
@@ -77,6 +92,12 @@ RSpec.describe ClothesController, type: :controller do
         session[:coordinates] = ["0", "0"]
         do_action
         expect(assigns[:clothes]).to eq []
+      end
+
+      it "sets stores for clothes to create modals" do
+        do_action
+        expect(assigns[:clothes][0].store).to eq second_store
+        expect(assigns[:clothes][1].store).to eq first_store
       end
     end
 

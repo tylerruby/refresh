@@ -4,8 +4,9 @@ class ClothesController < ApplicationController
   def index
     @clothes = cloth_searcher.clothes
     @sizes = cloth_searcher.sizes
-
-    render nothing: true
+    @male_categories = Category.where(male: true)
+    @female_categories = Category.where(female: true)
+    render layout: false
   end
 
   def show

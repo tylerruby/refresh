@@ -1,0 +1,49 @@
+<!-- Generating modals for clothes -->
+<% @clothes.each do |cloth| %>
+  <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
+<% end %>
+
+<div class="filters">
+  <div data-filter="category_id" data-filter-value="<%= params[:category_id] %>">
+    <%= dropdown_for "Mens", class: "male" do %>
+      <%= render partial: 'category', collection: @male_categories %>
+    <% end %>
+
+    <%= dropdown_for "Women", class: "female" do %>
+      <%= render partial: 'category', collection: @female_categories %>
+    <% end %>
+  </div>
+
+  <% if @sizes.any? %>
+    <%= dropdown_for "Size", class: "size", 'data-filter' => 'size', 'data-filter-value' => params[:size] do %>
+        <% @sizes.each do |size| %>
+          <li>
+            <a data-filter-select="<%= size %>"><%= size %></a>
+          </li>
+        <% end %>
+    <% end %>
+  <% end %>
+
+  <div class="max-price">
+    <p>
+      Max price: <span class="js-slider-value"></span>
+    </p>
+    <input type="range" min="1" max="1000" class="max-price js-slider" data-filter="max_price" value="<%= params[:max_price] || 1000 %>" data-filter-value="<%= params[:max_price] %>">
+  </div>
+</div>
+
+<div class="js-image-grid clothes col-md-10 col-md-offset-1">
+  <% if @clothes.empty? %>
+    In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
+  <% end %>
+
+  <% @clothes.each do |cloth| %>
+    <div class="cloth item">
+      <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
+        <%= image_tag cloth.image_url, width: cloth.image_dimensions.width, height: cloth.image_dimensions.height %>
+        <i class="heart-this fa fa-heart-o"></i>
+        <h3><%= cloth.name %></h3>
+      <% end %>
+    </div>
+  <% end %>
+</div>
