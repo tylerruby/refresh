@@ -41,7 +41,7 @@ class ClothSearcher
   end
 
   def sizes
-    if show_sizes?
+    if by_category?
       ClothVariant.select(:size)
       .where(cloth: clothes)
       .distinct
@@ -73,10 +73,6 @@ class ClothSearcher
 
     def by_max_price?
       max_price.present?
-    end
-
-    def show_sizes?
-      category_id.present? && size.blank?
     end
 
     def available_for_delivery

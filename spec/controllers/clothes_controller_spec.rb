@@ -160,9 +160,6 @@ RSpec.describe ClothesController, type: :controller do
       end
 
       describe "filtering by size" do
-        let!(:another_cloth) { create(:cloth, category: category, chain: chain) }
-        let!(:cloth_variant_from_another_size) { create(:cloth_variant, cloth: cloth, size: 'S') }
-
         let(:search_parameters) do
           {
             category_id: category.id,
@@ -185,9 +182,10 @@ RSpec.describe ClothesController, type: :controller do
           expect(assigns[:clothes]).to eq [cloth]
         end
 
-        it "doesn't return sizes" do
+        it "returns available sizes without repetition" do
+          create(:cloth_variant, size: 'M', cloth: create(:cloth, category: category))
           do_action
-          expect(assigns[:sizes]).to eq []
+          expect(assigns[:sizes]).to eq ['M']
         end
       end
     end
