@@ -294,7 +294,7 @@ input[type="color"]:focus,
   background-position: center center;
   background-size: cover;
   border-shadow:1px grey solid;
-  background-image: url('http://i.imgur.com/pQD2wrU.jpg') !important;
+  background-image: url('http://i.imgur.com/q5H8SVk.jpg') !important;
   h1 {
     font-size: 65px !important;
     text-shadow: 0 0 2px rgba(0,0,0,0.6);
@@ -451,7 +451,7 @@ h4.panel-title {
     }
 
     #nav-wrapper a.dropdown-toggle {
-        display: none!important;
+        display: none !important;
     }
     #nav-wrapper ul.dropdown-menu {
       display: inline;
@@ -474,6 +474,14 @@ h4.panel-title {
       background-color: transparent!important;
       color:#fff !important;
      }
+}
+div.container-fluid .secondary-nav {
+  float: none !important;
+  text-align:center;
+}
+div.container-fluid .secondary-nav > li {
+  float: none !important;
+  display: inline-block;
 }
 /* END scrollable for Secondary Nav*/
 
