@@ -263,7 +263,7 @@ body {
   font-size: 14px;
   line-height: 1.6;
   color: #333;
-  background-color: #f0f0f0;
+  background-color: #fff;
   margin-top:50px;
 }
 input,
@@ -1302,7 +1302,7 @@ select[multiple].input-lg {
   height: 36px;
   line-height: 36px;
   text-align: center;
-  pointer-events: none;
+  
 }
 .input-lg + .form-control-feedback,
 .input-group-lg + .form-control-feedback,
@@ -1555,7 +1555,7 @@ fieldset[disabled] .btn {
 }
 a.btn.disabled,
 fieldset[disabled] a.btn {
-  pointer-events: none;
+  
 }
 .btn-default {
   color: #536570;
@@ -3018,7 +3018,7 @@ tbody.collapse.in {
 [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"] {
   position: absolute;
   clip: rect(0, 0, 0, 0);
-  pointer-events: none;
+  
 }
 .input-group {
   position: relative;
@@ -3789,7 +3789,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #cccccc;
 }
 .navbar-inverse {
-  background-color: #fff;
+  background-color: #fcfcfc;
   border-bottom: none;
 }
 .navbar-inverse .navbar-brand {
@@ -8149,7 +8149,7 @@ img.zoom-img {
   bottom: 0;
   z-index: 1079;
   background: #ffffff;
-  pointer-events: none;
+  
   opacity: 0;
   transition: opacity 300ms;
 }
@@ -8354,7 +8354,7 @@ img.zoom-img {
   margin-left: -10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #f0f0f0;
+  border-bottom: 10px solid #fcfcfc;
 }
 @media (min-width: 768px) {
   .profile-header-nav .nav > li > a {
