@@ -14,9 +14,9 @@ class StoresController < ApplicationController
 
   def show
     @store = searcher.find(params[:id])
-    @clothes = @store.clothes.sort_by do |cloth|
-                 cloth.last_week_views
-               end.reverse!
+    #@clothes = @store.clothes.sort_by do |cloth|
+    #             cloth.last_week_views
+    #           end.reverse!
   end
 
   private
