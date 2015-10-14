@@ -1,6 +1,7 @@
 class ClothSearcher
   def initialize(search_params)
     self.chain_id    = search_params[:chain_id]
+    self.gender      = search_params[:gender]
     self.category_id = search_params[:category_id]
     self.size        = search_params[:size]
     self.max_price   = search_params[:max_price]
@@ -15,6 +16,10 @@ class ClothSearcher
       @clothes = Cloth.where(chain_id: chain_id)
     else
       @clothes = available_for_delivery
+    end
+
+    if by_gender?
+      @clothes = @clothes.joins(:category).where(categories: gender_condition)
     end
 
     if by_category?
@@ -53,7 +58,7 @@ class ClothSearcher
 
   private
 
-    attr_accessor :chain_id, :category_id, :size, :max_price, :stores
+    attr_accessor :chain_id, :gender, :category_id, :size, :max_price, :stores
 
     def max_price
       @max_price.present? && @max_price.to_money.cents
@@ -61,6 +66,10 @@ class ClothSearcher
 
     def by_chain?
       chain_id.present?
+    end
+
+    def by_gender?
+      gender.present?
     end
 
     def by_category?
@@ -83,5 +92,13 @@ class ClothSearcher
                     .flat_map {|q| q.select(:id).map(&:id) }
 
       Cloth.where(id: clothes_ids)
+    end
+
+    def gender_condition
+      case gender
+      when 'male' then { male: true }
+      when 'female' then { female: true }
+      else {}
+      end
     end
 end

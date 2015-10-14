@@ -5,6 +5,10 @@
 
 <div class="filters">
   <div class="selected-filters">
+    <% if @gender.present? %>
+      <p>Gender: <%= @gender %></p>
+    <% end %>
+
     <% if @category.persisted? %>
       <p>Category: <%= @category.name %></p>
     <% end %>
@@ -18,15 +22,17 @@
     <% end %>
   </div>
 
-  <div data-filter="category_id" data-filter-value="<%= @category.id %>">
-    <%= dropdown_for "Mens", class: "male" do %>
-      <%= render partial: 'category', collection: @male_categories %>
-    <% end %>
+  <%= dropdown_for "Gender", class: 'gender', 'data-filter' => 'gender', 'data-filter-value' => @gender do %>
+      <% @genders.each do |gender| %>
+        <li>
+          <a data-filter-select="<%= gender %>"><%= gender %></a>
+        </li>
+      <% end %>
+  <% end %>
 
-    <%= dropdown_for "Women", class: "female" do %>
-      <%= render partial: 'category', collection: @female_categories %>
-    <% end %>
-  </div>
+  <%= dropdown_for "Category", class: @categories.any? ? 'category' : 'hide category', 'data-filter' => 'category_id', 'data-filter-value' => @category.id do %>
+    <%= render partial: 'category', collection: @categories %>
+  <% end %>
 
   <%= dropdown_for "Size", class: @sizes.any? ? 'size' : 'hide size', 'data-filter' => 'size', 'data-filter-value' => @size do %>
       <% @sizes.each do |size| %>

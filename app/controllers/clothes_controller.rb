@@ -2,10 +2,15 @@ class ClothesController < ApplicationController
   impressionist actions: [:show]
 
   def index
+    @genders = %w(male female)
     @clothes = cloth_searcher.clothes
     @sizes = cloth_searcher.sizes
-    @male_categories = Category.where(male: true)
-    @female_categories = Category.where(female: true)
+    @gender = params[:gender]
+    @categories = case @gender
+                  when 'male' then Category.where(male: true)
+                  when 'female' then Category.where(female: true)
+                  else []
+                  end
 
     @category = Category.find_or_initialize_by(id: params[:category_id])
     @size = params[:size]

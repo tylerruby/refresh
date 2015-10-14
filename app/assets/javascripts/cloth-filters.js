@@ -16,21 +16,36 @@ function FilterClothes () {
   }
 
   function bindFilters (element) {
-    element.find('[data-filter] [data-filter-select]').click(bindFilter);
+    element
+      .find('[data-filter]')
+      .on('app.resetSubfilters', resetSubfilters)
+      .find('[data-filter-select]')
+      .click(selectFilter);
 
-    function bindFilter () {
+    function selectFilter () {
       var option = $(this);
       var value = option.data('filter-select');
       var filter = option.closest('[data-filter]');
       filter.data('filter-value', value);
+      filter.trigger('app.resetSubfilters')
 
-      triggerResets(filter);
       FilterClothes();
     }
 
-    function triggerResets (filter) {
-      if (filter.data('filter') == 'category_id') {
-        element.find('[data-filter=size]').data('filter-value', null);
+    function resetSubfilters (filter) {
+      var filterType = $(this).data('filter');
+
+      if (filterType == 'gender') {
+        element
+          .find('[data-filter=category_id]')
+          .data('filter-value', null)
+          .trigger('app.resetSubfilters');
+      }
+
+      if (filterType == 'category_id') {
+        element
+          .find('[data-filter=size]')
+          .data('filter-value', null);
       }
     }
   }

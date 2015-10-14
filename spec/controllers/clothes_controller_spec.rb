@@ -25,28 +25,6 @@ RSpec.describe ClothesController, type: :controller do
       ])
     end
 
-    describe "categories" do
-      let(:search_parameters) do
-        {}
-      end
-
-      it "returns all the categories separated by gender" do
-        female_category = create(:category, male: false, female: true)
-        male_category = create(:category, male: true, female: false)
-        unisex_category = create(:category, male: true, female: true)
-        do_action
-        expect(assigns[:female_categories]).to eq [female_category, unisex_category]
-        expect(assigns[:male_categories]).to eq [male_category, unisex_category]
-      end
-
-      it "assigns a non-persisted category" do
-        do_action
-        category = assigns[:category]
-        expect(category).to be_a Category
-        expect(category).not_to be_persisted
-      end
-    end
-
     describe "without any filter" do
       let!(:first_cloth) { create(:cloth, chain: chain) }
       let!(:second_cloth) { create(:cloth, chain: chain) }
@@ -60,9 +38,21 @@ RSpec.describe ClothesController, type: :controller do
         expect(assigns[:clothes]).to match_array [first_cloth, second_cloth]
       end
 
+      it "doesn't return categories" do
+        do_action
+        expect(assigns[:categories]).to eq []
+      end
+
       it "doesn't return sizes" do
         do_action
         expect(assigns[:sizes]).to eq []
+      end
+
+      it "assigns a category even if none is selected" do
+        do_action
+        category = assigns[:category]
+        expect(category).to be_a Category
+        expect(category).not_to be_persisted
       end
     end
 
@@ -131,61 +121,124 @@ RSpec.describe ClothesController, type: :controller do
       end
     end
 
-    describe "filtering by category" do
-      let!(:category) { create(:category) }
-      let!(:cloth) { create(:cloth, category: category, chain: chain) }
-      let!(:cloth_variant) { create(:cloth_variant, cloth: cloth, size: 'M') }
-      let!(:cloth_from_another_category) { create(:cloth, chain: chain) }
+    describe "filtering by gender" do
+      let!(:female_category) { create(:category, male: false, female: true) }
+      let!(:male_category) { create(:category, male: true, female: false) }
+      let!(:unisex_category) { create(:category, male: true, female: true) }
+
+      let!(:male_cloth) { create(:cloth, category: male_category, chain: chain) }
+      let!(:female_cloth) { create(:cloth, category: female_category, chain: chain) }
+      let!(:unisex_cloth) { create(:cloth, category: unisex_category, chain: chain) }
 
       let(:search_parameters) do
-        {
-          category_id: category.id
-        }
+        {}
       end
 
-      it "assigns the category" do
+      it "always shows all genders" do
         do_action
-        expect(assigns[:category]).to eq category
+        expect(assigns[:genders]).to eq %w(male female)
       end
 
-      it "returns only clothes from that category" do
-        do_action
-        expect(assigns[:clothes]).to eq [cloth]
-      end
-
-      it "returns available sizes without repetition" do
-        create(:cloth_variant, size: 'M', cloth: create(:cloth, category: category))
-        do_action
-        expect(assigns[:sizes]).to eq ['M']
-      end
-
-      describe "filtering by size" do
+      context "selecting male" do
         let(:search_parameters) do
           {
-            category_id: category.id,
-            size: 'M'
+            gender: 'male'
+          }
+        end
+
+        before { do_action }
+        it { expect(assigns[:gender]).to eq 'male' }
+        it { expect(assigns[:categories]).to eq [male_category, unisex_category] }
+        it { expect(assigns[:clothes]).to match_array [male_cloth, unisex_cloth] }
+      end
+
+      context "selecting female" do
+        let(:search_parameters) do
+          {
+            gender: 'female'
+          }
+        end
+
+        before { do_action }
+
+        it { expect(assigns[:gender]).to eq 'female' }
+        it { expect(assigns[:categories]).to eq [female_category, unisex_category] }
+        it { expect(assigns[:clothes]).to match_array [female_cloth, unisex_cloth] }
+      end
+
+      context "selecting invalid gender" do
+        let(:search_parameters) do
+          {
+            gender: 'invalid gender'
+          }
+        end
+
+        before { do_action }
+
+        it { expect(assigns[:gender]).to eq 'invalid gender' }
+        it { expect(assigns[:categories]).to eq [] }
+        it { expect(assigns[:clothes]).to eq [] }
+      end
+
+      describe "filtering by category" do
+        let!(:cloth_variant) { create(:cloth_variant, cloth: male_cloth, size: 'M') }
+        let!(:cloth_from_another_category) { create(:cloth, chain: chain) }
+
+        let(:search_parameters) do
+          {
+            gender: 'male',
+            category_id: male_category.id
           }
         end
 
         it "assigns the category" do
           do_action
-          expect(assigns[:category]).to eq category
+          expect(assigns[:category]).to eq male_category
         end
 
-        it "assigns the size" do
+        it "returns only clothes from that category" do
           do_action
-          expect(assigns[:size]).to eq 'M'
-        end
-
-        it "returns only clothes from that category and size" do
-          do_action
-          expect(assigns[:clothes]).to eq [cloth]
+          expect(assigns[:clothes]).to eq [male_cloth]
         end
 
         it "returns available sizes without repetition" do
-          create(:cloth_variant, size: 'M', cloth: create(:cloth, category: category))
+          create(:cloth_variant, size: 'M', cloth: create(:cloth, category: male_category))
           do_action
           expect(assigns[:sizes]).to eq ['M']
+        end
+
+        describe "filtering by size" do
+          let!(:cloth_variant_from_another_size) do
+            create(:cloth_variant, cloth: male_cloth, size: 'S')
+          end
+          let(:search_parameters) do
+            {
+              gender: 'male',
+              category_id: male_category.id,
+              size: 'M'
+            }
+          end
+
+          it "assigns the category" do
+            do_action
+            expect(assigns[:category]).to eq male_category
+          end
+
+          it "assigns the size" do
+            do_action
+            expect(assigns[:size]).to eq 'M'
+          end
+
+          it "returns only clothes from that category and size" do
+            do_action
+            expect(assigns[:clothes]).to eq [male_cloth]
+          end
+
+          it "returns available sizes without repetition" do
+            create(:cloth_variant, size: 'M', cloth: create(:cloth, category: male_category))
+            do_action
+            expect(assigns[:sizes]).to eq ['M', 'S']
+          end
         end
       end
     end
