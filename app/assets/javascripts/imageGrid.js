@@ -5,7 +5,9 @@
   });
 
   function setImageGrids() {
-    $('.js-image-grid').removeWhitespace().collagePlus({
+    var imageGrid = $('.js-image-grid');
+    imageGrid.children().first().attr('style', '');
+    imageGrid.removeWhitespace().collagePlus({
       'fadeSpeed' : 100,
       'targetHeight' : 400,
       'allowPartialLastRow': true
