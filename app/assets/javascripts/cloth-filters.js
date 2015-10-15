@@ -9,10 +9,11 @@ function FilterClothes () {
   function loadClothes (html) {
     clothesPanel.html(html);
     clothesPanel.trigger('page:load');
-    var filtersNav = clothesPanel.find('.filters');
-    filtersNav = $('.js-filters-nav').html(filtersNav);
-    bindSliders(filtersNav);
-    bindFilters(filtersNav);
+    var originalFiltersNav = clothesPanel.find('.filters');
+    var newFiltersNav = $('.js-filters-nav').html(originalFiltersNav.html());
+    originalFiltersNav.remove();
+    bindSliders(newFiltersNav);
+    bindFilters(newFiltersNav);
   }
 
   function bindFilters (element) {

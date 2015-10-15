@@ -4,25 +4,10 @@
 <% end %>
 
 <div class="filters">
-  <div class="selected-filters">
-    <% if @gender.present? %>
-      <p>Gender: <%= @gender %></p>
-    <% end %>
-
-    <% if @category.persisted? %>
-      <p>Category: <%= @category.name %></p>
-    <% end %>
-
-    <% if @size.present? %>
-      <p>Size: <%= @size %> </p>
-    <% end %>
-
-    <% if @max_price.present? %>
-      <p>Max price: <%= humanized_money_with_symbol @max_price.to_money %> </p>
-    <% end %>
-  </div>
-
-  <%= dropdown_for "Gender", class: 'gender', 'data-filter' => 'gender', 'data-filter-value' => @gender do %>
+  <%= dropdown_for @gender || 'Gender',
+                   class: 'gender',
+                   'data-filter' => 'gender',
+                   'data-filter-value' => @gender do %>
       <% @genders.each do |gender| %>
         <li>
           <a data-filter-select="<%= gender %>"><%= gender %></a>
@@ -30,11 +15,17 @@
       <% end %>
   <% end %>
 
-  <%= dropdown_for "Category", class: @categories.any? ? 'category' : 'hide category', 'data-filter' => 'category_id', 'data-filter-value' => @category.id do %>
+  <%= dropdown_for @category.name || 'Category',
+                   class: @categories.any? ? 'category' : 'hide category',
+                   'data-filter' => 'category_id',
+                   'data-filter-value' => @category.id do %>
     <%= render partial: 'category', collection: @categories %>
   <% end %>
 
-  <%= dropdown_for "Size", class: @sizes.any? ? 'size' : 'hide size', 'data-filter' => 'size', 'data-filter-value' => @size do %>
+  <%= dropdown_for @size || 'Size',
+                   class: @sizes.any? ? 'size' : 'hide size',
+                   'data-filter' => 'size',
+                   'data-filter-value' => @size do %>
       <% @sizes.each do |size| %>
         <li>
           <a data-filter-select="<%= size %>"><%= size %></a>
@@ -42,11 +33,20 @@
       <% end %>
   <% end %>
 
-  <div class="max-price">
-    <p>
+  <li class="max-price">
+    <label for="max-price">
       Max price: $<span class="js-slider-value"></span>
-    </p>
-    <input type="range" min="1" max="1000" class="max-price js-slider" data-filter="max_price" value="<%= @max_price || 1000 %>" data-filter-value="<%= @max_price %>">
+    </label>
+    <input
+      id="max-price"
+      type="range"
+      min="1"
+      max="1000"
+      class="max-price
+      js-slider"
+      data-filter="max_price"
+      value="<%= @max_price || 1000 %>"
+      data-filter-value="<%= @max_price %>">
   </div>
 </div>
 
