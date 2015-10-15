@@ -4,13 +4,13 @@
 <% end %>
 
 <div class="filters">
-  <%= dropdown_for @gender || 'Gender',
+  <%= dropdown_for gender_name(@gender) || 'Gender',
                    class: 'gender',
                    'data-filter' => 'gender',
                    'data-filter-value' => @gender do %>
       <% @genders.each do |gender| %>
         <li>
-          <a data-filter-select="<%= gender %>"><%= gender %></a>
+          <a data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
         </li>
       <% end %>
   <% end %>

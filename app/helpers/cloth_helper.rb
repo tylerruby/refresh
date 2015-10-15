@@ -13,4 +13,11 @@ module ClothHelper
       }
     end.to_json
   end
+
+  def gender_name(gender)
+    case gender
+    when 'male' then "Men's"
+    when 'female' then "Women's"
+    end
+  end
 end
