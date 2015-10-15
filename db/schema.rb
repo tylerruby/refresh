@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003184752) do
+ActiveRecord::Schema.define(version: 20151008034509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20151003184752) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",                       null: false
+    t.boolean  "male",       default: false
+    t.boolean  "female",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "chains", force: :cascade do |t|
@@ -77,8 +85,10 @@ ActiveRecord::Schema.define(version: 20151003184752) do
     t.string   "colors",             default: [],                 array: true
     t.integer  "gender"
     t.string   "image_dimensions"
+    t.integer  "category_id"
   end
 
+  add_index "clothes", ["category_id"], name: "index_clothes_on_category_id", using: :btree
   add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -178,6 +188,7 @@ ActiveRecord::Schema.define(version: 20151003184752) do
   add_foreign_key "cloth_instances", "cloth_variants"
   add_foreign_key "cloth_instances", "stores"
   add_foreign_key "cloth_variants", "clothes"
+  add_foreign_key "clothes", "categories"
   add_foreign_key "clothes", "chains"
   add_foreign_key "orders", "users"
   add_foreign_key "stores", "chains"

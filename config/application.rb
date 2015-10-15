@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Refresh
   class Application < Rails::Application
-    config.autoload_paths += %W["#{config.root}/app/values/"]
+    config.autoload_paths += %W["#{config.root}/app/values/" "#{config.root}/app/searchers/"]
     config.autoload_paths << Rails.root.join('lib')
 
 

@@ -27,6 +27,9 @@ class Store < ActiveRecord::Base
     .select("(#{distance_from_sql(location)}) as distance")
     .order('distance')
   }
+  scope :available_for_delivery, -> (location) {
+    near(location, RADIUS)
+  }
 
   def name
     super.present? ? super : chain.try(:name)

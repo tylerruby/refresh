@@ -9,8 +9,9 @@ class Cloth < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   belongs_to :chain
+  belongs_to :category
   has_many :cloth_variants, dependent: :destroy
-  validates :name, :gender, :price, :chain, presence: true
+  validates :name, :category, :gender, :price, :chain, presence: true
 
   attr_accessor :colors, :cloth_variants_configuration, :store
 
@@ -70,6 +71,7 @@ class Cloth < ActiveRecord::Base
       end
       field :image
       field :chain
+      field :category
     end
 
     list do
@@ -84,6 +86,7 @@ class Cloth < ActiveRecord::Base
       field :colors
       field :image
       field :chain
+      field :category
       field :total_views
       field :last_week_views
     end

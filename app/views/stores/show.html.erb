@@ -1,7 +1,4 @@
-<!-- Generating modals for clothes -->
-<% @clothes.each do |cloth| %>
-  <%= render 'cloth_modal', cloth: cloth, store: @store %>
-<% end %>
+<span data-filter="chain_id" data-filter-value="<%= @store.chain_id %>"></span>
 
 <div id="nav-wrapper" class="js-affix-wrapper">
   <nav class="navbar navbar-inverse js-affix">
@@ -9,42 +6,11 @@
       <ul class="nav navbar-nav">
         <li class="active">
           <%= link_to "/" + @store.city do %>
-            <%=@store.city%> > <%=@store.name%>
+            <%=@store.city%> &gt; <%=@store.name%>
           <% end %>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mens <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Womens</a></li>
-            <li><a href="#">Both</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Small <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Medium</a></li>
-            <li><a href="#">Large</a></li>
-            <li><a href="#">XL</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Black <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Red</a></li>
-            <li><a href="#">Green</a></li>
-            <li><a href="#">Blue</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">T-Shirts<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Pants</a></li>
-            <li><a href="#">Shorts</a></li>
-            <li><a href="#">Hoodies</a></li>
-          </ul>
-        </li>
+      <ul class="nav navbar-nav navbar-right js-filters-nav">
       </ul>
     </div><!-- /.container-fluid -->
   </nav>
@@ -81,21 +47,13 @@
   </nav>
 </div>
 
-
+<%= image_tag 'spinner.gif', class: 'js-spinner', style: 'display: none;' %>
 <div class="js-image-grid container m-y-md col-md-8 col-md-offset-2">
-  <% if @clothes.empty? %>
-    <h2>No products registered for this store yet</h2>
-  <% end %>
-
-  <% @clothes.each do |cloth| %>
-    <div class="cloth item">
-      <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
-        <%= image_tag cloth.image_url, width: cloth.image_dimensions.width, height: cloth.image_dimensions.height %>
-        <i class="heart-this fa fa-heart-o"></i>
-        <h3><%= cloth.name %></h3>
-        <h4><%= number_to_currency(cloth.price, precision: 0) %></h4>
-      <% end %>
-    </div>
-  <% end %>
+  <div id="clothes" class="tab-pane">
+    <!-- TODO: find a way to avoid having this JS here -->
+    <%= javascript_tag do %>
+      FilterClothes();
+    <% end %>
+  </div>
 </div>
 <div class="clearfix"></div>

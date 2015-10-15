@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        category:
+          attributes:
+            male:
+              at_least_one_gender: 'or female should be selected'
+            female:
+              at_least_one_gender: 'or male should be selected'

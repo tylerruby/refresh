@@ -1,0 +1,67 @@
+<!-- Generating modals for clothes -->
+<% @clothes.each do |cloth| %>
+  <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
+<% end %>
+
+<div class="filters">
+  <%= dropdown_for gender_name(@gender) || 'Gender',
+                   class: 'gender',
+                   'data-filter' => 'gender',
+                   'data-filter-value' => @gender do %>
+      <% @genders.each do |gender| %>
+        <li>
+          <a data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
+        </li>
+      <% end %>
+  <% end %>
+
+  <%= dropdown_for @category.name || 'Category',
+                   class: @categories.any? ? 'category' : 'hide category',
+                   'data-filter' => 'category_id',
+                   'data-filter-value' => @category.id do %>
+    <%= render partial: 'category', collection: @categories %>
+  <% end %>
+
+  <%= dropdown_for @size || 'Size',
+                   class: @sizes.any? ? 'size' : 'hide size',
+                   'data-filter' => 'size',
+                   'data-filter-value' => @size do %>
+      <% @sizes.each do |size| %>
+        <li>
+          <a data-filter-select="<%= size %>"><%= size %></a>
+        </li>
+      <% end %>
+  <% end %>
+
+  <li class="max-price">
+    <label for="max-price">
+      Max price: $<span class="js-slider-value"></span>
+    </label>
+    <input
+      id="max-price"
+      type="range"
+      min="1"
+      max="1000"
+      class="max-price
+      js-slider"
+      data-filter="max_price"
+      value="<%= @max_price || 1000 %>"
+      data-filter-value="<%= @max_price %>">
+  </div>
+</div>
+
+<div class="js-image-grid clothes col-md-10 col-md-offset-1">
+  <% if @clothes.empty? %>
+    In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
+  <% end %>
+
+  <% @clothes.each do |cloth| %>
+    <div class="cloth item">
+      <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
+        <%= image_tag cloth.image_url, width: cloth.image_dimensions.width, height: cloth.image_dimensions.height %>
+        <i class="heart-this fa fa-heart-o"></i>
+        <h3><%= cloth.name %></h3>
+      <% end %>
+    </div>
+  <% end %>
+</div>
