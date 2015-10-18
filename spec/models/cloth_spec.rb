@@ -18,6 +18,25 @@ RSpec.describe Cloth, type: :model do
     it "doesn't accept invalid values for gender" do
       expect { cloth.gender = 'other' }.to raise_error(ArgumentError)
     end
+
+    it "doesn't accept a gender that's different than the category's" do
+      cloth.category = create(:category, male: false, female: true)
+      cloth.gender = 'male'
+      expect(cloth).not_to be_valid
+      expect(cloth.errors).to have_key :gender
+    end
+
+    it "accepts any gender if the category is unisex" do
+      cloth.category = create(:category, male: true, female: true)
+      cloth.gender = 'male'
+      expect(cloth).to be_valid
+    end
+
+    it "accepts any category if the gender is unisex" do
+      cloth.category = create(:category, male: false, female: true)
+      cloth.gender = 'unisex'
+      expect(cloth).to be_valid
+    end
   end
 
   describe "associations" do
