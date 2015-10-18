@@ -14,12 +14,10 @@ class Devise::PasswordsController < DeviseController
     self.resource = resource_class.send_reset_password_instructions(resource_params)
     yield resource if block_given?
 
-    if successfully_sent?(resource)
-      respond_with({}, location: :back)
-    else
+    unless successfully_sent?(resource)
       flash[:errors] = 'Email not found.'
-      redirect_to :back
     end
+    redirect_to :back
   end
 
   # GET /resource/password/edit?reset_password_token=abcdef

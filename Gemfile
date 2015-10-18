@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -65,4 +63,8 @@ group :development, :test do
   gem 'dotenv-rails', '2.0.2'
   gem 'guard-rspec', '4.6.4'
   gem 'shoulda-matchers', '3.0.0'
+end
+
+group :development do
+  gem 'letter_opener', '1.4.1'
 end
