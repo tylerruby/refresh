@@ -84,6 +84,7 @@ Rails.application.configure do
     :bucket => ENV['AWS_BUCKET_NAME']
   }
 
+  config.action_mailer.default_url_options = { host: 'enigmatic-scrubland-5865.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
