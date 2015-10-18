@@ -35,6 +35,10 @@ class Store < ActiveRecord::Base
     super.present? ? super : chain.try(:name)
   end
 
+  def city=(value)
+    super(value.strip)
+  end
+
   def full_address
     [address, city, state].join(', ')
   end

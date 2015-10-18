@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Store, type: :model do
+  let(:store) { build(:store) }
+
   # Due to Rails Admin
   it "generates slug when it's an empty string" do
     chain = create(:chain, name: 'Test Chain')
@@ -17,7 +19,11 @@ RSpec.describe Store, type: :model do
   end
 
   it "delegates the logo to the chain's logo" do
-    store = create(:store)
     expect(store.logo).to eq store.chain.logo
   end 
+
+  it "strips city from surrounding empty space" do
+    store.city = '  New York  '
+    expect(store.city).to eq 'New York'
+  end
 end
