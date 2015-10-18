@@ -208,8 +208,11 @@ RSpec.describe ClothesController, type: :controller do
         end
 
         describe "filtering by size" do
+          let!(:another_cloth_from_same_category) do
+            create(:cloth, category: male_cloth.category)
+          end
           let!(:cloth_variant_from_another_size) do
-            create(:cloth_variant, cloth: male_cloth, size: 'S')
+            create(:cloth_variant, cloth: another_cloth_from_same_category, size: 'S')
           end
           let(:search_parameters) do
             {
