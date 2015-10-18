@@ -69,9 +69,20 @@
 /* end store page makeup */
 
 /* filters */
-.js-filters-nav {
+.js-genders-nav {
   .btn-group {
-    min-height: 57px;
+    height: 8px;
+
+    .btn {
+      background-color: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+
+      &.active {
+        background-color: #fff;
+        color: #00bf8f;
+      }
+    }
   }
 }
 

@@ -3,13 +3,15 @@
   <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
 <% end %>
 
-<div class="filters">
+<div class="js-genders">
   <div class="btn-group" data-filter="gender" data-filter-value="<%= @gender %>">
     <% @genders.each do |gender| %>
-      <a class="btn btn-default<%= ' btn-info' if gender == @gender %>" data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
+      <a class="btn btn-default<%= ' active' if gender == @gender %>" data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
     <% end %>
   </div>
+</div>
 
+<div class="js-filters">
   <%= dropdown_for @category.name || 'Category',
                    class: @categories.any? ? 'category' : 'hide category',
                    'data-filter' => 'category_id',

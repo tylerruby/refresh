@@ -9,11 +9,16 @@ function FilterClothes () {
   function loadClothes (html) {
     clothesPanel.html(html);
     clothesPanel.trigger('page:load');
-    var originalFiltersNav = clothesPanel.find('.filters');
-    var newFiltersNav = $('.js-filters-nav').html(originalFiltersNav.html());
-    originalFiltersNav.remove();
-    bindSliders(newFiltersNav);
-    bindFilters(newFiltersNav);
+    moveAndBind('.js-filters', '.js-filters-nav');
+    moveAndBind('.js-genders', '.js-genders-nav');
+  }
+
+  function moveAndBind(from, to) {
+    var originalElement = clothesPanel.find(from);
+    var newElement = $(to).html(originalElement.html());
+    originalElement.remove();
+    bindSliders(newElement);
+    bindFilters(newElement);
   }
 
   function bindFilters (element) {
