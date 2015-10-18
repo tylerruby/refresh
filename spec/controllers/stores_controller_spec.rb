@@ -60,18 +60,5 @@ RSpec.describe StoresController, type: :controller do
       do_action
       expect(assigns[:store]).to eq store
     end
-
-    it "orders clothes by views" do
-      Impression.create!(impressionable: second_cloth)
-      do_action
-      expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
-    end
-
-    it "orders clothes by views in the last week" do
-      2.times { Impression.create!(impressionable: first_cloth, created_at: 2.weeks.ago) }
-      Impression.create!(impressionable: second_cloth)
-      do_action
-      expect(assigns[:clothes]).to eq [second_cloth, first_cloth]
-    end
   end
 end
