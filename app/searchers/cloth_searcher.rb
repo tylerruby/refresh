@@ -46,15 +46,18 @@ class ClothSearcher
   end
 
   def sizes
-    if by_category?
-      ClothVariant.select(:size)
-      .joins(cloth: :category)
-      .where(clothes: { category_id: category_id })
-      .distinct
-      .map(&:size)
-    else
-      []
+    variants = ClothVariant.select(:size).distinct
+
+    if by_gender?
+      variants = variants.joins(:cloth)
+                         .where(clothes: { gender: genders })
     end
+
+    if by_category?
+      variants = variants.joins(cloth: :category)
+                         .where(clothes: { category_id: category_id })
+    end
+    variants.map(&:size)
   end
 
   private

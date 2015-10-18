@@ -25,30 +25,23 @@ RSpec.describe ClothesController, type: :controller do
       ])
     end
 
-    describe "without any filter" do
+    describe "with default filters" do
       let!(:category) { create(:category, male: true) }
       let!(:first_cloth) { create(:cloth, chain: chain, category: category) }
+      let!(:first_cloth_variant) { create(:cloth_variant, cloth: first_cloth, size: 'S') }
       let!(:second_cloth) { create(:cloth, chain: chain, category: category) }
+      let!(:second_cloth_variant) { create(:cloth_variant, cloth: second_cloth, size: 'M') }
+
+      let!(:category_from_another_gender) { create(:category, male: false, female: true) }
+      let!(:cloth_from_another_gender) do
+        create(:cloth, gender: 'female', category: category_from_another_gender)
+      end
+      let!(:cloth_variant_from_another_gender) do
+        create(:cloth_variant, cloth: cloth_from_another_gender, size: 'X')
+      end
 
       let(:search_parameters) do
         {}
-      end
-
-      it "returns all the clothes" do
-        do_action
-        expect(assigns[:clothes]).to match_array [first_cloth, second_cloth]
-      end
-
-      it "doesn't return sizes" do
-        do_action
-        expect(assigns[:sizes]).to eq []
-      end
-
-      it "assigns a category even if none is selected" do
-        do_action
-        category = assigns[:category]
-        expect(category).to be_a Category
-        expect(category).not_to be_persisted
       end
 
       it "assigns a default gender" do
@@ -59,6 +52,23 @@ RSpec.describe ClothesController, type: :controller do
       it "return categories for the default gender" do
         do_action
         expect(assigns[:categories]).to eq [category]
+      end
+
+      it "returns all clothes from the default gender" do
+        do_action
+        expect(assigns[:clothes]).to match_array [first_cloth, second_cloth]
+      end
+
+      it "returns all sizes from clothes in the default gender" do
+        do_action
+        expect(assigns[:sizes]).to match_array %w(S M)
+      end
+
+      it "assigns a category even if none is selected" do
+        do_action
+        category = assigns[:category]
+        expect(category).to be_a Category
+        expect(category).not_to be_persisted
       end
     end
 
