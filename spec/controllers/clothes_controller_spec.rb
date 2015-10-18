@@ -26,8 +26,9 @@ RSpec.describe ClothesController, type: :controller do
     end
 
     describe "without any filter" do
-      let!(:first_cloth) { create(:cloth, chain: chain) }
-      let!(:second_cloth) { create(:cloth, chain: chain) }
+      let!(:category) { create(:category, male: true) }
+      let!(:first_cloth) { create(:cloth, chain: chain, category: category) }
+      let!(:second_cloth) { create(:cloth, chain: chain, category: category) }
 
       let(:search_parameters) do
         {}
@@ -36,11 +37,6 @@ RSpec.describe ClothesController, type: :controller do
       it "returns all the clothes" do
         do_action
         expect(assigns[:clothes]).to match_array [first_cloth, second_cloth]
-      end
-
-      it "doesn't return categories" do
-        do_action
-        expect(assigns[:categories]).to eq []
       end
 
       it "doesn't return sizes" do
@@ -53,6 +49,16 @@ RSpec.describe ClothesController, type: :controller do
         category = assigns[:category]
         expect(category).to be_a Category
         expect(category).not_to be_persisted
+      end
+
+      it "assigns a default gender" do
+        do_action
+        expect(assigns[:gender]).to eq 'male'
+      end
+
+      it "return categories for the default gender" do
+        do_action
+        expect(assigns[:categories]).to eq [category]
       end
     end
 

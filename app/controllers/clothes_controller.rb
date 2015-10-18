@@ -5,7 +5,7 @@ class ClothesController < ApplicationController
     @genders = %w(male female)
     @clothes = cloth_searcher.clothes
     @sizes = cloth_searcher.sizes
-    @gender = params[:gender]
+    @gender = params[:gender] || 'male'
     @categories = case @gender
                   when 'male' then Category.where(male: true)
                   when 'female' then Category.where(female: true)

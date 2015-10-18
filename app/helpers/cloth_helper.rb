@@ -16,8 +16,8 @@ module ClothHelper
 
   def gender_name(gender)
     case gender
-    when 'male' then "Men's"
-    when 'female' then "Women's"
+    when 'male' then "Mens"
+    when 'female' then "Womens"
     end
   end
 end
