@@ -19,7 +19,7 @@ class ClothSearcher
     end
 
     if by_gender?
-      @clothes = @clothes.joins(:category).where(categories: gender_condition)
+      @clothes = @clothes.where(gender: genders)
     end
 
     if by_category?
@@ -95,11 +95,9 @@ class ClothSearcher
       Cloth.where(id: clothes_ids)
     end
 
-    def gender_condition
-      case gender
-      when 'male' then { male: true }
-      when 'female' then { female: true }
-      else {}
-      end
+    def genders
+      @genders ||= Cloth.genders.values_at(gender, :unisex)
+      @genders = Cloth.none if @genders.any?(&:nil?)
+      @genders
     end
 end
