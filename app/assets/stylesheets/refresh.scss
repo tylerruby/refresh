@@ -66,9 +66,14 @@
     }
   }
 }
-
 /* end store page makeup */
 
+/* filters */
+.js-filters-nav {
+  .btn-group {
+    min-height: 57px;
+  }
+}
 
 /* docs overrides */
 .highlight {

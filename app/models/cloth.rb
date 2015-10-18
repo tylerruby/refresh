@@ -12,6 +12,7 @@ class Cloth < ActiveRecord::Base
   belongs_to :category
   has_many :cloth_variants, dependent: :destroy
   validates :name, :category, :gender, :price, :chain, presence: true
+  validate :match_category_gender
 
   attr_accessor :colors, :cloth_variants_configuration, :store
 
@@ -90,5 +91,12 @@ class Cloth < ActiveRecord::Base
       field :total_views
       field :last_week_views
     end
+  end
+
+  private
+
+  def match_category_gender
+    return unless male? && !category.male? || female? && !category.female?
+    errors.add(:gender, "doesn't match the category's gender")
   end
 end

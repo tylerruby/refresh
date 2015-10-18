@@ -19,7 +19,7 @@ class ClothSearcher
     end
 
     if by_gender?
-      @clothes = @clothes.joins(:category).where(categories: gender_condition)
+      @clothes = @clothes.where(gender: genders)
     end
 
     if by_category?
@@ -46,14 +46,18 @@ class ClothSearcher
   end
 
   def sizes
-    if by_category?
-      ClothVariant.select(:size)
-      .where(cloth: clothes)
-      .distinct
-      .map(&:size)
-    else
-      []
+    variants = ClothVariant.select(:size).distinct
+
+    if by_gender?
+      variants = variants.joins(:cloth)
+                         .where(clothes: { gender: genders })
     end
+
+    if by_category?
+      variants = variants.joins(cloth: :category)
+                         .where(clothes: { category_id: category_id })
+    end
+    variants.map(&:size)
   end
 
   private
@@ -94,11 +98,9 @@ class ClothSearcher
       Cloth.where(id: clothes_ids)
     end
 
-    def gender_condition
-      case gender
-      when 'male' then { male: true }
-      when 'female' then { female: true }
-      else {}
-      end
+    def genders
+      @genders ||= Cloth.genders.values_at(gender, :unisex)
+      @genders = Cloth.none if @genders.any?(&:nil?)
+      @genders
     end
 end

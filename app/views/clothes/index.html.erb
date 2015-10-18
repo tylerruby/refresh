@@ -4,16 +4,11 @@
 <% end %>
 
 <div class="filters">
-  <%= dropdown_for gender_name(@gender) || 'Gender',
-                   class: 'gender',
-                   'data-filter' => 'gender',
-                   'data-filter-value' => @gender do %>
-      <% @genders.each do |gender| %>
-        <li>
-          <a data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
-        </li>
-      <% end %>
-  <% end %>
+  <div class="btn-group" data-filter="gender" data-filter-value="<%= @gender %>">
+    <% @genders.each do |gender| %>
+      <a class="btn btn-default<%= ' btn-info' if gender == @gender %>" data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
+    <% end %>
+  </div>
 
   <%= dropdown_for @category.name || 'Category',
                    class: @categories.any? ? 'category' : 'hide category',

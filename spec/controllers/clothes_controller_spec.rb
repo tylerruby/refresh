@@ -25,27 +25,43 @@ RSpec.describe ClothesController, type: :controller do
       ])
     end
 
-    describe "without any filter" do
-      let!(:first_cloth) { create(:cloth, chain: chain) }
-      let!(:second_cloth) { create(:cloth, chain: chain) }
+    describe "with default filters" do
+      let!(:category) { create(:category, male: true) }
+      let!(:first_cloth) { create(:cloth, chain: chain, category: category) }
+      let!(:first_cloth_variant) { create(:cloth_variant, cloth: first_cloth, size: 'S') }
+      let!(:second_cloth) { create(:cloth, chain: chain, category: category) }
+      let!(:second_cloth_variant) { create(:cloth_variant, cloth: second_cloth, size: 'M') }
+
+      let!(:category_from_another_gender) { create(:category, male: false, female: true) }
+      let!(:cloth_from_another_gender) do
+        create(:cloth, gender: 'female', category: category_from_another_gender)
+      end
+      let!(:cloth_variant_from_another_gender) do
+        create(:cloth_variant, cloth: cloth_from_another_gender, size: 'X')
+      end
 
       let(:search_parameters) do
         {}
       end
 
-      it "returns all the clothes" do
+      it "assigns a default gender" do
+        do_action
+        expect(assigns[:gender]).to eq 'male'
+      end
+
+      it "return categories for the default gender" do
+        do_action
+        expect(assigns[:categories]).to eq [category]
+      end
+
+      it "returns all clothes from the default gender" do
         do_action
         expect(assigns[:clothes]).to match_array [first_cloth, second_cloth]
       end
 
-      it "doesn't return categories" do
+      it "returns all sizes from clothes in the default gender" do
         do_action
-        expect(assigns[:categories]).to eq []
-      end
-
-      it "doesn't return sizes" do
-        do_action
-        expect(assigns[:sizes]).to eq []
+        expect(assigns[:sizes]).to match_array %w(S M)
       end
 
       it "assigns a category even if none is selected" do
@@ -126,9 +142,21 @@ RSpec.describe ClothesController, type: :controller do
       let!(:male_category) { create(:category, male: true, female: false) }
       let!(:unisex_category) { create(:category, male: true, female: true) }
 
-      let!(:male_cloth) { create(:cloth, category: male_category, chain: chain) }
-      let!(:female_cloth) { create(:cloth, category: female_category, chain: chain) }
-      let!(:unisex_cloth) { create(:cloth, category: unisex_category, chain: chain) }
+      let!(:male_cloth) do
+        create(:cloth, category: male_category, gender: 'male', chain: chain)
+      end
+      let!(:female_cloth) do
+        create(:cloth, category: female_category, gender: 'female', chain: chain)
+      end
+      let!(:unisex_cloth) do
+        create(:cloth, category: unisex_category, gender: 'unisex', chain: chain)
+      end
+      let!(:male_cloth_from_unisex_category) do
+        create(:cloth, category: unisex_category, gender: 'male', chain: chain)
+      end
+      let!(:female_cloth_from_unisex_category) do
+        create(:cloth, category: unisex_category, gender: 'female', chain: chain)
+      end
 
       let(:search_parameters) do
         {}
@@ -149,7 +177,13 @@ RSpec.describe ClothesController, type: :controller do
         before { do_action }
         it { expect(assigns[:gender]).to eq 'male' }
         it { expect(assigns[:categories]).to eq [male_category, unisex_category] }
-        it { expect(assigns[:clothes]).to match_array [male_cloth, unisex_cloth] }
+        it do
+          expect(assigns[:clothes]).to match_array [
+            male_cloth,
+            unisex_cloth,
+            male_cloth_from_unisex_category
+          ]
+        end
       end
 
       context "selecting female" do
@@ -163,7 +197,13 @@ RSpec.describe ClothesController, type: :controller do
 
         it { expect(assigns[:gender]).to eq 'female' }
         it { expect(assigns[:categories]).to eq [female_category, unisex_category] }
-        it { expect(assigns[:clothes]).to match_array [female_cloth, unisex_cloth] }
+        it do
+          expect(assigns[:clothes]).to match_array [
+            female_cloth,
+            unisex_cloth,
+            female_cloth_from_unisex_category
+          ]
+        end
       end
 
       context "selecting invalid gender" do
@@ -208,8 +248,11 @@ RSpec.describe ClothesController, type: :controller do
         end
 
         describe "filtering by size" do
+          let!(:another_cloth_from_same_category) do
+            create(:cloth, category: male_cloth.category)
+          end
           let!(:cloth_variant_from_another_size) do
-            create(:cloth_variant, cloth: male_cloth, size: 'S')
+            create(:cloth_variant, cloth: another_cloth_from_same_category, size: 'S')
           end
           let(:search_parameters) do
             {

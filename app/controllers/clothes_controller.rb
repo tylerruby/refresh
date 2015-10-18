@@ -5,8 +5,7 @@ class ClothesController < ApplicationController
     @genders = %w(male female)
     @clothes = cloth_searcher.clothes
     @sizes = cloth_searcher.sizes
-    @gender = params[:gender]
-    @categories = case @gender
+    @categories = case gender
                   when 'male' then Category.where(male: true)
                   when 'female' then Category.where(female: true)
                   else []
@@ -26,7 +25,7 @@ class ClothesController < ApplicationController
 
     def cloth_searcher
       @cloth_searcher ||= ClothSearcher.new(
-        params.merge(stores: store_searcher.available_for_delivery)
+        params.merge(gender: gender, stores: store_searcher.available_for_delivery)
       )
     end
 
@@ -35,5 +34,9 @@ class ClothesController < ApplicationController
         city: params[:city],
         coordinates: session[:coordinates]
       )
+    end
+
+    def gender
+      @gender ||= params[:gender] || 'male'
     end
 end
