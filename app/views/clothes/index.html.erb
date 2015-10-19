@@ -1,6 +1,8 @@
 <!-- Generating modals for clothes -->
-<% @clothes.each do |cloth| %>
-  <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
+<% if @store.nil? || @store.available_for_delivery_on?(session[:coordinates]) %>
+  <% @clothes.each do |cloth| %>
+    <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
+  <% end %>
 <% end %>
 
 <div class="js-genders">

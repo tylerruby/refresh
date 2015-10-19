@@ -47,6 +47,10 @@ class Store < ActiveRecord::Base
     distance_from_user <= RADIUS
   end
 
+  def available_for_delivery_on?(location)
+    distance_from(location) <= RADIUS
+  end
+
   def slug_candidates
     [
       :name,

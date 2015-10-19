@@ -1,6 +1,8 @@
 class ClothSearcher
+  attr_accessor :store
+
   def initialize(search_params)
-    self.chain_id    = search_params[:chain_id]
+    self.store       = Store.find_by(id: search_params[:store_id])
     self.gender      = search_params[:gender]
     self.category_id = search_params[:category_id]
     self.size        = search_params[:size]
@@ -12,8 +14,8 @@ class ClothSearcher
   def clothes
     return @clothes unless @clothes.nil?
 
-    if by_chain?
-      @clothes = Cloth.where(chain_id: chain_id)
+    if by_store?
+      @clothes = Cloth.where(chain: store.chain)
     else
       @clothes = available_for_delivery
     end
@@ -62,14 +64,14 @@ class ClothSearcher
 
   private
 
-    attr_accessor :chain_id, :gender, :category_id, :size, :max_price, :stores
+    attr_accessor :gender, :category_id, :size, :max_price, :stores
 
     def max_price
       @max_price.present? && @max_price.to_money.cents
     end
 
-    def by_chain?
-      chain_id.present?
+    def by_store?
+      store.present?
     end
 
     def by_gender?

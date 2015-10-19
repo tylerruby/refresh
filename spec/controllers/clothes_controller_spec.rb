@@ -114,19 +114,19 @@ RSpec.describe ClothesController, type: :controller do
       end
     end
 
-    describe "filtering by chain ignores distance" do
-      let(:chain) { create(:chain) }
-      let!(:cloth) { create(:cloth, chain: chain) }
-      let!(:another_chain) { create(:chain, stores: [create(:store)]) }
-      let!(:cloth_from_another_chain) { create(:cloth) }
+    describe "filtering by store ignores distance" do
+      let(:store) { create(:store) }
+      let!(:cloth) { create(:cloth, chain: store.chain) }
+      let!(:another_store) { create(:store) }
+      let!(:cloth_from_another_store) { create(:cloth, chain: another_store.chain) }
 
       let(:search_parameters) do
         {
-          chain_id: chain.id
+          store_id: store.id
         }
       end
 
-      it "returns only clothes from that chain" do
+      it "returns only clothes from that store" do
         do_action
         expect(assigns[:clothes]).to eq [cloth]
       end
@@ -134,6 +134,11 @@ RSpec.describe ClothesController, type: :controller do
       it "doesn't return sizes" do
         do_action
         expect(assigns[:sizes]).to eq []
+      end
+
+      it "assigns store" do
+        do_action
+        expect(assigns[:store]).to eq store
       end
     end
 
