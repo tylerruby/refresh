@@ -27,11 +27,11 @@
             <%= form_for ClothInstance.new, url: cart_add_path, method: :patch do |f| %>
               <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
               <%= f.hidden_field :store_id, value: store.id %>
-              <div class="col-xs-3">
-                <%= select_tag :size, size_options_for(cloth), class: 'form-control js-size-select' %>
-              </div>
               <div class="col-xs-4">
                 <%= f.select :cloth_variant_id, [], {}, class: 'form-control js-color-select' %>
+              </div>
+              <div class="col-xs-3">
+                 <%= select_tag :size, size_options_for(cloth), class: 'form-control js-size-select' %>
               </div>
               <br /><br />
               <div class="col-xs-12">

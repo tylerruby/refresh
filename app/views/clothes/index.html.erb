@@ -6,7 +6,7 @@
 <div class="js-genders">
   <div class="btn-group" data-filter="gender" data-filter-value="<%= @gender %>">
     <% @genders.each do |gender| %>
-      <a class="btn btn-default<%= ' active' if gender == @gender %>" data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
+      <a class="btn btn-sm btn-default<%= ' active' if gender == @gender %>" data-filter-select="<%= gender %>"><%= gender_name(gender) %></a>
     <% end %>
   </div>
 </div>
