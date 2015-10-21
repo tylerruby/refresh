@@ -54,10 +54,10 @@
 
   <% @clothes.each do |cloth| %>
     <div class="cloth item">
+      <h3><%=cloth.name %></h3>
       <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal' do%>
         <%= image_tag cloth.image_url, width: cloth.image_dimensions.width, height: cloth.image_dimensions.height %>
         <i class="heart-this fa fa-heart-o"></i>
-        <h3><%= cloth.name %></h3>
       <% end %>
     </div>
   <% end %>
