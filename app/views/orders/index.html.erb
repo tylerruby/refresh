@@ -15,6 +15,7 @@
                     <th>Checked out at</th>
                     <th>Amount</th>
                     <th>Status</th>
+                    <th>Delivery address</th>
                   </tr>
                 </thead>
 
@@ -24,6 +25,7 @@
                       <td><%= order.created_at.strftime('%c') %></td>
                       <td><%= humanized_money_with_symbol order.amount %></td>
                       <td><%= status_for(order) %></td>
+                      <td><%= order.delivery_address %></td>
                     </tr>
                   <% end %>
                 </tbody>

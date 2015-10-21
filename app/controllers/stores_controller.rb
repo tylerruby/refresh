@@ -1,6 +1,7 @@
 class StoresController < ApplicationController
   def search_by_address
     session[:coordinates] = [params[:latitude], params[:longitude]]
+    session[:address] = params[:address]
 
     search_by_city
   end

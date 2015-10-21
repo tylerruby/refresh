@@ -96,9 +96,11 @@ RSpec.describe OrdersController, type: :controller do
       let!(:cart) { Cart.create! }
       let!(:cart_items) { 2.times.map { cart.add(create(:cloth_instance), 1) } }
       let(:total_cost) { cart.subtotal + cart.shipping_cost_for(delivery_time) }
+      let(:delivery_address) { "18th Street Atlanta" }
 
       before do
         session[:cart_id] = cart.id
+        session[:address] = delivery_address
         sign_in user
 
         allow(Stripe::Customer).to receive(:create).with(
@@ -129,6 +131,7 @@ RSpec.describe OrdersController, type: :controller do
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'waiting_confirmation' }
+        it { expect(order.delivery_address).to eq delivery_address }
         it { expect(Cart.exists? cart.id).to be false }
         it { expect(Stripe::Customer).to have_received(:create) }
         it { expect(Stripe::Charge).to have_received(:create) }

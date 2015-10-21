@@ -19,7 +19,8 @@ class OrdersController < ApplicationController
     order = Order.create!(
       user: current_user,
       amount: cart.total,
-      status: 'pending'
+      status: 'pending',
+      delivery_address: session[:address]
     )
 
     begin

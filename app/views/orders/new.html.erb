@@ -43,6 +43,7 @@
                   </tr>
                 </tbody>
               </table>
+              <p>The order will be delivered on: <%= session[:address] %></p>
               <h3>Total: <%= humanized_money_with_symbol @cart.total %></h3>
 
               <%= form_tag orders_path, method: :post do %>
