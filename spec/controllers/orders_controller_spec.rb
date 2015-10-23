@@ -218,6 +218,16 @@ RSpec.describe OrdersController, type: :controller do
           end
         end
       end
+
+      context "user already has a credit card" do
+        before do
+          user.update!(customer_id: 'some id')
+          post :create, delivery_time: delivery_time
+        end
+
+        it { expect(Stripe::Customer).not_to have_received(:create) }
+        it { expect(Stripe::Charge).to have_received(:create) }
+      end
     end
 
     context "unauthenticated" do

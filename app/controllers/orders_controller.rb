@@ -28,13 +28,15 @@ class OrdersController < ApplicationController
         order.update!(cart_items: cart.shopping_cart_items)
         cart.reload.destroy!
 
-        customer = Stripe::Customer.create(
-          card: params[:stripeToken],
-          description: 'Paying user',
-          email: current_user.email
-        )
+        if params[:stripeToken]
+          customer = Stripe::Customer.create(
+            card: params[:stripeToken],
+            description: 'Paying user',
+            email: current_user.email
+          )
 
-        current_user.update!(customer_id: customer.id)
+          current_user.update!(customer_id: customer.id)
+        end
 
         Stripe::Charge.create(
           :amount   => order.amount_cents,

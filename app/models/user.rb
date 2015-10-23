@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def has_credit_card?
+    customer_id.present?
+  end
 end

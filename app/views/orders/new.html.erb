@@ -46,16 +46,39 @@
               <p>The order will be delivered on: <%= session[:address] %></p>
               <h3>Total: <%= humanized_money_with_symbol @cart.total %></h3>
 
-              <%= form_tag orders_path, method: :post do %>
-                <%= hidden_field_tag :delivery_time, @cart.delivery_time %>
-                <script
-                  src="https://checkout.stripe.com/checkout.js"
-                  class="stripe-button"
-                  data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
-                  data-name="Refresh"
-                  data-description="<%= @cart.description %>"
-                  data-amount="<%= @cart.total.cents %>">
-                </script>
+              <% if false && current_user.has_credit_card? %>
+                <%= form_tag orders_path, method: :post do %>
+                  <%= hidden_field_tag :delivery_time, @cart.delivery_time %>
+                  <button type="submit" class="btn btn-default">Submit Payment</button>
+                <% end %>
+              <% else %>
+                <%= form_tag orders_path, method: :post, id: 'fill-credit-card-form' do %>
+                  <%= hidden_field_tag :delivery_time, @cart.delivery_time %>
+
+                    <div class="payment-errors"></div>
+
+                    <div class="form-group">
+                      <label for="card-number">Card Number</label>
+                      <input id="card-number" class="form-control" placeholder="Your credit card number" type="text" size="20" data-stripe="number"/>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-xs-2">
+                        <label for="card-cvc">CVC</label>
+                        <input id="card-cvc" class="form-control" type="text" size="4" data-stripe="cvc"/>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="card-exp-month">Expiration</label>
+                      <div class="form-inline">
+                        <input id="card-exp-month" class="form-control" placeholder="MM" type="text" size="2" data-stripe="exp-month"/>
+                        <span> / </span>
+                        <input class="form-control" placeholder="YYYY" type="text" size="4" data-stripe="exp-year"/>
+                      </div>
+                    </div>
+                  <button type="submit" class="btn btn-default">Submit Payment</button>
+                <% end %>
               <% end %>
             </div>
           </div>
