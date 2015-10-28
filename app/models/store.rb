@@ -10,7 +10,7 @@ class Store < ActiveRecord::Base
 
   belongs_to :chain
   has_many :clothes, through: :chain
-  has_one :address, as: :addressable
+  has_one :address, as: :addressable, dependent: :destroy
 
   serialize :image_dimensions
 
@@ -22,6 +22,8 @@ class Store < ActiveRecord::Base
   delegate :full_address, :coordinates, to: :address
 
   attr_writer :distance_from_user
+
+  accepts_nested_attributes_for :address, allow_destroy: true
 
   scope :by_city, -> (city) {
     joins(address: :city)

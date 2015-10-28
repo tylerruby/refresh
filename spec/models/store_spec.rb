@@ -4,7 +4,7 @@ RSpec.describe Store, type: :model do
   let(:store) { build(:store) }
 
   describe "associations" do
-    it { is_expected.to have_one(:address) }
+    it { is_expected.to have_one(:address).dependent(:destroy) }
   end
 
   it { is_expected.to delegate_method(:full_address).to(:address) }

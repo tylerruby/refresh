@@ -21,4 +21,11 @@ class Address < ActiveRecord::Base
   def coordinates
     [latitude, longitude]
   end
+
+  rails_admin do
+    edit do
+      field :address
+      field :city
+    end
+  end
 end
