@@ -8,4 +8,8 @@ class City < ActiveRecord::Base
   def state=(value)
     super(value.strip)
   end
+
+  def full_name
+    "#{name}/#{state}"
+  end
 end

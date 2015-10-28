@@ -16,4 +16,8 @@ RSpec.describe City, type: :model do
     city.state = '  GA  '
     expect(city.state).to eq 'GA'
   end
+
+  describe "#full_name" do
+    it { expect(city.full_name).to eq 'Atlanta/GA' }
+  end
 end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :clothes, only: [:index, :show]
   resources :orders, only: [:index, :new, :create], path_names: { new: 'checkout' }
+  resource :user, only: [:edit, :update]
   get 'cart' => 'cart#index'
   patch 'cart/add'
   delete 'cart/remove'

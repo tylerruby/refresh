@@ -7,6 +7,8 @@ RSpec.describe Store, type: :model do
     it { is_expected.to have_one(:address).dependent(:destroy) }
   end
 
+  it { is_expected.to accept_nested_attributes_for(:address).allow_destroy(true) }
+
   it { is_expected.to delegate_method(:full_address).to(:address) }
   it { is_expected.to delegate_method(:coordinates).to(:address) }
 
