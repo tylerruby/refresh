@@ -4,5 +4,5 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   has_many :cart_items, as: :owner, dependent: :destroy
-  validates :user, :delivery_address, presence: true
+  validates :user, :delivery_address, :delivery_time, presence: true
 end

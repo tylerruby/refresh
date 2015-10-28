@@ -5,6 +5,7 @@ RSpec.describe Order, type: :model do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:delivery_address) }
+    it { is_expected.to validate_presence_of(:delivery_time) }
     it { is_expected.to validate_presence_of(:user) }
   end
 

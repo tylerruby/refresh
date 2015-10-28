@@ -43,18 +43,14 @@
                   </tr>
                 </tbody>
               </table>
-              <p>The order will be delivered on: <%= session[:address] %></p>
               <h3>Total: <%= humanized_money_with_symbol @cart.total %></h3>
 
-              <% if false && current_user.has_credit_card? %>
-                <%= form_tag orders_path, method: :post do %>
-                  <%= hidden_field_tag :delivery_time, @cart.delivery_time %>
-                  <button type="submit" class="btn btn-default">Submit Payment</button>
+              <% if current_user.has_credit_card? %>
+                <%= render layout: 'form', locals: { order: @order, delivery_time: @cart.delivery_time, form_id: 'order-form' } do %>
+                  <% # noop %>
                 <% end %>
               <% else %>
-                <%= form_tag orders_path, method: :post, id: 'fill-credit-card-form' do %>
-                  <%= hidden_field_tag :delivery_time, @cart.delivery_time %>
-
+                <%= render layout: 'form', locals: { order: @order, delivery_time: @cart.delivery_time, form_id: 'fill-credit-card-form' } do %>
                     <div class="payment-errors"></div>
 
                     <div class="form-group">
@@ -77,7 +73,6 @@
                         <input class="form-control" placeholder="YYYY" type="text" size="4" data-stripe="exp-year"/>
                       </div>
                     </div>
-                  <button type="submit" class="btn btn-default">Submit Payment</button>
                 <% end %>
               <% end %>
             </div>
