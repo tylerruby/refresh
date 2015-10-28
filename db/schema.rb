@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021063131) do
+ActiveRecord::Schema.define(version: 20151025141240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "address"
+    t.integer  "city_id"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+  add_index "addresses", ["city_id"], name: "index_addresses_on_city_id", using: :btree
 
   create_table "cart_items", force: :cascade do |t|
     t.integer  "owner_id"
@@ -49,6 +63,13 @@ ActiveRecord::Schema.define(version: 20151021063131) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cloth_instances", force: :cascade do |t|
@@ -186,6 +207,7 @@ ActiveRecord::Schema.define(version: 20151021063131) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
+  add_foreign_key "addresses", "cities"
   add_foreign_key "cloth_instances", "cloth_variants"
   add_foreign_key "cloth_instances", "stores"
   add_foreign_key "cloth_variants", "clothes"

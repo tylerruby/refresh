@@ -33,7 +33,7 @@ RSpec.describe CartController, type: :controller do
 
     before do
       request.env["HTTP_REFERER"] = previous_url
-      session[:coordinates] = [store.latitude, store.longitude]
+      session[:coordinates] = store.coordinates
     end
 
     let(:cloth_variant) { create(:cloth_variant) }
@@ -120,7 +120,7 @@ RSpec.describe CartController, type: :controller do
 
     describe "cloth from a store which isn't available for delivery" do
       before do
-        store.update!(latitude: 0, longitude: 0)
+        store.update!(address: create(:far_far_away))
       end
 
       it "raises an exception when trying to add" do

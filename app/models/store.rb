@@ -7,40 +7,43 @@ class Store < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   RADIUS = 10 # miles
-  geocoded_by :full_address
 
   belongs_to :chain
   has_many :clothes, through: :chain
-  before_save :extract_dimensions
+  has_one :address, as: :addressable
+
   serialize :image_dimensions
 
-  before_validation :geocode, if: -> { address.present? and address_changed? }
+  before_save :extract_dimensions
 
-  validate :validate_geolocation
-  validates :address, :city, :state, :chain, presence: true
+  validates :address, :chain, presence: true
 
   delegate :logo, to: :chain
+  delegate :full_address, :coordinates, to: :address
 
-  scope :by_city, -> (city) { where('lower(city) = ?', city.downcase) }
-  scope :order_by_distance, -> (location) { 
-    select("#{table_name}.*")
-    .select("(#{distance_from_sql(location)}) as distance")
-    .order('distance')
+  attr_writer :distance_from_user
+
+  scope :by_city, -> (city) {
+    joins(address: :city)
+    .where('lower(cities.name) = ?', city.downcase)
   }
-  scope :available_for_delivery, -> (location) {
-    near(location, RADIUS)
-  }
+
+  def self.available_for_delivery(location)
+    merge_addresses(Address.for_stores.near(location, Store::RADIUS))
+  end
+
+  def self.order_by_distance(location)
+    merge_addresses(Address.for_stores.order_by_distance(location))
+  end
+
+  def self.merge_addresses(addresses)
+    includes(:address)
+    .references(:address)
+    .merge(addresses)
+  end
 
   def name
     super.present? ? super : chain.try(:name)
-  end
-
-  def city=(value)
-    super(value.strip)
-  end
-
-  def full_address
-    [address, city, state].join(', ')
   end
 
   def available_for_delivery?
@@ -48,15 +51,13 @@ class Store < ActiveRecord::Base
   end
 
   def available_for_delivery_on?(location)
-    distance_from(location) <= RADIUS
+    address.distance_from(location) <= RADIUS
   end
 
   def slug_candidates
+    # TODO: Define a better logic for generating slugs
     [
-      :name,
-      [:name, :city],
-      [:name, :city, :state],
-      [:name, :city, :state, :id]
+      :name
     ]
   end
 
@@ -78,8 +79,6 @@ class Store < ActiveRecord::Base
       end
 
       field :address
-      field :city
-      field :state
       field :image
       field :chain
     end
@@ -110,21 +109,51 @@ class Store < ActiveRecord::Base
     self.image_dimensions = [geometry.width.to_i, geometry.height.to_i]
   end
 
+  def set_distance_from_user!(location)
+    self.distance_from_user = address.distance_from(location)
+  end
+
+  # TODO: Remove after migrating data
+  def city
+    raise "Deprecated, please use Address model"
+  end
+
+  def city=(_)
+    raise "Deprecated, please use Address model"
+  end
+
+  def state
+    raise "Deprecated, please use Address model"
+  end
+
+  def state=(_)
+    raise "Deprecated, please use Address model"
+  end
+
+  def latitude
+    raise "Deprecated, please use Address model"
+  end
+
+  def latitude=(_)
+    raise "Deprecated, please use Address model"
+  end
+
+  def longitude
+    raise "Deprecated, please use Address model"
+  end
+
+  def longitude=(_)
+    raise "Deprecated, please use Address model"
+  end
+
   private
 
   def distance_from_user
-    distance
+    @distance_from_user || distance
   rescue NameError => e
     # distance is a method defined when making a query with distance
     # calculation, so it may not be defined if the model was retrived
     # in another way. In this case, we default to an infinite distance.
     Float::INFINITY
-  end
-
-  def validate_geolocation
-    return if latitude && longitude
-    message = "There was an error when trying to fetch the geolocation for this store. Please try again."
-    errors.add(:latitude, message)
-    errors.add(:longitude, message)
   end
 end

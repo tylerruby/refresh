@@ -9,15 +9,17 @@ class StoreSearcher
   end
 
   def available_for_delivery
-    stores = coordinates.blank? ? Store.none : Store.available_for_delivery(coordinates)
-    stores = stores.merge(Store.by_city(city)) if city.present?
+    stores = city.present? ? Store.by_city(city) : Store.all
+    stores = coordinates.blank? ? stores.none : stores.available_for_delivery(coordinates)
     stores
   end
 
   # We order by distance here to expose the distance method,
   # since the distance to the user is calculated via query.
   def find(id)
-    try_to_order_by_distance(Store.all).friendly.find(id)
+    store = Store.friendly.find(id)
+    store.set_distance_from_user!(coordinates)
+    store
   end
 
   private

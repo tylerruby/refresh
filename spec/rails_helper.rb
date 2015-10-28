@@ -65,6 +65,18 @@ RSpec.configure do |config|
       'country_code' => 'US'
     }
   ])
+
+  Geocoder::Lookup::Test.add_stub("Far Far Away, Atlanta, GA", [
+    {
+      'latitude'     => 0,
+      'longitude'    => 0,
+      'address'      => 'Far Far Away, Atlanta, GA',
+      'state'        => 'Georgia',
+      'state_code'   => 'GA',
+      'country'      => 'United States',
+      'country_code' => 'US'
+    }
+  ])
 end
 
 Shoulda::Matchers.configure do |config|

@@ -16,14 +16,26 @@ RSpec.describe StoresController, type: :controller do
   end
 
   describe "GET #search_by_city" do
-    let!(:first_store) { create(:store, city: 'Augusta') }
+    let(:augusta) { create(:city, name: 'Augusta') }
+    let!(:first_store) do
+      create :store, address: create(:address, city: augusta)
+    end
     let!(:first_cloth) { create(:cloth, chain: first_store.chain) }
 
-    let!(:second_store) { create(:store, chain: first_store.chain, city: 'Augusta') }
+    let!(:second_store) do
+      create :store,
+        chain: first_store.chain,
+        address: create(:address, city: augusta)
+    end
     let!(:second_cloth) { create(:cloth, chain: second_store.chain) }
 
-    let!(:store_in_another_city) { create(:store, city: 'Atlanta') }
-    let!(:cloth_from_store_in_another_city) { create(:cloth, chain: store_in_another_city.chain) }
+    let(:atlanta) { create(:city, name: 'Atlanta') }
+    let!(:store_in_another_city) do
+      create :store, address: create(:address, city: atlanta)
+    end
+    let!(:cloth_from_store_in_another_city) do
+      create :cloth, chain: store_in_another_city.chain
+    end
 
     def do_action
       get :search_by_city, city: 'augusta'
@@ -40,14 +52,15 @@ RSpec.describe StoresController, type: :controller do
 
     it "sets the stores" do
       do_action
-      expect(assigns[:stores]).to eq [first_store, second_store]
+      expect(assigns[:stores]).to match_array [first_store, second_store]
     end
 
     pending "order by distance"
   end
 
   describe "GET #show" do
-    let!(:store) { create(:store, city: 'Augusta') }
+    let(:augusta) { create(:city, name: 'Augusta') }
+    let!(:store) { create(:store, address: create(:address, city: augusta)) }
     let!(:first_cloth) { create(:cloth, chain: store.chain) }
     let!(:second_cloth) { create(:cloth, chain: store.chain) }
     let!(:cloth_from_store_in_another_city) { create(:cloth) }

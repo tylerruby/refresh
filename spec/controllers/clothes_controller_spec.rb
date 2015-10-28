@@ -73,13 +73,16 @@ RSpec.describe ClothesController, type: :controller do
     end
 
     describe "filtering by city" do
-      let!(:first_store) { create(:store, city: 'Augusta') }
+      let(:augusta) { create(:city, name: 'Augusta') }
+      let(:atlanta) { create(:city, name: 'Atlanta') }
+
+      let!(:first_store) { create(:store, address: create(:address, city: augusta)) }
       let!(:first_cloth) { create(:cloth, chain: first_store.chain) }
 
-      let!(:second_store) { create(:store, city: 'Augusta') }
+      let!(:second_store) { create(:store, address: create(:address, city: augusta)) }
       let!(:second_cloth) { create(:cloth, chain: second_store.chain) }
 
-      let!(:store_in_another_city) { create(:store, city: 'Atlanta') }
+      let!(:store_in_another_city) { create(:store, address: create(:address, city: atlanta)) }
       let!(:cloth_from_store_in_another_city) { create(:cloth, chain: store_in_another_city.chain) }
 
       let(:search_parameters) do
