@@ -33,7 +33,7 @@ RSpec.describe CartController, type: :controller do
 
     before do
       request.env["HTTP_REFERER"] = previous_url
-      session[:coordinates] = store.coordinates
+      session[:address_id] = store.address.id
     end
 
     let(:cloth_variant) { create(:cloth_variant) }

@@ -48,7 +48,7 @@ class CartController < ApplicationController
       store_id = cloth_instance_params[:store_id]
       StoreSearcher.new(
         city: Store.find(store_id).address.city.name,
-        coordinates: session[:coordinates]
+        coordinates: coordinates
       ).find(store_id)
     end
 end

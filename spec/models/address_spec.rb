@@ -22,14 +22,26 @@ RSpec.describe Address, type: :model do
     it { expect(address.coordinates).to eq [address.latitude, address.longitude] }
   end
 
-  it "geocodes before validation" do
-    expect(address.latitude).to be_nil
-    expect(address.longitude).to be_nil
+  describe "geocoder" do
+    it "geocodes before validation" do
+      expect(address.latitude).to be_nil
+      expect(address.longitude).to be_nil
 
-    address.valid?
+      address.valid?
 
-    expect(address.latitude).to be 40.7143528
-    expect(address.longitude).to be -74.0059731
+      expect(address.latitude).to be 40.7143528
+      expect(address.longitude).to be -74.0059731
+    end
+
+    it "doesn't geocodes if creating an address with default coordinates" do
+      address.latitude = 1.0
+      address.longitude = 1.0
+
+      address.valid?
+
+      expect(address.latitude).to be 1.0
+      expect(address.longitude).to be 1.0
+    end
   end
 
   describe ".for_stores" do

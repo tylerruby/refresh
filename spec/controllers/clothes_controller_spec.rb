@@ -10,7 +10,8 @@ RSpec.describe ClothesController, type: :controller do
     end
 
     before do
-      session[:coordinates] = ["40.7143528", "-74.0059731"]
+      user_address = create(:address, latitude: 40.7143528, longitude: -74.0059731)
+      session[:address_id] = user_address.id
 
       Geocoder::Lookup::Test.add_stub("4th Av., Augusta, GA", [
         {
@@ -105,7 +106,8 @@ RSpec.describe ClothesController, type: :controller do
       end
 
       it "shows only clothes from stores available for delivery" do
-        session[:coordinates] = ["0", "0"]
+        user_address = create(:address, latitude: 0.0, longitude: 0.0)
+        session[:address_id] = user_address.id
         do_action
         expect(assigns[:clothes]).to eq []
       end

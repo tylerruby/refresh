@@ -1,5 +1,5 @@
 <!-- Generating modals for clothes -->
-<% if @store.nil? || @store.available_for_delivery_on?(session[:coordinates]) %>
+<% if @store.nil? || @store.available_for_delivery_on?(coordinates) %>
   <% @clothes.each do |cloth| %>
     <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
   <% end %>

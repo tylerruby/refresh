@@ -4,7 +4,12 @@ class Address < ActiveRecord::Base
   belongs_to :city
   belongs_to :addressable, polymorphic: true
 
-  before_validation :geocode, if: -> { address.present? && city.present? }
+  before_validation :geocode, if: -> {
+    address.present? \
+    && city.present? \
+    && !latitude_changed? \
+    && !longitude_changed?
+  }
   validates :address, :city, :latitude, :longitude, presence: true
 
   scope :for_stores, -> { where(addressable_type: 'Store') }

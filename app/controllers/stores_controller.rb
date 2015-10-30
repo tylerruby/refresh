@@ -1,8 +1,8 @@
 class StoresController < ApplicationController
   def search_by_address
-    session[:coordinates] = [params[:latitude], params[:longitude]]
-    session[:address] = params[:address]
-    current_user.addresses << new_address
+    current_user.addresses << new_address if current_user.present?
+
+    session[:address_id] = new_address.id
 
     search_by_city
   end
@@ -21,7 +21,7 @@ class StoresController < ApplicationController
   private
 
     def searcher
-      StoreSearcher.new(city: params[:city], coordinates: session[:coordinates])
+      StoreSearcher.new(city: params[:city], coordinates: coordinates)
     end
 
     def city
@@ -30,6 +30,6 @@ class StoresController < ApplicationController
 
     # TODO: Find city in a more secure way, probably with friendly_id
     def new_address
-      Address.create(address: params[:address], city: City.find_by(name: city))
+      @new_address ||= Address.create(address: params[:address], city: City.find_by(name: city))
     end
 end

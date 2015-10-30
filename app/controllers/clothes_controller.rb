@@ -33,7 +33,7 @@ class ClothesController < ApplicationController
     def store_searcher
       @store_searcher ||= StoreSearcher.new(
         city: params[:city],
-        coordinates: session[:coordinates]
+        coordinates: coordinates
       )
     end
 

@@ -4,7 +4,7 @@
   <% current_user.addresses.each do |address| %>
     <div class="radio">
       <label>
-        <%= f.radio_button :delivery_address, address.full_address, required: true %>
+        <%= f.radio_button :delivery_address, address.full_address, required: true, checked: address == current_address %>
         <%= address.full_address %>
       </label>
     </div>
