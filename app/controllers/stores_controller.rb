@@ -30,6 +30,6 @@ class StoresController < ApplicationController
 
     # TODO: Find city in a more secure way, probably with friendly_id
     def new_address
-      @new_address ||= Address.create(address: params[:address], city: City.find_by(name: city))
+      @new_address ||= current_user.addresses.find_or_create_by(address: params[:address], city: City.find_by(name: city))
     end
 end
