@@ -86,7 +86,7 @@ RSpec.describe OrdersController, type: :controller do
     let(:delivery_address) { "18th Street Atlanta" }
 
     def do_action
-      post :create, order: { stripeToken: token, delivery_time: delivery_time, delivery_address: delivery_address }
+      post :create, stripeToken: token, order: { delivery_time: delivery_time, delivery_address: delivery_address }
     end
 
     def order

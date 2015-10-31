@@ -64,6 +64,6 @@ class OrdersController < ApplicationController
     end
 
     def stripe_token
-      params[:order][:stripeToken]
+      params[:stripeToken]
     end
 end
