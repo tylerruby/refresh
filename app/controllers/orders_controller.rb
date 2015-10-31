@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
   def new
     @cart = cart
     @cart.delivery_time = params.require(:delivery_time).to_i
+    @order = Order.new
     if @cart.empty?
       flash[:info] = 'Your cart is empty, cannot checkout yet.'
       redirect_to root_path
@@ -15,25 +16,27 @@ class OrdersController < ApplicationController
   end
 
   def create
-    cart.delivery_time = params.require(:delivery_time).to_i
-    order = Order.create!(
-      user: current_user,
-      amount: cart.total,
-      status: 'pending'
-    )
+    cart.delivery_time = order_params[:delivery_time].to_i
+    order = Order.create!(order_params) do |order|
+      order.user = current_user
+      order.amount = cart.total
+      order.status = 'pending'
+    end
 
     begin
       Order.transaction do
         order.update!(cart_items: cart.shopping_cart_items)
         cart.reload.destroy!
 
-        customer = Stripe::Customer.create(
-          card: params[:stripeToken],
-          description: 'Paying user',
-          email: current_user.email
-        )
+        if stripe_token.present?
+          customer = Stripe::Customer.create(
+            card: stripe_token,
+            description: 'Paying user',
+            email: current_user.email
+          )
 
-        current_user.update!(customer_id: customer.id)
+          current_user.update!(customer_id: customer.id)
+        end
 
         Stripe::Charge.create(
           :amount   => order.amount_cents,
@@ -53,4 +56,14 @@ class OrdersController < ApplicationController
     end
     redirect_to root_path
   end
+
+  private
+
+    def order_params
+      params.require(:order).permit(:delivery_time, :delivery_address)
+    end
+
+    def stripe_token
+      params[:stripeToken]
+    end
 end

@@ -199,6 +199,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -350,10 +352,12 @@ DEPENDENCIES
   jquery-turbolinks
   letter_opener (= 1.4.1)
   money-rails (= 1.4.1)
+  nested_form (= 0.3.2)
   omniauth-facebook (= 2.0.1)
   paperclip (= 4.3.0)
   pg (= 0.18.2)
   pry
+  pundit (= 1.0.1)
   rails (= 4.2.3)
   rails_12factor
   rails_admin (= 0.7.0)

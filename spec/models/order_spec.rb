@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   let(:order) { build(:order) }
 
-  it "validates presence of user" do
-    order = Order.new
-    expect(order).not_to be_valid
-    expect(order.errors).to have_key :user
+  describe "validations" do
+    it { is_expected.to validate_presence_of(:delivery_address) }
+    it { is_expected.to validate_presence_of(:delivery_time) }
+    it { is_expected.to validate_presence_of(:user) }
   end
 
   it "only accepts valid status" do

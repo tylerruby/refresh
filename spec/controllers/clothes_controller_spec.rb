@@ -10,7 +10,8 @@ RSpec.describe ClothesController, type: :controller do
     end
 
     before do
-      session[:coordinates] = ["40.7143528", "-74.0059731"]
+      user_address = create(:address, latitude: 40.7143528, longitude: -74.0059731)
+      session[:address_id] = user_address.id
 
       Geocoder::Lookup::Test.add_stub("4th Av., Augusta, GA", [
         {
@@ -73,13 +74,16 @@ RSpec.describe ClothesController, type: :controller do
     end
 
     describe "filtering by city" do
-      let!(:first_store) { create(:store, city: 'Augusta') }
+      let(:augusta) { create(:city, name: 'Augusta') }
+      let(:atlanta) { create(:city, name: 'Atlanta') }
+
+      let!(:first_store) { create(:store, address: create(:address, city: augusta)) }
       let!(:first_cloth) { create(:cloth, chain: first_store.chain) }
 
-      let!(:second_store) { create(:store, city: 'Augusta') }
+      let!(:second_store) { create(:store, address: create(:address, city: augusta)) }
       let!(:second_cloth) { create(:cloth, chain: second_store.chain) }
 
-      let!(:store_in_another_city) { create(:store, city: 'Atlanta') }
+      let!(:store_in_another_city) { create(:store, address: create(:address, city: atlanta)) }
       let!(:cloth_from_store_in_another_city) { create(:cloth, chain: store_in_another_city.chain) }
 
       let(:search_parameters) do
@@ -102,7 +106,8 @@ RSpec.describe ClothesController, type: :controller do
       end
 
       it "shows only clothes from stores available for delivery" do
-        session[:coordinates] = ["0", "0"]
+        user_address = create(:address, latitude: 0.0, longitude: 0.0)
+        session[:address_id] = user_address.id
         do_action
         expect(assigns[:clothes]).to eq []
       end
@@ -114,19 +119,19 @@ RSpec.describe ClothesController, type: :controller do
       end
     end
 
-    describe "filtering by chain ignores distance" do
-      let(:chain) { create(:chain) }
-      let!(:cloth) { create(:cloth, chain: chain) }
-      let!(:another_chain) { create(:chain, stores: [create(:store)]) }
-      let!(:cloth_from_another_chain) { create(:cloth) }
+    describe "filtering by store ignores distance" do
+      let(:store) { create(:store) }
+      let!(:cloth) { create(:cloth, chain: store.chain) }
+      let!(:another_store) { create(:store) }
+      let!(:cloth_from_another_store) { create(:cloth, chain: another_store.chain) }
 
       let(:search_parameters) do
         {
-          chain_id: chain.id
+          store_id: store.id
         }
       end
 
-      it "returns only clothes from that chain" do
+      it "returns only clothes from that store" do
         do_action
         expect(assigns[:clothes]).to eq [cloth]
       end
@@ -134,6 +139,11 @@ RSpec.describe ClothesController, type: :controller do
       it "doesn't return sizes" do
         do_action
         expect(assigns[:sizes]).to eq []
+      end
+
+      it "assigns store" do
+        do_action
+        expect(assigns[:store]).to eq store
       end
     end
 

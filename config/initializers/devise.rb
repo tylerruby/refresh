@@ -269,4 +269,5 @@ end
 
 Rails.application.config.to_prepare do
   Devise::SessionsController.layout "application"
+  Devise::RegistrationsController.layout "application"
 end

@@ -1,0 +1,22 @@
+<h2>Edit profile</h2>
+
+<%= nested_form_for(@user) do |f| %>
+  <fieldset class="addresses">
+    <%= f.fields_for :addresses do |address_form| %>
+      <div class="form-inline">
+        <div class="form-group">
+          <%= address_form.label :address %>
+          <%= address_form.text_field :address, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= address_form.label :city %>
+          <%= address_form.collection_select :city_id, City.all, :id, :full_name, class: 'form-control' %>
+        </div>
+        <%= address_form.link_to_remove 'Remove address', class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+    <%= f.link_to_add "Add a address", :addresses, class: 'btn btn-info' %>
+  </fieldset>
+
+  <%= f.button "Update", class: 'btn btn-default' %>
+<% end %>

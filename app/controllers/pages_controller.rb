@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   end
 
   def landing
-    @cities = Store.select(:city).distinct.map(&:city)
+    @cities = Address.for_stores.select(:city_id).distinct.map(&:city).map(&:name)
   end
 
   def profile

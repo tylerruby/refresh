@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
     omniauth_providers: [:facebook]
 
   has_many :orders
+  has_many :addresses, as: :addressable, dependent: :destroy
+  accepts_nested_attributes_for :addresses, allow_destroy: true
 
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -18,5 +20,9 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def has_credit_card?
+    customer_id.present?
   end
 end

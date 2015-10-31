@@ -5,8 +5,11 @@ class CartController < ApplicationController
   end
 
   def add
+    cloth_instance = ClothInstance.find_or_initialize_by(cloth_instance_params)
+    cloth_instance.store = store
+    authorize cloth_instance
     Cart.transaction do
-      cloth_instance = ClothInstance.find_or_create_by!(cloth_instance_params)
+      cloth_instance.save!
       cart.add(cloth_instance, cloth_instance.price, quantity)
     end
     flash[:success] = 'Item added to the cart!'
@@ -39,5 +42,13 @@ class CartController < ApplicationController
 
     def cloth_instance
       @cloth_instance ||= ClothInstance.find(params[:cloth_instance_id])
+    end
+
+    def store
+      store_id = cloth_instance_params[:store_id]
+      StoreSearcher.new(
+        city: Store.find(store_id).address.city.name,
+        coordinates: coordinates
+      ).find(store_id)
     end
 end

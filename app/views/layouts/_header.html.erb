@@ -50,7 +50,8 @@
         </ul>
 
         <ul class="nav navbar-nav hidden">
-          <li><a href="/profile">Profile</a>
+          <li><a href="/profile">Profile</a></li>
+          <li><%= link_to 'Edit profile', edit_user_path %></li>
           <li><a href="#" data-action="growl">Growl</a></li>
           <li><%= link_to 'Previous orders', orders_path %></li>
           <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>

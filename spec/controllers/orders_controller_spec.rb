@@ -83,9 +83,10 @@ RSpec.describe OrdersController, type: :controller do
     let(:token) { 'some token' }
     let(:customer_double) { double('Stripe::Customer', id: 'some id') }
     let(:delivery_time) { 1 }
+    let(:delivery_address) { "18th Street Atlanta" }
 
     def do_action
-      post :create, stripeToken: token, delivery_time: delivery_time
+      post :create, stripeToken: token, order: { delivery_time: delivery_time, delivery_address: delivery_address }
     end
 
     def order
@@ -129,6 +130,7 @@ RSpec.describe OrdersController, type: :controller do
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'waiting_confirmation' }
+        it { expect(order.delivery_address).to eq delivery_address }
         it { expect(Cart.exists? cart.id).to be false }
         it { expect(Stripe::Customer).to have_received(:create) }
         it { expect(Stripe::Charge).to have_received(:create) }
@@ -214,6 +216,16 @@ RSpec.describe OrdersController, type: :controller do
             end
           end
         end
+      end
+
+      context "user already has a credit card" do
+        before do
+          user.update!(customer_id: 'some id')
+          post :create, order: { delivery_time: delivery_time, delivery_address: delivery_address }
+        end
+
+        it { expect(Stripe::Customer).not_to have_received(:create) }
+        it { expect(Stripe::Charge).to have_received(:create) }
       end
     end
 
