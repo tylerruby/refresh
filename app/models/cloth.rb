@@ -1,4 +1,5 @@
 class Cloth < ActiveRecord::Base
+  acts_as_paranoid
   is_impressionable
 
   monetize :price_cents

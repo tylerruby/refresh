@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028060143) do
+ActiveRecord::Schema.define(version: 20151102173124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,9 +88,11 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.integer  "cloth_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
   add_index "cloth_variants", ["cloth_id"], name: "index_cloth_variants_on_cloth_id", using: :btree
+  add_index "cloth_variants", ["deleted_at"], name: "index_cloth_variants_on_deleted_at", using: :btree
 
   create_table "clothes", force: :cascade do |t|
     t.string   "name"
@@ -107,10 +109,12 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.integer  "gender"
     t.string   "image_dimensions"
     t.integer  "category_id"
+    t.datetime "deleted_at"
   end
 
   add_index "clothes", ["category_id"], name: "index_clothes_on_category_id", using: :btree
   add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id", using: :btree
+  add_index "clothes", ["deleted_at"], name: "index_clothes_on_deleted_at", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -159,8 +163,10 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.datetime "updated_at",                       null: false
     t.string   "delivery_address"
     t.integer  "delivery_time"
+    t.datetime "deleted_at"
   end
 
+  add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
