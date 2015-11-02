@@ -9,7 +9,7 @@ class StoresController < ApplicationController
 
   def search_by_city
     @city = city
-    @stores = searcher.all
+    @stores = searcher.available_for_delivery
 
     render :index
   end
