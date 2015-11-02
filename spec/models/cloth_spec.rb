@@ -66,4 +66,22 @@ RSpec.describe Cloth, type: :model do
     expect(cloth.cloth_variants.find_by(size: "S", color: "blue")).not_to be_nil
     expect(cloth.cloth_variants.find_by(size: "M", color: "blue")).not_to be_nil
   end
+
+  it "isn't really deleted" do
+    cloth.save!
+    cloth.destroy
+    expect(Cloth.with_deleted).to include cloth
+  end
+
+  it "can be destroyed even if it's related to an order" do
+    cloth_variant = create(:cloth_variant, cloth: cloth)
+    cloth_instance = create(:cloth_instance, cloth_variant: cloth_variant)
+    cart = create(:cart)
+    cart.add(cloth_instance, 1)
+    order = create(:order)
+    order.update!(cart_items: cart.shopping_cart_items)
+    cart.reload.destroy!
+
+    expect { cloth.destroy! }.not_to raise_error
+  end
 end

@@ -39,6 +39,7 @@ gem 'impressionist', '1.5.1'
 gem 'omniauth-facebook', '2.0.1'
 gem 'pundit', '1.0.1'
 gem 'nested_form', '0.3.2'
+gem 'paranoia', '2.1.3'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
