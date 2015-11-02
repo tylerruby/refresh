@@ -24,29 +24,8 @@ class OrdersController < ApplicationController
     end
 
     begin
-      Order.transaction do
-        order.update!(cart_items: cart.shopping_cart_items)
-        cart.reload.destroy!
-
-        if stripe_token.present?
-          customer = Stripe::Customer.create(
-            card: stripe_token,
-            description: 'Paying user',
-            email: current_user.email
-          )
-
-          current_user.update!(customer_id: customer.id)
-        end
-
-        Stripe::Charge.create(
-          :amount   => order.amount_cents,
-          :currency => "usd",
-          :customer => current_user.customer_id
-        )
-
-        order.waiting_confirmation!
-        flash[:success] = "Checkout was successful! Waiting confirmation..."
-      end
+      MakePayment.new(order: order, cart: cart, stripe_token: stripe_token).pay
+      flash[:success] = "Checkout was successful! Waiting confirmation..."
     rescue ActiveRecord::RecordInvalid
       order.internal_failure!
       flash[:danger] = "Something went wrong. Contact us and we'll solve the problem."

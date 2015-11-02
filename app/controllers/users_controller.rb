@@ -5,7 +5,6 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    binding.pry
     if @user.update(user_params)
       flash[:success] = "Profile updated with success!"
       redirect_to root_path
