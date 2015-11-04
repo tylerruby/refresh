@@ -13,21 +13,38 @@ RSpec.describe StoresController, type: :controller do
         'country_code' => 'US'
       }
     ])
+
+    Geocoder::Lookup::Test.add_stub("3905 Mike Padgett Hwy, Augusta, GA", [
+      {
+        'latitude'     => 33.353523,
+        'longitude'    => -81.982439,
+        'address'      => '3905 Mike Padgett Hwy, Augusta, GA',
+        'state'        => 'Georgia',
+        'state_code'   => 'GA',
+        'country'      => 'United States',
+        'country_code' => 'US'
+      }
+    ])
   end
 
   describe "GET #search_by_city" do
     let(:augusta) { create(:city, name: 'Augusta') }
-    let!(:first_store) do
-      create :store, address: create(:address, city: augusta)
+    let(:current_address) do
+      create :address, city: augusta, address: '3905 Mike Padgett Hwy'
     end
-    let!(:first_cloth) { create(:cloth, chain: first_store.chain) }
 
-    let!(:second_store) do
-      create :store,
-        chain: first_store.chain,
-        address: create(:address, city: augusta)
+    let!(:available_store) do
+      create :store, address: create(:address,
+        city: augusta, address: '3905 Mike Padgett Hwy')
     end
-    let!(:second_cloth) { create(:cloth, chain: second_store.chain) }
+    let!(:available_cloth) { create(:cloth, chain: available_store.chain) }
+
+    let!(:unavailable_store) do
+      create :store,
+        chain: available_store.chain,
+        address: create(:address, city: augusta, address: '4th Av.')
+    end
+    let!(:unavailable_cloth) { create(:cloth, chain: unavailable_store.chain) }
 
     let(:atlanta) { create(:city, name: 'Atlanta') }
     let!(:store_in_another_city) do
@@ -43,6 +60,8 @@ RSpec.describe StoresController, type: :controller do
 
     before do
       allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(true)
+      allow_any_instance_of(ApplicationController)
+        .to receive(:current_address).and_return(current_address)
     end
 
     it "sets the city's name" do
@@ -50,9 +69,9 @@ RSpec.describe StoresController, type: :controller do
       expect(assigns[:city]).to eq 'Augusta'
     end
 
-    it "sets the stores" do
+    it "result contains available stores only" do
       do_action
-      expect(assigns[:stores]).to match_array [first_store, second_store]
+      expect(assigns[:stores]).to match_array [available_store]
     end
 
     pending "order by distance"
