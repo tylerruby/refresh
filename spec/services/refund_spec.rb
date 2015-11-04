@@ -32,4 +32,10 @@ RSpec.describe Refund do
                                 .from(nil)
                                 .to(stripe_refund.id)
   end
+
+  it "changes the order status to canceled" do
+    expect { refund.create }.to change { order.reload.status }
+                                .from('waiting_confirmation')
+                                .to('canceled')
+  end
 end

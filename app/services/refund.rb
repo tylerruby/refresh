@@ -7,7 +7,7 @@ class Refund
 
   def create
     response = Stripe::Refund.create(charge: charge_id, reason: reason)
-    order.update!(refund_id: response.id)
+    order.update!(refund_id: response.id, status: :canceled)
     RefundMailer.refund(user, message).deliver
   end
 
