@@ -81,7 +81,8 @@ RSpec.describe OrdersController, type: :controller do
 
   describe "POST #create" do
     let(:token) { 'some token' }
-    let(:customer_double) { double('Stripe::Customer', id: 'some id') }
+    let(:customer_double) { double('Stripe::Customer', id: 'some customer id') }
+    let(:charge_double) { double('Stripe::Charge', id: 'some charge id') }
     let(:delivery_time) { 1 }
     let(:delivery_address) { "18th Street Atlanta" }
 
@@ -112,7 +113,7 @@ RSpec.describe OrdersController, type: :controller do
           amount:   total_cost.cents,
           currency: "usd",
           customer: customer_double.id
-        )
+        ).and_return(charge_double)
       end
 
       it "creates a new order from the cart" do
@@ -124,13 +125,19 @@ RSpec.describe OrdersController, type: :controller do
       describe "post-conditions" do
         before do
           do_action
+          user.reload
+          order.reload
         end
+
+        it { expect(user.customer_id).to eq customer_double.id }
 
         it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'waiting_confirmation' }
         it { expect(order.delivery_address).to eq delivery_address }
+        it { expect(order.charge_id).to eq charge_double.id }
+
         it { expect(Cart.exists? cart.id).to be false }
         it { expect(Stripe::Customer).to have_received(:create) }
         it { expect(Stripe::Charge).to have_received(:create) }
@@ -220,8 +227,11 @@ RSpec.describe OrdersController, type: :controller do
 
       context "user already has a credit card" do
         before do
-          user.update!(customer_id: 'some id')
-          post :create, order: { delivery_time: delivery_time, delivery_address: delivery_address }
+          user.update!(customer_id: 'some customer id')
+          post :create, order: {
+            delivery_time: delivery_time,
+            delivery_address: delivery_address
+          }
         end
 
         it { expect(Stripe::Customer).not_to have_received(:create) }

@@ -19,6 +19,8 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Refund)
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -29,6 +31,7 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+    refund
 
     ## With an audit adapter, you can add:
     # history_index
