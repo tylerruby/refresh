@@ -19,7 +19,9 @@ module RailsAdmin
         end
 
         register_instance_option :visible? do
-          !bindings[:object].refunded?
+          if bindings[:object].respond_to? :refunded?
+            !bindings[:object].refunded?
+          end
         end
 
         register_instance_option :controller do
