@@ -18,6 +18,7 @@
 
 # Ignore uploaded images in development
 /public/system
+/public/uploads
 
 .env
 .DS_Store
