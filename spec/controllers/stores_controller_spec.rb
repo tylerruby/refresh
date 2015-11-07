@@ -37,21 +37,21 @@ RSpec.describe StoresController, type: :controller do
       create :store, address: create(:address,
         city: augusta, address: '3905 Mike Padgett Hwy')
     end
-    let!(:available_cloth) { create(:cloth, chain: available_store.chain) }
+    let!(:available_product) { create(:product, chain: available_store.chain) }
 
     let!(:unavailable_store) do
       create :store,
         chain: available_store.chain,
         address: create(:address, city: augusta, address: '4th Av.')
     end
-    let!(:unavailable_cloth) { create(:cloth, chain: unavailable_store.chain) }
+    let!(:unavailable_product) { create(:product, chain: unavailable_store.chain) }
 
     let(:atlanta) { create(:city, name: 'Atlanta') }
     let!(:store_in_another_city) do
       create :store, address: create(:address, city: atlanta)
     end
-    let!(:cloth_from_store_in_another_city) do
-      create :cloth, chain: store_in_another_city.chain
+    let!(:product_from_store_in_another_city) do
+      create :product, chain: store_in_another_city.chain
     end
 
     def do_action
@@ -80,9 +80,9 @@ RSpec.describe StoresController, type: :controller do
   describe "GET #show" do
     let(:augusta) { create(:city, name: 'Augusta') }
     let!(:store) { create(:store, address: create(:address, city: augusta)) }
-    let!(:first_cloth) { create(:cloth, chain: store.chain) }
-    let!(:second_cloth) { create(:cloth, chain: store.chain) }
-    let!(:cloth_from_store_in_another_city) { create(:cloth) }
+    let!(:first_product) { create(:product, chain: store.chain) }
+    let!(:second_product) { create(:product, chain: store.chain) }
+    let!(:product_from_store_in_another_city) { create(:product) }
 
     def do_action
       get :show, id: store.friendly_id

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks", passwords: "devise/passwords", registrations: "devise/registrations" }
 
-  resources :clothes, only: [:index, :show]
   resources :orders, only: [:index, :new, :create], path_names: { new: 'checkout' }
   resource :user, only: [:edit, :update]
   get 'cart' => 'cart#index'

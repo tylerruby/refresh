@@ -7,9 +7,4 @@ RSpec.describe Chain, type: :model do
     create(:store, chain: chain)
     expect { chain.destroy }.to change { Store.count }.by(-1)
   end
-
-  it "destroys child clothes when destroying chain" do
-    create(:cloth, chain: chain)
-    expect { chain.destroy }.to change { Cloth.count }.by(-1)
-  end
 end

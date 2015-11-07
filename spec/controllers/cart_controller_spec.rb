@@ -17,8 +17,8 @@ RSpec.describe CartController, type: :controller do
 
     it "sets an existing cart" do
       cart = Cart.create!
-      old_cart_item = cart.add(create(:cloth_instance), 1)
-      new_cart_item = cart.add(create(:cloth_instance), 1)
+      old_cart_item = cart.add(create(:product), 1)
+      new_cart_item = cart.add(create(:product), 1)
       old_cart_item.touch
       session[:cart_id] = cart.id
       do_action
@@ -36,21 +36,13 @@ RSpec.describe CartController, type: :controller do
       session[:address_id] = store.address.id
     end
 
-    let(:cloth_variant) { create(:cloth_variant) }
     let(:quantity) { 3 }
-    let(:cloth_instance_attributes) do
-      {
-        size: "doesn't even matter",
-        cloth_variant_id: cloth_variant.id,
-        store_id: store.id
-      }
-    end
 
     def do_action
-      patch :add, quantity: quantity, cloth_instance: cloth_instance_attributes
+      patch :add, quantity: quantity, product_id: product.id
     end
 
-    context "cloth from a store available for delivery" do
+    context "product from a store available for delivery" do
       it "creates a cart" do
         do_action
         expect(session[:cart_id]).to eq Cart.last.id
@@ -63,30 +55,27 @@ RSpec.describe CartController, type: :controller do
         expect(session[:cart_id]).to eq Cart.last.id
       end
 
-      it "creates a cloth instance with the correct attributes" do
-        expect { do_action }.to change { ClothInstance.count }.by(1)
-        cloth_instance = ClothInstance.last
-        expect(cloth_instance.color).to eq cloth_variant.color
-        expect(cloth_instance.size).to eq cloth_variant.size
-        expect(cloth_instance.cloth_variant).to eq cloth_variant
-        expect(cloth_instance.store).to eq store
+      it "creates a product instance with the correct attributes" do
+        expect { do_action }.to change { Product.count }.by(1)
+        product = Product.last
+        expect(product.store).to eq store
       end
 
-      it "doesn't allow a cloth instance that references an inexistent cloth variant id" do
+      it "doesn't allow a product instance that references an inexistent product variant id" do
         expect do
-          patch :add, quantity: 0, cloth_instance: cloth_instance_attributes.merge(cloth_variant_id: -1)
+          patch :add, quantity: 0, product_id: product.id
         end.to raise_error(ActiveRecord::RecordInvalid)
       end
 
-      it "adds the cloth instance to the cart with the cloth's price and with the correct quantity" do
+      it "adds the product instance to the cart with the product's price and with the correct quantity" do
         do_action
         cart = Cart.last
         cart_item = CartItem.last
-        expect(cart.subtotal).to eq cloth_variant.price * quantity
+        expect(cart.subtotal).to eq product.price * quantity
         expect(cart.shopping_cart_items).to eq [cart_item]
         expect(cart_item.quantity).to eq quantity
-        expect(cart_item.price).to eq cloth_variant.price
-        expect(cart_item.item).to eq ClothInstance.last
+        expect(cart_item.price).to eq product.price
+        expect(cart_item.item).to eq Product.last
       end
 
       it "redirects the user back to the the previous page" do
@@ -99,14 +88,14 @@ RSpec.describe CartController, type: :controller do
         expect(flash[:success]).to eq 'Item added to the cart!'
       end
 
-      it "adds a cloth instance to the existing cart" do
+      it "adds a product instance to the existing cart" do
         cart = Cart.create!
         session[:cart_id] = cart.id
         do_action
-        expect(cart.reload.shopping_cart_items.last.item).to eq ClothInstance.last
+        expect(cart.reload.shopping_cart_items.last.item).to eq Product.last
       end
 
-      it "adds equal cloth instance to the existing cart item" do
+      it "adds equal product instance to the existing cart item" do
         do_action
         do_action
 
@@ -114,11 +103,11 @@ RSpec.describe CartController, type: :controller do
         cart_item = CartItem.last
         expect(cart.shopping_cart_items).to eq [cart_item]
         expect(cart_item.quantity).to eq quantity * 2
-        expect(cart.subtotal).to eq cloth_variant.price * quantity * 2
+        expect(cart.subtotal).to eq product.price * quantity * 2
       end
     end
 
-    describe "cloth from a store which isn't available for delivery" do
+    describe "product from a store which isn't available for delivery" do
       before do
         store.update!(address: create(:far_far_away))
       end
@@ -132,19 +121,19 @@ RSpec.describe CartController, type: :controller do
   describe "DELETE #remove" do
     let(:previous_url) { '/previous_url' }
     let(:cart) { Cart.create! }
-    let(:cloth_instance) { create(:cloth_instance) }
+    let(:product) { create(:product) }
 
     before do
       request.env["HTTP_REFERER"] = previous_url
-      cart.add(cloth_instance, cloth_instance.price, 3)
+      cart.add(product, product.price, 3)
       session[:cart_id] = cart.id
     end
 
     def do_action
-      delete :remove, cloth_instance_id: cloth_instance.id
+      delete :remove, product_id: product.id
     end
 
-    it "removes the cloth instance from the cart" do
+    it "removes the product instance from the cart" do
       do_action
       expect(cart.reload).to be_empty
     end
@@ -164,12 +153,12 @@ RSpec.describe CartController, type: :controller do
     let(:previous_url) { '/previous_url' }
     let(:cart) { Cart.create! }
     let(:quantity) { 3 }
-    let(:cloth_instance) { create(:cloth_instance) }
-    let(:cart_item) { cart.add cloth_instance, cloth_instance.price, 2 }
+    let(:product) { create(:product) }
+    let(:cart_item) { cart.add product, product.price, 2 }
 
     def do_action
       cart_item
-      patch :update, quantity: quantity, cloth_instance_id: cloth_instance.id
+      patch :update, quantity: quantity, product_id: product.id
     end
 
     before do
@@ -180,7 +169,7 @@ RSpec.describe CartController, type: :controller do
     it "updates the cart item's quantity" do
       do_action
       expect(cart_item.reload.quantity).to eq quantity
-      expect(cart.reload.subtotal).to eq cloth_instance.price * quantity
+      expect(cart.reload.subtotal).to eq product.price * quantity
     end
 
     it "redirects the user back to the the previous page" do

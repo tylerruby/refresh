@@ -46,7 +46,7 @@ RSpec.describe OrdersController, type: :controller do
       let(:cart) { Cart.create! }
 
       before do
-        cart.add(create(:cloth_instance), 1)
+        cart.add(create(:product), 1)
         session[:cart_id] = cart.id
         sign_in user
       end
@@ -96,7 +96,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context "authenticated" do
       let!(:cart) { Cart.create! }
-      let!(:cart_items) { 2.times.map { cart.add(create(:cloth_instance), 1) } }
+      let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
       let(:total_cost) { cart.subtotal + cart.shipping_cost_for(delivery_time) }
 
       before do
