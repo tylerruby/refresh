@@ -2,18 +2,12 @@ class Store < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
-  has_attached_file :image, styles: { medium: "x300>", thumb: "100x100>" },
-    default_url: "https://placehold.it/300x300"
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  mount_uploader :image, ImageUploader
 
   RADIUS = 10 # miles
 
   has_many :products
   has_one :address, as: :addressable, dependent: :destroy
-
-  serialize :image_dimensions
-
-  before_save :extract_dimensions
 
   validates :address, presence: true
 
@@ -74,33 +68,13 @@ class Store < ActiveRecord::Base
 
       field :address
       field :image
-      field :chain
     end
 
     list do
       field :name
-      field :chain
       field :full_address
       field :image
     end
-  end
-
-  def image_url
-    image.url(:medium)
-  end
-
-  def image_dimensions
-    Dimensions.new(*super)
-  end
-
-  def extract_dimensions
-    tempfile = image.queued_for_write[:medium]
-    extract_from(tempfile) unless tempfile.nil?
-  end
-
-  def extract_from(file)
-    geometry = Paperclip::Geometry.from_file(file)
-    self.image_dimensions = [geometry.width.to_i, geometry.height.to_i]
   end
 
   def set_distance_from_user!(location)
