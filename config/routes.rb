@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'privacy/' => 'pages#privacy'
   get 'blog/' => 'pages#blog'
   get 'contact' => 'pages#contact'
+  get 'drivers' => 'pages#drivers'
 
   resources :stores, only: [:show]
 
