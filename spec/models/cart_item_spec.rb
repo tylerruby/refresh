@@ -5,7 +5,7 @@ RSpec.describe CartItem, type: :model do
     product = create(:product)
     cart_item = build(:cart_item, item: product)
 
-    %w(name color size gender image store).each do |attribute|
+    %w(name image store).each do |attribute|
       expect(cart_item.send(attribute)).to eq product.send(attribute)
     end
   end

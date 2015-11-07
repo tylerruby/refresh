@@ -37,21 +37,20 @@ RSpec.describe StoresController, type: :controller do
       create :store, address: create(:address,
         city: augusta, address: '3905 Mike Padgett Hwy')
     end
-    let!(:available_product) { create(:product, chain: available_store.chain) }
+    let!(:available_product) { create(:product, store: available_store) }
 
     let!(:unavailable_store) do
       create :store,
-        chain: available_store.chain,
         address: create(:address, city: augusta, address: '4th Av.')
     end
-    let!(:unavailable_product) { create(:product, chain: unavailable_store.chain) }
+    let!(:unavailable_product) { create(:product, store: unavailable_store) }
 
     let(:atlanta) { create(:city, name: 'Atlanta') }
     let!(:store_in_another_city) do
       create :store, address: create(:address, city: atlanta)
     end
     let!(:product_from_store_in_another_city) do
-      create :product, chain: store_in_another_city.chain
+      create :product, store: store_in_another_city
     end
 
     def do_action
@@ -80,8 +79,8 @@ RSpec.describe StoresController, type: :controller do
   describe "GET #show" do
     let(:augusta) { create(:city, name: 'Augusta') }
     let!(:store) { create(:store, address: create(:address, city: augusta)) }
-    let!(:first_product) { create(:product, chain: store.chain) }
-    let!(:second_product) { create(:product, chain: store.chain) }
+    let!(:first_product) { create(:product, store: store) }
+    let!(:second_product) { create(:product, store: store) }
     let!(:product_from_store_in_another_city) { create(:product) }
 
     def do_action

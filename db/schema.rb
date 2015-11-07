@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107144059) do
+ActiveRecord::Schema.define(version: 20151107160216) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
@@ -53,16 +54,6 @@ ActiveRecord::Schema.define(version: 20151107144059) do
     t.boolean  "female",     default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-  end
-
-  create_table "chains", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -119,20 +110,31 @@ ActiveRecord::Schema.define(version: 20151107144059) do
     t.datetime "updated_at",                       null: false
     t.string   "delivery_address"
     t.integer  "delivery_time"
-    t.datetime "deleted_at"
     t.string   "charge_id"
     t.string   "refund_id"
   end
 
-  add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "price_cents",    default: 0,     null: false
+    t.string   "price_currency", default: "USD", null: false
+    t.integer  "category_id"
+    t.integer  "store_id"
+    t.string   "image"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "slug"
-    t.integer  "chain_id"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -140,7 +142,6 @@ ActiveRecord::Schema.define(version: 20151107144059) do
     t.string   "image_dimensions"
   end
 
-  add_index "stores", ["chain_id"], name: "index_stores_on_chain_id", using: :btree
   add_index "stores", ["slug"], name: "index_stores_on_slug", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -169,5 +170,6 @@ ActiveRecord::Schema.define(version: 20151107144059) do
 
   add_foreign_key "addresses", "cities"
   add_foreign_key "orders", "users"
-  add_foreign_key "stores", "chains"
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "stores"
 end

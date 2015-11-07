@@ -8,7 +8,7 @@ class Cart < ActiveRecord::Base
   attr_accessor :delivery_time
 
   def description
-    "#{total_unique_items} #{'cloth'.pluralize(total_unique_items)} (#{total.format})"
+    "#{total_unique_items} #{'product'.pluralize(total_unique_items)} (#{total.format})"
   end
 
   def taxes

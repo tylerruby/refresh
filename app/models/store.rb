@@ -8,17 +8,15 @@ class Store < ActiveRecord::Base
 
   RADIUS = 10 # miles
 
-  belongs_to :chain
-  has_many :clothes, through: :chain
+  has_many :products
   has_one :address, as: :addressable, dependent: :destroy
 
   serialize :image_dimensions
 
   before_save :extract_dimensions
 
-  validates :address, :chain, presence: true
+  validates :address, presence: true
 
-  delegate :logo, to: :chain
   delegate :full_address, :coordinates, to: :address
 
   attr_writer :distance_from_user
@@ -44,10 +42,6 @@ class Store < ActiveRecord::Base
     .merge(addresses)
   end
 
-  def name
-    super.present? ? super : chain.try(:name)
-  end
-
   def available_for_delivery?
     distance_from_user <= RADIUS
   end
@@ -65,9 +59,7 @@ class Store < ActiveRecord::Base
 
   # Due to Rails Admin setting the slug to empty string
   def slug=(value)
-    if value.present?
-      write_attribute(:slug, value)
-    end
+    super if value.present?
   end
 
   rails_admin do
