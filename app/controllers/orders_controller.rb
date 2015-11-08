@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:delivery_time, :delivery_address)
+      params.require(:order).permit(:delivery_time, :delivery_address, :observations)
     end
 
     def stripe_token
