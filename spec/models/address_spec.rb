@@ -16,6 +16,12 @@ RSpec.describe Address, type: :model do
 
   describe "#full_address" do
     it { expect(address.full_address).to eq "4th Av., Atlanta, GA" }
+
+    context 'when address_2 is present' do
+      before { address.address_2 = '2º floor' }
+
+      it { expect(address.full_address).to eq "4th Av., 2º floor, Atlanta, GA" }
+    end
   end
 
   describe "#coordinates" do

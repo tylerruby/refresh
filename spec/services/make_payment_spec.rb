@@ -4,7 +4,7 @@ RSpec.describe MakePayment do
   let(:delivery_time) { 1 }
   let(:user) { create(:user) }
   let(:cart) { create(:cart, delivery_time: delivery_time) }
-  let!(:cart_items) { 2.times.map { cart.add(create(:cloth_instance), 1) } }
+  let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
   let(:order) { create(:order, user: user, amount: cart.total, status: 'pending') }
 
   let(:customer_double) { double('Stripe::Customer', id: 'some customer id') }
