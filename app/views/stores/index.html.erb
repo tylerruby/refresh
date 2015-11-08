@@ -9,16 +9,16 @@
 
 <div class="profile-header text-center">
   <% unless @stores.empty? %>
-  <nav class="profile-header-nav">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#stores" data-toggle="tab">Stores</a>
-      </li>
-      <li>
-        <a href="#clothes" data-toggle="tab">Clothes</a>
-      </li>
-    </ul>
-  </nav>
+    <nav class="profile-header-nav">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#stores" data-toggle="tab">Stores</a>
+        </li>
+        <li>
+          <a href="#clothes" data-toggle="tab">Clothes</a>
+        </li>
+      </ul>
+    </nav>
   <% end %>
   <div class="container">
     <div class="container-inner">
@@ -36,19 +36,23 @@
 
 <div class="container m-y-md tab-content">
   <div id="stores" class="tab-pane active">
-    <div class="js-image-grid stores col-md-10 col-md-offset-1">
+    <div class="stores col-lg-10 col-lg-offset-1">
       <% if @stores.empty? %>
         In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
       <% end %>
 
-      <% @stores.each do |store| %>
-        <div class="store item">
-          <%= link_to store_path(store) do %>
-            <%= image_tag store.image_url, class: "store-item", width: store.image_dimensions.width, height: store.image_dimensions.height  %>
-            <h3><%= store.name %></h3>
-            <% if store.available_for_delivery? %>
-              <i class="available-for-delivery fa fa-truck"></i>
-            <% end %>
+      <% @stores.in_groups_of(3).map(&:compact).each do |group| %>
+        <div class="row">
+          <% group.each do |store| %>
+            <div class="store item col-lg-4 col-sm-4 col-xs-12 thumb">
+              <%= link_to store_path(store), class: 'thumbnail' do %>
+                <%= image_tag store.image_url, class: "store-item", width: store.image_dimensions.width, height: store.image_dimensions.height  %>
+                <h3><%= store.name %></h3>
+                <% if store.available_for_delivery? %>
+                  <i class="available-for-delivery fa fa-truck"></i>
+                <% end %>
+              <% end %>
+            </div>
           <% end %>
         </div>
       <% end %>

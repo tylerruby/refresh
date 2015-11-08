@@ -1,39 +1,41 @@
-<div class="container p-t-md">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <ul class="list-group media-list media-list-stream">
-        <li class="list-group-item p-a">
-          <h2 class="m-a-0">Previous orders</h2>
-        </li>
-
-        <li class="media list-group-item p-a">
-          <div class="media-body">
-            <div class="orders">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Checked out at</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Delivery address</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <% @orders.each do |order| %>
-                    <tr>
-                      <td><%= order.created_at.strftime('%c') %></td>
-                      <td><%= humanized_money_with_symbol order.amount %></td>
-                      <td><%= status_for(order) %></td>
-                      <td><%= order.delivery_address %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
+<br />
+<div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+  <div class="panel panel-default">
+  	<div class="panel-heading">
+      <h4>Orders</h4>
+    </div>
+    <div class="panel-body">
+      <% @orders.each do |order| %>
+        <div class="row">
+          <% cart_item = order.cart_items.first %>
+          <% if cart_item %>
+            <div class="col-xs-3 col-lg-3">
+              <%= image_tag cart_item.image.url, class: 'img-responsive center-block' %>
+            </div >
+          <% end %>
+          <div class="col-xs-6 col-lg-5">
+            <% store = cart_item.try(:store) %>
+            <% if store %>
+              <b><%= link_to store.name, store %></b>
+              <br />
+              Classic CA Sweater
+              <br />
+            <% end %>
+            <%= order.created_at.strftime('%D, %I:%M%p') %>
+            <br />
+            <%= order.delivery_address %>
           </div>
-        </li>
-      </ul>
+          <div class="col-xs-2">
+            <br />
+          <%= status_for(order) %>
+          </div>
+          <div class="col-sm-2">
+            <br />
+            <%= humanized_money_with_symbol order.amount %>
+          </div>
+        </div>
+        <hr />
+      <% end %>
     </div>
   </div>
 </div>
