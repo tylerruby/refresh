@@ -1,7 +1,3 @@
-// Place all the styles related to the Pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 $body-bg: #fafafa;
 $navbar-inverse-bg: #222;
 $navbar-inverse-border: none;
@@ -62,14 +58,20 @@ $panel-default-border: 0px;
 
 /* Partner Page */
 .partner-header {
-  background-image: url("http://i.imgur.com/s1hhsiV.png") !important;
-  background-color: #555 !important;
+  background: -webkit-linear-gradient(60deg, #222, #777);
+  background: -o-linear-gradient(60deg, #222, #777);
+  background: -moz-linear-gradient(60deg, #222, #777);
+  background: linear-gradient(60deg, #222, #777);
   h1 {
     color: #fff !important;
-    font-family: 'Product Sans', Arial, sans-serif !important;
+    font-family: 'Raleway', sans-serif;
+    font-size:70px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
   h3 {
     color: #f0f0f0 !important;
+    font-family: 'Raleway', sans-serif;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
 }
 
@@ -99,11 +101,11 @@ $panel-default-border: 0px;
 .landing-button {
   color: #fff !important;
   border: 1px solid #f0f0f0 !important;
-  background: #222 !important;
+  background: #34bf49 !important;
 }
 
 .landing-header {
-  background-image: url("http://i.imgur.com/KaXfeov.png") !important;
+  background-image: url("http://i.imgur.com/703gtfR.png") !important;
   background-size: 100% 100% !important;
   background-color: #444 !important;
   h1 {
@@ -322,7 +324,7 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
   display: inline-block;
   img {
     margin-top:15px;
-    width:80px;
+    width:70px;
   }
 }
 .footer-text {

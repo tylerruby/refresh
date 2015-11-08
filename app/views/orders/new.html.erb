@@ -1,7 +1,7 @@
 <%= form_for(@order, html: { id: current_user.has_credit_card? ? 'order-form' : 'fill-credit-card-form' }) do |f| %>
   <%= f.hidden_field :delivery_time, value: @cart.delivery_time %>
   <br />
-  <div class="col-lg-5 col-lg-offset-2">
+  <div class="col-sm-8 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>Checkout</h4>
@@ -21,12 +21,12 @@
           <!-- div id="address-info" class="hidden">
             <div class="col-lg-12">
               <hr />
-              <div class="col-lg-6">
+              <div class="col-xs-6">
                 <div class="form-group">
                   <input type="first-name" class="form-control" placeholder="First Name">
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-xs-6">
                 <div class="form-group">
                   <input type="last-name" class="form-control" placeholder="Last Name">
                 </div>
@@ -36,22 +36,22 @@
                   <input type="street-address" class="form-control" placeholder="Street Address">
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-xs-4 col-lg-3">
                 <div class="form-group">
                   <input type="apt" class="form-control" placeholder="Apt/Suite">
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-xs-8 col-lg-6">
                 <div class="form-group">
                   <input type="city" class="form-control" placeholder="City">
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-xs-6 col-lg-3">
                 <div class="form-group">
                   <input type="state" class="form-control" placeholder="State">
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-xs-6 col-lg-3">
                 <div class="form-group">
                   <input type="zip" class="form-control" placeholder="Zip">
                 </div>
@@ -95,7 +95,7 @@
                     <input type="text" class="form-control" placeholder="1234 5678 9012 3456" data-stripe="number">
                   </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xs-6 col-lg-3">
                   <div class="form-group">
                     <select class="form-control" data-stripe="exp-month">
                       <option value="" selected disabled>Month</option>
@@ -114,7 +114,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xs-6 col-lg-3">
                   <div class="form-group">
                     <select class="form-control" data-stripe="exp-year">
                       <option value="" selected disabled>Year</option>
@@ -127,13 +127,13 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xs-6 col-lg-3">
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="CCV" data-stripe="cvc">
                   </div>
                 </div>
                 <!-- Stripe doesn't require zip code -->
-                <!-- div class="col-lg-3">
+                <!-- div class="col-xs-6 col-lg-3">
                   <div class="form-group">
                     <input type="zip-code" class="form-control" id="card" placeholder="Zip Code">
                   </div>
@@ -150,33 +150,33 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-3">
+  <div class="col-sm-4 col-md-4 col-lg-3">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4>Order Summary</h4>
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-lg-10">
+          <div class="col-xs-10">
             <h5>Subtotal</h5>
           </div>
-          <div class="col-lg-2">
+          <div class="col-xs-2">
             <h5><%= humanized_money_with_symbol @cart.subtotal %></h5>
           </div>
-          <div class="col-lg-10">
+          <div class="col-xs-10">
             <h5>Delivery</h5>
           </div>
-          <div class="col-lg-2">
+          <div class="col-xs-2">
             <h5><%= humanized_money_with_symbol @cart.shipping_cost  %></h5>
           </div>
         </div>
 
         <hr />
 
-        <div class="col-lg-10">
+        <div class="col-xs-10">
           <h4>Total</h4>
         </div>
-        <div class="col-lg-2">
+        <div class="col-xs-2">
           <h4><%= humanized_money_with_symbol @cart.total %></h4>
         </div>
       </div>
