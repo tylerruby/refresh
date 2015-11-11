@@ -1,21 +1,21 @@
 <% if @store.nil? || @store.available_for_delivery_on?(coordinates) %>
-  <% @clothes.each do |cloth| %>
-    <%= render 'stores/cloth_modal', cloth: cloth, store: cloth.store %>
+  <% @products.each do |product| %>
+    <%= render 'stores/product_modal', product: product, store: product.store %>
   <% end %>
 <% end %>
 
-<% if @clothes.empty? %>
+<% if @products.empty? %>
   In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
 <% end %>
 
-<% @clothes.in_groups_of(3).map(&:compact).each do |group| %>
+<% @products.in_groups_of(3).map(&:compact).each do |group| %>
   <div class="row">
-    <% group.each do |cloth| %>
+    <% group.each do |product| %>
       <div class="col-lg-4 col-sm-4 col-xs-6 thumb">
-        <%= link_to '#' + modal_id(cloth), 'data-toggle' => 'modal', class: 'thumbnail' do %>
-          <h3><%= cloth.name %></h3>
-          <h4><%= cloth.price.format %></h4>
-          <%= image_tag cloth.image_url, class: 'img-responsive' %>
+        <%= link_to '#' + modal_id(product), 'data-toggle' => 'modal', class: 'thumbnail' do %>
+          <h3><%= product.name %></h3>
+          <h4><%= product.price.format %></h4>
+          <%= image_tag product.image_url, class: 'img-responsive' %>
         <% end %>
       </div>
     <% end %>
