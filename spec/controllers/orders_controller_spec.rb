@@ -87,7 +87,10 @@ RSpec.describe OrdersController, type: :controller do
     let(:delivery_address) { "18th Street Atlanta" }
 
     def do_action
-      post :create, stripeToken: token, order: { delivery_time: delivery_time, delivery_address: delivery_address }
+      post :create, stripeToken: token, order: {
+        delivery_time: delivery_time,
+        delivery_address: delivery_address,
+        observations: 'Take off the bacon!' }
     end
 
     def order
@@ -136,6 +139,7 @@ RSpec.describe OrdersController, type: :controller do
         it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'waiting_confirmation' }
         it { expect(order.delivery_address).to eq delivery_address }
+        it { expect(order.observations).to eq 'Take off the bacon!' }
         it { expect(order.charge_id).to eq charge_double.id }
 
         it { expect(Cart.exists? cart.id).to be false }

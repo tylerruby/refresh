@@ -460,8 +460,8 @@ PLATFORMS
 DEPENDENCIES
   acts_as_shopping_cart (= 0.3.0)
   aws-sdk (< 2.0)
-  carrierwave (~> 0.10.0)
   bootstrap-sass (= 3.3.5.1)
+  carrierwave (~> 0.10.0)
   coffee-rails (~> 4.1.0)
   devise (= 3.5.1)
   dotenv-rails (= 2.0.2)
