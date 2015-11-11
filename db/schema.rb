@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108231319) do
+ActiveRecord::Schema.define(version: 20151111121242) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
@@ -138,6 +137,7 @@ ActiveRecord::Schema.define(version: 20151108231319) do
     t.datetime "updated_at", null: false
     t.string   "slug"
     t.string   "image"
+    t.string   "logo"
   end
 
   add_index "stores", ["slug"], name: "index_stores_on_slug", unique: true, using: :btree

@@ -3,6 +3,7 @@ class Store < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
 
   mount_uploader :image, ImageUploader
+  mount_uploader :logo, ImageUploader
 
   RADIUS = 10 # miles
 
@@ -68,6 +69,7 @@ class Store < ActiveRecord::Base
 
       field :address
       field :image
+      field :logo
     end
 
     list do
