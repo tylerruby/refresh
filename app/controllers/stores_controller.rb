@@ -16,6 +16,7 @@ class StoresController < ApplicationController
 
   def show
     @store = searcher.find(params[:id])
+    @available_products = @store.products.available
   end
 
   private
