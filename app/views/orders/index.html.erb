@@ -16,7 +16,7 @@
           <div class="col-xs-6 col-lg-5">
             <% store = cart_item.try(:store) %>
             <% if store %>
-              <b><%= link_to store.name, store %></b>
+              <b><%= link_to store.name, store_path(store) %></b>
               <br />
               Classic CA Sweater
               <br />

@@ -39,4 +39,8 @@ module ApplicationHelper
       end)
     end
   end
+
+  def store_path(store)
+    "/atlanta/#{store.friendly_id}"
+  end
 end

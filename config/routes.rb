@@ -24,9 +24,8 @@ Rails.application.routes.draw do
   get 'contact' => 'pages#contact'
   get 'drivers' => 'pages#drivers'
 
-  resources :stores, only: [:show]
-
   # These must be the last routes in the file, since they'll match anything
   post '/:city' => 'stores#search_by_address'
   get '/:city' => 'stores#search_by_city'
+  get '/atlanta/:id' => 'stores#show'
 end
