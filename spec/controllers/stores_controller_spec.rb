@@ -79,8 +79,8 @@ RSpec.describe StoresController, type: :controller do
   describe "GET #show" do
     let(:augusta) { create(:city, name: 'Augusta') }
     let!(:store) { create(:store, address: create(:address, city: augusta)) }
-    let!(:first_product) { create(:product, store: store) }
-    let!(:second_product) { create(:product, store: store) }
+    let!(:available_product) { create(:product, store: store, available: true) }
+    let!(:unavailable_product) { create(:product, store: store, available: false) }
     let!(:product_from_store_in_another_city) { create(:product) }
 
     def do_action
@@ -90,6 +90,11 @@ RSpec.describe StoresController, type: :controller do
     it "assigns the store" do
       do_action
       expect(assigns[:store]).to eq store
+    end
+
+    it "assigns the available_products" do
+      do_action
+      expect(assigns[:available_products]).to eq [available_product]
     end
   end
 end

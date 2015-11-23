@@ -5,4 +5,6 @@ class Product < ActiveRecord::Base
   belongs_to :category
   belongs_to :store
   validates :name, presence: true
+
+  scope :available, -> { where(available: true) }
 end
