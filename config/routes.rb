@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'notifications' => 'pages#notifications'
   get 'home' => 'pages#home'
   get 'account' => 'pages#account'
-  
+
   get 'help' => 'pages#help'
   get 'about' => 'pages#about'
   get 'partners' => 'pages#partners'
@@ -27,5 +27,5 @@ Rails.application.routes.draw do
   # These must be the last routes in the file, since they'll match anything
   post '/:city' => 'stores#search_by_address'
   get '/:city' => 'stores#search_by_city'
-  get '/atlanta/:id' => 'stores#show'
+  get '/atlanta/:id' => 'stores#show', as: :store
 end
