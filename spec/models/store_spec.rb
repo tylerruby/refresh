@@ -81,14 +81,31 @@ RSpec.describe Store, type: :model do
       ])
     end
 
-    let!(:store_available_for_delivery) { create(:store) }
-    let!(:store_not_available_for_delivery) do
-      create(:store, address: create(:address, address: 'far far away'))
+    let!(:far_away_store)  { create :store, name: 'Far Away Store',  address: create(:address, address: 'far far away') }
+    let!(:fulltime_store)  { create :store, name: 'Full Time Store' }
+    let!(:morning_store)   { create :store, name: 'Morning Store',   human_opens_at: '05:00', human_closes_at: '15:00' }
+    let!(:afternoon_store) { create :store, name: 'Afternoon Store', human_opens_at: '15:00', human_closes_at: '22:00' }
+    let!(:night_store)     { create :store, name: 'Night Store',     human_opens_at: '21:00', human_closes_at: '03:00' }
+    let(:available_stores) { Store.available_for_delivery('4th Av., Atlanta, GA').all.map(&:name) }
+
+    context 'when 1:00' do
+      before { Timecop.travel '1-1-2016_01:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
     end
 
-    it do
-      expect(Store.available_for_delivery('4th Av., Atlanta, GA'))
-      .to eq [store_available_for_delivery]
+    context 'when 9:00' do
+      before { Timecop.travel '1-1-2016_09:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, morning_store.name] }
+    end
+
+    context 'when 15:00' do
+      before { Timecop.travel '1-1-2016_15:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, morning_store.name, afternoon_store.name] }
+    end
+
+    context 'when 21:00' do
+      before { Timecop.travel '1-1-2016_21:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, afternoon_store.name, night_store.name] }
     end
   end
 end

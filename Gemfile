@@ -41,6 +41,7 @@ group :development, :test do
   gem 'dotenv-rails',          '2.0.2'
   gem 'guard-rspec',           '4.6.4'
   gem 'shoulda-matchers',      '3.0.0'
+  gem 'timecop'
 end
 
 group :development do
