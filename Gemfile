@@ -49,6 +49,10 @@ group :development do
   gem 'letter_opener', '1.4.1'
 end
 
+group :test do
+  gem 'stripe-ruby-mock', '~> 2.2.1', require: 'stripe_mock'
+end
+
 group :production, :staging do
   gem 'rails_12factor'
 end
