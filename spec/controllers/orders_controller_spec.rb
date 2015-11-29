@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
+  let(:stripe_helper) { StripeMock.create_test_helper }
   let(:user) { create(:user) }
 
   before do
@@ -80,8 +81,7 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "POST #create" do
-    let(:token) { 'some token' }
-    let(:customer_double) { double('Stripe::Customer', id: 'some customer id') }
+    let(:token) { stripe_helper.generate_card_token }
     let(:charge_double) { double('Stripe::Charge', id: 'some charge id') }
     let(:delivery_time) { 1 }
     let(:delivery_address) { "18th Street Atlanta" }
@@ -106,16 +106,10 @@ RSpec.describe OrdersController, type: :controller do
         session[:cart_id] = cart.id
         sign_in user
 
-        allow(Stripe::Customer).to receive(:create).with(
-          card:        token,
-          description: 'Paying user',
-          email:       user.email
-        ).and_return(customer_double)
-
         allow(Stripe::Charge).to receive(:create).with(
           amount:   total_cost.cents,
           currency: "usd",
-          customer: customer_double.id
+          customer: user.customer.id
         ).and_return(charge_double)
       end
 
@@ -132,8 +126,6 @@ RSpec.describe OrdersController, type: :controller do
           order.reload
         end
 
-        it { expect(user.customer_id).to eq customer_double.id }
-
         it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
@@ -143,7 +135,6 @@ RSpec.describe OrdersController, type: :controller do
         it { expect(order.charge_id).to eq charge_double.id }
 
         it { expect(Cart.exists? cart.id).to be false }
-        it { expect(Stripe::Customer).to have_received(:create) }
         it { expect(Stripe::Charge).to have_received(:create) }
 
         it "redirects to root path" do
@@ -187,7 +178,6 @@ RSpec.describe OrdersController, type: :controller do
             end
 
             it "doesn't call stripe" do
-              expect(Stripe::Customer).not_to have_received(:create)
               expect(Stripe::Charge).not_to have_received(:create)
             end
           end
@@ -197,7 +187,7 @@ RSpec.describe OrdersController, type: :controller do
           let(:error_message) { 'some external error' }
 
           before do
-            allow(Stripe::Customer).to receive(:create)
+            allow(Stripe::Customer).to receive(:retrieve)
               .and_raise(Stripe::APIError, error_message)
           end
 
@@ -229,17 +219,56 @@ RSpec.describe OrdersController, type: :controller do
         end
       end
 
-      context "user already has a credit card" do
+      context 'user already has a credit card' do
         before do
-          user.update!(customer_id: 'some customer id')
-          post :create, order: {
-            delivery_time: delivery_time,
-            delivery_address: delivery_address
-          }
+          allow_any_instance_of(MakePayment).to receive(:user).and_return(user)
         end
 
-        it { expect(Stripe::Customer).not_to have_received(:create) }
-        it { expect(Stripe::Charge).to have_received(:create) }
+        context 'when user pay with existing credit card' do
+          before do
+            allow(Stripe::Charge).to receive(:create).with(
+              amount:   total_cost.cents,
+              currency: "usd",
+              customer: user.customer.id,
+              source: 'some source id'
+            ).and_return(charge_double)
+
+            allow(user).to receive :add_credit_card
+
+            post :create, order: {
+              delivery_time: delivery_time,
+              delivery_address: delivery_address,
+              source_id: 'some source id'
+            }
+          end
+
+          it { expect(user).not_to have_received(:add_credit_card) }
+
+          it do
+            expect(Stripe::Charge).to have_received(:create).with(
+              amount:   total_cost.cents,
+              currency: 'usd',
+              customer: user.customer.id,
+              source: 'some source id')
+          end
+        end
+
+        context 'when user pay with new credit card' do
+          before do
+            allow(user).to receive(:add_credit_card).with(token)
+
+            do_action
+          end
+
+          it { expect(user).to have_received(:add_credit_card).with(token) }
+
+          it do
+            expect(Stripe::Charge).to have_received(:create).with(
+              amount:   total_cost.cents,
+              currency: 'usd',
+              customer: user.customer.id)
+          end
+        end
       end
     end
 

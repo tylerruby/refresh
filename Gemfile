@@ -33,6 +33,7 @@ gem 'bootstrap-sass',        '3.3.5.1'
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-rails'
   gem 'web-console',           '~> 2.0'
   gem 'spring',                '1.3.6'
   gem 'spring-commands-rspec', '1.0.4'
@@ -46,6 +47,10 @@ end
 
 group :development do
   gem 'letter_opener', '1.4.1'
+end
+
+group :test do
+  gem 'stripe-ruby-mock', '~> 2.2.1', require: 'stripe_mock'
 end
 
 group :production, :staging do

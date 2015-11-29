@@ -10,8 +10,9 @@ class MakePayment
       order.update!(cart_items: cart.shopping_cart_items)
       cart.reload.destroy!
 
-      if stripe_token.present?
-        user.update!(customer_id: customer.id)
+      if stripe_token.present? && order.source_id.blank?
+        # Register a new credit card
+        user.add_credit_card(stripe_token)
       end
 
       order.update!(charge_id: charge.id)
@@ -24,19 +25,14 @@ class MakePayment
     attr_accessor :order, :cart, :stripe_token
     delegate :user, to: :order
 
-    def customer
-      @customer ||= Stripe::Customer.create(
-        card: stripe_token,
-        description: 'Paying user',
-        email: user.email
-      )
-    end
-
     def charge
-      @charge ||= Stripe::Charge.create(
-        :amount   => order.amount_cents,
-        :currency => "usd",
-        :customer => user.customer_id
-      )
+      charge_params = {
+        amount: order.amount_cents,
+        currency: 'usd',
+        customer: user.customer_id}
+
+        charge_params[:source] = order.source_id if order.source_id.present?
+
+      @charge ||= Stripe::Charge.create(charge_params)
     end
 end
