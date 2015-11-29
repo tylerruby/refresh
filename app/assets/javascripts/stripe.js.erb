@@ -14,6 +14,8 @@
     };
 
     function stripeResponseHandler (status, response) {
+      // TODO: Handle when credit card was declined. Ex.: 4000000000000002
+
       if (response.error) {
         $form
           .find('.payment-errors')
