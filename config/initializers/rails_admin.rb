@@ -33,6 +33,19 @@ RailsAdmin.config do |config|
     show_in_app
     refund
 
+    member :mark_as_delivered do
+      only 'Order'
+      link_icon 'icon-check'
+
+      register_instance_option(:visible?) do
+        bindings[:object].is_a?(Order) && bindings[:object].on_the_way?
+      end
+
+      register_instance_option(:controller) do
+        proc { object.delivered!; redirect_to :back }
+      end
+    end
+
     ## With an audit adapter, you can add:
     # history_index
     # history_show
