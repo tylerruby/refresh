@@ -1,41 +1,54 @@
 <br />
-<div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-  <div class="panel panel-default">
-  	<div class="panel-heading">
-      <h4>Orders</h4>
-    </div>
-    <div class="panel-body">
-      <% @orders.each do |order| %>
-        <div class="row">
-          <% cart_item = order.cart_items.first %>
-          <% if cart_item %>
-            <div class="col-xs-3 col-lg-3">
-              <%= image_tag cart_item.image.url, class: 'img-responsive center-block' %>
-            </div >
-          <% end %>
-          <div class="col-xs-6 col-lg-5">
-            <% store = cart_item.try(:store) %>
-            <% if store %>
-              <b><%= link_to store.name, store_path(store) %></b>
-              <br />
-              Classic CA Sweater
-              <br />
-            <% end %>
-            <%= order.created_at.strftime('%D, %I:%M%p') %>
-            <br />
-            <%= order.delivery_address %>
+<div class="order-index-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-lg-8 col-lg-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Orders</h4>
           </div>
-          <div class="col-xs-2">
-            <br />
-          <%= status_for(order) %>
-          </div>
-          <div class="col-sm-2">
-            <br />
-            <%= humanized_money_with_symbol order.amount %>
+
+          <div class="panel-body">
+            <div class="orders-wrapper">
+              <% @orders.each do |order| %>
+                <div class="order-wrapper">
+                  <div class="row">
+                    <div class="col-xs-3 col-sm-2 col-sm-offset-1">
+                      <div class="order-id"># <%= order.id %></div>
+                    </div>
+
+                    <div class="col-xs-3 col-sm-2">
+                      <div class="order-amount"><%= humanized_money_with_symbol order.amount %></div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-3">
+                      <div class="order-status"><%= status_for(order) %></div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                      <div class="order-date-and-address">
+                        <div><%= order.created_at.strftime('%D, %I:%M%p') %></div>
+                        <div><%= order.delivery_address %></div>
+                      </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                      <a data-toggle="collapse" class="collapsed" href="#order-items-<%= order.id %>">
+                        <i class="fa fa-plus-circle"></i>
+                      </a>
+
+                      <div class="order-items-wrapper collapse" id="order-items-<%= order.id %>">
+                        <%= render 'orders/index/cart_items', cart_items: order.cart_items %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+              <% end %>
+            </div>
           </div>
         </div>
-        <hr />
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
