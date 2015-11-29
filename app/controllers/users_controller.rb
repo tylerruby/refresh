@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json do
         begin
-          customer.sources.create(source: params[:credit_card].merge(object: 'card'))
+          current_user.add_credit_card params[:credit_card]
           partial_html = render_to_string(partial: 'pages/account/credit_cards', locals: {message: 'Card added!'})
           render json: {html: partial_html}
         rescue Stripe::CardError => e
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def remove_credit_card
-    customer.sources.retrieve(params[:credit_card_id]).delete()
+    current_user.remove_credit_card params[:credit_card_id]
     flash[:success] = 'Credit card removed.'
     redirect_to :back
   end
@@ -43,16 +43,5 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         addresses_attributes: [:id, :address, :city_id, :_destroy]
       )
-    end
-
-    def customer
-      if current_user.customer_id.present?
-        customer = Stripe::Customer.retrieve(current_user.customer_id)
-      else
-        customer = Stripe::Customer.create(email: current_user.email)
-        update!(customer_id: customer.id)
-      end
-
-      customer
     end
 end

@@ -11,18 +11,8 @@ class MakePayment
       cart.reload.destroy!
 
       if stripe_token.present? && order.source_id.blank?
-        if user.customer_id.present?
-          # Register a new credit card for existing customer
-          customer = Stripe::Customer.retrieve(user.customer_id)
-          customer.sources.create(source: stripe_token)
-        else
-          customer = Stripe::Customer.create(
-            card: stripe_token,
-            description: 'Paying user',
-            email: user.email)
-
-          user.update!(customer_id: customer.id)
-        end
+        # Register a new credit card
+        user.add_credit_card(stripe_token)
       end
 
       order.update!(charge_id: charge.id)
