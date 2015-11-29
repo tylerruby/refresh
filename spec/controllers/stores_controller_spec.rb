@@ -27,7 +27,7 @@ RSpec.describe StoresController, type: :controller do
     ])
   end
 
-  describe "GET #search_by_city", :wip do
+  describe "GET #search_by_city"  do
     let(:augusta) { create(:city, name: 'Augusta') }
 
     let(:current_address) do
