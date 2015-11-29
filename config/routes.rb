@@ -34,5 +34,5 @@ Rails.application.routes.draw do
   # These must be the last routes in the file, since they'll match anything
   post '/:city' => 'stores#search_by_address'
   get '/:city' => 'stores#search_by_city'
-  get '/atlanta/:id' => 'stores#show'
+  get '/atlanta/:id' => 'stores#show', as: :store
 end

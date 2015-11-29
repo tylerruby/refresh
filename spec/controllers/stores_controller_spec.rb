@@ -27,28 +27,40 @@ RSpec.describe StoresController, type: :controller do
     ])
   end
 
-  describe "GET #search_by_city" do
+  describe "GET #search_by_city"  do
     let(:augusta) { create(:city, name: 'Augusta') }
+
     let(:current_address) do
       create :address, city: augusta, address: '3905 Mike Padgett Hwy'
     end
 
     let!(:available_store) do
-      create :store, address: create(:address,
-        city: augusta, address: '3905 Mike Padgett Hwy')
+      create :store,
+        human_opens_at: '21:00', human_closes_at: '03:00',
+        address: create(:address, city: augusta, address: '3905 Mike Padgett Hwy')
     end
+
     let!(:available_product) { create(:product, store: available_store) }
 
     let!(:unavailable_store) do
       create :store,
         address: create(:address, city: augusta, address: '4th Av.')
     end
+
+    let!(:unavailable_store_by_time) do
+      create :store,
+        human_opens_at: '05:00', human_closes_at: '15:00',
+        address: create(:address, city: augusta, address: '3905 Mike Padgett Hwy')
+    end
+
     let!(:unavailable_product) { create(:product, store: unavailable_store) }
 
     let(:atlanta) { create(:city, name: 'Atlanta') }
+
     let!(:store_in_another_city) do
       create :store, address: create(:address, city: atlanta)
     end
+
     let!(:product_from_store_in_another_city) do
       create :product, store: store_in_another_city
     end
@@ -58,6 +70,8 @@ RSpec.describe StoresController, type: :controller do
     end
 
     before do
+      Timecop.travel '1-1-2016_01:00'
+
       allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(true)
       allow_any_instance_of(ApplicationController)
         .to receive(:current_address).and_return(current_address)
@@ -68,9 +82,14 @@ RSpec.describe StoresController, type: :controller do
       expect(assigns[:city]).to eq 'Augusta'
     end
 
-    it "result contains available stores only" do
+    it 'result contains available stores only' do
       do_action
       expect(assigns[:stores]).to match_array [available_store]
+    end
+
+    it 'redirect to open store' do
+      do_action
+      expect(subject).to redirect_to action: :show, id: available_store.slug
     end
 
     pending "order by distance"
