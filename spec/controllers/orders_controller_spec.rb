@@ -100,7 +100,7 @@ RSpec.describe OrdersController, type: :controller do
     context "authenticated" do
       let!(:cart) { Cart.create! }
       let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
-      let(:total_cost) { cart.subtotal }
+      let(:total_cost) { cart.total }
 
       before do
         session[:cart_id] = cart.id
