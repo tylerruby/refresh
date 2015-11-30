@@ -86,26 +86,26 @@ RSpec.describe Store, type: :model do
     let!(:morning_store)   { create :store, name: 'Morning Store',   human_opens_at: '05:00', human_closes_at: '15:00' }
     let!(:afternoon_store) { create :store, name: 'Afternoon Store', human_opens_at: '15:00', human_closes_at: '22:00' }
     let!(:night_store)     { create :store, name: 'Night Store',     human_opens_at: '21:00', human_closes_at: '03:00' }
-    let(:available_stores) { Store.available_for_delivery('4th Av., Atlanta, GA').all.map(&:name) }
+    let(:available_stores) { Store.available_for_delivery('4th Av., Atlanta, GA').map(&:name) }
 
     context 'when 1:00' do
-      before { Timecop.travel '1-1-2016_01:00' }
+      before { Timecop.travel '01-01-2016 01:00' }
       it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
     end
 
     context 'when 9:00' do
-      before { Timecop.travel '1-1-2016_09:00' }
+      before { Timecop.travel '01-01-2016 09:00' }
       it { expect(available_stores).to eq [fulltime_store.name, morning_store.name] }
     end
 
     context 'when 15:00' do
-      before { Timecop.travel '1-1-2016_15:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, morning_store.name, afternoon_store.name] }
+      before { Timecop.travel '01-01-2016 15:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, afternoon_store.name] }
     end
 
     context 'when 21:00' do
-      before { Timecop.travel '1-1-2016_21:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, afternoon_store.name, night_store.name] }
+      before { Timecop.travel '01-01-2016 21:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
     end
   end
 end

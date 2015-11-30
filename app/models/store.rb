@@ -61,21 +61,21 @@ class Store < ActiveRecord::Base
   end
 
   def self.opened
-    current_hour = TimeOfDay.to_decimal(Time.now)
+    current_time = TimeOfDay.to_decimal(Time.current)
 
     # Support stores that close after midnight
     # For instance, 01:00 AM in real world is 25:00 in our system.
-    if current_hour <= EXTRA_HOURS
-      current_hour = current_hour + 24
-    end
+    current_time = current_time + 24 if current_time <= EXTRA_HOURS
 
-    where <<-EOS
+    sql = <<-EOS
       (
-        (opens_at BETWEEN 0 AND #{current_hour})
+        opens_at < :current_time
         AND
-        (closes_at BETWEEN #{current_hour} AND #{EXTENDED_DAY_HOURS})
+        closes_at >= :current_time
       ) OR (opens_at IS NULL AND closes_at IS NULL)
     EOS
+
+    where(sql, current_time: current_time)
   end
 
   def self.order_by_distance(location)
