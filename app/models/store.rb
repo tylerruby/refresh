@@ -17,7 +17,7 @@ class Store < ActiveRecord::Base
   validates :opens_at, presence: true, if: 'human_closes_at.present? || closes_at.present?'
   validates :closes_at, presence: true, if: 'human_opens_at.present? || opens_at.present?'
 
-  before_validation :parse_working_hours, if: 'human_opens_at && :human_closes_at'
+  before_validation :parse_working_hours, if: 'human_opens_at && human_closes_at'
 
   delegate :full_address, :coordinates, to: :address
 
