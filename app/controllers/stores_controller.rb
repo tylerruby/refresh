@@ -9,13 +9,19 @@ class StoresController < ApplicationController
 
   def search_by_city
     @city = city
-    @stores = searcher.all
+    @stores = searcher.available_for_delivery
 
-    render :index
+    if @stores.any?
+      # For now we are working with one store per day's period (morning, afternoon etc)
+      redirect_to store_path(@stores.first)
+    else
+      render :index
+    end
   end
 
   def show
     @store = searcher.find(params[:id])
+    @available_products = @store.products.available
   end
 
   private
