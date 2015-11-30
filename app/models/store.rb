@@ -170,6 +170,7 @@ class Store < ActiveRecord::Base
       self.errors.add(:human_closes_at, :invalid)
     end
 
+    return unless opens_at.present? && closes_at.present?
     # In case of store close after midnight
     if closes_at < opens_at
       self.closes_at = closes_at + 24

@@ -108,4 +108,42 @@ RSpec.describe Store, type: :model do
       it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
     end
   end
+
+  describe '#human_opens_at' do
+    it 'formats decimal to string' do
+      store.opens_at = 9.5
+      expect(store.human_opens_at).to eq '09:30'
+    end
+  end
+
+  describe '#human_closes_at' do
+    it 'formats decimal to string' do
+      store.closes_at = 9.5
+      expect(store.human_closes_at).to eq '09:30'
+    end
+  end
+
+  describe 'parses human-readable times to decimals on validation' do
+    context 'correctly parsing time' do
+      let(:store) { build(:store, human_opens_at: '21:30', human_closes_at: '05:00') }
+
+      before do
+        expect(store).to be_valid
+      end
+
+      it { expect(store.opens_at).to eq 21.5 }
+      it { expect(store.closes_at).to eq 29.0 }
+    end
+
+    context 'incorrectly parsing time' do
+      let(:store) { build(:store, human_opens_at: '21:60', human_closes_at: '05:60') }
+
+      before do
+        expect(store).not_to be_valid
+      end
+
+      it { expect(store.errors).to include :opens_at }
+      it { expect(store.errors).to include :closes_at }
+    end
+  end
 end
