@@ -6,7 +6,8 @@ class Store < ActiveRecord::Base
   mount_uploader :logo, ImageUploader
 
   RADIUS = 10 # miles
-  EXTENDED_DAY_HOURS = 29 # To support stores that close after midnight
+  EXTRA_HOURS = 5
+  EXTENDED_DAY_HOURS = 24 + EXTRA_HOURS # To support stores that close after midnight
 
   has_many :products
   has_one :address, as: :addressable, dependent: :destroy
@@ -60,11 +61,11 @@ class Store < ActiveRecord::Base
   end
 
   def self.opened
-    current_hour = extract_decimal_hour Time.now
+    current_hour = TimeOfDay.to_decimal(Time.now)
 
     # Support stores that close after midnight
     # For instance, 01:00 AM in real world is 25:00 in our system.
-    if current_hour <= EXTENDED_DAY_HOURS - 24
+    if current_hour <= EXTRA_HOURS
       current_hour = current_hour + 24
     end
 
@@ -103,11 +104,11 @@ class Store < ActiveRecord::Base
   end
 
   def human_opens_at
-    @human_opens_at ||= format_working_hour opens_at
+    @human_opens_at ||= TimeOfDay.to_string(opens_at)
   end
 
   def human_closes_at
-    @human_closes_at ||= format_working_hour closes_at
+    @human_closes_at ||= TimeOfDay.to_string(closes_at)
   end
 
   # Due to Rails Admin setting the slug to empty string
@@ -154,26 +155,17 @@ class Store < ActiveRecord::Base
 
   private
 
-  def self.extract_decimal_hour time
-    # Creating a BigDecimal manually because Rails accessor is assigning wrong value.
-    BigDecimal.new((time.hour + (time.min.to_f / 60)).to_s)
-  end
-
-  def extract_decimal_hour time
-    self.class.extract_decimal_hour(time)
-  end
-
   def parse_working_hours
     return if human_opens_at.blank? || human_closes_at.blank?
 
     begin
-      self.opens_at = extract_decimal_hour Time.parse(human_opens_at)
+      self.opens_at = TimeOfDay.to_decimal(human_opens_at)
     rescue ArgumentError => e
       self.errors.add(:human_opens_at, :invalid)
     end
 
     begin
-      self.closes_at = extract_decimal_hour Time.parse(human_closes_at)
+      self.closes_at = TimeOfDay.to_decimal(human_closes_at)
     rescue ArgumentError => e
       self.errors.add(:human_closes_at, :invalid)
     end
@@ -182,12 +174,6 @@ class Store < ActiveRecord::Base
     if closes_at < opens_at
       self.closes_at = closes_at + 24
     end
-  end
-
-  def format_working_hour working_hour
-    return nil unless working_hour
-    time = Time.new(2000) + working_hour.hour
-    time.strftime '%H:%M'
   end
 
   def distance_from_user
