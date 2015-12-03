@@ -1,74 +1,49 @@
 <span data-filter="store_id" data-filter-value="<%= @store.id %>"></span>
 
-<nav class="navbar navbar-default" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-
-      <div class="col-md-10 col-md-offset-1">
+		<div class="block-images col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav secondary">
-          <li><a href="#"><b>All</b></a></li>
-          <li><a href="#">Salads</a></li>
-          <li><a href="#">Sandwiches</a></li>
-          <li><a href="#">Mezza</a></li>
-          <li><a href="#">Grilled Entrees</a></li>
-          <li><a href="#">Chef's Specials</a></li>
-          <li><a href="#">Soups</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Sides</a></li>
-              <li><a href="#">Drinks</a></li>
-              <li><a href="#">Desserts</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Most Popular <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Price: High to Low</a></li>
-              <li><a href="#">Price: Low to High</a></li>
-              <li><a href="#">Newest</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li>
+          <!-- TODO: Actually select the active store -->
+          <li><a class="active" href="#"><b>Breakfast</b></a></li>
+					<li><a href="#">Lunch</a></li>
+					<li><a href="#">Dinner</a></li>
+					<li><a href="#">Essentials</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="col-lg-10 col-lg-offset-1">
-	<br />
-  <%= image_tag @store.logo.url, class: 'center-block' %>
-	<br />
+<div class="jumbotron" style="background:#fff;">
+  <h1 class="text-center"><%= @store.name %></h1>
+  <!-- TODO: Replace with actual working hours -->
+  <h3 class="text-center">7:00am - 10:30am</h3>
+</div>
 
-  <div id="products">
-    <% @available_products.in_groups_of(3).map(&:compact).each do |group| %>
-        <div class="row">
-          <% group.each do |product| %>
-            <div class="col-lg-4 col-sm-4 col-xs-6 thumb">
-              <%= render 'stores/product_modal', product: product, store: @store %>
-              <%= link_to '#' + modal_id(product), 'data-toggle' => 'modal', class: 'thumbnail' do %>
-                <%= image_tag product.image_url, class: 'img-responsive' %>
-                <h3><%= product.name %></h3>
-                <% if @store.available_for_delivery? %>
-                  <i class="available-for-delivery fa fa-truck"></i>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-    <% end %>
-  </div>
+<br class="items-list-break" />
+<div class="col-md-10 col-md-offset-1 items-list">
+	<% @available_products.each do |product| %>
+		<div class="col-sm-6 col-md-6 col-lg-4">
+			<div class="panel panel-default">
+				<%= render 'stores/product_modal', product: product, store: @store %>
+					<%= image_tag product.image_url, class: 'img-responsive' %>
+					<div class="panel-body">
+						<div class="col-xs-12">
+							<h3><%= product.name %></h3>
+						</div>
+						<div class="col-xs-9">
+							<p>Some description</p>
+						</div>
+						<div class="col-xs-3">
+							<br />
+							<br />
+							<%= link_to product.price.format, '#' + modal_id(product), 'data-toggle' => 'modal', class: 'btn btn-default green pull-right' %>
+						</div>
+					</div>
+			</div>
+		</div>
+	<% end %>
 </div>
