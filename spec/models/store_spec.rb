@@ -86,26 +86,64 @@ RSpec.describe Store, type: :model do
     let!(:morning_store)   { create :store, name: 'Morning Store',   human_opens_at: '05:00', human_closes_at: '15:00' }
     let!(:afternoon_store) { create :store, name: 'Afternoon Store', human_opens_at: '15:00', human_closes_at: '22:00' }
     let!(:night_store)     { create :store, name: 'Night Store',     human_opens_at: '21:00', human_closes_at: '03:00' }
-    let(:available_stores) { Store.available_for_delivery('4th Av., Atlanta, GA').all.map(&:name) }
+    let(:available_stores) { Store.available_for_delivery('4th Av., Atlanta, GA').map(&:name) }
 
     context 'when 1:00' do
-      before { Timecop.travel '1-1-2016_01:00' }
+      before { Timecop.travel '01-01-2016 01:00' }
       it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
     end
 
     context 'when 9:00' do
-      before { Timecop.travel '1-1-2016_09:00' }
+      before { Timecop.travel '01-01-2016 09:00' }
       it { expect(available_stores).to eq [fulltime_store.name, morning_store.name] }
     end
 
     context 'when 15:00' do
-      before { Timecop.travel '1-1-2016_15:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, morning_store.name, afternoon_store.name] }
+      before { Timecop.travel '01-01-2016 15:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, afternoon_store.name] }
     end
 
     context 'when 21:00' do
-      before { Timecop.travel '1-1-2016_21:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, afternoon_store.name, night_store.name] }
+      before { Timecop.travel '01-01-2016 21:00' }
+      it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
+    end
+  end
+
+  describe '#human_opens_at' do
+    it 'formats decimal to string' do
+      store.opens_at = 9.5
+      expect(store.human_opens_at).to eq '09:30'
+    end
+  end
+
+  describe '#human_closes_at' do
+    it 'formats decimal to string' do
+      store.closes_at = 9.5
+      expect(store.human_closes_at).to eq '09:30'
+    end
+  end
+
+  describe 'parses human-readable times to decimals on validation' do
+    context 'correctly parsing time' do
+      let(:store) { build(:store, human_opens_at: '21:30', human_closes_at: '05:00') }
+
+      before do
+        expect(store).to be_valid
+      end
+
+      it { expect(store.opens_at).to eq 21.5 }
+      it { expect(store.closes_at).to eq 29.0 }
+    end
+
+    context 'incorrectly parsing time' do
+      let(:store) { build(:store, human_opens_at: '21:60', human_closes_at: '05:60') }
+
+      before do
+        expect(store).not_to be_valid
+      end
+
+      it { expect(store.errors).to include :opens_at }
+      it { expect(store.errors).to include :closes_at }
     end
   end
 end
