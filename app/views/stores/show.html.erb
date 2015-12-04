@@ -25,23 +25,26 @@
 
 <br class="items-list-break" />
 <div class="col-md-10 col-md-offset-1 items-list">
-	<% @available_products.each do |product| %>
-		<div class="col-sm-6 col-md-6 col-lg-4">
-			<div class="panel panel-default">
-				<%= render 'stores/product_modal', product: product, store: @store %>
-					<%= image_tag product.image_url, class: 'img-responsive' %>
-					<div class="panel-body">
-						<div class="col-xs-12">
-							<h3><%= product.name %></h3>
-						</div>
-						<div class="col-xs-9">
+  <% @available_products.each do |product| %>
+    <div class="col-sm-6 col-md-6 col-lg-4">
+      <div class="panel panel-default">
+        <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
+          <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+          <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
+          <%= image_tag product.image_url, class: 'img-responsive' %>
+          <div class="panel-body">
+            <div class="col-xs-12">
+              <h3><%= product.name %></h3>
+            </div>
+            <div class="col-xs-9">
               <p><%= product.description %></p>
-						</div>
-						<div class="col-xs-3">
-							<%= link_to product.price.format, '#' + modal_id(product), 'data-toggle' => 'modal', class: 'btn btn-default green pull-right' %>
-						</div>
-					</div>
-			</div>
-		</div>
-	<% end %>
+            </div>
+            <div class="col-xs-3">
+              <%= f.button product.price.format, class: 'btn btn-default green pull-right' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
