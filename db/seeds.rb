@@ -16,24 +16,24 @@ address = {
 Store.create! [
   {
     name: 'Breakfast',
-    human_opens_at: '05:00',
-    human_closes_at: '11:00',
-    address: Address.new(address)
-  },
-  {
-    name: 'Lunch',
-    human_opens_at: '11:00',
-    human_closes_at: '18:00',
-    address: Address.new(address)
-  },
-  {
-    name: 'Dinner',
-    human_opens_at: '18:00',
-    human_closes_at: '05:00',
-    address: Address.new(address)
-  },
-  {
-    name: 'General Store',
+    human_opens_at: '07:00',
+    human_closes_at: '10:30',
     address: Address.new(address)
   }
+  # {
+  #   name: 'Lunch',
+  #   human_opens_at: '11:00',
+  #   human_closes_at: '14:00',
+  #   address: Address.new(address)
+  # },
+  # {
+  #   name: 'Dinner',
+  #   human_opens_at: '18:00',
+  #   human_closes_at: '05:00',
+  #   address: Address.new(address)
+  # },
+  # {
+  #   name: 'General Store',
+  #   address: Address.new(address)
+  # }
 ]
