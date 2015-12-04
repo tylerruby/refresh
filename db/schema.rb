@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151121212221) do
+ActiveRecord::Schema.define(version: 20151204122032) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "hstore"
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20151121212221) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "available",      default: false
+    t.string   "description"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

@@ -12,8 +12,7 @@
     <div class="container-inner">
       <h1 class="profile-header-user" style="">
         <% if @stores.empty? %>
-          Wait Up!
-          <h4>We'll be in <%= @city %> soon.</h4>
+          We're not delivering right now.
         <% else %>
         <%= @city %>
         <% end %>
@@ -25,10 +24,6 @@
 <div class="container m-y-md tab-content">
   <div id="stores" class="tab-pane active">
     <div class="stores col-lg-8 col-lg-offset-2">
-      <% if @stores.empty? %>
-        In the meantime, check out our <a href="/atlanta">Atlanta</a> store!
-      <% end %>
-
       <% @stores.in_groups_of(2).map(&:compact).each do |group| %>
         <div class="row">
           <% group.each do |store| %>
