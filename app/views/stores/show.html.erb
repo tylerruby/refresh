@@ -3,7 +3,7 @@
 <nav class="navbar navbar-default hide">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-		<div class="block-images col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav secondary">
@@ -32,16 +32,16 @@
         <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
           <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
           <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
-          <%= image_tag product.image_url, class: 'img-responsive' %>
-          <div class="panel-body">
+          <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
+          <div class="panel-body food-items">
             <div class="col-xs-12">
-              <h3><%= product.name %></h3>
+              <h3><%= product.name %> - <%= product.price.format %></h3>
             </div>
             <div class="col-xs-9">
               <p><%= product.description %></p>
             </div>
             <div class="col-xs-3">
-              <%= f.button product.price.format, class: 'btn btn-default green pull-right' %>
+              <%= f.button '+ Add', class: 'btn btn-default green pull-right' %>
             </div>
           </div>
         <% end %>
