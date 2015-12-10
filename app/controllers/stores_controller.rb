@@ -9,11 +9,9 @@ class StoresController < ApplicationController
 
   def search_by_city
     @city = city
-    @stores = searcher.available_for_delivery
 
-    if @stores.any?
-      # For now we are working with one store per day's period (morning, afternoon etc)
-      redirect_to store_path(@stores.first)
+    if @city == 'Atlanta'
+      redirect_to store_path(SelectNextStore.new(Store.all).select)
     else
       render :index
     end
@@ -39,7 +37,7 @@ class StoresController < ApplicationController
       scope = current_user && current_user.addresses || Address
       @new_address ||= scope.find_or_create_by(
         address: params[:address],
-        city: City.find_by(name: city)
+        city: City.find_or_create_by(name: city)
       )
     end
 end
