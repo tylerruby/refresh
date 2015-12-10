@@ -17,6 +17,41 @@ RSpec.describe Store, type: :model do
     store = create(:store, name: 'Test Store', slug: '')
     expect(store.slug).to eq 'test-store'
   end
+  
+  describe "#opened?" do
+    let(:opened_store) { create :store, human_opens_at: '09:00', human_closes_at: '11:00' }
+    let(:closed_store) { create :store, human_opens_at: '11:00', human_closes_at: '13:00' }
+
+    before do
+      Timecop.travel Time.zone.parse('10:00')
+    end
+
+    it { expect(opened_store).to be_opened }
+    it { expect(closed_store).not_to be_opened }
+
+    it "works during extra hours" do
+      Timecop.travel Time.zone.parse('02:00')
+      store = create :store, human_opens_at: '22:00', human_closes_at: '03:00'
+      expect(store).to be_opened
+    end
+  end
+
+  describe '.default_scope' do
+    let!(:later_store) do
+      create :store,
+             human_opens_at: '14:00',
+             human_closes_at: '16:00',
+             created_at: 1.hour.ago
+    end
+    let!(:earlier_store) do
+      create :store,
+             human_opens_at: '09:00',
+             human_closes_at: '11:00',
+             created_at: 1.hour.from_now
+    end
+
+    it { expect(Store.all).to eq [earlier_store, later_store] }
+  end
 
   describe ".by_city" do
     let!(:city) { create(:city, name: 'Atlanta') }
@@ -66,7 +101,7 @@ RSpec.describe Store, type: :model do
     end
   end
 
-  describe ".available_for_delivery" do
+  describe ".opened" do
     before do
       Geocoder::Lookup::Test.add_stub("far far away, Atlanta, GA", [
         {
@@ -81,31 +116,31 @@ RSpec.describe Store, type: :model do
       ])
     end
 
-    let!(:far_away_store)  { create :store, name: 'Far Away Store',  address: create(:address, address: 'far far away') }
+    # let!(:far_away_store)  { create :store, name: 'Far Away Store',  address: create(:address, address: 'far far away') }
     let!(:fulltime_store)  { create :store, name: 'Full Time Store' }
     let!(:morning_store)   { create :store, name: 'Morning Store',   human_opens_at: '05:00', human_closes_at: '15:00' }
-    let!(:afternoon_store) { create :store, name: 'Afternoon Store', human_opens_at: '15:00', human_closes_at: '22:00' }
+    let!(:afternoon_store) { create :store, name: 'Afternoon Store', human_opens_at: '15:00', human_closes_at: '21:00' }
     let!(:night_store)     { create :store, name: 'Night Store',     human_opens_at: '21:00', human_closes_at: '03:00' }
-    let(:available_stores) { Store.available_for_delivery('4th Av., Atlanta, GA').map(&:name) }
+    let(:opened_stores) { Store.opened.map(&:name) }
 
     context 'when 1:00' do
-      before { Timecop.travel '01-01-2016 01:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
+      before { Timecop.travel Time.zone.parse('01-01-2016 01:00') }
+      it { expect(opened_stores).to eq [night_store.name, fulltime_store.name] }
     end
 
     context 'when 9:00' do
-      before { Timecop.travel '01-01-2016 09:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, morning_store.name] }
+      before { Timecop.travel Time.zone.parse('01-01-2016 09:00') }
+      it { expect(opened_stores).to eq [morning_store.name, fulltime_store.name] }
     end
 
     context 'when 15:00' do
-      before { Timecop.travel '01-01-2016 15:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, afternoon_store.name] }
+      before { Timecop.travel Time.zone.parse('01-01-2016 15:00') }
+      it { expect(opened_stores).to eq [afternoon_store.name, fulltime_store.name] }
     end
 
     context 'when 21:00' do
-      before { Timecop.travel '01-01-2016 21:00' }
-      it { expect(available_stores).to eq [fulltime_store.name, night_store.name] }
+      before { Timecop.travel Time.zone.parse('01-01-2016 21:00') }
+      it { expect(opened_stores).to eq [night_store.name, fulltime_store.name] }
     end
   end
 

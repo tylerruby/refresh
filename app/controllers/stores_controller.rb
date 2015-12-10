@@ -12,8 +12,9 @@ class StoresController < ApplicationController
     @stores = searcher.available_for_delivery
 
     if @stores.any?
-      # For now we are working with one store per day's period (morning, afternoon etc)
-      redirect_to store_path(@stores.first)
+      current_time = TimeOfDay.to_decimal(Time.current)
+      store = @stores.find(&:opened?) || @stores.drop_while { |store| store.opens_at < current_time }.first
+      redirect_to store_path(store)
     else
       render :index
     end

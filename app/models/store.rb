@@ -26,6 +26,7 @@ class Store < ActiveRecord::Base
 
   accepts_nested_attributes_for :address, allow_destroy: true
 
+  default_scope -> { order(opens_at: :asc) }
   scope :by_city, -> (city) {
     joins(address: :city)
     .where('lower(cities.name) = ?', city.downcase)
@@ -57,25 +58,19 @@ class Store < ActiveRecord::Base
   end
 
   def self.available_for_delivery(location)
-    opened.merge_addresses Address.for_stores.near(location, Store::RADIUS)
+    merge_addresses Address.for_stores.near(location, Store::RADIUS)
   end
 
   def self.opened
-    current_time = TimeOfDay.to_decimal(Time.current)
-
-    # Support stores that close after midnight
-    # For instance, 01:00 AM in real world is 25:00 in our system.
-    current_time = current_time + 24 if current_time <= EXTRA_HOURS
-
     sql = <<-EOS
       (
-        opens_at < :current_time
+        opens_at <= :current_time
         AND
-        closes_at >= :current_time
+        closes_at > :current_time
       ) OR (opens_at IS NULL AND closes_at IS NULL)
     EOS
 
-    where(sql, current_time: current_time)
+    where(sql, current_time: current_time_with_extra_hours)
   end
 
   def self.order_by_distance(location)
@@ -86,6 +81,11 @@ class Store < ActiveRecord::Base
     includes(:address)
     .references(:address)
     .merge(addresses)
+  end
+
+  def opened?
+    current_time = self.class.current_time_with_extra_hours
+    opens_at <= current_time && closes_at > current_time
   end
 
   def available_for_delivery?
@@ -184,5 +184,13 @@ class Store < ActiveRecord::Base
     # calculation, so it may not be defined if the model was retrived
     # in another way. In this case, we default to an infinite distance.
     Float::INFINITY
+  end
+
+  def self.current_time_with_extra_hours
+    current_time = TimeOfDay.to_decimal(Time.current)
+
+    # Support stores that close after midnight
+    # For instance, 01:00 AM in real world is 25:00 in our system.
+    current_time <= EXTRA_HOURS ? current_time + 24 : current_time
   end
 end

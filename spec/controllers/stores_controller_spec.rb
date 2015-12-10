@@ -70,7 +70,7 @@ RSpec.describe StoresController, type: :controller do
     end
 
     before do
-      Timecop.travel '1-1-2016_01:00'
+      Timecop.travel Time.zone.parse('01-01-2016 01:00')
 
       allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(true)
       allow_any_instance_of(ApplicationController)
@@ -82,14 +82,23 @@ RSpec.describe StoresController, type: :controller do
       expect(assigns[:city]).to eq 'Augusta'
     end
 
-    it 'result contains available stores only' do
-      do_action
-      expect(assigns[:stores]).to match_array [available_store]
-    end
-
     it 'redirect to open store' do
       do_action
       expect(subject).to redirect_to action: :show, id: available_store.slug
+    end
+
+    context "there's no store opened" do
+      it "redirects to the next store to be opened during normal hours" do
+        Timecop.travel Time.zone.parse('01-01-2016 20:00')
+        do_action
+        expect(subject).to redirect_to action: :show, id: available_store.slug
+      end
+
+      it "redirects to the next store to be opened during extra hours" do
+        Timecop.travel Time.zone.parse('01-01-2016 04:00')
+        do_action
+        expect(subject).to redirect_to action: :show, id: unavailable_store_by_time.slug
+      end
     end
 
     pending "order by distance"
