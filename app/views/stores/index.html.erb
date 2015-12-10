@@ -1,44 +1,13 @@
-<div id="nav-wrapper" class="js-affix-wrapper">
-  <nav class="navbar navbar-inverse js-affix">
-    <div class="container-fluid">
-      <ul class="nav navbar-nav navbar-right secondary-nav js-filters-nav">
-      </ul>
-    </div><!-- /.container-fluid -->
-  </nav>
-</div>
-
 <div class="profile-header text-center">
   <div class="container">
     <div class="container-inner">
       <h1 class="profile-header-user" style="">
-        <% if @stores.empty? %>
+        <% if @city == 'Atlanta' %>
           We're not delivering right now.
         <% else %>
-        <%= @city %>
+          We don't deliver on <%= @city %> yet. Take a look at our shop in <%= link_to 'Atlanta', '/atlanta' %>!
         <% end %>
       </h1>
-    </div>
-  </div>
-</div>
-
-<div class="container m-y-md tab-content">
-  <div id="stores" class="tab-pane active">
-    <div class="stores col-lg-8 col-lg-offset-2">
-      <% @stores.in_groups_of(2).map(&:compact).each do |group| %>
-        <div class="row">
-          <% group.each do |store| %>
-            <div class="store item col-sm-6 thumb">
-              <%= link_to store_path(store), class: 'thumbnail' do %>
-                <h3><%= store.name %></h3>
-                <%= image_tag store.image_url, class: "store-item img-responsive" %>
-                <% if store.available_for_delivery? %>
-                  <i class="available-for-delivery fa fa-truck"></i>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>
