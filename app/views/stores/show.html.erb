@@ -23,7 +23,11 @@
     <h2 class="text-center closed">Closed</h2>
   <% end %>
   <h3 class="text-center <%= 'line-through' if @store.closed? %>">
-    <%= format_24_to_am_pm(@store.human_opens_at) %> - <%= format_24_to_am_pm(@store.human_closes_at) %>
+    <% if @store.opens_at && @store.closes_at %>
+      <%= format_24_to_am_pm(@store.human_opens_at) %> - <%= format_24_to_am_pm(@store.human_closes_at) %>
+    <% else %>
+      Opened all day
+    <% end %>
   </h3>
 </div>
 
