@@ -9,11 +9,13 @@ class StoresController < ApplicationController
 
   def search_by_city
     @city = city
-    @stores = searcher.available_for_delivery
 
-    if @stores.any?
+    if @city == 'Atlanta'
+      stores = Store.all
       current_time = TimeOfDay.to_decimal(Time.current)
-      store = @stores.find(&:opened?) || @stores.drop_while { |store| store.opens_at < current_time }.first
+      store = stores.find { |store| store.opens_at && store.opened? } ||
+              stores.drop_while { |store| store.opens_at < current_time }.first ||
+              stores.first
       redirect_to store_path(store)
     else
       render :index

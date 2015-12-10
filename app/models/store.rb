@@ -84,8 +84,13 @@ class Store < ActiveRecord::Base
   end
 
   def opened?
+    return true if opens_at.nil? && closes_at.nil?
     current_time = self.class.current_time_with_extra_hours
     opens_at <= current_time && closes_at > current_time
+  end
+
+  def closed?
+    !opened?
   end
 
   def available_for_delivery?

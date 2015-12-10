@@ -5,6 +5,7 @@ class CartController < ApplicationController
   end
 
   def add
+    authorize product.store
     Cart.transaction do
       cart.add(product, product.price, quantity)
     end

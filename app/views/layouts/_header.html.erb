@@ -23,7 +23,7 @@
       <ul class="nav navbar-nav hidden-xs">
         <% if current_address.present? %>
           <li>
-            <%= link_to current_address.city.name.parameterize do %>
+            <%= link_to '/' + current_address.city.name.parameterize do %>
               <i class="fa fa-map-marker"></i> <%= current_address.address %>
           <% end %>
           </li>

@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe StoresController, type: :controller do
   before do
-    Geocoder::Lookup::Test.add_stub("4th Av., Augusta, GA", [
+    Geocoder::Lookup::Test.add_stub("4th Av., Atlanta, GA", [
       {
         'latitude'     => 40.7143528,
         'longitude'    => -74.0059731,
-        'address'      => '4th Av., Augusta, GA',
+        'address'      => '4th Av., Atlanta, GA',
         'state'        => 'Georgia',
         'state_code'   => 'GA',
         'country'      => 'United States',
@@ -14,11 +14,11 @@ RSpec.describe StoresController, type: :controller do
       }
     ])
 
-    Geocoder::Lookup::Test.add_stub("3905 Mike Padgett Hwy, Augusta, GA", [
+    Geocoder::Lookup::Test.add_stub("3905 Mike Padgett Hwy, Atlanta, GA", [
       {
         'latitude'     => 33.353523,
         'longitude'    => -81.982439,
-        'address'      => '3905 Mike Padgett Hwy, Augusta, GA',
+        'address'      => '3905 Mike Padgett Hwy, Atlanta, GA',
         'state'        => 'Georgia',
         'state_code'   => 'GA',
         'country'      => 'United States',
@@ -28,32 +28,32 @@ RSpec.describe StoresController, type: :controller do
   end
 
   describe "GET #search_by_city"  do
-    let(:augusta) { create(:city, name: 'Augusta') }
+    let(:atlanta) { create(:city, name: 'Atlanta') }
+
+    def available_address
+      create :address, city: atlanta, address: '3905 Mike Padgett Hwy'
+    end
 
     let(:current_address) do
-      create :address, city: augusta, address: '3905 Mike Padgett Hwy'
+      available_address
     end
 
     let!(:available_store) do
       create :store,
         human_opens_at: '21:00', human_closes_at: '03:00',
-        address: create(:address, city: augusta, address: '3905 Mike Padgett Hwy')
+        address: available_address
     end
-
-    let!(:available_product) { create(:product, store: available_store) }
 
     let!(:unavailable_store) do
       create :store,
-        address: create(:address, city: augusta, address: '4th Av.')
+        address: create(:address, city: atlanta, address: '4th Av.')
     end
 
     let!(:unavailable_store_by_time) do
       create :store,
         human_opens_at: '05:00', human_closes_at: '15:00',
-        address: create(:address, city: augusta, address: '3905 Mike Padgett Hwy')
+        address: available_address
     end
-
-    let!(:unavailable_product) { create(:product, store: unavailable_store) }
 
     let(:atlanta) { create(:city, name: 'Atlanta') }
 
@@ -61,12 +61,8 @@ RSpec.describe StoresController, type: :controller do
       create :store, address: create(:address, city: atlanta)
     end
 
-    let!(:product_from_store_in_another_city) do
-      create :product, store: store_in_another_city
-    end
-
     def do_action
-      get :search_by_city, city: 'augusta'
+      get :search_by_city, city: 'atlanta'
     end
 
     before do
@@ -79,7 +75,7 @@ RSpec.describe StoresController, type: :controller do
 
     it "sets the city's name" do
       do_action
-      expect(assigns[:city]).to eq 'Augusta'
+      expect(assigns[:city]).to eq 'Atlanta'
     end
 
     it 'redirect to open store' do
@@ -99,14 +95,25 @@ RSpec.describe StoresController, type: :controller do
         do_action
         expect(subject).to redirect_to action: :show, id: unavailable_store_by_time.slug
       end
+
+      it "redirects to the first store when after all stores closed" do
+        Store.destroy_all
+        closed_store = create :store,
+                              human_opens_at: '09:00',
+                              human_closes_at: '11:00',
+                              address: available_address
+        Timecop.travel Time.zone.parse('01-01-2016 12:00')
+        do_action
+        expect(subject).to redirect_to action: :show, id: closed_store.slug
+      end
     end
 
     pending "order by distance"
   end
 
   describe "GET #show" do
-    let(:augusta) { create(:city, name: 'Augusta') }
-    let!(:store) { create(:store, address: create(:address, city: augusta)) }
+    let(:atlanta) { create(:city, name: 'Atlanta') }
+    let!(:store) { create(:store, address: create(:address, city: atlanta)) }
     let!(:available_product) { create(:product, store: store, available: true) }
     let!(:unavailable_product) { create(:product, store: store, available: false) }
     let!(:product_from_store_in_another_city) { create(:product) }

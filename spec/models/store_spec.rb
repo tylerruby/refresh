@@ -21,18 +21,25 @@ RSpec.describe Store, type: :model do
   describe "#opened?" do
     let(:opened_store) { create :store, human_opens_at: '09:00', human_closes_at: '11:00' }
     let(:closed_store) { create :store, human_opens_at: '11:00', human_closes_at: '13:00' }
+    let(:all_day_store) { create :store }
 
     before do
       Timecop.travel Time.zone.parse('10:00')
     end
 
+    it { expect(all_day_store).to be_opened }
+
     it { expect(opened_store).to be_opened }
+    it { expect(opened_store).not_to be_closed }
+
     it { expect(closed_store).not_to be_opened }
+    it { expect(closed_store).to be_closed }
 
     it "works during extra hours" do
       Timecop.travel Time.zone.parse('02:00')
       store = create :store, human_opens_at: '22:00', human_closes_at: '03:00'
       expect(store).to be_opened
+      expect(store).not_to be_closed
     end
   end
 
