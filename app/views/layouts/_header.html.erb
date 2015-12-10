@@ -21,8 +21,20 @@
       </div>
 
       <ul class="nav navbar-nav hidden-xs">
-				<li><a href="/atlanta"><i class="fa fa-map-marker"></i> Atlanta</a></li>
-        </li>
+        <% if current_address.present? %>
+          <li>
+            <%= link_to current_address.city.name.parameterize do %>
+              <i class="fa fa-map-marker"></i> <%= current_address.address %>
+          <% end %>
+          </li>
+          <li>
+            <%= link_to '(Change address)', '/', class: 'detail' %>
+          </li>
+        <% else %>
+          <li>
+            <a href="/atlanta"><i class="fa fa-map-marker"></i> Atlanta</a>
+          </li>
+        <% end %>
       </ul>
 
       <!-- Collect the nav links, forms, and other content for toggling -->

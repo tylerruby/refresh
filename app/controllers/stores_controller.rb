@@ -39,7 +39,7 @@ class StoresController < ApplicationController
       scope = current_user && current_user.addresses || Address
       @new_address ||= scope.find_or_create_by(
         address: params[:address],
-        city: City.find_by(name: city)
+        city: City.find_or_create_by(name: city)
       )
     end
 end
