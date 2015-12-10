@@ -11,12 +11,7 @@ class StoresController < ApplicationController
     @city = city
 
     if @city == 'Atlanta'
-      stores = Store.all
-      current_time = TimeOfDay.to_decimal(Time.current)
-      store = stores.find { |store| store.opens_at && store.opened? } ||
-              stores.drop_while { |store| store.opens_at < current_time }.first ||
-              stores.first
-      redirect_to store_path(store)
+      redirect_to store_path(SelectNextStore.new(Store.all).select)
     else
       render :index
     end
