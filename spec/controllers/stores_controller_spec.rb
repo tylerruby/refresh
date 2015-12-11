@@ -2,29 +2,8 @@ require 'rails_helper'
 
 RSpec.describe StoresController, type: :controller do
   before do
-    Geocoder::Lookup::Test.add_stub("4th Av., Atlanta, GA", [
-      {
-        'latitude'     => 40.7143528,
-        'longitude'    => -74.0059731,
-        'address'      => '4th Av., Atlanta, GA',
-        'state'        => 'Georgia',
-        'state_code'   => 'GA',
-        'country'      => 'United States',
-        'country_code' => 'US'
-      }
-    ])
-
-    Geocoder::Lookup::Test.add_stub("3905 Mike Padgett Hwy, Atlanta, GA", [
-      {
-        'latitude'     => 33.353523,
-        'longitude'    => -81.982439,
-        'address'      => '3905 Mike Padgett Hwy, Atlanta, GA',
-        'state'        => 'Georgia',
-        'state_code'   => 'GA',
-        'country'      => 'United States',
-        'country_code' => 'US'
-      }
-    ])
+    stub_address("4th Av., Atlanta, GA", 40.7143528, -74.0059731)
+    stub_address("3905 Mike Padgett Hwy, Atlanta, GA", 33.353523, -81.982439)
   end
 
   describe "GET #search_by_city"  do

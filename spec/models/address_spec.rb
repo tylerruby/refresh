@@ -59,29 +59,8 @@ RSpec.describe Address, type: :model do
 
   describe ".order_by_distance" do
     before do
-      Geocoder::Lookup::Test.add_stub("closer address, Atlanta, GA", [
-        {
-          'latitude'     => 40.7143528,
-          'longitude'    => -74.0059731,
-          'address'      => 'closer address, Atlanta, GA',
-          'state'        => 'Georgia',
-          'state_code'   => 'GA',
-          'country'      => 'United States',
-          'country_code' => 'US'
-        }
-      ])
-
-      Geocoder::Lookup::Test.add_stub("further address, Atlanta, GA", [
-        {
-          'latitude'     => 40.9999999,
-          'longitude'    => -74.9999999,
-          'address'      => 'further address, Atlanta, GA',
-          'state'        => 'Georgia',
-          'state_code'   => 'GA',
-          'country'      => 'United States',
-          'country_code' => 'US'
-        }
-      ])
+      stub_address("closer address, Atlanta, GA", 40.7143528, -74.0059731)
+      stub_address("further address, Atlanta, GA", 40.9999999, -74.9999999)
     end
 
     let!(:further_address) { create(:address, address: 'further address') }
