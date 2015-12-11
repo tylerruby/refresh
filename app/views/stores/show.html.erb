@@ -48,7 +48,7 @@
               <p><%= product.description %></p>
             </div>
             <div class="col-xs-3">
-              <%= f.button '+ Add', class: 'btn btn-default green pull-right', disabled: @store.closed? %>
+              <%= f.button '+ Add', class: 'btn btn-default green pull-right', disabled: !policy(@store).add? %>
             </div>
           </div>
         <% end %>

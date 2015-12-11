@@ -125,39 +125,6 @@ class Store < ActiveRecord::Base
     self.distance_from_user = address.distance_from(location)
   end
 
-  # TODO: Remove after migrating data
-  def city
-    raise "Deprecated, please use Address model"
-  end
-
-  def city=(_)
-    raise "Deprecated, please use Address model"
-  end
-
-  def state
-    raise "Deprecated, please use Address model"
-  end
-
-  def state=(_)
-    raise "Deprecated, please use Address model"
-  end
-
-  def latitude
-    raise "Deprecated, please use Address model"
-  end
-
-  def latitude=(_)
-    raise "Deprecated, please use Address model"
-  end
-
-  def longitude
-    raise "Deprecated, please use Address model"
-  end
-
-  def longitude=(_)
-    raise "Deprecated, please use Address model"
-  end
-
   private
 
   def parse_working_hours

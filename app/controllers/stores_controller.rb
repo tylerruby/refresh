@@ -1,6 +1,9 @@
 class StoresController < ApplicationController
   def search_by_address
-    current_user.addresses << new_address if current_user.present?
+    if current_user.present?
+      current_user.addresses << new_address
+      current_user.update!(current_address: new_address)
+    end
 
     session[:address_id] = new_address.id
 

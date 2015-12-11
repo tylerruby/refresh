@@ -18,7 +18,7 @@ class SelectNextStore
   end
 
   def next_closed_store
-    stores.drop_while { |store| store.opens_at < current_time }.first
+    stores.drop_while { |store| store.opens_at && store.opens_at < current_time }.first
   end
 
   def current_time

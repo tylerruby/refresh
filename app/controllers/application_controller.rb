@@ -16,7 +16,11 @@ class ApplicationController < ActionController::Base
     end
 
     def current_address
-      Address.find_by(id: session[:address_id])
+      if current_user
+        current_user.current_address
+      else
+        Address.find_by(id: session[:address_id])
+      end
     end
 
     def coordinates
