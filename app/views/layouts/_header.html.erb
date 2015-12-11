@@ -24,11 +24,11 @@
         <% if current_address.present? %>
           <li>
             <%= link_to '/' + current_address.city.name.parameterize do %>
-              <i class="fa fa-map-marker"></i> <%= current_address.address %>
+              <i class="fa fa-map-marker"></i> <%= current_address.address.gsub("30303, USA", "") %>
           <% end %>
           </li>
           <li>
-            <%= link_to '(Change address)', '/', class: 'detail' %>
+            <%= link_to 'Change address', '/', class: 'detail' %>
           </li>
         <% else %>
           <li>

@@ -115,22 +115,25 @@ h1, h2, h3, h4 {
 }
 
 .landing-header {
+  background-image: url("http://www.johnshermanphotography.com/images/food/crepe.jpg");
   background-size: 100% 100% !important;
   background-color: #f0f0f0 !important;
+  text-shadow: 0 0 2px rgba(0,0,0,0.6);
   h1 {
-    color: #000 !important;
-    font-size:50px !important;
+    color: #fff !important;
+    font-size:60px !important;
+
   }
   h2 {
-    color: #000 !important;
-    font-size: 38px !important;
+    color: #fff !important;
+    font-size: 48px !important;
   }
   h3 {
-    color: #222 !important;
+    color: #f0f0f0 !important;
     font-size:28px !important;
   }
   h4 {
-    color: #222 !important;
+    color: #f0f0f0 !important;
     font-size:20px !important;
   }
 }
