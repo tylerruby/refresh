@@ -1,0 +1,104 @@
+.order-index-page {
+  // Reset row to Bootstrap default
+  .row {
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+  }
+}
+
+.orders-wrapper {
+  .order-wrapper {
+    padding: 5px 0;
+  }
+
+  hr {
+    border-width: 2px;
+  }
+
+  .order-id,
+  .order-amount {
+    font-size: 16px;
+  }
+
+  .order-date-and-address {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  a[data-toggle="collapse"] {
+    position: absolute;
+    left: 50%;
+    margin-left: -17px;
+    top: 7px;
+    font-size: 24px;
+    display: none;
+
+    &, &:hover {
+      color: darken(white, 30%);
+    }
+
+    &.collapsed {
+      display: block;
+    }
+  }
+
+  .order-item-wrapper {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid darken(white, 5%);
+  }
+
+  @media (min-width: $screen-sm-min) {
+    .order-id,
+    .order-amount {
+      font-size: 17px;
+    }
+
+    .order-id,
+    .order-amount,
+    .order-status {
+      margin-top: 6px;
+    }
+
+    .order-date-and-address {
+      margin-top: 0;
+      font-size: 14px;
+
+      div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    a[data-toggle="collapse"] {
+      left: 25px;
+      margin-left: 0;
+      top: -40px;
+      font-size: 26px;
+      display: block;
+      transform: rotate(45deg);
+      transition: all .3s;
+
+      &.collapsed {
+        transform: rotate(0);
+      }
+    }
+
+    .order-item-wrapper {
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+
+    .cart-item-name,
+    .cart-item-quantity-and-price {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: $screen-md-min) {
+  }
+
+  @media (min-width: $screen-lg-min) {
+  }
+}

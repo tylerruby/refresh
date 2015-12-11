@@ -85,7 +85,7 @@ function initGoogleMapsAutocomplete() {
   // location types.
   var autocomplete = new google.maps.places.Autocomplete(
       document.getElementById('gmaps-autocomplete'),
-      { types: ['geocode'] }
+      { types: ['geocode', 'establishment'] }
   );
 
   var addressSelector = new AddressSelector($('#store-location-form'));
