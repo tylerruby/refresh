@@ -5,7 +5,7 @@ class StoreSearcher
   end
 
   def all
-    stores_in(city).joins(chain: :clothes).uniq
+    stores_in(city).uniq
   end
 
   def available_for_delivery

@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     @cities = Address.for_stores.select(:city_id).distinct.map(&:city).map(&:name)
   end
 
-  def profile
+  def account
   end
 
   def help
@@ -29,7 +29,7 @@ class PagesController < ApplicationController
 
   def privacy
   end
-  
+
   def contact
   end
 
