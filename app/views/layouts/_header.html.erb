@@ -20,15 +20,12 @@
         </a>
       </div>
 
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav address-menu">
         <% if current_address.present? %>
           <li>
             <%= link_to '/' + current_address.city.name.parameterize do %>
               <i class="fa fa-map-marker"></i> <%= current_address.address.gsub(/ \d{5}, (?:USA|United States)/, '') %>
           <% end %>
-          </li>
-          <li class="hidden-xs">
-            <%= link_to 'Change address', '/', class: 'detail' %>
           </li>
         <% else %>
           <li>
