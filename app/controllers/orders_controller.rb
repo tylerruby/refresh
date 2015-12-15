@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
 
     begin
       MakePayment.new(order: order, cart: cart, stripe_token: stripe_token).pay
-      flash[:success] = "Checkout was successful! Waiting confirmation..."
+      flash[:success] = "Checkout was successful! You'll receive your order in 15 minutes!"
     rescue ActiveRecord::RecordInvalid
       order.internal_failure!
       flash[:danger] = "Something went wrong. Contact us and we'll solve the problem."

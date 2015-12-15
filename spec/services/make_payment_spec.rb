@@ -23,7 +23,7 @@ RSpec.describe MakePayment do
 
   it { expect(order.cart_items).to eq cart_items }
   it { expect(order.user).to eq user }
-  it { expect(order.status).to eq 'waiting_confirmation' }
+  it { expect(order.status).to eq 'approved' }
   it { expect(order.charge_id).to eq charge_double.id }
 
   it { expect(Cart.exists? cart.id).to be false }

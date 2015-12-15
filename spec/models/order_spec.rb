@@ -12,7 +12,7 @@ RSpec.describe Order, type: :model do
   it do
       is_expected.to define_enum_for(:status).with %w(
         pending
-        waiting_confirmation
+        approved
         on_the_way
         delivered
         internal_failure

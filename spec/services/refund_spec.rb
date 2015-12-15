@@ -35,7 +35,7 @@ RSpec.describe Refund do
 
   it "changes the order status to canceled" do
     expect { refund.create }.to change { order.reload.status }
-                                .from('waiting_confirmation')
+                                .from('approved')
                                 .to('canceled')
   end
 end
