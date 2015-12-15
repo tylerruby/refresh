@@ -1,5 +1,5 @@
 $(function () {
-  setTimeout(autoclose, 3000);
+  setTimeout(autoclose, 5000);
   function autoclose () {
     $('.alert.autoclose').alert('close');
   }

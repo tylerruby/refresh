@@ -1,82 +1,58 @@
 <span data-filter="store_id" data-filter-value="<%= @store.id %>"></span>
 
-<div id="nav-wrapper" class="js-affix-wrapper">
-  <nav class="navbar navbar-inverse js-affix">
-    <div class="container-fluid">
-      <ul class="nav navbar-nav">
-        <li class="active">
-          <%= link_to "/" + @store.address.city.name.downcase do %>
-            <%= @store.address.city.name %>
-          <% end %>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right js-filters-nav">
-      </ul>
-    </div><!-- /.container-fluid -->
-  </nav>
-</div>
+<nav class="navbar navbar-default hide">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav secondary">
+          <!-- TODO: Actually select the active store -->
+          <li><a class="active" href="#"><b>Breakfast</b></a></li>
+					<li><a href="#">Lunch</a></li>
+					<li><a href="#">Dinner</a></li>
+					<li><a href="#">Essentials</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-<nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project name</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-static-top/">Static top</a></li>
-              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
-
-
-
-<div class="profile-header text-center">
-  <div class="container-inner">
-    <%= image_tag @store.logo.url, class: 'img-circle media-object' %>
-
-    <p class="profile-header-bio">
-      <br />
-      <%= link_to @store.full_address, "https://www.google.com/maps/place/" + @store.full_address, style: "font-size: 14px;", target: "_blank" %>
-      <% if @store.available_for_delivery? %>
-        <i class="available-for-delivery fa fa-truck"></i>
-      <% end %>
-    </p>
-  </div>
-</div>
-
-<%= image_tag 'spinner.gif', class: 'js-spinner', style: 'display: none;' %>
-<div class="js-image-grid stores col-md-12 col-md-offset-1">
-  <div id="clothes" class="tab-pane">
-    <!-- TODO: find a way to avoid having this JS here -->
-    <%= javascript_tag do %>
-      FilterClothes();
+<div class="jumbotron" style="background:#fff;">
+  <h1 class="text-center"><%= @store.name %></h1>
+  <% if @store.closed? %>
+    <h2 class="text-center closed">Closed</h2>
+  <% end %>
+  <h3 class="text-center <%= 'line-through' if @store.closed? %>">
+    <% if @store.opens_at && @store.closes_at %>
+      <%= format_24_to_am_pm(@store.human_opens_at) %> - <%= format_24_to_am_pm(@store.human_closes_at) %>
+    <% else %>
+      Opened all day
     <% end %>
-  </div>
+  </h3>
 </div>
-<div class="clearfix"></div>
+
+<br class="items-list-break" />
+<div class="col-md-10 col-md-offset-1 items-list">
+  <% @available_products.each do |product| %>
+    <div class="col-sm-6 col-md-6 col-lg-4">
+      <div class="panel panel-default">
+        <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
+          <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+          <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
+          <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
+          <div class="panel-body food-items">
+            <div class="col-xs-12">
+              <h3><%= product.name %> - <%= product.price.format %></h3>
+            </div>
+            <div class="col-xs-9">
+              <p><%= product.description %></p>
+            </div>
+            <div class="col-xs-3">
+              <%= f.button '+ Add', class: 'btn btn-default green pull-right', disabled: !policy(@store).add? %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -21,6 +21,11 @@
 
 en:
   activerecord:
+    attributes:
+      store:
+        human_opens_at: Opens At
+        human_closes_at: Closes At
+
     errors:
       models:
         category:

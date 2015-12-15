@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Refresh</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'https://js.stripe.com/v2/' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>Refresh</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'https://js.stripe.com/v2/' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,600' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width; initial-scale=1">
+  </head>
 
-  <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-</head>
-  <%= render 'layouts/alert' %>
-  <%= render 'layouts/header' %>
-  <%= yield %>
-  <%= render 'layouts/footer' %>
-
-</body>
+  <body class="<%= body_css_classes %>">
+    <%= render 'layouts/alert' %>
+    <%= render 'layouts/header' %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>
