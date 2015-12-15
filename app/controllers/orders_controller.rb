@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
 
   def new
     @cart = cart
-    @cart.delivery_time = params.require(:delivery_time).to_i
     @order = Order.new
     if @cart.empty?
       flash[:info] = 'Your cart is empty, cannot checkout yet.'
@@ -16,7 +15,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    cart.delivery_time = order_params[:delivery_time].to_i
     order = Order.create!(order_params) do |order|
       order.user = current_user
       order.amount = cart.total
@@ -39,7 +37,7 @@ class OrdersController < ApplicationController
   private
 
     def order_params
-      params.require(:order).permit(:delivery_time, :delivery_address, :observations, :source_id)
+      params.require(:order).permit(:delivery_address, :observations, :source_id)
     end
 
     def stripe_token

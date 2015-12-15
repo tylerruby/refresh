@@ -37,10 +37,8 @@ RSpec.describe OrdersController, type: :controller do
   end
 
   describe "GET #new" do
-    let(:delivery_time) { 1 }
-
     def do_action
-      get :new, delivery_time: delivery_time
+      get :new
     end
 
     describe "authenticated" do
@@ -55,7 +53,6 @@ RSpec.describe OrdersController, type: :controller do
       it "sets the cart for the user" do
         do_action
         expect(assigns[:cart]).to eq cart
-        expect(assigns[:cart].delivery_time).to eq delivery_time
       end
 
       it "renders the correct page" do
@@ -83,12 +80,10 @@ RSpec.describe OrdersController, type: :controller do
   describe "POST #create" do
     let(:token) { stripe_helper.generate_card_token }
     let(:charge_double) { double('Stripe::Charge', id: 'some charge id') }
-    let(:delivery_time) { 1 }
     let(:delivery_address) { "18th Street Atlanta" }
 
     def do_action
       post :create, stripeToken: token, order: {
-        delivery_time: delivery_time,
         delivery_address: delivery_address,
         observations: 'Take off the bacon!' }
     end
@@ -236,7 +231,6 @@ RSpec.describe OrdersController, type: :controller do
             allow(user).to receive :add_credit_card
 
             post :create, order: {
-              delivery_time: delivery_time,
               delivery_address: delivery_address,
               source_id: 'some source id'
             }

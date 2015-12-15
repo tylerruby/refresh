@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   has_many :cart_items, as: :owner, dependent: :destroy
-  validates :user, :delivery_address, :delivery_time, presence: true
+  validates :user, :delivery_address, presence: true
 
   attr_accessor :source_id
 
@@ -31,7 +31,6 @@ class Order < ActiveRecord::Base
       end
       field :charged?
       field :refunded?
-      field :delivery_time
       field :delivery_address
       field :created_at
     end
