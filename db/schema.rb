@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210201108) do
+ActiveRecord::Schema.define(version: 20151215223907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address"
@@ -109,7 +110,6 @@ ActiveRecord::Schema.define(version: 20151210201108) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "delivery_address"
-    t.integer  "delivery_time"
     t.string   "charge_id"
     t.string   "refund_id"
     t.text     "observations"

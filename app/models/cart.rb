@@ -1,6 +1,5 @@
 class Cart < ActiveRecord::Base
   acts_as_shopping_cart_using :cart_item
-  attr_accessor :delivery_time
 
   def description
     "#{total_unique_items} #{'product'.pluralize(total_unique_items)} (#{total.format})"

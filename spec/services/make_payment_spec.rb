@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe MakePayment do
   let(:stripe_helper) { StripeMock.create_test_helper }
-  let(:delivery_time) { 1 }
   let(:user) { create(:user) }
-  let(:cart) { create(:cart, delivery_time: delivery_time) }
+  let(:cart) { create(:cart) }
   let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
   let(:order) { create(:order, user: user, amount: cart.total, status: 'pending') }
 
