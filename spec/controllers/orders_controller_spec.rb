@@ -129,7 +129,7 @@ RSpec.describe OrdersController, type: :controller do
         it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
-        it { expect(order.status).to eq 'waiting_confirmation' }
+        it { expect(order.status).to eq 'approved' }
         it { expect(order.delivery_address).to eq delivery_address }
         it { expect(order.observations).to eq 'Take off the bacon!' }
         it { expect(order.charge_id).to eq charge_double.id }
@@ -142,7 +142,7 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it "sets a success message" do
-          expect(flash[:success]).to eq "Checkout was successful! Waiting confirmation..."
+          expect(flash[:success]).to eq "Checkout was successful! You'll receive your order in 15 minutes!"
         end
       end
 

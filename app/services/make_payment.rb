@@ -16,7 +16,7 @@ class MakePayment
       end
 
       order.update!(charge_id: charge.id)
-      order.waiting_confirmation!
+      order.approved!
     end
   end
 
