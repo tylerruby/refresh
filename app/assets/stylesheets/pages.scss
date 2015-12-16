@@ -1,8 +1,7 @@
 $body-bg: #f8f8f6;
-$navbar-inverse-bg: #222;
-$navbar-inverse-border: none;
-$navbar-default-bg: #fafafa;
-$navbar-default-link-active-bg: #fff;
+$navbar-default-bg: #fff;
+$navbar-default-border: none;
+$navbar-default-link-active-bg: #000;
 $panel-default-border: 0px;
 
 /* Misc */
@@ -53,7 +52,7 @@ h1, h2, h3, h4 {
   padding-top:11px !important;
 
   .cart-items-count {
-    color: white;
+    color: #000;
     font-size: 17px;
     line-height: 1em;
     font-weight: 200;
@@ -126,7 +125,7 @@ h1, h2, h3, h4 {
   }
   h2 {
     color: #fff !important;
-    font-size: 58px !important;
+    font-size: 38px !important;
   }
   h3 {
     color: #f0f0f0 !important;
