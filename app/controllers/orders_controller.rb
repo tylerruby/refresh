@@ -15,32 +15,34 @@ class OrdersController < ApplicationController
   end
 
   def create
-    order = Order.create!(order_params) do |order|
+    @order = Order.new(order_params) do |order|
       order.user = current_user
       order.amount = cart.total
       order.status = 'pending'
+      order.stripe_token = params[:stripeToken]
     end
 
-    begin
-      MakePayment.new(order: order, cart: cart, stripe_token: stripe_token).pay
-      flash[:success] = "Checkout was successful! You'll receive your order in 15 minutes!"
-    rescue ActiveRecord::RecordInvalid
-      order.internal_failure!
-      flash[:danger] = "Something went wrong. Contact us and we'll solve the problem."
-    rescue Stripe::StripeError => e
-      order.external_failure!
-      flash[:danger] = e.message
+    if @order.save
+      begin
+        MakePayment.new(order: @order, cart: cart).pay
+        flash[:success] = "Checkout was successful! You'll receive your order in 15 minutes!"
+      rescue ActiveRecord::RecordInvalid
+        @order.internal_failure!
+        flash[:danger] = "Something went wrong. Contact us and we'll solve the problem."
+      rescue Stripe::StripeError => e
+        @order.external_failure!
+        flash[:danger] = e.message
+      end
+      redirect_to root_path
+    else
+      flash[:danger] = @order.errors.messages.values.flatten.first
+      render :new, status: :unprocessable_entity
     end
-    redirect_to root_path
   end
 
   private
 
     def order_params
       params.require(:order).permit(:delivery_address, :observations, :source_id)
-    end
-
-    def stripe_token
-      params[:stripeToken]
     end
 end

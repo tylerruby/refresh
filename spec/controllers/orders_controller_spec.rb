@@ -153,6 +153,16 @@ RSpec.describe OrdersController, type: :controller do
             }.to change(Order, :count).by(1)
           end
 
+          context "when neither stripe token nor stripe source id are given" do
+            let(:token) { nil }
+
+            it "order is invalid and response has unprocessable error code" do
+              do_action
+              expect(response).to have_http_status(:unprocessable_entity)
+              expect(flash[:danger]).to eq "A credit card must be selected"
+            end
+          end
+
           describe "post-conditions" do
             before do
               do_action

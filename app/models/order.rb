@@ -4,9 +4,11 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   has_many :cart_items, as: :owner, dependent: :destroy
-  validates :user, :delivery_address, presence: true
 
-  attr_accessor :source_id
+  validates :user, :delivery_address, presence: true
+  validates :stripe_token, presence: true, if: 'source_id.blank?'
+
+  attr_accessor :source_id, :stripe_token
 
   def charged?
     charge_id.present?

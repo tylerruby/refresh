@@ -2,7 +2,6 @@ class MakePayment
   def initialize(options)
     self.order = options.fetch(:order)
     self.cart = options.fetch(:cart)
-    self.stripe_token = options.fetch(:stripe_token)
   end
 
   def pay
@@ -10,9 +9,9 @@ class MakePayment
       order.update!(cart_items: cart.shopping_cart_items)
       cart.reload.destroy!
 
-      if stripe_token.present? && order.source_id.blank?
+      if order.stripe_token.present? && order.source_id.blank?
         # Register a new credit card
-        user.add_credit_card(stripe_token)
+        user.add_credit_card(order.stripe_token)
       end
 
       order.update!(charge_id: charge.id)
@@ -22,7 +21,7 @@ class MakePayment
 
   private
 
-    attr_accessor :order, :cart, :stripe_token
+    attr_accessor :order, :cart
     delegate :user, to: :order
 
     def charge
