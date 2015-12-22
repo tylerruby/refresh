@@ -367,9 +367,9 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
     width:70px;
   }
   a {
-    color: #666;
+    color: #222;
   }
-  a:hover {
+  a:hover, a:active, a:focus {
     color: #000;
   }
 }
@@ -379,9 +379,9 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
 .footer-link {
   padding:10px;
   a {
-    color:#666;
+    color:#444;
   }
-  a:hover {
+  a:hover, a:active, a:focus {
     color:#222;
   }
 }
