@@ -1,142 +1,105 @@
-<div class="container p-t-md">
-  <div class="row">
-  	<div class="col-sm-3 col-md-3">
-  		<div class="list-group m-b-md">
-        <%= link_to help_path, class: "list-group-item active" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Help
-        <% end %>
-        <%= link_to about_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          About
-        <% end %>
-        <%= link_to partners_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Partners
-        <% end %>
-        <%= link_to terms_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Terms
-        <% end %>
-        <%= link_to privacy_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Privacy Policy
-        <% end %>
-        <%= link_to blog_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Blog
-        <% end %>
-        <%= link_to contact_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Contact
-        <% end %>
-      </div>
-     </div>
-    <div class="col-sm-9 col-md-8">
-      <ul class="list-group media-list media-list-stream">
-        <li class="list-group-item p-a">
-          <h2 class="m-a-0 text-center">Help</h2>
-        </li>
-
-        <li class="media list-group-item p-a">
-          <div class="media-body">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Why use Refresh?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    Refresh helps you find hot local clothing items and get them delivered in an hour so you save time and money.  No more waiting weeks for packages, paying outrageous shipping fees, or driving from store to store looking for what you want.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      What are your hours?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    We deliver from 9am to Midnight every day, depending on local store hours. On holidays, our delivery hours are subject to store holiday hours. You can view available delivery times for your area from the shopping cart.
-
-                    Our fastest delivery was just 12 minutes! Most customers choose to have delivery in the next 2 hours, and you can also schedule for a later date or time during checkout.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Where do you deliver?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                  <div class="panel-body">
-                    We currently only serve the city of Atlanta, but we are expanding our service area to other cities soon!
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      How much does delivery cost?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                  <div class="panel-body">
-                    We offer several pricing options for Refresh deliveries. The minimum order value is $10.
-                    <br />
-                    <u>Orders over $35:</u> Two hour or scheduled deliveries start at $3.99. Within an Hour deliveries start at $5.99.
-                    <br />
-                    <u>Orders under $35:</u> Two hour or scheduled deliveries start at $7.99. Within an Hour deliveries start at $9.99.
-                    <br />
-                    <small>*There is a $3 charge for each additional store you order from.</small>
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFive">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                      How are items priced on Refresh?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                  <div class="panel-body">
-                    When possible, Refresh works with retailers to bring you the same prices as found in the physical store. In some cases prices may be 15% higher than in-store.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingSix">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      How do I return items?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                  <div class="panel-body"> 
-                    Your purchases will come with a receipt which will allow you to return items depending on the store or item in question.  Most stores we carry have a return policy but some may not allow returns.
-                  </div>
-                </div>
+<br />
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2 class="text-center">
+        Help
+      </h2>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Why use Refresh?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                Refresh helps you find hot local clothing items and get them delivered in an hour so you save time and money.  No more waiting weeks for packages, paying outrageous shipping fees, or driving from store to store looking for what you want.
               </div>
             </div>
           </div>
-        </li>
-      </ul>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  What are your hours?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                We deliver from 9am to Midnight every day, depending on local store hours. On holidays, our delivery hours are subject to store holiday hours. You can view available delivery times for your area from the shopping cart.
+
+                Our fastest delivery was just 12 minutes! Most customers choose to have delivery in the next 2 hours, and you can also schedule for a later date or time during checkout.
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Where do you deliver?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                We currently only serve the city of Atlanta, but we are expanding our service area to other cities soon!
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  How much does delivery cost?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+              <div class="panel-body">
+                We offer several pricing options for Refresh deliveries. The minimum order value is $10.
+                <br />
+                <u>Orders over $35:</u> Two hour or scheduled deliveries start at $3.99. Within an Hour deliveries start at $5.99.
+                <br />
+                <u>Orders under $35:</u> Two hour or scheduled deliveries start at $7.99. Within an Hour deliveries start at $9.99.
+                <br />
+                <small>*There is a $3 charge for each additional store you order from.</small>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFive">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  How are items priced on Refresh?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+              <div class="panel-body">
+                When possible, Refresh works with retailers to bring you the same prices as found in the physical store. In some cases prices may be 15% higher than in-store.
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingSix">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                  How do I return items?
+                </a>
+              </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+              <div class="panel-body"> 
+                Your purchases will come with a receipt which will allow you to return items depending on the store or item in question.  Most stores we carry have a return policy but some may not allow returns.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

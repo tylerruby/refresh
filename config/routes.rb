@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   root 'pages#landing'
   get 'notifications' => 'pages#notifications'
-  get 'home' => 'pages#home'
   get 'account' => 'pages#account'
 
   get 'help' => 'pages#help'
@@ -27,8 +26,6 @@ Rails.application.routes.draw do
   get 'partners' => 'pages#partners'
   get 'terms' => 'pages#terms'
   get 'privacy' => 'pages#privacy'
-  get 'blog' => 'pages#blog'
-  get 'contact' => 'pages#contact'
   get 'drivers' => 'pages#drivers'
 
   # These must be the last routes in the file, since they'll match anything

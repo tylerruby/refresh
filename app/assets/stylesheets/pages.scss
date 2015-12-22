@@ -366,6 +366,12 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
     margin-top:15px;
     width:70px;
   }
+  a {
+    color: #666;
+  }
+  a:hover {
+    color: #000;
+  }
 }
 .footer-text {
   padding-top:20px;
