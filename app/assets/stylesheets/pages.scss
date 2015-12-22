@@ -60,10 +60,10 @@ h1, h2, h3, h4 {
 
 /* Partner Page */
 .partner-header {
-  background: -webkit-linear-gradient(60deg, #222, #555);
-  background: -o-linear-gradient(60deg, #222, #555);
-  background: -moz-linear-gradient(60deg, #222, #555);
-  background: linear-gradient(60deg, #222, #555);
+  background-image: url("http://static1.squarespace.com/static/502314fbc4aa42bbb4744034/502314fbc4aa42bbb474403a/52e8238fe4b026a2636de1b7/1390945173158/176511.jpg?format=2500w") !important;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
   h1 {
     color: #fff !important;
     font-size:70px !important;
