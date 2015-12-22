@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe StorePolicy do
-
   let(:guest) { nil }
   let(:user) { create(:user, current_address: create_address) }
+  let(:user_without_address) { create(:user, current_address: nil) }
 
   subject { described_class }
 
@@ -49,5 +49,6 @@ describe StorePolicy do
     it { is_expected.to permit(user, opened_store) }
     it { is_expected.not_to permit(user, closed_store) }
     it { is_expected.not_to permit(user, far_away_store) }
+    it { is_expected.not_to permit(user_without_address, opened_store) }
   end
 end
