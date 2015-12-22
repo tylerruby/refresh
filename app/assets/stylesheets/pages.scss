@@ -536,3 +536,14 @@ ul.nav.navbar-nav.secondary > li.active > a {
 .food-pictures {
   width:100% !important;
 }
+.price {
+  position: absolute;
+  top: 5px;
+  right: 5%;
+  background: rgba(0,0,0,.3);
+  color: #fff;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 2px;
+}
