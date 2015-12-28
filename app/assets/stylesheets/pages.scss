@@ -264,6 +264,30 @@ h1, h2, h3, h4 {
   border-color: #222 !important;
   color: #fff !important;
 }
+.red {
+  background-color: #ff5a5f;
+  border: #ff5a5f !important;
+  color: #fff !important;
+}
+.red {
+  color: #fff;
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+  text-shadow: 0 0 3px rgba(255, 255, 255, .3);
+}
+.red:hover {
+  cursor:pointer;
+  -webkit-animation-name: pulse;
+  -webkit-animation-duration: .8s;
+  -webkit-animation-iteration-count: infinite;
+  }
+
+  @-webkit-keyframes pulse {
+  from { background-color: #ff5a5f;}
+  50% { background-color: #ff2e34; }
+  to { background-color: #ff5a5f;}
+}
 .green {
   background: #34bf49 !important;
   border-color: #34bf49 !important;
