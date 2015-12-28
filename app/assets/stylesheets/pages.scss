@@ -57,19 +57,32 @@ h1, h2, h3, h4 {
 /* Partner Page */
 .partner-header {
   background-image: url("http://i.imgur.com/29zRnUm.png") !important;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
   h1 {
     color: #fff !important;
     font-size:70px !important;
     text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
+  h2 {
+    color: #fff !important;
+    font-size:38px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  }
   h3 {
     color: #f0f0f0 !important;
+    font-size: 38px !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  }
+  h4 {
+    color: #f0f0f0 !important;
+    font-size:25px !important;
     text-shadow: 0 0 2px rgba(0,0,0,0.6);
   }
 }
+
+
 
 /* Landing Page */
 .landing-logo {
@@ -113,7 +126,7 @@ h1, h2, h3, h4 {
   }
   h2 {
     color: #fff !important;
-    font-size: 38px !important;
+    font-size: 30px !important;
   }
   h3 {
     color: #f0f0f0 !important;
@@ -121,7 +134,7 @@ h1, h2, h3, h4 {
   }
   h4 {
     color: #f0f0f0 !important;
-    font-size:30px !important;
+    font-size:25px !important;
   }
 }
 .landing-image {
@@ -499,7 +512,7 @@ ul.navbar-nav > li > a {
 }
 
 ul.nav.navbar-nav.secondary > li > a {
-  color: #777;
+  color: #f0f0f0;
 }
 
 ul.nav.navbar-nav.secondary {
@@ -518,7 +531,8 @@ ul.navbar-nav > li > a {
 }
 
 ul.nav.navbar-nav.secondary > li.active > a {
-  border-bottom: 2px solid #333333;
+  border-bottom: 2px solid #fff;
+  color: #fff;
 }
 
 @media (max-width: 480px) {
