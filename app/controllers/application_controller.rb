@@ -26,4 +26,17 @@ class ApplicationController < ActionController::Base
     def coordinates
       current_address && current_address.coordinates
     end
+
+    def authenticate!
+      if request.format.json?
+        authenticate_api!
+      else
+        authenticate_user!
+      end
+    end
+
+    def authenticate_api!
+      head :unauthorized if request.headers['Authorization'].nil? ||
+        !AuthToken.decode(request.headers['Authorization'].split(' ').last)
+    end
 end

@@ -333,6 +333,7 @@ GEM
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
@@ -489,6 +490,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jwt (= 1.5.1)
   letter_opener (= 1.4.1)
   mini_magick (~> 4.3.2)
   money-rails (= 1.4.1)
@@ -500,6 +502,7 @@ DEPENDENCIES
   pry
   pry-rails
   pundit (= 1.0.1)
+  rack-cors (= 0.4.0)
   rails (= 4.2.3)
   rails_12factor
   rails_admin (= 0.7.0)

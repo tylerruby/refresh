@@ -30,6 +30,8 @@ gem 'pundit',                '1.0.1'
 gem 'nested_form',           '0.3.2'
 gem 'paranoia',              '2.1.3'
 gem 'bootstrap-sass',        '3.3.5.1'
+gem 'jwt',                   '1.5.1'
+gem 'rack-cors',             '0.4.0', :require => 'rack/cors'
 
 group :development, :test do
   gem 'pry'
