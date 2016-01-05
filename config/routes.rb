@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/auth/:provider', to: 'auth#authenticate'
+
   get 'cart' => 'cart#index'
   patch 'cart/add'
   delete 'cart/remove'

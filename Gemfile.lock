@@ -486,6 +486,7 @@ DEPENDENCIES
   friendly_id (= 5.1.0)
   geocoder (= 1.2.9)
   guard-rspec (= 4.6.4)
+  httpclient (= 2.6.0.1)
   impressionist (= 1.5.1)
   jbuilder (~> 2.0)
   jquery-rails

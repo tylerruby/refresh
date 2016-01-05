@@ -17,6 +17,24 @@ class User < ActiveRecord::Base
     end
   end
 
+	def self.from_oauth(oauth)
+		data = oauth.get_data
+
+		user = find_by(provider: oauth.provider, uid: data[:id]) || find_or_create_by(email: data[:email]) do |u|
+			u.password =  SecureRandom.hex
+		end
+
+    # first_name, last_name = [data[:first_name], data[:last_name]]
+		user.update(
+			# display_name: [first_name, last_name].join(' '),
+			email: data[:email],
+			provider: oauth.provider,
+      uid: data[:id]
+		)
+
+		user
+	end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
