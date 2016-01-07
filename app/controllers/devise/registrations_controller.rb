@@ -1,6 +1,7 @@
 class Devise::RegistrationsController < DeviseController
   prepend_before_filter :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+	skip_before_action :verify_authenticity_token, only: :create
 
   # GET /resource/sign_up
   def new
@@ -24,12 +25,20 @@ class Devise::RegistrationsController < DeviseController
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
       end
+
+      respond_to do |format|
+        format.json do
+          token = AuthToken.encode(user_id: resource.id)
+          render json: { id: resource.id, token: token }
+        end
+
+        format.html { redirect_to :back }
+      end
     else
       clean_up_passwords resource
       set_minimum_password_length
-      flash[:errors] = resource.errors.full_messages.join(', ')
+      render json: resource.errors, status: :unprocessable_entity
     end
-    redirect_to :back
   end
 
   # GET /resource/edit

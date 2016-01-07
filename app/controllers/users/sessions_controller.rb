@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
     respond_to do |format|
       format.json do
         token = AuthToken.encode(user_id: resource.id)
-        render json: { user: resource.email, token: token }
+        render json: { id: resource.id, token: token }
       end
 
       format.html do
