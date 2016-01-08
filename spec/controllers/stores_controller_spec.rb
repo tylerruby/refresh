@@ -88,23 +88,6 @@ RSpec.describe StoresController, type: :controller do
     end
 
     pending "order by distance"
-
-    describe "JSON response" do
-      render_views
-
-      before do
-        request.accept = 'application/json'
-        do_action
-      end
-
-      it do
-        expect(json).to eq(
-          "store" => {
-            "id" => available_store.id
-          }
-        )
-      end
-    end
   end
 
   describe "GET #show" do
@@ -126,37 +109,6 @@ RSpec.describe StoresController, type: :controller do
     it "assigns the available_products" do
       do_action
       expect(assigns[:available_products]).to eq [available_product]
-    end
-
-    describe "JSON response" do
-      render_views
-
-      before do
-        request.accept = 'application/json'
-        do_action
-      end
-
-      it do
-        expect(json).to eq(
-          "store" => {
-            "id" => store.id,
-            "name" => store.name,
-            "image" => store.image.url(:thumb),
-            "opens_at" => store.opens_at,
-            "closes_at" => store.closes_at,
-            "products" => [
-              {
-                "id" => available_product.id,
-                "name" => available_product.name,
-                "description" => available_product.description,
-                "price_cents" => available_product.price_cents,
-                "price_currency" => available_product.price_currency,
-                "image" => available_product.image.url(:thumb)
-              }
-            ]
-          }
-        )
-      end
     end
   end
 end

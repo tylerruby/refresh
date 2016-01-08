@@ -9,8 +9,9 @@ class ApplicationController < ActionController::Base
 
     def cart
       @cart = Cart.exists?(@cart.try(:id)) && @cart  \
+              || current_user && current_user.cart   \
               || Cart.find_by(id: session[:cart_id]) \
-              || Cart.create!
+              || Cart.create!(user: current_user)
       session[:cart_id] = @cart.id
       @cart
     end
@@ -35,15 +36,29 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def authenticate_api!
+    def current_user
       begin
-        authorization = request.headers['Authorization']
-        raise JWT::DecodeError if authorization.blank?
-        token = authorization.split(' ').last
-        payload = AuthToken.decode(token).first
-        @current_user = User.find(payload['user_id'])
+        @current_user ||= warden.authenticate(:scope => :user) || user_from_token
       rescue JWT::DecodeError
-        head :unauthorized
+        nil
       end
+    end
+
+    def authenticate_api!
+      head :unauthorized unless current_user
+    end
+
+    def token_payload
+      AuthToken.decode(token).first
+    end
+
+    def token
+      authorization = request.headers['Authorization']
+      return '' if authorization.blank?
+      authorization.split(' ').last
+    end
+
+    def user_from_token
+      User.find(token_payload['user_id'])
     end
 end

@@ -25,50 +25,6 @@ RSpec.describe CartController, type: :controller do
       expect(assigns[:cart]).to eq cart
       expect(assigns[:cart_items]).to eq [old_cart_item, new_cart_item]
     end
-
-    describe "JSON response" do
-      render_views
-      let(:cart) { create(:cart) }
-      let(:product) { create(:product, price: '2.50') }
-      let(:cart_item) { cart.add(product, product.price, 2) }
-
-      before do
-        request.accept = 'application/json'
-        cart_item
-        session[:cart_id] = cart.id
-        do_action
-      end
-
-      it do
-        expect(json).to eq(
-          "cart" => {
-            "subtotal_cents" => 500,
-            "subtotal_currency" => "USD",
-            "total_cents" => 700,
-            "total_currency" => "USD",
-            "cart_items" => [
-              {
-                "quantity" => 2,
-                "subtotal_cents" => 500,
-                "subtotal_currency" => "USD",
-                "product" => {
-                  "id" => product.id,
-                  "name" => product.name,
-                  "description" => product.description,
-                  "price_cents" => 250,
-                  "price_currency" => "USD",
-                  "image" => product.image.url(:thumb),
-                  "store" => {
-                    "id" => product.store.id,
-                    "name" => product.store.name
-                  }
-                }
-              }
-            ]
-          }
-        )
-      end
-    end
   end
 
   describe "PATCH #add" do
@@ -163,19 +119,6 @@ RSpec.describe CartController, type: :controller do
         expect { do_action }.to raise_error(Pundit::NotAuthorizedError)
       end
     end
-
-    describe "JSON response" do
-      render_views
-
-      before do
-        request.accept = 'application/json'
-        do_action
-      end
-
-      it do
-        expect(response.status).to be 200
-      end
-    end
   end
 
   describe "DELETE #remove" do
@@ -206,19 +149,6 @@ RSpec.describe CartController, type: :controller do
     it "sets a success message" do
       do_action
       expect(flash[:success]).to eq 'Item removed from the cart.'
-    end
-
-    describe "JSON response" do
-      render_views
-
-      before do
-        request.accept = 'application/json'
-        do_action
-      end
-
-      it do
-        expect(response.status).to be 200
-      end
     end
   end
 
@@ -253,19 +183,6 @@ RSpec.describe CartController, type: :controller do
     it "sets a success message" do
       do_action
       expect(flash[:success]).to eq "Item's quantity updated to #{quantity}."
-    end
-
-    describe "JSON response" do
-      render_views
-
-      before do
-        request.accept = 'application/json'
-        do_action
-      end
-
-      it do
-        expect(response.status).to be 200
-      end
     end
   end
 end

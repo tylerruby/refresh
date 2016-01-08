@@ -5,12 +5,13 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:orders) }
     it { is_expected.to have_many(:addresses).dependent(:destroy) }
     it { is_expected.to belong_to(:current_address) }
+    it { is_expected.to have_one(:cart) }
   end
 
   it { is_expected.to accept_nested_attributes_for(:addresses).allow_destroy(true) }
 
   it "defaults to any address if there's not current_address" do
-    user = create(:user)
+    user = create(:user, current_address: nil)
     address = create(:address)
     user.addresses << address
 
