@@ -13,10 +13,20 @@ class StoresController < ApplicationController
   def search_by_city
     @city = city
 
-    if @city == 'Atlanta'
-      redirect_to store_path(SelectNextStore.new(Store.all).select)
-    else
-      render :index
+    next_store = SelectNextStore.new(Store.all).select
+
+    respond_to do |format|
+      format.json do
+        render json: { store: { id: next_store.id } }
+      end
+
+      format.html do
+        if @city == 'Atlanta'
+          redirect_to store_path(next_store)
+        else
+          render :index
+        end
+      end
     end
   end
 

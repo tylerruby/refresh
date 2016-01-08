@@ -36,7 +36,14 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_api!
-      head :unauthorized if request.headers['Authorization'].nil? ||
-        !AuthToken.decode(request.headers['Authorization'].split(' ').last)
+      begin
+        authorization = request.headers['Authorization']
+        raise JWT::DecodeError if authorization.blank?
+        token = authorization.split(' ').last
+        payload = AuthToken.decode(token).first
+        @current_user = User.find(payload['user_id'])
+      rescue JWT::DecodeError
+        head :unauthorized
+      end
     end
 end

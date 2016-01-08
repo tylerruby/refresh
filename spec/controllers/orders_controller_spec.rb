@@ -34,6 +34,41 @@ RSpec.describe OrdersController, type: :controller do
         expect(response).to redirect_to new_user_session_path
       end
     end
+
+    describe "JSON response" do
+      render_views
+
+      before do
+        request.accept = 'application/json'
+        api_sign_in user
+        do_action
+      end
+
+      it do
+        expect(json).to eq(
+          [
+            {
+              "id" => new_order.id,
+              "status" => new_order.status,
+              "amount_cents" => new_order.amount_cents,
+              "amount_currency" => new_order.amount_currency,
+              "created_at" => new_order.created_at.iso8601(3),
+              "delivery_address" => new_order.delivery_address,
+              "observations" => new_order.observations
+            },
+            {
+              "id" => old_order.id,
+              "status" => old_order.status,
+              "amount_cents" => old_order.amount_cents,
+              "amount_currency" => old_order.amount_currency,
+              "created_at" => old_order.created_at.iso8601(3),
+              "delivery_address" => old_order.delivery_address,
+              "observations" => old_order.observations
+            }
+          ]
+        )
+      end
+    end
   end
 
   describe "GET #new" do
@@ -114,6 +149,20 @@ RSpec.describe OrdersController, type: :controller do
         }.to change(Order, :count).by(1)
       end
 
+      describe "JSON response" do
+        render_views
+
+        before do
+          request.accept = 'application/json'
+          api_sign_in user
+          do_action
+        end
+
+        it do
+          expect(response.status).to be 200
+        end
+      end
+
       describe "post-conditions" do
         before do
           do_action
@@ -153,6 +202,23 @@ RSpec.describe OrdersController, type: :controller do
             }.to change(Order, :count).by(1)
           end
 
+          describe "JSON response" do
+            render_views
+
+            before do
+              request.accept = 'application/json'
+              api_sign_in user
+              do_action
+            end
+
+            it { expect(response.status).to be 422 }
+            it do
+              expect(json).to eq(
+                "error" => "Something went wrong. Contact us and we'll solve the problem."
+              )
+            end
+          end
+
           context "when neither stripe token nor stripe source id are given" do
             let(:token) { nil }
 
@@ -160,6 +226,23 @@ RSpec.describe OrdersController, type: :controller do
               do_action
               expect(response).to have_http_status(:unprocessable_entity)
               expect(flash[:danger]).to eq "A credit card must be selected"
+            end
+
+            describe "JSON response" do
+              render_views
+
+              before do
+                request.accept = 'application/json'
+                api_sign_in user
+                do_action
+              end
+
+              it { expect(response.status).to be 422 }
+              it do
+                expect(json).to eq(
+                  "error" => "A credit card must be selected"
+                )
+              end
             end
           end
 
@@ -200,6 +283,23 @@ RSpec.describe OrdersController, type: :controller do
             expect {
               do_action
             }.to change(Order, :count).by(1)
+          end
+
+          describe "JSON response" do
+            render_views
+
+            before do
+              request.accept = 'application/json'
+              api_sign_in user
+              do_action
+            end
+
+            it { expect(response.status).to be 400 }
+            it do
+              expect(json).to eq(
+                "error" => error_message
+              )
+            end
           end
 
           describe "post-conditions" do

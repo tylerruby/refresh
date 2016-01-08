@@ -23,20 +23,21 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
+      redirect = -> { redirect_to root_path }
       begin
         MakePayment.new(order: @order, cart: cart).pay
-        flash[:success] = "Checkout was successful! You'll receive your order in 15 minutes!"
+        render_success "Checkout was successful! You'll receive your order in 15 minutes!", html_render_method: redirect
       rescue ActiveRecord::RecordInvalid
         @order.internal_failure!
-        flash[:danger] = "Something went wrong. Contact us and we'll solve the problem."
+        render_error "Something went wrong. Contact us and we'll solve the problem.", status: :unprocessable_entity, html_render_method: redirect
       rescue Stripe::StripeError => e
         @order.external_failure!
-        flash[:danger] = e.message
+        render_error e.message, html_render_method: redirect
       end
-      redirect_to root_path
     else
-      flash[:danger] = @order.errors.messages.values.flatten.first
-      render :new, status: :unprocessable_entity
+      render_error @order.errors.messages.values.flatten.first, status: :unprocessable_entity, html_render_method: -> {
+        render :new, status: :unprocessable_entity
+      }
     end
   end
 
@@ -44,5 +45,25 @@ class OrdersController < ApplicationController
 
     def order_params
       params.require(:order).permit(:delivery_address, :observations, :source_id)
+    end
+
+    def render_success(message, html_render_method: -> { render })
+      respond_to do |format|
+        format.json { head :ok }
+        format.html do
+          flash[:success] = message
+          html_render_method.call
+        end
+      end
+    end
+
+    def render_error(message, status: :bad_request, html_render_method: -> {render })
+      respond_to do |format|
+        format.json { render json: { error: message }, status: status }
+        format.html do
+          flash[:danger] = message
+          html_render_method.call
+        end
+      end
     end
 end
