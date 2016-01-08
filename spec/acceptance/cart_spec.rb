@@ -37,7 +37,8 @@ resource 'Cart' do
         expect(response_status).to be 200
       end
 
-      example_request "cart with its items" do
+      example "getting the cart with its items", document: :public do
+        do_request
         expect(json).to eq(
           "cart" => {
             "subtotal_cents" => 500,
@@ -76,7 +77,8 @@ resource 'Cart' do
     let(:product) { create(:product) }
     let(:product_id) { product.id }
 
-    example_request "it's successful" do
+    example "adding a product to the cart", document: :public do
+      do_request
       expect(response_status).to be 200
     end
   end
@@ -88,7 +90,8 @@ resource 'Cart' do
     let!(:cart) { create(:cart, user: user) }
     let!(:cart_item) { cart.add(product, product.price, 1) }
 
-    example_request "it's successful" do
+    example "removing a product from the cart", document: :public do
+      do_request
       expect(response_status).to be 200
     end
   end
@@ -102,7 +105,8 @@ resource 'Cart' do
     let!(:cart) { create(:cart, user: user) }
     let!(:cart_item) { cart.add(product, product.price, 1) }
 
-    example_request "it's successful" do
+    example "updating a cart item's quantity", document: :public do
+      do_request
       expect(response_status).to be 200
     end
   end

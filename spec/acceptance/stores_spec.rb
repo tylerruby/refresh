@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'rspec_api_documentation/dsl'
 
-resource 'Orders' do
+resource 'Stores' do
   header 'Authorization', :authorization
   let(:authorization) { "Bearer #{token}" }
   let(:token) { AuthToken.encode(user_id: user.id) }
@@ -27,7 +27,6 @@ resource 'Orders' do
 
     before do
       Timecop.travel Time.zone.parse('01-01-2016 01:00')
-
       allow_any_instance_of(Store).to receive(:available_for_delivery?).and_return(true)
     end
 
@@ -35,7 +34,8 @@ resource 'Orders' do
       expect(response_status).to be 200
     end
 
-    example_request "returns the current opened store" do
+    example "getting the current opened store", document: :public do
+      do_request
       expect(json).to eq(
         "store" => {
           "id" => available_store.id
@@ -62,7 +62,8 @@ resource 'Orders' do
       expect(response_status).to be 200
     end
 
-    example_request "returns the store with its products" do
+    example "getting the store with its products", document: :public do
+      do_request
       expect(json).to eq(
         "store" => {
           "id" => store.id,

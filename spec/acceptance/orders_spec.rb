@@ -16,7 +16,8 @@ resource 'Orders' do
       expect(response_status).to be 200
     end
 
-    example_request "getting orders" do
+    example "getting user's orders", document: :public do
+      do_request
       expect(json).to eq(
         [
           {
@@ -43,9 +44,9 @@ resource 'Orders' do
   end
 
   post '/orders.json' do
-    parameter :stripeToken
+    parameter :stripeToken, "Stripe's single-use token (check https://stripe.com/docs/tutorials/forms for more information)"
     parameter :delivery_address, scope: :order
-    parameter :observations, scope: :order
+    parameter :observations, "Order observations (for example, \"I'm the guy using a black shirt\")", scope: :order
     let(:stripe_helper) { StripeMock.create_test_helper }
     let!(:cart) { create(:cart, user: user) }
     let!(:cart_items) { [cart.add(create(:product), 1)] }
@@ -53,7 +54,8 @@ resource 'Orders' do
     let(:stripeToken) { stripe_helper.generate_card_token }
     let(:delivery_address) { "18th Street Atlanta" }
 
-    example_request "it's successful" do
+    example "creating an order", document: :public do
+      do_request
       expect(response_status).to be 200
     end
 
@@ -66,7 +68,8 @@ resource 'Orders' do
         expect(response_status).to be 422
       end
 
-      example_request "returns the error message" do
+      example "internal error when creating an order", document: :public do
+        do_request
         expect(json).to eq(
           "error" => "Something went wrong. Contact us and we'll solve the problem."
         )
@@ -80,7 +83,8 @@ resource 'Orders' do
         expect(response_status).to be 422
       end
 
-      example_request "returns the error message" do
+      example "error when didn't send the stripe token", document: :public do
+        do_request
         expect(json).to eq(
           "error" => "A credit card must be selected"
         )
@@ -99,7 +103,8 @@ resource 'Orders' do
         expect(response_status).to be 400
       end
 
-      example_request "returns the error message" do
+      example "stripe error when creating an order", document: :public do
+        do_request
         expect(json).to eq(
           "error" => error_message
         )
