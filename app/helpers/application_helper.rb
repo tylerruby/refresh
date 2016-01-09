@@ -30,8 +30,11 @@ module ApplicationHelper
     end
   end
 
-  def modal_to(title, href)
-    link_to title, href, data: { toggle: :modal, dismiss: :modal }
+  def modal_to(title, href, options = {})
+    options = {
+      data: { toggle: :modal, dismiss: :modal }
+    }.merge(options)
+    link_to title, href, options
   end
 
   def dropdown_for(title, options = {})

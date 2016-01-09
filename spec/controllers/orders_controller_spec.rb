@@ -122,6 +122,7 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it { expect(order.cart_items).to eq cart_items }
+        it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'approved' }

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :addresses, as: :addressable, dependent: :destroy
+  has_one :cart
   belongs_to :current_address, class_name: 'Address'
   accepts_nested_attributes_for :addresses, allow_destroy: true
 
@@ -16,6 +17,24 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
     end
   end
+
+	def self.from_oauth(oauth)
+		data = oauth.get_data
+
+		user = find_by(provider: oauth.provider, uid: data[:id]) || find_or_create_by(email: data[:email]) do |u|
+			u.password =  SecureRandom.hex
+		end
+
+    # first_name, last_name = [data[:first_name], data[:last_name]]
+		user.update(
+			# display_name: [first_name, last_name].join(' '),
+			email: data[:email],
+			provider: oauth.provider,
+      uid: data[:id]
+		)
+
+		user
+	end
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -56,11 +75,11 @@ class User < ActiveRecord::Base
     customer.sources.retrieve(id).delete()
   end
 
-private
+  private
 
-  # TODO: Handle possible error on Stripe API communication
-  def create_customer
-    customer = Stripe::Customer.create(email: email)
-    self.customer_id = customer.id
-  end
+    # TODO: Handle possible error on Stripe API communication
+    def create_customer
+      customer = Stripe::Customer.create(email: email)
+      self.customer_id = customer.id
+    end
 end

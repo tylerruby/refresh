@@ -6,7 +6,7 @@ RSpec.describe StoresController, type: :controller do
     stub_address("3905 Mike Padgett Hwy, Atlanta, GA", 33.353523, -81.982439)
   end
 
-  describe "GET #search_by_city"  do
+  describe "GET #search_by_city" do
     let(:atlanta) { create(:city, name: 'Atlanta') }
 
     def available_address

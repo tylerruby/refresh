@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
-
 gem 'rails',                 '4.2.3'
 gem 'sass-rails',            '~> 5.0'
 gem 'uglifier',              '>= 1.3.0'
@@ -30,19 +29,23 @@ gem 'pundit',                '1.0.1'
 gem 'nested_form',           '0.3.2'
 gem 'paranoia',              '2.1.3'
 gem 'bootstrap-sass',        '3.3.5.1'
+gem 'jwt',                   '1.5.1'
+gem 'rack-cors',             '0.4.0', :require => 'rack/cors'
+gem 'httpclient',            '2.6.0.1'
 
 group :development, :test do
-  gem 'pry'
-  gem 'pry-rails'
-  gem 'web-console',           '~> 2.0'
-  gem 'spring',                '1.3.6'
-  gem 'spring-commands-rspec', '1.0.4'
-  gem 'rspec-rails',           '3.3.3'
-  gem 'factory_girl_rails',    '4.5.0'
-  gem 'dotenv-rails',          '2.0.2'
-  gem 'guard-rspec',           '4.6.4'
-  gem 'shoulda-matchers',      '3.0.0'
-  gem 'timecop'
+  gem 'pry',                     '0.10.1'
+  gem 'pry-rails',               '0.3.4'
+  gem 'web-console',             '~> 2.0'
+  gem 'spring',                  '1.3.6'
+  gem 'spring-commands-rspec',   '1.0.4'
+  gem 'rspec-rails',             '3.3.3'
+  gem 'factory_girl_rails',      '4.5.0'
+  gem 'dotenv-rails',            '2.0.2'
+  gem 'guard-rspec',             '4.6.4'
+  gem 'shoulda-matchers',        '3.0.0'
+  gem 'timecop',                 '0.8.0'
+  gem 'rspec_api_documentation', '4.6.0'
 end
 
 group :development do
@@ -51,6 +54,8 @@ end
 
 group :test do
   gem 'stripe-ruby-mock', '~> 2.2.1', require: 'stripe_mock'
+  gem 'vcr',                     '3.0.1'
+  gem 'webmock',                 '1.22.5'
 end
 
 group :production, :staging do

@@ -40,14 +40,17 @@
               </a>
             </li>
           <% end %>
+          <li><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide' : '') %></li>
           <li class="dropdown">
-            <% if user_signed_in? %>
-              <a href="#" class="dropdown-toggle avatar-padding" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img class="img-circle profile" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
-              </a>
-            <% else %>
-              <li><%= modal_to "Login", "#loginModal" %></li>
-            <% end %>
+            <a href="#"
+               id="user-dropdown"
+               class="dropdown-toggle avatar-padding<%= ' hide' unless user_signed_in? %>"
+               data-toggle="dropdown"
+               role="button"
+               aria-haspopup="true"
+               aria-expanded="false">
+               <img class="img-circle profile" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
+            </a>
             <ul class="dropdown-menu">
               <li><a href="/account">Account</a></li>
               <li><%= link_to 'Edit profile', edit_user_path %></li>

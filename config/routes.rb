@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks", passwords: "devise/passwords", registrations: "devise/registrations" }
+  devise_for :users, :controllers => {
+    omniauth_callbacks: "users/omniauth_callbacks",
+    passwords: "devise/passwords",
+    registrations: "devise/registrations",
+    sessions: "users/sessions"
+  }
 
   resources :orders, only: [:index, :new, :create], path_names: { new: 'checkout' }
 
@@ -11,6 +16,8 @@ Rails.application.routes.draw do
       get :remove_credit_card
     end
   end
+
+  post '/auth/:provider', to: 'auth#authenticate'
 
   get 'cart' => 'cart#index'
   patch 'cart/add'

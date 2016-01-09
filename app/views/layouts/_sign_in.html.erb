@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body p-a-0 js-modalBody">
-        <%= form_for(User.new, url: session_path(:user), html: { class: "m-x-auto text-center app-login-form", role: "form" }) do |f| %>
+        <%= form_for(User.new, url: session_path(:user), html: { id: 'sign-in-form', class: "m-x-auto text-center app-login-form", role: "form" }) do |f| %>
           <a href="/" class="app-brand m-b-lg">
             <img src="http://i.imgur.com/mJLWHVZ.png" alt="brand">
           </a>
@@ -12,6 +12,7 @@
             <% end %>
           </div>
           <hr />
+          <p class="errors error-message"></p>
           <div class="form-group">
             <%= f.email_field :email, autofocus: true, required: true, class: "form-control", placeholder: "Email" %>
           </div>

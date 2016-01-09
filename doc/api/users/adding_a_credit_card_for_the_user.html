@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Users API</h1>
+
+      <div class="article">
+        <h2>adding a credit card for the user</h2>
+        <h3>POST /user/add_credit_card.json</h3>
+
+          <h3>Parameters</h3>
+          <table class="parameters table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <span class="name">credit_card[number]</span>
+                </td>
+                <td>
+                  <span class="description">Credit card number</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">credit_card[exp_year]</span>
+                </td>
+                <td>
+                  <span class="description">Credit card exp year</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">credit_card[exp_month]</span>
+                </td>
+                <td>
+                  <span class="description">Credit card exp month</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">credit_card[cvc]</span>
+                </td>
+                <td>
+                  <span class="description">Credit card cvc</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMzc2fQ.5K3XRf0uIGx6K816hXRU5vjpzfa7sVXjj0MPt7fwDgU
+Host: example.org
+Content-Type: application/x-www-form-urlencoded
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">POST /user/add_credit_card.json</pre>
+
+
+            <h4>Body</h4>
+            <pre class="request body">credit_card[number]=4242+4242+4242+4242&credit_card[exp_year]=2025&credit_card[exp_month]=1&credit_card[cvc]=123</pre>
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;2c77b73f10f8d32065b3da0533ecb360&quot;
+Cache-Control: max-age=0, private, must-revalidate
+Set-Cookie: request_method=POST; path=/
+X-Request-Id: a2fbd31b-aef4-4cf7-92e8-c13bea79194f
+X-Runtime: 0.007285
+Vary: Origin
+Content-Length: 5129</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">{
+  &quot;message&quot;: &quot;Card added!&quot;,
+  &quot;html&quot;: &quot;&lt;div class=\&quot;credit-cards-wrapper panel panel-default\&quot;&gt;\n  &lt;div class=\&quot;panel-heading\&quot;&gt;\n    &lt;h4&gt;Payment Info&lt;/h4&gt;\n  &lt;/div&gt;\n\n  &lt;div id=\&quot;payment-info\&quot; class=\&quot;panel-body\&quot;&gt;\n      &lt;div class=\&quot;alert alert-dismissible alert-success\&quot; role=\&quot;alert\&quot;&gt;\n        &lt;button type=\&quot;button\&quot; class=\&quot;close\&quot; data-dismiss=\&quot;alert\&quot; aria-label=\&quot;Close\&quot;&gt;&lt;span aria-hidden=\&quot;true\&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;\n        Card added!\n      &lt;/div&gt;\n\n    &lt;table class=\&quot;table\&quot;&gt;\n        &lt;tr&gt;\n          &lt;td&gt;Visa | 4242&lt;/td&gt;\n          &lt;td&gt;\n            &lt;a data-disable-with=\&quot;removing...\&quot; data-confirm=\&quot;Are you sure?\&quot; href=\&quot;/user/remove_credit_card?credit_card_id=test_cc_6\&quot;&gt;remove&lt;/a&gt;\n          &lt;/td&gt;\n        &lt;/tr&gt;\n    &lt;/table&gt;\n\n    &lt;br&gt;\n\n    &lt;form style=\&quot;display: none\&quot; action=\&quot;/user/add_credit_card\&quot; accept-charset=\&quot;UTF-8\&quot; data-remote=\&quot;true\&quot; method=\&quot;post\&quot;&gt;&lt;input name=\&quot;utf8\&quot; type=\&quot;hidden\&quot; value=\&quot;&amp;#x2713;\&quot; /&gt;\n\n\n      &lt;div class=\&quot;row\&quot;&gt;\n        &lt;div class=\&quot;col-xs-12\&quot;&gt;\n          &lt;div class=\&quot;form-group\&quot;&gt;\n            &lt;label for=\&quot;credit_card_number\&quot;&gt;Number&lt;/label&gt;\n            &lt;input class=\&quot;form-control\&quot; placeholder=\&quot;1234 5678 9012 3456\&quot; type=\&quot;text\&quot; name=\&quot;credit_card[number]\&quot; id=\&quot;credit_card_number\&quot; /&gt;\n          &lt;/div&gt;\n        &lt;/div&gt;\n      &lt;/div&gt;\n\n      &lt;div class=\&quot;row\&quot;&gt;\n        &lt;div class=\&quot;col-sm-4\&quot;&gt;\n          &lt;div class=\&quot;form-group\&quot;&gt;\n            &lt;label for=\&quot;credit_card_exp_year\&quot;&gt;Exp year&lt;/label&gt;\n            &lt;select class=\&quot;form-control\&quot; name=\&quot;credit_card[exp_year]\&quot; id=\&quot;credit_card_exp_year\&quot;&gt;&lt;option value=\&quot;2016\&quot;&gt;2016&lt;/option&gt;\n&lt;option value=\&quot;2017\&quot;&gt;2017&lt;/option&gt;\n&lt;option value=\&quot;2018\&quot;&gt;2018&lt;/option&gt;\n&lt;option value=\&quot;2019\&quot;&gt;2019&lt;/option&gt;\n&lt;option value=\&quot;2020\&quot;&gt;2020&lt;/option&gt;\n&lt;option value=\&quot;2021\&quot;&gt;2021&lt;/option&gt;\n&lt;option value=\&quot;2022\&quot;&gt;2022&lt;/option&gt;\n&lt;option value=\&quot;2023\&quot;&gt;2023&lt;/option&gt;\n&lt;option value=\&quot;2024\&quot;&gt;2024&lt;/option&gt;\n&lt;option value=\&quot;2025\&quot;&gt;2025&lt;/option&gt;\n&lt;option value=\&quot;2026\&quot;&gt;2026&lt;/option&gt;\n&lt;option value=\&quot;2027\&quot;&gt;2027&lt;/option&gt;\n&lt;option value=\&quot;2028\&quot;&gt;2028&lt;/option&gt;\n&lt;option value=\&quot;2029\&quot;&gt;2029&lt;/option&gt;\n&lt;option value=\&quot;2030\&quot;&gt;2030&lt;/option&gt;\n&lt;option value=\&quot;2031\&quot;&gt;2031&lt;/option&gt;&lt;/select&gt;\n          &lt;/div&gt;\n        &lt;/div&gt;\n\n        &lt;div class=\&quot;col-sm-4\&quot;&gt;\n          &lt;div class=\&quot;form-group\&quot;&gt;\n            &lt;label for=\&quot;credit_card_exp_month\&quot;&gt;Exp month&lt;/label&gt;\n            &lt;select class=\&quot;form-control\&quot; name=\&quot;credit_card[exp_month]\&quot; id=\&quot;credit_card_exp_month\&quot;&gt;&lt;option value=\&quot;1\&quot;&gt;1&lt;/option&gt;\n&lt;option value=\&quot;2\&quot;&gt;2&lt;/option&gt;\n&lt;option value=\&quot;3\&quot;&gt;3&lt;/option&gt;\n&lt;option value=\&quot;4\&quot;&gt;4&lt;/option&gt;\n&lt;option value=\&quot;5\&quot;&gt;5&lt;/option&gt;\n&lt;option value=\&quot;6\&quot;&gt;6&lt;/option&gt;\n&lt;option value=\&quot;7\&quot;&gt;7&lt;/option&gt;\n&lt;option value=\&quot;8\&quot;&gt;8&lt;/option&gt;\n&lt;option value=\&quot;9\&quot;&gt;9&lt;/option&gt;\n&lt;option value=\&quot;10\&quot;&gt;10&lt;/option&gt;\n&lt;option value=\&quot;11\&quot;&gt;11&lt;/option&gt;\n&lt;option value=\&quot;12\&quot;&gt;12&lt;/option&gt;&lt;/select&gt;\n          &lt;/div&gt;\n        &lt;/div&gt;\n\n        &lt;div class=\&quot;col-sm-4\&quot;&gt;\n          &lt;div class=\&quot;form-group\&quot;&gt;\n            &lt;label for=\&quot;credit_card_cvc\&quot;&gt;Cvc&lt;/label&gt;\n            &lt;input class=\&quot;form-control\&quot; placeholder=\&quot;CCV\&quot; type=\&quot;text\&quot; name=\&quot;credit_card[cvc]\&quot; id=\&quot;credit_card_cvc\&quot; /&gt;\n          &lt;/div&gt;\n        &lt;/div&gt;\n      &lt;/div&gt;\n\n      &lt;div class=\&quot;row\&quot;&gt;\n        &lt;div class=\&quot;col-xs-12\&quot;&gt;\n          &lt;button id=\&quot;cancel-add-payment\&quot; type=\&quot;reset\&quot; value=\&quot;Reset\&quot; class=\&quot;btn btn-default\&quot;&gt;Cancel&lt;/button&gt;\n          &lt;input type=\&quot;submit\&quot; name=\&quot;commit\&quot; value=\&quot;Submit\&quot; class=\&quot;btn btn-default\&quot; data-disable-with=\&quot;Submitting...\&quot; /&gt;\n        &lt;/div&gt;\n      &lt;/div&gt;\n&lt;/form&gt;\n    &lt;div class=\&quot;clearfix\&quot;&gt;&lt;/div&gt;\n    &lt;hr style=\&quot;margin-bottom:0px\&quot; /&gt;\n  &lt;/div&gt;\n\n  &lt;div class=\&quot;panel-body\&quot;&gt;\n    &lt;a id=\&quot;add-payment\&quot; class=\&quot;btn btn-default black\&quot;&gt;Add New Card&lt;/a&gt;\n  &lt;/div&gt;\n&lt;/div&gt;\n&quot;
+}</pre>
+      </div>
+    </div>
+  </body>
+</html>

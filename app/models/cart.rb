@@ -1,5 +1,6 @@
 class Cart < ActiveRecord::Base
   acts_as_shopping_cart_using :cart_item
+  belongs_to :user
 
   def description
     "#{total_unique_items} #{'product'.pluralize(total_unique_items)} (#{total.format})"

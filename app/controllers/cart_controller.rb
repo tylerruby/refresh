@@ -9,20 +9,38 @@ class CartController < ApplicationController
     Cart.transaction do
       cart.add(product, product.price, quantity)
     end
-    flash[:success] = 'Item added to the cart!'
-    redirect_to :back
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        flash[:success] = 'Item added to the cart!'
+        redirect_to :back
+      end
+    end
   end
 
   def remove
     cart.remove(product, cart.item_for(product).quantity)
-    flash[:success] = 'Item removed from the cart.'
-    redirect_to :back
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        flash[:success] = 'Item removed from the cart.'
+        redirect_to :back
+      end
+    end
   end
 
   def update
     cart.item_for(product).update!(quantity: quantity)
-    flash[:success] = "Item's quantity updated to #{quantity}."
-    redirect_to :back
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        flash[:success] = "Item's quantity updated to #{quantity}."
+        redirect_to :back
+      end
+    end
   end
 
   private
