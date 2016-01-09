@@ -84,4 +84,44 @@ resource 'Sessions' do
       )
     end
   end
+
+  get '/user/new_token.json' do
+    header 'Authorization', :authorization
+    let(:authorization) { "Bearer #{token}" }
+    let(:token) { AuthToken.encode(user_id: user.id) }
+    let(:user) { create(:user) }
+
+    let(:new_token) do
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IiI.-IZCxF2OTSg7vVCuU5MJlJ65DLGHv49LI-9YsyllVIo'
+    end
+
+    before do
+      token
+      allow(AuthToken)
+        .to receive(:encode)
+        .with(user_id: user.id)
+        .and_return(new_token)
+    end
+
+    example "get a new token", document: :public do
+      do_request
+      expect(json).to eq(
+        "id" => user.id,
+        "credit_cards" => [],
+        "token" => new_token
+      )
+    end
+
+    context "trying to get new token after expired" do
+      before do
+        token
+        Timecop.travel 1.month.from_now
+      end
+
+      example "fails to get a new token after the previous was expired" do
+        do_request
+        expect(response_status).to be 401
+      end
+    end
+  end
 end

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_api!
+
   def edit
     @user = current_user
   end
@@ -49,6 +51,10 @@ class UsersController < ApplicationController
         redirect_to :back
       end
     end
+  end
+
+  def new_token
+    render json: UserSerializer.new(current_user)
   end
 
   private

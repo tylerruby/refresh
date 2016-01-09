@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     end
 
     def token_payload
-      AuthToken.decode(token).first
+      AuthToken.decode(token)
     end
 
     def token
