@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Registrations API</title>
+    <title>Sessions API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,54 +106,25 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Registrations API</h1>
+      <h1>Sessions API</h1>
 
       <div class="article">
-        <h2>creating an user</h2>
-        <h3>POST /users.json</h3>
+        <h2>get a new token</h2>
+        <h3>GET /user/new_token.json</h3>
 
-          <h3>Parameters</h3>
-          <table class="parameters table table-striped table-bordered table-condensed">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                    <span class="name">user[email]</span>
-                </td>
-                <td>
-                  <span class="description">User email</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">user[password]</span>
-                </td>
-                <td>
-                  <span class="description">User password</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
 
 
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Host: example.org
-Content-Type: application/x-www-form-urlencoded
+            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NTUwNTUzNjgsImRhdGEiOnsidXNlcl9pZCI6MTYwNX19.DaZvizBUMgkwW3MV8LKTZEZZ38SkjoaFq2VGV6r60WY
+Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /users.json</pre>
+          <pre class="request route highlight">GET /user/new_token.json</pre>
 
 
-            <h4>Body</h4>
-            <pre class="request body">user[email]=some.email%40example.com&user[password]=12345678</pre>
 
 
             <h3>Response</h3>
@@ -162,19 +133,17 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;c00c49c4c0a2c1adcd54ba12bd9b7eb8&quot;
+ETag: W/&quot;fb7850e695770999c0cc0b0a2c2ad288&quot;
 Cache-Control: max-age=0, private, must-revalidate
-Set-Cookie: request_method=POST; path=/
-_refresh_session=c2RrTm90WFBVU050WGtCVkpjWkZiT0VwMFoyRU8vOU5LbDcwaFRQREl2K3g4OTFMTUlZNWRMcEpFZVZFVXRhMEVmdzdwWVNXOGxiOFY4dXlXZnl0TW54SDd0UDBHMEdNYzBpek1WQlNKZkNuclFxY3B4TzFnNjI4a0U4VnZmcFZHWVNOanZKSHRjbEF1WlZYek5WTXlXWVpHY0ZKY1dDK1JsV053bGpHTUNBPS0tZVEyYldVR1BFRnczcTg3cXIvUmpFQT09--9bc71632e76cbd24ad38bffd0dbb74dc04a5cf68; path=/; HttpOnly
-X-Request-Id: 9c40f50b-27e3-44af-b5ed-8480a84db83e
-X-Runtime: 0.015101
+X-Request-Id: 0ffe8ec4-8c48-41b3-8086-031012015175
+X-Runtime: 0.007735
 Vary: Origin
 Content-Length: 124</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;id&quot;: 1600,
+  &quot;id&quot;: 1605,
   &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IiI.-IZCxF2OTSg7vVCuU5MJlJ65DLGHv49LI-9YsyllVIo&quot;,
   &quot;credit_cards&quot;: [
 

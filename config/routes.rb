@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       post :add_credit_card, defaults: {format: 'json'}
       get :remove_credit_card
+      get :new_token
     end
   end
 
