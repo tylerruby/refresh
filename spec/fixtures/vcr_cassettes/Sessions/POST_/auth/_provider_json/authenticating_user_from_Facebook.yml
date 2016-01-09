@@ -1,0 +1,150 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/v2.3/oauth/access_token
+    body:
+      encoding: UTF-8
+      string: code=AQAbPYPr-aVYV5DhQVJBlUdAEqjwllnbt3TKDmIGR9I9LY6el22kzSiQS5MXyWT-EXiO3Wfv7HWnyhn18jwUuRxZEP7ILv0dUmvczR4GjYYk7YdeZaOo4T5WcWqOgYE49QMRrTSH22lc3RfYnehHyyplQ-8sZNotw2Mh0wXdVtUcmIBedtlS8dKYSJ_8OmORqWRb-5Mo7wkMMaYV8WgZQ-ngR0IQc_f79cDyrKKkwNz19guCNFbVJu3J-qU5kSex1qp0_3xwwtmH8cU3REOjaXVzfdAbRK0zPdAZq5T6FhjiWFrH1SkNAqJrN7bUQn7IrCXaY-WOOGwZ67kB4NmHSUig36nBLbvohGJelVCvGTlnUQ%23_%3D_&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&client_id=752018661610868&client_secret=b14971e0531ff5be2876d313c4f549a1&grant_type=authorization_code
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.6.0.1, ruby 2.2.2 (2015-04-13))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 08 Jan 2016 23:58:38 GMT
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - H+11lDEyp1I
+      X-Fb-Rev:
+      - '2122722'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.3
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - MRC3o84DvHJmuZg13uzyrZDULtS1ACIi6u+y+htz5/gsYLRkgEOgQCFTkAuPpOE1YKH2pTlT6gcCGxbaBp1jRw==
+      Date:
+      - Fri, 08 Jan 2016 23:58:39 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '263'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"CAAKr9P0wlXQBAOLsdVqoCZAafZBRsVG6atDmKYOEHRv5QTZA6rt2hg8pGZAcjvZAMNOOeGSYgRBBKgRsaZAsRsLMxJ38yVESdfCDHXeaLUKPdndbkvnZCVPsUVAoWeSmZB4R7NlICe0wUPZAcMRM5T0JzIDdsXtdXx0iTFOlt0SMG3BvZAiNZCdxJHd6WNDA9cANmAZD","token_type":"bearer","expires_in":5183926}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 23:58:39 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v2.3/me?access_token=CAAKr9P0wlXQBAOLsdVqoCZAafZBRsVG6atDmKYOEHRv5QTZA6rt2hg8pGZAcjvZAMNOOeGSYgRBBKgRsaZAsRsLMxJ38yVESdfCDHXeaLUKPdndbkvnZCVPsUVAoWeSmZB4R7NlICe0wUPZAcMRM5T0JzIDdsXtdXx0iTFOlt0SMG3BvZAiNZCdxJHd6WNDA9cANmAZD&fields=first_name,%20last_name,%20email,%20gender,%20about,%20link,%20website,%20picture
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.6.0.1, ruby 2.2.2 (2015-04-13))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 08 Jan 2016 23:58:58 GMT
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - HzHMOSJg9z9
+      X-Fb-Rev:
+      - '2122722'
+      Etag:
+      - '"f70047678ae8c83cf0d0850c9c68eda43077ff49"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.4
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - mXlZfxChwj1ChT124DbBWizY3vJ07PafKcprPJMLBSfDtmWGO6hS3kUtssbateNJowIeeJTuVlgpSnd+zjkdTA==
+      Date:
+      - Fri, 08 Jan 2016 23:58:59 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '489'
+    body:
+      encoding: UTF-8
+      string: '{"first_name":"Marcos Felipe","last_name":"Rodrigues","email":"marcosrodrigues\u0040id.uff.br","gender":"male","link":"https:\/\/www.facebook.com\/app_scoped_user_id\/1036740603037267\/","picture":{"data":{"is_silhouette":false,"url":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-xaf1\/v\/t1.0-1\/p50x50\/10995285_921492244562104_407056410761423017_n.jpg?oh=6c83628fd759dbe235d48dab4c2a05f2&oe=56FEF1E2&__gda__=1463904680_ad3ef3a34416d8d1c0a494d64c27550f"}},"id":"1036740603037267"}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 23:58:59 GMT
+- request:
+    method: get
+    uri: https://graph.facebook.com/v2.3/me?access_token=CAAKr9P0wlXQBAOLsdVqoCZAafZBRsVG6atDmKYOEHRv5QTZA6rt2hg8pGZAcjvZAMNOOeGSYgRBBKgRsaZAsRsLMxJ38yVESdfCDHXeaLUKPdndbkvnZCVPsUVAoWeSmZB4R7NlICe0wUPZAcMRM5T0JzIDdsXtdXx0iTFOlt0SMG3BvZAiNZCdxJHd6WNDA9cANmAZD&fields=first_name,%20last_name,%20email,%20gender,%20about,%20link,%20website,%20picture
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.6.0.1, ruby 2.2.2 (2015-04-13))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 08 Jan 2016 23:58:59 GMT
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - HtLQNTjk882
+      X-Fb-Rev:
+      - '2122722'
+      Etag:
+      - '"f70047678ae8c83cf0d0850c9c68eda43077ff49"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.4
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Debug:
+      - C69HVV4WlbftTs2yBvTwj8tSaN5VjnYGicbfjyJq8QCki8g1kM42N5kYwCAvtaYatsVv3YCF5P1KpIZXijr23g==
+      Date:
+      - Fri, 08 Jan 2016 23:58:59 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '489'
+    body:
+      encoding: UTF-8
+      string: '{"first_name":"Marcos Felipe","last_name":"Rodrigues","email":"marcosrodrigues\u0040id.uff.br","gender":"male","link":"https:\/\/www.facebook.com\/app_scoped_user_id\/1036740603037267\/","picture":{"data":{"is_silhouette":false,"url":"https:\/\/fbcdn-profile-a.akamaihd.net\/hprofile-ak-xaf1\/v\/t1.0-1\/p50x50\/10995285_921492244562104_407056410761423017_n.jpg?oh=6c83628fd759dbe235d48dab4c2a05f2&oe=56FEF1E2&__gda__=1463904680_ad3ef3a34416d8d1c0a494d64c27550f"}},"id":"1036740603037267"}'
+    http_version: 
+  recorded_at: Fri, 08 Jan 2016 23:58:59 GMT
+recorded_with: VCR 3.0.1
