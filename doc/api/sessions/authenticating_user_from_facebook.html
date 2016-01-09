@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Orders API</title>
+    <title>Sessions API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Orders API</h1>
+      <h1>Sessions API</h1>
 
       <div class="article">
-        <h2>error when didn&#39;t send the stripe token</h2>
-        <h3>POST /orders.json</h3>
+        <h2>authenticating user from Facebook</h2>
+        <h3>POST /auth/:provider.json</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,26 +123,18 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">stripeToken</span>
+                    <span class="name">code</span>
                 </td>
                 <td>
-                  <span class="description">Stripe&#39;s single-use token (check https://stripe.com/docs/tutorials/forms for more information)</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">order[delivery_address]</span>
-                </td>
-                <td>
-                  <span class="description">Order delivery address</span>
+                  <span class="description"> code</span>
                 </td>
               </tr>
               <tr>
                 <td>
-                    <span class="name">order[observations]</span>
+                    <span class="name">redirectUri</span>
                 </td>
                 <td>
-                  <span class="description">Order observations (for example, &quot;I&#39;m the guy using a black shirt&quot;)</span>
+                  <span class="description"> redirecturi</span>
                 </td>
               </tr>
             </tbody>
@@ -152,17 +144,16 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDA0fQ.sOAVRrT8b9ePh1iZHS1EiF5Hlc-9_KQuRsmSx0qG_PA
-Host: example.org
+            <pre class="request headers">Host: example.org
 Content-Type: application/x-www-form-urlencoded
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /orders.json</pre>
+          <pre class="request route highlight">POST /auth/facebook.json</pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">stripeToken&order[delivery_address]=18th+Street+Atlanta&order[observations]=Take+off+the+bacon%21</pre>
+            <pre class="request body">code=AQAbPYPr-aVYV5DhQVJBlUdAEqjwllnbt3TKDmIGR9I9LY6el22kzSiQS5MXyWT-EXiO3Wfv7HWnyhn18jwUuRxZEP7ILv0dUmvczR4GjYYk7YdeZaOo4T5WcWqOgYE49QMRrTSH22lc3RfYnehHyyplQ-8sZNotw2Mh0wXdVtUcmIBedtlS8dKYSJ_8OmORqWRb-5Mo7wkMMaYV8WgZQ-ngR0IQc_f79cDyrKKkwNz19guCNFbVJu3J-qU5kSex1qp0_3xwwtmH8cU3REOjaXVzfdAbRK0zPdAZq5T6FhjiWFrH1SkNAqJrN7bUQn7IrCXaY-WOOGwZ67kB4NmHSUig36nBLbvohGJelVCvGTlnUQ%23_%3D_&redirectUri=http%3A%2F%2Flocalhost%3A3000%2F</pre>
 
 
             <h3>Response</h3>
@@ -171,18 +162,19 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-Cache-Control: no-cache
+ETag: W/&quot;9048bcbd239147e7cc104c862ce992a9&quot;
+Cache-Control: max-age=0, private, must-revalidate
 Set-Cookie: request_method=POST; path=/
-_refresh_session=ZnZlWFVaUjV3clZRSitjbi9zZ2xZaXpFS2taQWpkT3M1VEQ2U2JSL24zbTJKMW0rVHpnVzJlTHBNT05lOXNmOVVUOS8wckxVWUZ6cmlLZldaRmVVR3c9PS0tdU5HODNDLzdtSkV5M0Z1ZWNxTStBUT09--057daae524c26fe97fad6a2a53a693eb1f033b16; path=/; HttpOnly
-X-Request-Id: 28fa7ebc-7e67-455a-9ea9-b10b9e10c1d0
-X-Runtime: 0.006708
+X-Request-Id: 0ce866ba-16bc-42be-a966-e42ae88b8710
+X-Runtime: 0.032556
 Vary: Origin
-Content-Length: 42</pre>
+Content-Length: 106</pre>
             <h4>Status</h4>
-            <pre class="response status">422 Unprocessable Entity</pre>
+            <pre class="response status">200 OK</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;error&quot;: &quot;A credit card must be selected&quot;
+  &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IiI.-IZCxF2OTSg7vVCuU5MJlJ65DLGHv49LI-9YsyllVIo&quot;,
+  &quot;id&quot;: 1011
 }</pre>
       </div>
     </div>

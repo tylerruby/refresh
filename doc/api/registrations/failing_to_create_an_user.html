@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Orders API</title>
+    <title>Registrations API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Orders API</h1>
+      <h1>Registrations API</h1>
 
       <div class="article">
-        <h2>error when didn&#39;t send the stripe token</h2>
-        <h3>POST /orders.json</h3>
+        <h2>failing to create an user</h2>
+        <h3>POST /users.json</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,26 +123,18 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">stripeToken</span>
+                    <span class="name">user[email]</span>
                 </td>
                 <td>
-                  <span class="description">Stripe&#39;s single-use token (check https://stripe.com/docs/tutorials/forms for more information)</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">order[delivery_address]</span>
-                </td>
-                <td>
-                  <span class="description">Order delivery address</span>
+                  <span class="description">User email</span>
                 </td>
               </tr>
               <tr>
                 <td>
-                    <span class="name">order[observations]</span>
+                    <span class="name">user[password]</span>
                 </td>
                 <td>
-                  <span class="description">Order observations (for example, &quot;I&#39;m the guy using a black shirt&quot;)</span>
+                  <span class="description">User password</span>
                 </td>
               </tr>
             </tbody>
@@ -152,17 +144,16 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDA0fQ.sOAVRrT8b9ePh1iZHS1EiF5Hlc-9_KQuRsmSx0qG_PA
-Host: example.org
+            <pre class="request headers">Host: example.org
 Content-Type: application/x-www-form-urlencoded
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /orders.json</pre>
+          <pre class="request route highlight">POST /users.json</pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">stripeToken&order[delivery_address]=18th+Street+Atlanta&order[observations]=Take+off+the+bacon%21</pre>
+            <pre class="request body">user[email]=some.email%40example.com&user[password]=</pre>
 
 
             <h3>Response</h3>
@@ -173,16 +164,17 @@ X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
 Set-Cookie: request_method=POST; path=/
-_refresh_session=ZnZlWFVaUjV3clZRSitjbi9zZ2xZaXpFS2taQWpkT3M1VEQ2U2JSL24zbTJKMW0rVHpnVzJlTHBNT05lOXNmOVVUOS8wckxVWUZ6cmlLZldaRmVVR3c9PS0tdU5HODNDLzdtSkV5M0Z1ZWNxTStBUT09--057daae524c26fe97fad6a2a53a693eb1f033b16; path=/; HttpOnly
-X-Request-Id: 28fa7ebc-7e67-455a-9ea9-b10b9e10c1d0
-X-Runtime: 0.006708
+X-Request-Id: 0bb50bb9-80d4-42ec-8d5b-70d9a8f4dd18
+X-Runtime: 0.004505
 Vary: Origin
-Content-Length: 42</pre>
+Content-Length: 31</pre>
             <h4>Status</h4>
             <pre class="response status">422 Unprocessable Entity</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;error&quot;: &quot;A credit card must be selected&quot;
+  &quot;password&quot;: [
+    &quot;can&#39;t be blank&quot;
+  ]
 }</pre>
       </div>
     </div>
