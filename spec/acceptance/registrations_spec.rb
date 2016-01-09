@@ -21,6 +21,7 @@ resource 'Registrations' do
       do_request
       expect(json).to eq(
         "id" => User.last.id,
+        "credit_cards" => [],
         "token" => token
       )
     end

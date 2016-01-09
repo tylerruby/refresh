@@ -42,17 +42,13 @@ resource 'Users' do
     parameter :credit_card_id, "Stripe's credit card id"
     let(:credit_card_id) { user.credit_cards.first.id }
 
-    def reset_stripe_customer
-      user.instance_variable_set :@customer, nil
-    end
-
     before do
-      user.add_credit_card StripeMock.create_test_helper.generate_card_token
-      reset_stripe_customer
+      add_credit_card(user)
+      reset_stripe_customer(user)
     end
 
     example_request "removes the credit card from the list" do
-      reset_stripe_customer
+      reset_stripe_customer(user)
       expect(user.customer.sources.data.length).to be 0
     end
 

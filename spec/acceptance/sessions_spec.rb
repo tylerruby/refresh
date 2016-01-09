@@ -12,6 +12,7 @@ resource 'Sessions' do
     let(:token) do
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IiI.-IZCxF2OTSg7vVCuU5MJlJ65DLGHv49LI-9YsyllVIo'
     end
+    let!(:card) { add_credit_card(user) }
 
     before do
       allow(AuthToken)
@@ -28,6 +29,11 @@ resource 'Sessions' do
       do_request
       expect(json).to eq(
         "id" => user.id,
+        "credit_cards" => [
+          "id" => card.id,
+          "type" => card.type,
+          "last4" => card.last4
+        ],
         "token" => token
       )
     end
@@ -56,6 +62,7 @@ resource 'Sessions' do
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IiI.-IZCxF2OTSg7vVCuU5MJlJ65DLGHv49LI-9YsyllVIo'
     end
     let(:provider) { 'facebook' }
+    let!(:card) { add_credit_card(user) }
 
     before do
       allow(AuthToken)
@@ -68,6 +75,11 @@ resource 'Sessions' do
       do_request
       expect(json).to eq(
         "id" => user.id,
+        "credit_cards" => [
+          "id" => card.id,
+          "type" => card.type,
+          "last4" => card.last4
+        ],
         "token" => token
       )
     end
