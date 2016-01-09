@@ -75,11 +75,11 @@ class User < ActiveRecord::Base
     customer.sources.retrieve(id).delete()
   end
 
-private
+  private
 
-  # TODO: Handle possible error on Stripe API communication
-  def create_customer
-    customer = Stripe::Customer.create(email: email)
-    self.customer_id = customer.id
-  end
+    # TODO: Handle possible error on Stripe API communication
+    def create_customer
+      customer = Stripe::Customer.create(email: email)
+      self.customer_id = customer.id
+    end
 end

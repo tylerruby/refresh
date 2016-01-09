@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
-
 gem 'rails',                 '4.2.3'
 gem 'sass-rails',            '~> 5.0'
 gem 'uglifier',              '>= 1.3.0'
@@ -47,8 +46,6 @@ group :development, :test do
   gem 'shoulda-matchers',        '3.0.0'
   gem 'timecop',                 '0.8.0'
   gem 'rspec_api_documentation', '4.6.0'
-  gem 'vcr',                     '3.0.1'
-  gem 'webmock',                 '1.22.5'
 end
 
 group :development do
@@ -57,6 +54,8 @@ end
 
 group :test do
   gem 'stripe-ruby-mock', '~> 2.2.1', require: 'stripe_mock'
+  gem 'vcr',                     '3.0.1'
+  gem 'webmock',                 '1.22.5'
 end
 
 group :production, :staging do

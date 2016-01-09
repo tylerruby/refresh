@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Stores API</title>
+    <title>Users API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Stores API</h1>
+      <h1>Users API</h1>
 
       <div class="article">
-        <h2>getting the current opened store</h2>
-        <h3>POST /:city.json</h3>
+        <h2>removing user&#39;s credit card</h2>
+        <h3>GET /user/remove_credit_card.json</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,10 +123,10 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">address</span>
+                    <span class="name">credit_card_id</span>
                 </td>
                 <td>
-                  <span class="description">The user&#39;s current address</span>
+                  <span class="description">Stripe&#39;s credit card id</span>
                 </td>
               </tr>
             </tbody>
@@ -136,17 +136,16 @@ table th, table td {
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTgyfQ.AW6FUm8RWwyvibwjp-WrzxpRZJYxK-xPAUiBo_TArsU
+            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMTg5fQ.HnrUNiSiAY7szCxZMQLPQjdaYBZdpa2h0xTTGVq115Y
 Host: example.org
-Content-Type: application/x-www-form-urlencoded
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">POST /atlanta.json</pre>
+          <pre class="request route highlight">GET /user/remove_credit_card.json?credit_card_id=test_cc_12</pre>
 
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">credit_card_id: test_cc_12</pre>
 
-            <h4>Body</h4>
-            <pre class="request body">address=3905+Mike+Padgett+Hwy</pre>
 
 
             <h3>Response</h3>
@@ -154,23 +153,14 @@ Cookie: </pre>
               <pre class="response headers">X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
-Content-Type: application/json; charset=utf-8
-ETag: W/&quot;77b6fd28f0b005927e3cac29fc864f7b&quot;
-Cache-Control: max-age=0, private, must-revalidate
-Set-Cookie: request_method=POST; path=/
-_refresh_session=VUJ3d1NLTDNrRmNMNkRKT0JzRmZETTVmdWp2bGR3ekVpTHhsYW10KzN6ZjlqdXUvYXJ2SjJTdWlLb2s1SXpnUW9IZk5abDVoZFBzemhmTkxheDZ1aVhUTkFDY3A4TFltYUl5MCtybVhLTGs9LS1ma0xUNFVJdE5YVklRQUZka24xN0FnPT0%3D--2c95d01feb24063a54f9b56eaa0ec810fbba9013; path=/; HttpOnly
-X-Request-Id: 5408f851-2fdd-4448-a51b-3409131f6460
-X-Runtime: 0.012420
+Content-Type: application/json
+Cache-Control: no-cache
+X-Request-Id: 0bc19539-8b73-4b08-9c41-546f32b1da8f
+X-Runtime: 0.003559
 Vary: Origin
-Content-Length: 21</pre>
+Content-Length: 0</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
-              <h4>Body</h4>
-              <pre class="response body">{
-  &quot;store&quot;: {
-    &quot;id&quot;: 1367
-  }
-}</pre>
       </div>
     </div>
   </body>
