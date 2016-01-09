@@ -33,8 +33,16 @@ resource 'Users' do
     end
 
     example "adding a credit card for the user", document: :public do
+      card_double = double("Stripe::Card", id: 'card-id', type: 'Visa', last4: '4242')
+      allow_any_instance_of(Stripe::ListObject)
+        .to receive(:create)
+        .and_return(card_double)
       do_request
-      expect(json["message"]).to eq 'Card added!'
+      expect(json["credit_card"]).to eq(
+        "id" => card_double.id,
+        "type" => card_double.type,
+        "last4" => card_double.last4
+      )
     end
   end
 

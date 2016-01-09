@@ -18,10 +18,18 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json do
         begin
-          current_user.add_credit_card params[:credit_card]
+          credit_card = current_user.add_credit_card params[:credit_card]
           message = 'Card added!'
           partial_html = render_to_string(partial: 'pages/account/credit_cards', locals: { message: message})
-          render json: { message: message, html: partial_html }
+          render json: {
+            message: message,
+            html: partial_html,
+            credit_card: {
+              id: credit_card.id,
+              type: credit_card.type,
+              last4: credit_card.last4
+            }
+          }
         rescue Stripe::CardError => e
           @credit_card = CreditCard.new params[:credit_card]
           @credit_card.errors.add(:base, e.message)
