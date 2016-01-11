@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get 'account' => 'pages#account'
 
   get 'help' => 'pages#help'
-  get 'about' => 'pages#about'
+  get 'contact' => 'pages#contact'
   get 'partners' => 'pages#partners'
   get 'terms' => 'pages#terms'
   get 'privacy' => 'pages#privacy'

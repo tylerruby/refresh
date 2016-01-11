@@ -18,13 +18,7 @@ class PagesController < ApplicationController
   def help
   end
 
-  def about
-  end
-
   def terms
-  end
-
-  def blog
   end
 
   def privacy
@@ -33,16 +27,13 @@ class PagesController < ApplicationController
   def contact
   end
 
-  def partners
+  def drivers
   end
 
   def forgot
   end
 
   def register
-  end
-
-  def search
   end
 
 end

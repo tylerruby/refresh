@@ -49,7 +49,8 @@
                role="button"
                aria-haspopup="true"
                aria-expanded="false">
-               <img class="img-circle profile" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
+               
+               <img class="img-circle profile<%= ' hide' unless user_signed_in? %>" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
             </a>
             <ul class="dropdown-menu">
               <li><a href="/account">Account</a></li>
