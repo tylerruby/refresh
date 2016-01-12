@@ -34,7 +34,7 @@
               </a>
             </li>
           <% end %>
-          <li><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide' : '') %></li>
+          <li><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %></li>
           <li class="dropdown">
             <a href="#"
                id="user-dropdown"
