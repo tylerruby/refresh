@@ -12,6 +12,10 @@ h1, h2, h3, h4 {
   padding-left:0px !important;
   padding-right:0px !important;
 }
+.no-padding {
+  padding-left:0px !important;
+  padding-right:0px !important;
+}
 .panel {
   border: none !important;
 }
@@ -24,6 +28,15 @@ h1, h2, h3, h4 {
     top: 0px !important;
     width: 100% !important;
     z-index: 1 !important;
+}
+.myVideo {
+  background-image: url(https://ubereats.com/assets/images/iphone.png);
+  background-repeat:no-repeat;
+  height: 629px;
+  padding-top: 67px;
+  padding-left: 20px;
+  margin-top:80px;
+  overflow:hidden;
 }
 
 /* Jumbotrons */
@@ -97,7 +110,7 @@ h1, h2, h3, h4 {
 .landing-address {
   height: 62px !important;
   font-size: 25px !important;
-  border: 1px solid #fff !important;
+  border: 1px solid #f0f0f0 !important;
   background: #fff !important;
   box-shadow: none !important;
   color: #000 !important;
@@ -108,32 +121,29 @@ h1, h2, h3, h4 {
 .landing-address:-ms-input-placeholder { color: #666 !important;}
 
 .landing-button {
-  color: #000 !important;
-  border: 1px solid #fff !important;
-  background: #fff !important;
+  color: #fff !important;
+  border: 1px solid red !important;
+  background: red !important;
   border-left: 1px solid #f0f0f0 !important;
 }
 
 .landing-header {
-  background-image: url("http://i.imgur.com/87YCqw1.png");
-  background-size: 100% 100% !important;
-  background-color: #f0f0f0 !important;
-  text-shadow: 0 0 2px rgba(0,0,0,0.6);
+  background-color: #fff !important;
   h1 {
-    color: #fff !important;
-    font-size:70px !important;
+    color: #000 !important;
+    font-size:50px !important;
 
   }
   h2 {
-    color: #fff !important;
+    color: #000 !important;
     font-size: 30px !important;
   }
   h3 {
-    color: #f0f0f0 !important;
-    font-size:38px !important;
+    color: #666 !important;
+    font-size:30px !important;
   }
   h4 {
-    color: #f0f0f0 !important;
+    color: #666 !important;
     font-size:25px !important;
   }
 }
@@ -288,11 +298,7 @@ h1, h2, h3, h4 {
   50% { background-color: #ff2e34; }
   to { background-color: #ff5a5f;}
 }
-.green {
-  background: #34bf49 !important;
-  border-color: #34bf49 !important;
-  color: #fff !important;
-}
+
 .white {
   background: #fff !important;
   border-color: #fff !important;
@@ -333,6 +339,7 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
 .app-brand {
     width: 25%;
     display: inline-block;
+    margin-bottom: 40px !important;
 }
 .m-b-lg {
     margin-bottom: 40px !important;
@@ -358,7 +365,7 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
     cursor: pointer;
     border-radius: 4px;
 }
-.fb-button:hover {
+.fb-button:hover, .fb-button:active {
   color: #fff;
   text-decoration: none;
   background: #3f5693;
