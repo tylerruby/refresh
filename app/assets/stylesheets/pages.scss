@@ -2,12 +2,13 @@ $body-bg: #f8f8f6;
 $navbar-default-bg: #fff;
 $panel-default-border: 0px;
 
+$navbar-inverse-bg: #444;
+
 
 /* Misc */
 h1, h2, h3, h4 {
-  font-family: 'Raleway', sans-serif !important;
+  font-weight: 300 !important;
 }
-
 .container-fluid {
   padding-left:0px !important;
   padding-right:0px !important;
@@ -22,21 +23,11 @@ h1, h2, h3, h4 {
 .panel-heading {
   background: #fff !important;
   border-bottom: 3px solid #fafafa !important;
-
 }
 .affix {
     top: 0px !important;
     width: 100% !important;
     z-index: 1 !important;
-}
-.myVideo {
-  background-image: url(https://ubereats.com/assets/images/iphone.png);
-  background-repeat:no-repeat;
-  height: 629px;
-  padding-top: 67px;
-  padding-left: 20px;
-  margin-top:80px;
-  overflow:hidden;
 }
 
 /* Jumbotrons */
@@ -95,7 +86,16 @@ h1, h2, h3, h4 {
   }
 }
 
-
+/* Landing Video */
+.landing-video {
+  background-image: url(http://i.imgur.com/fpZnTcA.png?1);
+  background-repeat:no-repeat;
+  height: 629px;
+  padding-top: 65px;
+  padding-left: 13px;
+  margin-top:80px;
+  overflow:hidden;
+}
 
 /* Landing Page */
 .landing-logo {
@@ -110,32 +110,30 @@ h1, h2, h3, h4 {
 .landing-address {
   height: 62px !important;
   font-size: 25px !important;
-  border: 1px solid #f0f0f0 !important;
+  border: 1px solid #a3a3a3 !important;
   background: #fff !important;
   box-shadow: none !important;
   color: #000 !important;
 }
-.landing-address::-webkit-input-placeholder { color: #666 !important;}
-.landing-address:-moz-placeholder { color: #666 !important;}
-.landing-address::-moz-placeholder { color: #666 !important;}
-.landing-address:-ms-input-placeholder { color: #666 !important;}
+.landing-address::-webkit-input-placeholder { color: #a3a3a3 !important;}
+.landing-address:-moz-placeholder { color: #a3a3a3 !important;}
+.landing-address::-moz-placeholder { color: #a3a3a3 !important;}
+.landing-address:-ms-input-placeholder { color: #a3a3a3 !important;}
 
 .landing-button {
   color: #fff !important;
   border: 1px solid red !important;
   background: red !important;
-  border-left: 1px solid #f0f0f0 !important;
 }
 
 .landing-header {
   background-color: #fff !important;
   h1 {
-    color: #000 !important;
+    color: #222 !important;
     font-size:50px !important;
-
   }
   h2 {
-    color: #000 !important;
+    color: #222 !important;
     font-size: 30px !important;
   }
   h3 {
@@ -275,49 +273,16 @@ h1, h2, h3, h4 {
   color: #fff !important;
 }
 .red {
-  background-color: #ff5a5f;
-  border: #ff5a5f !important;
+  background-color: #ff0000;
+  border: #ff0000 !important;
   color: #fff !important;
 }
-.red {
-  color: #fff;
-  -webkit-animation-name: pulse;
-  -webkit-animation-duration: 3s;
-  -webkit-animation-iteration-count: infinite;
-  text-shadow: 0 0 3px rgba(255, 255, 255, .3);
-}
-.red:hover {
-  cursor:pointer;
-  -webkit-animation-name: pulse;
-  -webkit-animation-duration: .8s;
-  -webkit-animation-iteration-count: infinite;
-  }
 
-  @-webkit-keyframes pulse {
-  from { background-color: #ff5a5f;}
-  50% { background-color: #ff2e34; }
-  to { background-color: #ff5a5f;}
-}
 
 .white {
   background: #fff !important;
   border-color: #fff !important;
   color: #222 !important;
-}
-
-/* Pagination */
-.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
-  background-color: #444 !important;
-  border-color: #444 !important;
-  color: #fff !important;
-}
-.pagination > li > a, .pagination > li > span {
-  color: #444 !important;
-}
-textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus,  input[type="color"]:focus, .uneditable-input:focus, .form-control:focus {
-  border-color: none !important;
-  box-shadow:none !important;
-  outline: none !important;
 }
 
 
@@ -365,7 +330,7 @@ textarea:focus, input[type="text"]:focus,textarea[type="text"]:focus,   input[ty
     cursor: pointer;
     border-radius: 4px;
 }
-.fb-button:hover, .fb-button:active {
+.fb-button:hover, .fb-button:active, .fb-button:focus {
   color: #fff;
   text-decoration: none;
   background: #3f5693;
