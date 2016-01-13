@@ -42,14 +42,12 @@
           <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
           <div class="price"><%= product.price.format %></div>
           <div class="panel-body food-items">
-            <div class="col-xs-12">
-              <h3><%= product.name %></h3>
-            </div>
             <div class="col-xs-9">
-              <p><%= product.description %></p>
+              <h4><%= product.name %></h4>
+              <p>Chick-Fil-A</p>
             </div>
             <div class="col-xs-3">
-              <%= f.button '+ Add', class: 'btn btn-default black pull-right', disabled: !policy(@store).add? %>
+              <%= f.button 'Add Item', class: 'btn btn-default add-item-button pull-right', disabled: !policy(@store).add? %>
             </div>
           </div>
         <% end %>

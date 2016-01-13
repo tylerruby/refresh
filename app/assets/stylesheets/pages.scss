@@ -31,6 +31,13 @@ h1, h2, h3, h4 {
 .login-link {
   color: #000 !important;
 }
+.add-item-button {
+  color: #ff0000 !important;
+  border: none !important;
+}
+.add-item-button:hover, .add-item-button:focus {
+  background-color: transparent !important;
+}
 
 
 /* Jumbotrons */
@@ -548,7 +555,7 @@ ul.nav.navbar-nav.secondary > li.active > a {
 
 /* Food panels */
 .food-items {
-  height: 170px;
+  height: 100px;
 }
 .food-pictures {
   width:100% !important;
