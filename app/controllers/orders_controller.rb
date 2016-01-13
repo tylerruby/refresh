@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate!
 
   def index
     @orders = current_user.orders.order(created_at: :desc)
@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
 
   def new
     @cart = cart
-    @cart.delivery_time = params.require(:delivery_time).to_i
     @order = Order.new
     if @cart.empty?
       flash[:info] = 'Your cart is empty, cannot checkout yet.'
@@ -16,54 +15,55 @@ class OrdersController < ApplicationController
   end
 
   def create
-    cart.delivery_time = order_params[:delivery_time].to_i
-    order = Order.create!(order_params) do |order|
+    @order = Order.new(order_params) do |order|
       order.user = current_user
       order.amount = cart.total
       order.status = 'pending'
+      order.stripe_token = params[:stripeToken]
     end
 
-    begin
-      Order.transaction do
-        order.update!(cart_items: cart.shopping_cart_items)
-        cart.reload.destroy!
-
-        if stripe_token.present?
-          customer = Stripe::Customer.create(
-            card: stripe_token,
-            description: 'Paying user',
-            email: current_user.email
-          )
-
-          current_user.update!(customer_id: customer.id)
-        end
-
-        Stripe::Charge.create(
-          :amount   => order.amount_cents,
-          :currency => "usd",
-          :customer => current_user.customer_id
-        )
-
-        order.waiting_confirmation!
-        flash[:success] = "Checkout was successful! Waiting confirmation..."
+    if @order.save
+      redirect = -> { redirect_to root_path }
+      begin
+        MakePayment.new(order: @order, cart: cart).pay
+        render_success "Checkout was successful! You'll receive your order in 15 minutes!", html_render_method: redirect
+      rescue ActiveRecord::RecordInvalid
+        @order.internal_failure!
+        render_error "Something went wrong. Contact us and we'll solve the problem.", status: :unprocessable_entity, html_render_method: redirect
+      rescue Stripe::StripeError => e
+        @order.external_failure!
+        render_error e.message, html_render_method: redirect
       end
-    rescue ActiveRecord::RecordInvalid
-      order.internal_failure!
-      flash[:danger] = "Something went wrong. Contact us and we'll solve the problem."
-    rescue Stripe::StripeError => e
-      order.external_failure!
-      flash[:danger] = e.message
+    else
+      render_error @order.errors.messages.values.flatten.first, status: :unprocessable_entity, html_render_method: -> {
+        render :new, status: :unprocessable_entity
+      }
     end
-    redirect_to root_path
   end
 
   private
 
     def order_params
-      params.require(:order).permit(:delivery_time, :delivery_address)
+      params.require(:order).permit(:delivery_address, :observations, :source_id)
     end
 
-    def stripe_token
-      params[:stripeToken]
+    def render_success(message, html_render_method: -> { render })
+      respond_to do |format|
+        format.json { head :ok }
+        format.html do
+          flash[:success] = message
+          html_render_method.call
+        end
+      end
+    end
+
+    def render_error(message, status: :bad_request, html_render_method: -> {render })
+      respond_to do |format|
+        format.json { render json: { error: message }, status: status }
+        format.html do
+          flash[:danger] = message
+          html_render_method.call
+        end
+      end
     end
 end

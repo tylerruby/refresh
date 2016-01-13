@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cart API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cart API</h1>
+
+      <div class="article">
+        <h2>getting the cart with its items</h2>
+        <h3>GET /cart.json</h3>
+
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0NTUwNTUzNjcsImRhdGEiOnsidXNlcl9pZCI6MTU4NX19.Bq8fgL1erl8kEw6aPp9kDxa8jxBiEK0Amzr496AfQiw
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET /cart.json</pre>
+
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;4298c7643f14f6c51e2b090b78b98502&quot;
+Cache-Control: max-age=0, private, must-revalidate
+Set-Cookie: _refresh_session=cDZJY0pvNGw2d2laMkFxWEk5NEZ3VTFtZ2dtY05iQTc4Z0pXMlhyNDhUdnA1UFZDVGpYTE4wdXpKTTdwdnhYRWxCVGxlWUxpSDN2RFd5YUsvVnFZVXc9PS0tcjhSZmRNWTNvdGF5SVBiamNWWFZFZz09--e0f0e74421e19a4c6ff449f9df29dffa0a86edda; path=/; HttpOnly
+X-Request-Id: 85be3e02-7216-4433-9212-7af9a90c0eaa
+X-Runtime: 0.016481
+Vary: Origin
+Content-Length: 381</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">{
+  &quot;cart&quot;: {
+    &quot;subtotal_cents&quot;: 500,
+    &quot;subtotal_currency&quot;: &quot;USD&quot;,
+    &quot;total_cents&quot;: 700,
+    &quot;total_currency&quot;: &quot;USD&quot;,
+    &quot;cart_items&quot;: [
+      {
+        &quot;quantity&quot;: 2,
+        &quot;subtotal_cents&quot;: 500,
+        &quot;subtotal_currency&quot;: &quot;USD&quot;,
+        &quot;product&quot;: {
+          &quot;id&quot;: 1288,
+          &quot;name&quot;: &quot;MyString&quot;,
+          &quot;description&quot;: null,
+          &quot;price_cents&quot;: 250,
+          &quot;price_currency&quot;: &quot;USD&quot;,
+          &quot;image&quot;: &quot;http://localhost:3000//images/fallbacks/product_image_thumb.png&quot;,
+          &quot;store&quot;: {
+            &quot;id&quot;: 1754,
+            &quot;name&quot;: null
+          }
+        }
+      }
+    ]
+  }
+}</pre>
+      </div>
+    </div>
+  </body>
+</html>

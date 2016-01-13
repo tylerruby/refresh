@@ -21,6 +21,11 @@
 
 en:
   activerecord:
+    attributes:
+      store:
+        human_opens_at: Opens At
+        human_closes_at: Closes At
+
     errors:
       models:
         category:
@@ -29,3 +34,7 @@ en:
               at_least_one_gender: 'or female should be selected'
             female:
               at_least_one_gender: 'or male should be selected'
+        order:
+          attributes:
+            stripe_token:
+              blank: 'A credit card must be selected'

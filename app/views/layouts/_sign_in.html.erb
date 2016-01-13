@@ -2,16 +2,15 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body p-a-0 js-modalBody">
-        <%= form_for(User.new, url: session_path(:user), html: { class: "m-x-auto text-center app-login-form", role: "form" }) do |f| %>
-          <a href="/" class="app-brand m-b-lg">
-            <img src="http://i.imgur.com/mJLWHVZ.png" alt="brand">
-          </a>
+        <%= form_for(User.new, url: session_path(:user), html: { id: 'sign-in-form', class: "m-x-auto text-center app-login-form", role: "form" }) do |f| %>
+            <img src="http://i.imgur.com/mJLWHVZ.png" alt="brand" class="app-brand">
           <div class="form-group">
             <%= link_to omniauth_authorize_path(:user, :facebook), class: "fb-button" do %>
               <span class="facebook"></span> Login with Facebook
             <% end %>
           </div>
           <hr />
+          <p class="errors error-message"></p>
           <div class="form-group">
             <%= f.email_field :email, autofocus: true, required: true, class: "form-control", placeholder: "Email" %>
           </div>
@@ -19,7 +18,7 @@
             <%= f.password_field :password, required: true, class: "form-control", placeholder: "Password" %>
           </div>
           <div class="m-b-lg">
-            <%= f.button "Log In", class: "btn btn-block btn-primary" %>
+            <%= f.button "Log In", class: "btn btn-lg btn-block red" %>
             <br /><br />
             <%= modal_to "Sign up", "#registerModal" %> | 
             <%= modal_to "Forgot password", "#passwordModal" %>

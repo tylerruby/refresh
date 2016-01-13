@@ -1,142 +1,136 @@
-<div class="container p-t-md">
-  <div class="row">
-  	<div class="col-sm-3 col-md-3">
-  		<div class="list-group m-b-md">
-        <%= link_to help_path, class: "list-group-item active" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Help
-        <% end %>
-        <%= link_to about_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          About
-        <% end %>
-        <%= link_to partners_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Partners
-        <% end %>
-        <%= link_to terms_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Terms
-        <% end %>
-        <%= link_to privacy_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Privacy Policy
-        <% end %>
-        <%= link_to blog_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Blog
-        <% end %>
-        <%= link_to contact_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Contact
-        <% end %>
-      </div>
-     </div>
-    <div class="col-sm-9 col-md-8">
-      <ul class="list-group media-list media-list-stream">
-        <li class="list-group-item p-a">
-          <h2 class="m-a-0 text-center">Help</h2>
-        </li>
-
-        <li class="media list-group-item p-a">
-          <div class="media-body">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Why use Refresh?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    Refresh helps you find hot local clothing items and get them delivered in an hour so you save time and money.  No more waiting weeks for packages, paying outrageous shipping fees, or driving from store to store looking for what you want.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      What are your hours?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    We deliver from 9am to Midnight every day, depending on local store hours. On holidays, our delivery hours are subject to store holiday hours. You can view available delivery times for your area from the shopping cart.
-
-                    Our fastest delivery was just 12 minutes! Most customers choose to have delivery in the next 2 hours, and you can also schedule for a later date or time during checkout.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Where do you deliver?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                  <div class="panel-body">
-                    We currently only serve the city of Atlanta, but we are expanding our service area to other cities soon!
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      How much does delivery cost?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                  <div class="panel-body">
-                    We offer several pricing options for Refresh deliveries. The minimum order value is $10.
-                    <br />
-                    <u>Orders over $35:</u> Two hour or scheduled deliveries start at $3.99. Within an Hour deliveries start at $5.99.
-                    <br />
-                    <u>Orders under $35:</u> Two hour or scheduled deliveries start at $7.99. Within an Hour deliveries start at $9.99.
-                    <br />
-                    <small>*There is a $3 charge for each additional store you order from.</small>
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFive">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                      How are items priced on Refresh?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                  <div class="panel-body">
-                    When possible, Refresh works with retailers to bring you the same prices as found in the physical store. In some cases prices may be 15% higher than in-store.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingSix">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      How do I return items?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                  <div class="panel-body"> 
-                    Your purchases will come with a receipt which will allow you to return items depending on the store or item in question.  Most stores we carry have a return policy but some may not allow returns.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav secondary">
+        <li class="active"><a href="/help"><b>Help</b></a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/privacy">Privacy</a></li>
       </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<br />
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2 class="text-center">
+        Help
+      </h2>
+      <hr />
+
+      <div class="col-lg-10 col-lg-offset-1">
+        <br />
+        <p>
+        <h3><b>How do I use Derby?</b></h3>
+        <hr>
+
+        Derby’s app is extremely simple to use, and is available on iOS and Android and Web. To order online, visit <a href="http://getderby.co">http://getderby.co</a> and enter your delivery address, then browse featured items for delivery.
+        <br /><br />
+        &nbsp;&nbsp;1. Select an item from the on the home screen you wish to purchase by clicking the plus icon.
+        <br /><br />
+        &nbsp;&nbsp;2. Swipe right or click checkout to complete your order.
+
+
+        <br /><br />
+        <h3><b>When can I use Derby?</b></h3>
+        <hr>
+
+        Derby is available for breakfast Monday through Friday from 7:00 am - 10:30 am.
+
+        <br /><br />
+        <h3><b>Where is Derby available?</b></h3>
+        <hr>
+
+        Currently, Derby is only serving Atlanta but we will be expanding to more cities very soon.
+
+
+        <br /><br />
+        <h3><b>Who makes the deliveries?</b></h3>
+        <hr>
+
+        Our drivers are personally onboarded by our management team to complete deliveries in your city.
+
+        <br /><br />
+        <h3><b>How much does it cost?</b></h3>
+        <hr>
+
+        Delivery fees are $2.
+
+        <br /><br />
+        <h3><b>What if I need to contact my driver?</b></h3>
+        <hr>
+
+        You can call your driver at any point during your delivery, directly from the app.
+
+        <br /><br />
+        <h3><b>Does Derby deliver to commercial addresses?</b></h3>
+        <hr>
+
+        Absolutely. As long as you are in our delivery area.
+
+        <br /><br />
+        <h3><b>What should I do if I need to edit my delivery address?</b></h3>
+        <hr>
+
+        If you have not placed your order yet, you can edit the drop-off directly from the home page or the check-out page.
+        <br /><br />
+        If you've already placed your order and need to change the delivery address, you can call your driver directly from the app.
+
+        <br /><br />
+        <h3><b>What if I need to change my order, or add an item?</b></h3>
+        <hr>
+
+        Call your driver as soon as you realize you need to change the order.
+
+
+        <br /><br />
+        <h3><b>Is tip required?</b></h3>
+        <hr>
+
+        Tip is not required.. If you would like to leave a tip, you are given the opportunity to add 1, 2, or 3 dollar amount.
+
+        <br /><br />
+        <h3><b>Can I tip my driver with cash?</b></h3>
+        <hr>
+
+        No. Tips are only accepted through the app.
+
+        <br /><br />
+        <h3><b>How do you hire your drivers?</b></h3>
+        <hr>
+
+        All driver are thoroughly vetted, including a background check, in-person interview and test deliveries.
+
+        <br /><br />
+        <h3><b>Can I apply to become a driver?</b></h3>
+        <hr>
+
+        Yes, we would love that! You can submit an application here: <a href="http://getderby.co/drivers">http://www.getderby.co/drivers</a>
+
+        <br /><br />
+        <h3><b>What if my delivery takes longer than 15 minutes?</b></h3>
+        <hr>
+
+        Depending on the circumstances, we may refund the delivery cost.
+
+        <br /><br />
+        <h3><b>Will my driver bring the meal to my door or inside my office?</b></h3>
+        <hr>
+
+        No, curbside delivery is the quickest and most reliable way for you to connect with your driver.
+
+        <br /><br />
+        <h3><b>I’m a restaurant and am interested in partnering with Derby. What steps should I take?</b></h3>
+        <hr>
+
+        Thanks for your interest! We’re always looking to deliver great new dishes. Please send us a message to <a href="mailto:email">Email</a>.
+
+        </p>
+      </div>
     </div>
   </div>
 </div>

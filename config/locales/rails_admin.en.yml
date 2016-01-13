@@ -1,0 +1,12 @@
+en:
+  admin:
+    actions:
+      refund:
+        menu: 'Refund'
+        breadcrumb: 'Refund'
+        title: 'Cancel order and refund user'
+        link: 'Refund this order'
+        done: 'Refund completed!'
+
+      mark_as_delivered:
+        menu: 'Mark as delivered'
