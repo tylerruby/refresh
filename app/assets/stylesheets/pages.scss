@@ -33,7 +33,9 @@ h1, h2, h3, h4 {
 }
 .add-item-button {
   color: #ff0000 !important;
+  background-color: transparent !important;
   border: none !important;
+  font-size: 32px !important;
 }
 .add-item-button:hover, .add-item-button:focus {
   background-color: transparent !important;
@@ -554,8 +556,12 @@ ul.nav.navbar-nav.secondary > li.active > a {
 }
 
 /* Food panels */
+.product-name {
+  font-weight: bold;
+  font-size:16px;
+}
 .food-items {
-  height: 100px;
+  height: 75px;
 }
 .food-pictures {
   width:100% !important;
