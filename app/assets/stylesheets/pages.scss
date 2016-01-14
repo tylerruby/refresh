@@ -264,6 +264,7 @@ h1, h2, h3, h4 {
 /* Modal */
 .modal-header {
   color:#444 !important;
+  border-bottom: none !important;
 }
 .modal-body {
   padding:0px !important;
@@ -280,6 +281,8 @@ h1, h2, h3, h4 {
   margin: 0px;
 }
 
+/* Colors */
+
 .black {
   background: #222 !important;
   border-color: #222 !important;
@@ -290,14 +293,14 @@ h1, h2, h3, h4 {
   border: #ff0000 !important;
   color: #fff !important;
 }
-
-
 .white {
   background: #fff !important;
   border-color: #fff !important;
   color: #222 !important;
 }
-
+.black-links {
+  color: #333 !important;
+}
 
 /* Authentication Modals */
 .p-a-0 {
