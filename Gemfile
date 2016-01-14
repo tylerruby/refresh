@@ -32,6 +32,7 @@ gem 'bootstrap-sass',        '3.3.5.1'
 gem 'jwt',                   '1.5.1'
 gem 'rack-cors',             '0.4.0', :require => 'rack/cors'
 gem 'httpclient',            '2.6.0.1'
+gem 'mail_form'
 
 group :development, :test do
   gem 'pry',                     '0.10.1'
