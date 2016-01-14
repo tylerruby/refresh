@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'privacy' => 'pages#privacy'
   get 'drivers' => 'pages#drivers'
 
-  match '/contacts',     to: 'contacts#new', via: 'get'
+  match '/contact',     to: 'contacts#new', via: 'get'
   resources "contacts", only: [:new, :create]
 
   # These must be the last routes in the file, since they'll match anything
