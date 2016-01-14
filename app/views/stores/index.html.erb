@@ -1,13 +1,24 @@
-<div class="profile-header text-center">
-  <div class="container">
-    <div class="container-inner">
-      <h1 class="profile-header-user" style="">
+<br />
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2 class="text-center">Hold your horses!</h2>
+      <h3 class="text-center">
         <% if @city == 'Atlanta' %>
           We're not delivering right now.
         <% else %>
-          We don't deliver on <%= @city %> yet. Take a look at our shop in <%= link_to 'Atlanta', '/atlanta' %>!
+          We don't deliver to <%= @city %> yet. Take a look at <%= link_to 'Atlanta', '/atlanta' %> store!
         <% end %>
-      </h1>
+      </h3>
+      <hr />
+
+      <div class="col-lg-4">
+        <a href="/atlanta">
+          <img src="http://i.imgur.com/0aIjmiX.png" class="img-responsive" />
+        </a>
+        Georgia Tech
+      </div>
+      <br />
     </div>
   </div>
 </div>
