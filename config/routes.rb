@@ -38,6 +38,11 @@ Rails.application.routes.draw do
   match '/contact',     to: 'contacts#new', via: 'get'
   resources "contacts", only: [:new, :create]
 
+  match '/drive',     to: 'drivers#new', via: 'get'
+  resources "drive", only: [:new, :create]
+
+
+
   # These must be the last routes in the file, since they'll match anything
   post '/:city' => 'stores#search_by_address'
   get '/:city' => 'stores#search_by_city'
