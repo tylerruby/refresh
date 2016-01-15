@@ -11,7 +11,7 @@ class Driver < MailForm::Base
     {
       :subject => "Driver Application",
       :to => "support@getderby.co",
-      :from => %("#{name}" <#{email}>)
+      :from => %("#{name} #{phone}" <#{email}>)
     }
   end
 end

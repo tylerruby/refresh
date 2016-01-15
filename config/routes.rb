@@ -33,13 +33,12 @@ Rails.application.routes.draw do
   get 'partners' => 'pages#partners'
   get 'terms' => 'pages#terms'
   get 'privacy' => 'pages#privacy'
-  get 'drivers' => 'pages#drivers'
 
   match '/contact',     to: 'contacts#new', via: 'get'
   resources "contacts", only: [:new, :create]
 
   match '/drive',     to: 'drivers#new', via: 'get'
-  resources "drive", only: [:new, :create]
+  resources "drivers", only: [:new, :create]
 
 
 
