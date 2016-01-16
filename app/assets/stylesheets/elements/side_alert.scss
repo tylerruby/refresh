@@ -3,11 +3,11 @@
   top: 55px;
   width: 100%;
   border-radius: 0;
-  font: 16px/1.3em 'Raleway', sans-serif;
+  font: 14px/1.3em 'Raleway', sans-serif;
   z-index: 999;
 
   .close {
-    font-size: 50px;
+    font-size: 30px;
     line-height: 0;
     width: 25px;
     height: 25px;
@@ -21,9 +21,12 @@
   }
 
   @media (min-width: $screen-sm-min) {
-    right: 15px;
-    width: 350px;
-    padding: 20px;
-    top: 70px;
+    padding: 10px;
   }
+}
+
+.alert-info {
+  background-color: #444 !important;
+  border-color: #444 !important;
+  color: #fff !important;
 }

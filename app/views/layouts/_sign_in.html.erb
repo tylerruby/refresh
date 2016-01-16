@@ -6,7 +6,8 @@
       </div>
       <div class="modal-body p-a-0 js-modalBody">
         <%= form_for(User.new, url: session_path(:user), html: { id: 'sign-in-form', class: "m-x-auto text-center app-login-form", role: "form" }) do |f| %>
-            <img src="http://i.imgur.com/mJLWHVZ.png" alt="brand" class="app-brand">
+            <img src="http://i.imgur.com/CIblB64.png" alt="brand" class="app-brand">
+            <!-- http://i.imgur.com/mJLWHVZ.png -->
           <div class="form-group">
             <%= link_to omniauth_authorize_path(:user, :facebook), class: "fb-button" do %>
               <span class="facebook"></span> Login with Facebook
