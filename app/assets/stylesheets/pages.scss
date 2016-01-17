@@ -128,8 +128,8 @@ h1, h2, h3, h4 {
 
 .landing-button {
   color: #fff !important;
-  border: 1px solid red !important;
-  background: red !important;
+  border: 1px solid #ff0000 !important;
+  background: #ff0000 !important;
 }
 
 .landing-header {
@@ -284,6 +284,16 @@ h1, h2, h3, h4 {
 .red {
   background-color: #ff0000;
   border: #ff0000 !important;
+  color: #fff !important;
+}
+.btn-red {
+  background-color: #ff0000;
+  border: #ff0000 !important;
+  color: #fff !important;
+}
+.btn-red:hover {
+  background-color: #d51913;
+  border: #d51913 !important;
   color: #fff !important;
 }
 .white {

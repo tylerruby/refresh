@@ -25,10 +25,70 @@
       <div class="" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% unless cart.empty? %>
-            <li>
-              <a class="cart" href="/cart">
+            <li class="dropdown">
+              <a href="#" class="cart dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 <%= image_tag('Shopping-Cart', style: "width:24px;") %>
               </a>
+              <ul class="dropdown-menu dropdown-cart" role="menu">
+              <li>
+                <span class="item">
+                  <span class="item-left">
+                    <img src="http://lorempixel.com/50/50/" alt="" />
+                    <span class="item-info">
+                      <span>Chik-Fil-A Biscuit</span>
+                      <span>$3</span>
+                    </span>
+                  </span>
+                  <span class="item-right">
+                    <button class="btn btn-xs btn-default pull-right">x</button>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="item">
+                  <span class="item-left">
+                    <img src="http://lorempixel.com/50/50/" alt="" />
+                    <span class="item-info">
+                      <span>Chik-Fil-A Biscuit</span>
+                      <span>$3</span>
+                    </span>
+                  </span>
+                  <span class="item-right">
+                    <button class="btn btn-xs btn-default pull-right">x</button>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="item">
+                  <span class="item-left">
+                    <img src="http://lorempixel.com/50/50/" alt="" />
+                    <span class="item-info">
+                      <span>Chik-Fil-A Biscuit</span>
+                      <span>$3</span>
+                    </span>
+                  </span>
+                  <span class="item-right">
+                    <button class="btn btn-xs btn-default pull-right">x</button>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="item">
+                  <span class="item-left">
+                    <img src="http://lorempixel.com/50/50/" alt="" />
+                    <span class="item-info">
+                      <span>Chik-Fil-A Biscuit</span>
+                      <span>$3</span>
+                    </span>
+                  </span>
+                  <span class="item-right">
+                    <button class="btn btn-xs btn-default pull-right">x</button>
+                  </span>
+                </span>
+              </li>
+              <li class="divider"></li>
+              <li><a class="btn-red text-center" href="">View Cart</a></li>
+          </ul>
             </li>
           <% end %>
           <li><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %></li>
