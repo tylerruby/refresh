@@ -1,24 +1,32 @@
-<br />
-<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h2 class="text-center">Hold your horses!</h2>
-      <h3 class="text-center">
-        <% if @city == 'Atlanta' %>
-          We're not delivering right now.
-        <% else %>
-          We don't deliver to <%= @city %> yet. Take a look at <%= link_to 'Atlanta', '/atlanta' %> store!
-        <% end %>
-      </h3>
-      <hr />
+<body style="background-color: #fff;">
+  <div class="jumbotron" style="background:#fff;">
+  <br /><br /><br /><br /><br />
 
-      <div class="col-lg-4">
-        <a href="/atlanta">
-        <%= image_tag('Georgia-Tech', class: "img-responsive") %>
-        </a>
-        Georgia Tech
-      </div>
-      <br />
+  <%= image_tag('Derby-Logo-Black', class: "center-block", style: "width:80px;") %>
+  <br />
+  <h1 class="text-center">Hold your horses!</h1>
+  <h3 class="text-center">
+    <% if @city == 'Atlanta' %>
+      We're not delivering right now.
+    <% else %>
+      We don't deliver to <%= @city %> yet. Take a look at <%= link_to 'Atlanta', '/atlanta' %> store!
+    <% end %>
+  </h3>
+  <br /><br />
+  <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4">
+    <div class="col-xs-4">
+      <%= image_tag('Doughnut-96', class: 'center-block') %>
+    </div>
+    <div class="col-xs-4">
+      <%= image_tag('Pancake-96', class: 'center-block') %>
+    </div>
+    <div class="col-xs-4">
+      <%= image_tag('Cinnamon Roll-96', class: 'center-block') %>
     </div>
   </div>
-</div>
+
+  <br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br /><br /><br /><br /><br />
+  <br /><br /><br /><br />
+  </div>
+</body>
