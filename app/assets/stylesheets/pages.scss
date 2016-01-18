@@ -290,6 +290,16 @@ h1, h2, h3, h4 {
   border: #ff0000 !important;
   color: #fff !important;
 }
+.white {
+  background: #fff !important;
+  border-color: #fff !important;
+  color: #222 !important;
+}
+.black-links {
+  color: #333 !important;
+}
+
+/* Checkout Button */
 .btn-red {
   background-color: #ff0000;
   border: #ff0000 !important;
@@ -302,13 +312,13 @@ h1, h2, h3, h4 {
   border: #d51913 !important;
   color: #fff !important;
 }
-.white {
-  background: #fff !important;
-  border-color: #fff !important;
-  color: #222 !important;
-}
-.black-links {
-  color: #333 !important;
+.cart-items-length{
+  background-color: darken(#ff5a5f, 25%) !important;
+  padding: 3px 6px !important;
+  border-radius: 3px !important;
+  position: absolute !important;
+  left: 1em !important;
+  bottom: 6px !important;
 }
 
 /* Authentication Modals */
