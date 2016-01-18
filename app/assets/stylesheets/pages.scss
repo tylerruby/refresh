@@ -4,9 +4,12 @@ $panel-default-border: 0px;
 $navbar-inverse-bg: #444;
 $link-color: #ff0000;
 
+.dropdown-cart > li:nth-child(even) {
+    background: #f8f8f6 !important;
+}
 
 /* Misc */
-.dropdown-menu {
+.dropdown-cart {
   padding-bottom:0px !important;
   margin-bottom:0px !important;
 }
