@@ -439,6 +439,10 @@ h1, h2, h3, h4 {
   }
 }
 @media (max-width: 767px) {
+  .landing-address {
+  height: 42px !important;
+  font-size: 20px !important;
+}
   #primary-nav .navbar-brand {
     padding: 15px 10px !important;
   }
@@ -553,10 +557,6 @@ ul.nav.navbar-nav.secondary > li.active > a {
 }
 
 @media (max-width: 480px) {
-    .landing-address {
-  height: 42px !important;
-  font-size: 20px !important;
-}
 	.items-list, .items-list > div {
 		padding: 0 !important;
 	}
