@@ -24,7 +24,7 @@
             <%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Confirm Password", 'data-rule-equalTo' => "#sign-up-password" %>
           </div>
           <div class="m-b-lg">
-            <%= f.button "Sign Up", class: "btn btn-lg btn-block red" %>
+            <%= f.button "Sign Up", class: "btn btn-lg btn-block red", id: "sign-up-modal-view" %>
             <br />
             <%= modal_to "Login", "#loginModal", class: "black-links" %> | 
             <%= modal_to "Forgot password", "#passwordModal", class: "black-links" %>
