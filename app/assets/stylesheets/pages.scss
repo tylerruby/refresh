@@ -2,10 +2,68 @@ $body-bg: #f8f8f6;
 $navbar-default-bg: #fff;
 $panel-default-border: 0px;
 $navbar-inverse-bg: #444;
+$navbar-inverse-border: #444;
 $link-color: #ff0000;
 
-.dropdown-cart > li:nth-child(even) {
-    background: #f8f8f6 !important;
+/* Driver Bar */
+.driver-bar {
+  width:100%;
+  background-color:#f0f0f0;
+  height:70px;
+  padding:10px;
+  h2 {
+    color: #fff;
+  }
+}
+.btn-driver {
+  background: transparent;
+  border: transparent;
+  color: #666;
+}
+.btn-driver:hover, .btn-driver:focus {
+  color: #000 !important;
+}
+
+@-webkit-keyframes move
+{
+    from {
+        left: 0;
+    }
+    to {
+        left: 50%;
+    }
+}
+@keyframes move
+{
+    from {
+        left: 0;
+    }
+    to {
+        left: 50%;
+    }
+}
+
+body {
+    background: black;
+}
+
+a#rotator {
+    top: -5px;
+    text-decoration: none;
+    padding-right: 20px;
+    left: 50%;
+    position: absolute;
+    -webkit-animation: move 5s;
+    animation: move 5s;
+}
+
+a#rotator img {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out; 
+    -o-transition: all 1s ease-in-out; 
+    -ms-transition: all 1s ease-in-out; 
+    border-radius:60px;
+    transition-duration: 1s;
 }
 
 /* Misc */
@@ -203,6 +261,11 @@ h1, h2, h3, h4 {
 .block-images {
   padding-left:1px !important;
   padding-right:1px !important;
+  padding-bottom:1px !important;
+}
+.nav-padding {
+  padding-left:10px !important;
+  padding-right:0px !important;
   padding-bottom:1px !important;
 }
 .col-md-12 {
