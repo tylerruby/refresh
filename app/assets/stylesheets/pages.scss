@@ -8,38 +8,58 @@ $link-color: #ff0000;
 /* Driver Bar */
 .driver-bar {
   width:100%;
-  background-color:#f0f0f0;
-  height:70px;
+  background-color:#444;
+  height:60px;
   padding:10px;
   h2 {
     color: #fff;
   }
 }
+.driver-text {
+  font-family: 'Raleway', sans-serif;
+  font-size:24px;
+  color: #fff;
+  font-weight: 400 !important;
+  margin-top:11px;
+}
+.driver-apply, .driver-apply:hover, .driver-apply:focus {
+  background:red;
+  padding:5px;
+  padding-left:10px !important;
+  padding-right:10px !important;
+  position:absolute;
+  top:7px;
+  left:-15px;
+  padding:5px;
+  color:#fff;
+  border-radius: 3px;
+}
 .btn-driver {
   background: transparent;
   border: transparent;
-  color: #666;
+  color: #999;
+  margin-top:-1px;
 }
 .btn-driver:hover, .btn-driver:focus {
-  color: #000 !important;
+  color: #fff !important;
 }
 
 @-webkit-keyframes move
 {
     from {
-        left: 0;
+        left: -20%;
     }
     to {
-        left: 50%;
+        left: 90%;
     }
 }
 @keyframes move
 {
     from {
-        left: 0;
+        left: -20%;
     }
     to {
-        left: 50%;
+        left: 90%;
     }
 }
 
@@ -48,13 +68,13 @@ body {
 }
 
 a#rotator {
-    top: -5px;
+    top: -8px;
     text-decoration: none;
     padding-right: 20px;
-    left: 50%;
+    left: 90%;
     position: absolute;
-    -webkit-animation: move 5s;
-    animation: move 5s;
+    -webkit-animation: move 4s;
+    animation: move 4s;
 }
 
 a#rotator img {

@@ -1,23 +1,31 @@
 <%= render 'layouts/sign_in' %>
 <%= render 'layouts/sign_up' %>
 <%= render 'layouts/forgot_password' %>
-
-<div class="driver-bar collapse in" id="demo">
-  <div class="row">
-  <div class="col-md-12">
-    <div class="col-md-8">
-      <a id="rotator">
-      <%= image_tag('Car-96') %>
-      </a>
-    </div>
-    <div class="col-md-3">
-      <button type="button" class="btn btn-driver pull-right" data-toggle="collapse" data-target="#demo">
-        <i class="fa fa-2x fa-times"></i>
-      </button>
+<% if current_page?(root_path) %>
+  <div class="driver-bar collapse in" id="demo">
+    <div class="row">
+      <div class="hidden-xs col-sm-3 col-md-5">
+        <a id="rotator">
+        <%= image_tag('Car-96') %>
+        </a>
+      </div>
+      <div class="col-xs-7 col-sm-4 col-xs-offset-1 col-md-2 col-md-offset-0">
+        <div class="text-center">
+          <h2 class="driver-text">Drive For Us</h2>
+        </div>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <a class="driver-apply">Apply</a>
+      </div>
+      <div class="col-xs-2 col-md-3">
+        <button type="button" class="btn btn-driver pull-right" data-toggle="collapse" data-target="#demo">
+          <i class="fa fa-2x fa-times"></i>
+        </button>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-</div>
+<% end %>
 <nav class="navbar navbar-default" id="primary-nav">
   <div class="container-fluid">
     <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
