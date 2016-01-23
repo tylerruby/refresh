@@ -5,6 +5,11 @@ $navbar-inverse-bg: #333;
 $navbar-inverse-border: #333;
 $link-color: #ff0000;
 
+
+.navbar-inverse {
+  height:30px !important;
+}
+
 /* Driver Bar */
 .driver-bar {
   width: 100%;
@@ -635,8 +640,8 @@ ul.navbar-nav > li > a {
 }
 
 ul.nav.navbar-nav.secondary > li.active > a {
-  border-bottom: 2px solid #fff;
-  color: #fff;
+  border-bottom: 4px solid #fff;
+
 }
 
 @media (max-width: 480px) {
