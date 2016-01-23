@@ -1,8 +1,8 @@
 $body-bg: #f8f8f6;
 $navbar-default-bg: #fff;
 $panel-default-border: 0px;
-$navbar-inverse-bg: #333;
-$navbar-inverse-border: #333;
+$navbar-inverse-bg: #444;
+$navbar-inverse-border: #444;
 $link-color: #ff0000;
 
 
@@ -13,7 +13,7 @@ $link-color: #ff0000;
 /* Driver Bar */
 .driver-bar {
   width: 100%;
-  background-color: #333;
+  background-color: #444;
   height: 60px;
   padding: 10px;
   h2 {
@@ -641,7 +641,6 @@ ul.navbar-nav > li > a {
 
 ul.nav.navbar-nav.secondary > li.active > a {
   border-bottom: 4px solid #fff;
-
 }
 
 @media (max-width: 480px) {
