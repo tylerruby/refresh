@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   match '/drive',     to: 'drivers#new', via: 'get'
   resources "drivers", only: [:new, :create]
 
+  match '/restaurants',     to: 'restaurants#new', via: 'get'
+  resources "restaurants", only: [:new, :create]
+
 
 
   # These must be the last routes in the file, since they'll match anything

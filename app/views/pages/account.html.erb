@@ -15,7 +15,9 @@
             <h5 class="profile-text text-center">tylerruby@comcast.net</h5>
             <h5 class="profile-text text-center">678-488-2616</h5>
             <p class="text-center">
-            <a>Edit Profile</a>
+            <a href="#">Edit Profile</a>
+            <br /><br />
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "black-links" %>
             </p>
           </div>
         </div>

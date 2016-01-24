@@ -119,25 +119,14 @@
           </ul>
             </li>
           <% end %>
-          <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %></li>
-          <li class="dropdown">
-            <a href="#"
-               id="user-dropdown"
+          <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %>
+          </li>
+          <li class="<%= !user_signed_in? ? 'hide' : '' %>">
+            <a href="/account"
                class="dropdown-toggle avatar-padding<%= ' hide' unless user_signed_in? %>"
-               data-toggle="dropdown"
-               role="button"
-               aria-haspopup="true"
                aria-expanded="false">
-               
-               <img class="img-circle profile<%= ' hide' unless user_signed_in? %>" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
+              <img class="img-circle profile<%= ' hide' unless user_signed_in? %>" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
             </a>
-            <ul class="dropdown-menu">
-              <li><a href="/account">Account</a></li>
-              <li><%= link_to 'Edit profile', edit_user_path %></li>
-              <li><%= link_to 'Orders', orders_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-            </ul>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->

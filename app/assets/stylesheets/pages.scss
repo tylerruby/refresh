@@ -4,6 +4,7 @@ $panel-default-border: 0px;
 $navbar-inverse-bg: #444;
 $navbar-inverse-border: #444;
 $link-color: #ff0000;
+$link-hover-decoration: none;
 
 
 .navbar-inverse {
@@ -13,7 +14,7 @@ $link-color: #ff0000;
 /* Driver Bar */
 .driver-bar {
   width: 100%;
-  background-color: #444;
+  background-color: #555;
   height: 60px;
   padding: 10px;
   h2 {
@@ -68,10 +69,6 @@ $link-color: #ff0000;
     }
 }
 
-body {
-    background: black;
-}
-
 a#rotator {
     top: -8px;
     text-decoration: none;
@@ -92,6 +89,10 @@ a#rotator img {
 }
 
 /* Misc */
+a {
+outline-color: none !important;
+}
+
 .dropdown-cart {
   padding-bottom:0px !important;
   margin-bottom:0px !important;
@@ -491,7 +492,7 @@ h1, h2, h3, h4 {
 /* Footer */
 .footer {
   border-top: 1px solid #e7e7e7;
-  background:#f8f8f8;
+  background:#fff;
   color:#666;
   width:100%;
   display: inline-block;
@@ -676,5 +677,14 @@ ul.nav.navbar-nav.secondary > li.active > a {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 2px;
+}
+
+/* Restaurant Page */
+
+.restaurant-header {
+  background-image: url("http://i.imgur.com/mzCJJAw.jpg");
+  background-size: cover;
+  background-position: top;
+  height: 700px;
 }
 
