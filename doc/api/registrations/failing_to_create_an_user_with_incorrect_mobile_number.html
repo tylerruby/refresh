@@ -109,7 +109,7 @@ table th, table td {
       <h1>Registrations API</h1>
 
       <div class="article">
-        <h2>failing to create an user</h2>
+        <h2>failing to create an user with incorrect mobile number</h2>
         <h3>POST /users.json</h3>
 
           <h3>Parameters</h3>
@@ -137,6 +137,14 @@ table th, table td {
                   <span class="description">User password</span>
                 </td>
               </tr>
+              <tr>
+                <td>
+                    <span class="name">user[mobile_number]</span>
+                </td>
+                <td>
+                  <span class="description">User mobile number</span>
+                </td>
+              </tr>
             </tbody>
           </table>
 
@@ -153,7 +161,7 @@ Cookie: </pre>
 
 
             <h4>Body</h4>
-            <pre class="request body">user[email]=some.email%40example.com&user[password]=</pre>
+            <pre class="request body">user[email]=some.email%40example.com&user[password]=12345678&user[mobile_number]=invalid+format</pre>
 
 
             <h3>Response</h3>
@@ -164,16 +172,16 @@ X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
 Cache-Control: no-cache
 Set-Cookie: request_method=POST; path=/
-X-Request-Id: 0f0ea178-0f9d-42f7-9152-d319d5d92d77
-X-Runtime: 0.004937
+X-Request-Id: ea190b16-a540-4e94-9185-8dbcbe617f46
+X-Runtime: 0.005921
 Vary: Origin
-Content-Length: 31</pre>
+Content-Length: 32</pre>
             <h4>Status</h4>
             <pre class="response status">422 Unprocessable Entity</pre>
               <h4>Body</h4>
               <pre class="response body">{
-  &quot;password&quot;: [
-    &quot;can&#39;t be blank&quot;
+  &quot;mobile_number&quot;: [
+    &quot;is invalid&quot;
   ]
 }</pre>
       </div>

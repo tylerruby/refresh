@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   before_create :create_customer
 
+  validates :mobile_number, format: { with: /\(\d{3}\) \d{3}-\d{4}/ }, allow_blank: true
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
