@@ -1,5 +1,5 @@
 $body-bg: #f8f8f6;
-$navbar-default-bg: #333;
+$navbar-default-bg: #fff;
 $panel-default-border: 0px;
 $navbar-inverse-bg: #555;
 $navbar-inverse-border: #555;
@@ -398,6 +398,7 @@ h1, h2, h3, h4 {
   color: #fff !important;
   padding: 10px !important;
   font-size: 15px !important;
+  min-height:30px;
 }
 .btn-red:hover, .btn-red:focus {
   background-color: #d51913 !important;
