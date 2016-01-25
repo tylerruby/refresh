@@ -29,6 +29,7 @@ resource 'Sessions' do
       do_request
       expect(json).to eq(
         "id" => user.id,
+        "mobile_number" => nil,
         "credit_cards" => [
           "id" => card.id,
           "type" => card.type,
@@ -75,6 +76,7 @@ resource 'Sessions' do
       do_request
       expect(json).to eq(
         "id" => user.id,
+        "mobile_number" => nil,
         "credit_cards" => [
           "id" => card.id,
           "type" => card.type,
@@ -107,6 +109,7 @@ resource 'Sessions' do
       do_request
       expect(json).to eq(
         "id" => user.id,
+        "mobile_number" => nil,
         "credit_cards" => [],
         "token" => new_token
       )

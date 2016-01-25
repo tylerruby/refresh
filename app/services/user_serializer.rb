@@ -6,6 +6,7 @@ class UserSerializer
   def as_json(*args)
     {
       id: user.id,
+      mobile_number: user.mobile_number,
       token: token,
       credit_cards: user.credit_cards.map do |credit_card|
         {
