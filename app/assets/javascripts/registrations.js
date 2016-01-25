@@ -1,10 +1,9 @@
 $(function setupRegistrations() {
   setupRemoteForm($('#sign-in-form'), "The email or password is incorrect.");
   setupRemoteForm($('#sign-up-form'), "There was an error in the sign up.");
+  setupRemoteForm($('#recover-password-form'), "There was an error recovering your password.");
 
   function setupRemoteForm(form, errorMessage) {
-    form.validate();
-
     var errorsContainer = form.find('.errors');
     errorsContainer.hide();
     form.submit(submitAndCheckErrors);

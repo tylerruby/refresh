@@ -1,6 +1,7 @@
 class Devise::RegistrationsController < DeviseController
   prepend_before_filter :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+  before_action :add_custom_fields, only: :create
 
   # GET /resource/sign_up
   def new
@@ -149,5 +150,9 @@ class Devise::RegistrationsController < DeviseController
 
   def translation_scope
     'devise.registrations'
+  end
+
+  def add_custom_fields
+    devise_parameter_sanitizer.for(:sign_up) << :mobile_number
   end
 end

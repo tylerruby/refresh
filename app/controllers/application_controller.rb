@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  helper_method :current_address, :coordinates, :cart
+  helper_method :current_address, :coordinates, :cart, :cart_items
 
   protected
 
@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
               || Cart.create!(user: current_user)
       session[:cart_id] = @cart.id
       @cart
+    end
+
+    def cart_items
+      @cart_items ||= cart.shopping_cart_items.order(:created_at)
     end
 
     def current_address
