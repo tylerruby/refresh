@@ -49,6 +49,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+
+          <li id="cd-cart-trigger">
+            <a class="cart cd-img-replace" href="#0">
+              <%= image_tag('Shopping-Cart', style: "width:24px;") %>
+            </a>
+          </li>
+
           <% unless cart_items.empty? %>
             <li class="dropdown">
               <a href="#" class="cart dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -82,6 +89,9 @@
               </ul>
             </li>
           <% end %>
+
+
+
           <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %>
           </li>
           <li class="<%= !user_signed_in? ? 'hide' : '' %>">

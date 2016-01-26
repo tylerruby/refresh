@@ -17,45 +17,70 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="jumbotron" style="background:#fff;">
-  <h1 class="text-center"><%= @store.name %></h1>
-  <h3 class="text-center" style="color:#666;">
-    <% if @store.opens_at && @store.closes_at %>
-      <%= format_24_to_am_pm(@store.human_opens_at) %> - <%= format_24_to_am_pm(@store.human_closes_at) %> 
-    <% else %>
-      Opened all day
-    <% end %>
-  </h3>
-  <% if @store.closed? %>
-    <h3 class="text-center">
-      <label class="label red">Closed</label>
+<main>
+  <div class="jumbotron" style="background:#fff;">
+    <h1 class="text-center"><%= @store.name %></h1>
+    <h3 class="text-center" style="color:#666;">
+      <% if @store.opens_at && @store.closes_at %>
+        <%= format_24_to_am_pm(@store.human_opens_at) %> - <%= format_24_to_am_pm(@store.human_closes_at) %> 
+      <% else %>
+        Opened all day
+      <% end %>
     </h3>
-  <% end %>
-</div>
+    <% if @store.closed? %>
+      <h3 class="text-center">
+        <label class="label red">Closed</label>
+      </h3>
+    <% end %>
+  </div>
 
-<br class="items-list-break" />
-<div class="col-md-10 col-md-offset-1 items-list">
-  <% @available_products.each do |product| %>
-    <div class="col-sm-6 col-md-6 col-lg-4">
-      <div class="panel panel-default">
-        <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
-          <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
-          <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
-          <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
-          <div class="price"><%= product.price.format %></div>
-          <div class="panel-body food-items">
-            <div class="col-xs-10">
-              <div class="product-name"><%= product.name %></div>
-              <p>Chick-Fil-A</p>
-            </div>
-            <div class="col-xs-2">
-              <div class="<%= ' hide' unless policy(@store).add? %>">
-              <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>
+  <br class="items-list-break" />
+  <div class="col-md-10 col-md-offset-1 items-list">
+    <% @available_products.each do |product| %>
+      <div class="col-sm-6 col-md-6 col-lg-4">
+        <div class="panel panel-default">
+          <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
+            <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+            <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
+            <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
+            <div class="price"><%= product.price.format %></div>
+            <div class="panel-body food-items">
+              <div class="col-xs-10">
+                <div class="product-name"><%= product.name %></div>
+                <p>Chick-Fil-A</p>
+              </div>
+              <div class="col-xs-2">
+                <div class="<%= ' hide' unless policy(@store).add? %>">
+                <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+</main>
+
+<div id="cd-shadow-layer"></div>
+
+<div id="cd-cart">
+  <h2>Cart</h2>
+  <ul class="cd-cart-items">
+    <li>
+      <!-- ... -->
+    </li>
+ 
+    <li>
+      <!-- ... -->
+    </li>
+  </ul> <!-- cd-cart-items -->
+ 
+  <div class="cd-cart-total">
+    <p>Total <span>$39.96</span></p>
+  </div> <!-- cd-cart-total -->
+ 
+  <a href="#0" class="checkout-btn">Checkout</a>
+  
+  <p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
+</div> <!-- cd-cart -->
