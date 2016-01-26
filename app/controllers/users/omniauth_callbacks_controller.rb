@@ -10,14 +10,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def sign_in_from_omniauth
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = User.from_oauth(OmniauthWrapper.new(request.env["omniauth.auth"]))
 
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
-      session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
+      set_flash_message(:danger, :failure, kind: "Facebook") if is_navigational_format?
+      redirect_to :back
     end
   end
 end
