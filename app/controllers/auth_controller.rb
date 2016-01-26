@@ -1,10 +1,10 @@
 class AuthController < ApplicationController
   def authenticate
-    @oauth = "Oauth::#{params['provider'].titleize}".constantize.new(params)
-    if @oauth.authorized?
-      @user = User.from_oauth(@oauth)
-      if @user
-        render_success(UserSerializer.new(@user))
+    oauth = "Oauth::#{params['provider'].titleize}".constantize.new(params)
+    if oauth.authorized?
+      user = User.from_oauth(oauth)
+      if user
+        render_success(UserSerializer.new(user))
       else
         render_error "This #{params[:provider]} account is used already"
       end

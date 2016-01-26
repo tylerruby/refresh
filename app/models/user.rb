@@ -13,30 +13,19 @@ class User < ActiveRecord::Base
 
   validates :mobile_number, format: { with: /\(\d{3}\) \d{3}-\d{4}/ }, allow_blank: true
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+  def self.from_oauth(auth)
+		user = find_by(provider: auth.provider, uid: auth.uid) || find_or_create_by(email: auth.email) do |user|
       user.password = Devise.friendly_token[0,20]
     end
-  end
 
-	def self.from_oauth(oauth)
-		data = oauth.get_data
-
-		user = find_by(provider: oauth.provider, uid: data[:id]) || find_or_create_by(email: data[:email]) do |u|
-			u.password =  SecureRandom.hex
-		end
-
-    # first_name, last_name = [data[:first_name], data[:last_name]]
 		user.update(
-			# display_name: [first_name, last_name].join(' '),
-			email: data[:email],
-			provider: oauth.provider,
-      uid: data[:id]
+			email: auth.email,
+			provider: auth.provider,
+      uid: auth.uid
 		)
 
-		user
-	end
+    user
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|
