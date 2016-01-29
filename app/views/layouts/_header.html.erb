@@ -1,6 +1,7 @@
 <%= render 'layouts/sign_in' %>
 <%= render 'layouts/sign_up' %>
 <%= render 'layouts/forgot_password' %>
+<%= render 'layouts/cart' %>
 <% if current_page?(root_path) %>
   <div class="driver-bar collapse in" id="demo">
     <div class="row">
@@ -49,48 +50,14 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-
-          <li id="cd-cart-trigger">
-            <a class="cart cd-img-replace" href="#0">
-              <%= image_tag('Shopping-Cart', style: "width:24px;") %>
-            </a>
-          </li>
-
           <% unless cart_items.empty? %>
-            <li class="dropdown">
-              <a href="#" class="cart dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <li>
+              <a href="#" class="cart drawer-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 <%= image_tag('Shopping-Cart', style: "width:24px;") %>
+                <span class="badge"><%= cart_items.count %></span>
               </a>
-              <ul class="dropdown-menu dropdown-cart" role="menu">
-                <% cart_items.each do |cart_item| %>
-                  <li>
-                    <span class="item">
-                      <span class="item-left">
-                        <%= image_tag cart_item.image.url(:thumb), class: 'img-responsive center-block' %>
-                        <span class="item-info">
-                          <span class="hidden-xs"><%= cart_item.name %></span>
-                          <span><%= humanized_money_with_symbol cart_item.subtotal %></span>
-                        </span>
-                      </span>
-                      <span class="item-right">
-                        <%= button_to 'x', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'btn btn-xs btn-default pull-right' %>
-                      </span>
-                    </span>
-                  </li>
-                <% end %>
-                <li>
-                  <%= link_to new_order_path, class: 'btn-red text-center' do %>
-                    <div class="cart-items-length hidden-xs">
-                      <%= humanized_money_with_symbol cart.subtotal %>
-                    </div>
-                    Check Out
-                  <% end %>
-                </li>
-              </ul>
             </li>
           <% end %>
-
-
 
           <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %>
           </li>
