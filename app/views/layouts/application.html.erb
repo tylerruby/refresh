@@ -19,10 +19,13 @@
     <!-- End Segment -->
   </head>
 
-  <body class="<%= body_css_classes %>">
+  <body class="drawer drawer--right <%= body_css_classes %>">
     <%= render 'layouts/alert' %>
     <%= render 'layouts/header' %>
-    <%= yield %>
+
+    <main role="main">
+      <%= yield %>
+    </main>
     <%= render 'layouts/footer' %>
   </body>
 </html>
