@@ -1,0 +1,24 @@
+<ul class="drawer-nav list-group" role="menu">
+  <% cart_items.each do |cart_item| %>
+    <li class="list-group-item">
+      <div class="media">
+        <div class="media-left">
+          <%= image_tag cart_item.image.url(:thumb), class: 'media-object' %>
+        </div>
+        <div class="media-body">
+          <span class="item-info">
+            <span><%= cart_item.name %></span>
+            <span><%= humanized_money_with_symbol cart_item.subtotal %></span>
+          </span>
+          <%= button_to 'x', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'btn btn-xs btn-default pull-right' %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+    <%= link_to new_order_path, class: 'list-group-item btn-red text-center' do %>
+      <div class="cart-items-length">
+        <%= humanized_money_with_symbol cart.subtotal %>
+      </div>
+      Check Out
+    <% end %>
+</ul>
