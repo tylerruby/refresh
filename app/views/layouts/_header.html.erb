@@ -1,6 +1,9 @@
 <%= render 'layouts/sign_in' %>
 <%= render 'layouts/sign_up' %>
 <%= render 'layouts/forgot_password' %>
+
+
+<!-- Driver Header 
 <% if current_page?(root_path) %>
   <div class="driver-bar collapse in" id="demo">
     <div class="row">
@@ -27,6 +30,8 @@
     </div>
   </div>
 <% end %>
+-->
+
 <nav class="navbar navbar-default" id="primary-nav">
   <div class="container-fluid">
     <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
@@ -49,13 +54,11 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-
-          <li id="cd-cart-trigger">
-            <a class="cart cd-img-replace" href="#0">
-              <%= image_tag('Shopping-Cart', style: "width:24px;") %>
-            </a>
+          <% if current_page?(root_path) %>
+          <li>
+            <a href="#">How it Works</a>
           </li>
-
+          <% end %>
           <% unless cart_items.empty? %>
             <li class="dropdown">
               <a href="#" class="cart dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
