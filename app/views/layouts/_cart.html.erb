@@ -10,7 +10,7 @@
             <span><%= cart_item.name %></span>
             <span><%= humanized_money_with_symbol cart_item.subtotal %></span>
           </span>
-          <%= button_to 'x', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'btn btn-xs btn-default pull-right' %>
+          <%= button_to 'x', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'remove-item-button btn btn-xs btn-default pull-right' %>
         </div>
       </div>
     </li>

@@ -24,8 +24,7 @@ class CartController < ApplicationController
     respond_to do |format|
       format.json { head :ok }
       format.html do
-        flash[:success] = 'Item removed from the cart.'
-        redirect_to :back
+        render layout: false
       end
     end
   end

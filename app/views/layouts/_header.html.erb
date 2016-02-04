@@ -63,14 +63,12 @@
           </li>
           <% end %>
 
-          <% unless cart_items.empty? %>
-            <li>
-              <a href="#" class="cart-icon drawer-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <%= image_tag('Shopping-Cart', style: "width:24px;") %>
-                <span class="badge"><%= cart_items.count %></span>
-              </a>
-            </li>
-          <% end %>
+          <li>
+            <a href="#" class="cart-icon drawer-toggle <%= "hide" if cart.empty? %>" data-toggle="dropdown" role="button" aria-expanded="false">
+              <%= image_tag('Shopping-Cart', style: "width:24px;") %>
+              <span class="badge"><%= cart_items.count %></span>
+            </a>
+          </li>
 
           <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %>
           </li>
