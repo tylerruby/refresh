@@ -1,7 +1,7 @@
 $body-bg: #f7f7f7;
 $navbar-default-bg: #fff;
 $panel-default-border: 0px;
-$navbar-default-link-color: #333;
+$navbar-default-link-color: #666;
 $navbar-default-link-hover-color: #000;
 
 $navbar-inverse-bg: #fff;
@@ -687,6 +687,20 @@ ul.nav.navbar-nav.secondary > li.active > a {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 2px;
+}
+.food-label {
+  position: absolute;
+  top: 5px;
+  left: 5%;
+}
+.btn-circle {
+  width: 30px !important;
+  height: 30px !important;
+  text-align: center !important;
+  padding: 6px 0 !important;
+  font-size: 12px !important;
+  line-height: 1.428571429 !important;
+  border-radius: 15px !important;
 }
 
 /* Restaurant Page */
