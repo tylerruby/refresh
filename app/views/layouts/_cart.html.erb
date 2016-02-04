@@ -1,6 +1,6 @@
-<ul class="drawer-nav list-group" role="menu">
+<ul class="cart drawer-nav list-group" role="menu">
   <% cart_items.each do |cart_item| %>
-    <li class="list-group-item">
+    <li class="cart-item list-group-item">
       <div class="media">
         <div class="media-left">
           <%= image_tag cart_item.image.url(:thumb), class: 'media-object' %>
@@ -10,7 +10,7 @@
             <span><%= cart_item.name %></span>
             <span><%= humanized_money_with_symbol cart_item.subtotal %></span>
           </span>
-          <%= button_to 'x', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'btn btn-xs btn-default pull-right' %>
+          <%= button_to 'x', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'remove-item-button btn btn-xs btn-default pull-right' %>
         </div>
       </div>
     </li>
