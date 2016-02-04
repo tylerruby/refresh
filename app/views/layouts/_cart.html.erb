@@ -1,6 +1,6 @@
-<ul class="drawer-nav list-group" role="menu">
+<ul class="cart drawer-nav list-group" role="menu">
   <% cart_items.each do |cart_item| %>
-    <li class="list-group-item">
+    <li class="cart-item list-group-item">
       <div class="media">
         <div class="media-left">
           <%= image_tag cart_item.image.url(:thumb), class: 'media-object' %>

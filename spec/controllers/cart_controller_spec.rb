@@ -28,12 +28,10 @@ RSpec.describe CartController, type: :controller do
   end
 
   describe "PATCH #add" do
-    let(:previous_url) { '/previous_url' }
     let(:store) { create(:store) }
     let(:product) { create(:product, store: store) }
 
     before do
-      request.env["HTTP_REFERER"] = previous_url
       session[:address_id] = store.address.id
     end
 
@@ -78,16 +76,6 @@ RSpec.describe CartController, type: :controller do
         expect(cart_item.quantity).to eq quantity
         expect(cart_item.price).to eq product.price
         expect(cart_item.item).to eq Product.last
-      end
-
-      it "redirects the user back to the the previous page" do
-        do_action
-        expect(response).to redirect_to previous_url
-      end
-
-      it "sets a success message" do
-        do_action
-        expect(flash[:success]).to eq 'Item added to the cart!'
       end
 
       it "adds a product instance to the existing cart" do
