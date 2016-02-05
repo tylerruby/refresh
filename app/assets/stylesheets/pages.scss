@@ -144,12 +144,6 @@ h1, h2, h3, h4 {
   margin-bottom: 0px !important;
   border-radius: 0px !important;
 }
-.navbar-form .form-control {
-  background: #333 !important;
-  border: none !important;
-  color:#fff !important;
-}
-
 .cart-icon {
   padding-bottom:5px !important;
 
@@ -634,11 +628,9 @@ ul.navbar-nav > li > a {
   }
 }
 ul.nav.navbar-nav.secondary > li > a {
-  color: #333;
+  color: #555;
 }
-ul.nav.navbar-nav.secondary {
-  font-family: 'Raleway', sans-serif;
-}
+
 .navbar.navbar-default {
   border-top: none;
   border-left: none;
