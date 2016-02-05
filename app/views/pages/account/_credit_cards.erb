@@ -11,17 +11,17 @@
       </div>
     <% end %>
 
-    <table class="table">
+    <div class="col-md-12">
       <% current_user.credit_cards.each do |card| %>
-        <tr>
-          <td><%= "#{card.brand} | #{card.last4}" %></td>
-          <td>
+        <div class="row">
+          <div class="col-md-6"><%= "#{card.brand} | #{card.last4}" %></div>
+          <div class="col-md-6">
             <%= link_to 'remove', remove_credit_card_user_path(credit_card_id: card.id),
               data: {disable_with: 'removing...', confirm: 'Are you sure?'} %>
-          </td>
-        </tr>
+          </div>
+        </div>
       <% end %>
-    </table>
+    </div>
 
     <br>
 
@@ -76,7 +76,6 @@
     <% end %>
 
     <div class="clearfix"></div>
-    <hr style="margin-bottom:0px" />
   </div>
 
   <div class="panel-body">
