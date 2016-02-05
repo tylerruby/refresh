@@ -14,7 +14,7 @@
         <h5>Delivery</h5>
       </div>
       <div class="col-xs-2">
-        <h5><%= humanized_money_with_symbol @cart.shipping_cost  %></h5>
+        <h5 class="pull-right"><%= humanized_money_with_symbol @cart.shipping_cost  %></h5>
       </div>
     </div>
 
@@ -27,7 +27,8 @@
       <h4><%= humanized_money_with_symbol @cart.total %></h4>
     </div>
   </div>
-  <div class="panel-footer">
-    <button class="btn btn-default btn-block green">Checkout</button>
+  <hr />
+  <div class="panel-body">
+    <button class="btn btn-red btn-block">Checkout</button>
   </div>
 </div>
