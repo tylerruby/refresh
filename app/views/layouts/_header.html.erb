@@ -3,6 +3,8 @@
 <%= render 'layouts/forgot_password' %>
 <%= render 'layouts/cart' %>
 
+<%= render 'layouts/how_it_works' %>
+
 <!-- Driver Header 
 <% if current_page?(root_path) %>
   <div class="driver-bar collapse in" id="demo">
@@ -56,10 +58,9 @@
         <ul class="nav navbar-nav navbar-right">
           <% if current_page?(root_path) %>
           <li class="hidden-xs">
-            <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">
+            <a href="#how-it-works" role="button" id="how-works" data-toggle="collapse" aria-expanded="false">
             How it Works
             </a>
-
           </li>
           <% end %>
 

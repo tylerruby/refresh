@@ -12,7 +12,7 @@ $link-hover-decoration: none;
 
 
 .navbar-inverse {
-  height:30px !important;
+  height: 30px !important;
 }
 
 /* Driver Bar */
@@ -27,28 +27,28 @@ $link-hover-decoration: none;
 }
 .driver-text {
   font-family: 'Raleway', sans-serif;
-  font-size:24px;
+  font-size: 24px;
   color: #fff;
   font-weight: 400 !important;
-  margin-top:11px;
+  margin-top: 11px;
 }
 .driver-apply, .driver-apply:hover, .driver-apply:focus {
-  background:red;
-  padding:5px;
-  padding-left:10px !important;
-  padding-right:10px !important;
-  position:absolute;
-  top:7px;
-  left:-15px;
-  padding:5px;
-  color:#fff;
+  background: #ff0000;
+  padding: 5px;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  position: absolute;
+  top: 7px;
+  left: -15px;
+  padding: 5px;
+  color: #fff;
   border-radius: 3px;
 }
 .btn-driver {
   background: transparent;
   border: transparent;
   color: #999;
-  margin-top:-1px;
+  margin-top: -1px;
 }
 .btn-driver:hover, .btn-driver:focus {
   color: #fff !important;
@@ -88,7 +88,7 @@ a#rotator img {
     -moz-transition: all 1s ease-in-out; 
     -o-transition: all 1s ease-in-out; 
     -ms-transition: all 1s ease-in-out; 
-    border-radius:60px;
+    border-radius: 60px;
     transition-duration: 1s;
 }
 
@@ -101,12 +101,12 @@ h1, h2, h3, h4 {
   font-weight: 300 !important;
 }
 .container-fluid {
-  padding-left:0px !important;
-  padding-right:0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 .no-padding {
-  padding-left:0px !important;
-  padding-right:0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 .panel {
   border: none !important;
@@ -145,14 +145,14 @@ h1, h2, h3, h4 {
   border-radius: 0px !important;
 }
 .cart-icon {
-  padding-bottom:5px !important;
+  padding-bottom: 5px !important;
 
 }
 .avatar-padding {
-  padding:10px !important;
+  padding: 10px !important;
 }
 .profile {
-  width:30px;
+  width: 30px;
 }
 
 /* Partner Page */
@@ -160,11 +160,11 @@ h1, h2, h3, h4 {
   background: #fff !important;
   h1 {
     color: #000 !important;
-    font-size:70px !important;
+    font-size: 70px !important;
   }
   h2 {
     color: #000 !important;
-    font-size:38px !important;
+    font-size: 38px !important;
   }
   h3 {
     color: #666 !important;
@@ -172,7 +172,7 @@ h1, h2, h3, h4 {
   }
   h4 {
     color: #666 !important;
-    font-size:25px !important;
+    font-size: 25px !important;
   }
 }
 .driver-footer {
@@ -181,12 +181,12 @@ h1, h2, h3, h4 {
 /* Landing Video */
 .landing-video {
   background-image: url('Iphone-Background.png');
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   height: 629px;
   padding-top: 65px;
   padding-left: 13px;
-  margin-top:80px;
-  overflow:hidden;
+  margin-top: 80px;
+  overflow: hidden;
 }
 
 /* Landing Page */
@@ -222,7 +222,7 @@ h1, h2, h3, h4 {
   background-color: #fff !important;
   h1 {
     color: #222 !important;
-    font-size:50px !important;
+    font-size: 50px !important;
   }
   h2 {
     color: #222 !important;
@@ -230,11 +230,11 @@ h1, h2, h3, h4 {
   }
   h3 {
     color: #666 !important;
-    font-size:30px !important;
+    font-size: 30px !important;
   }
   h4 {
     color: #666 !important;
-    font-size:25px !important;
+    font-size: 25px !important;
   }
 }
 .landing-image {
@@ -242,13 +242,13 @@ h1, h2, h3, h4 {
 }
 .landing-login {
   position: absolute;
-  top:20px;
-  right:40px;
+  top: 20px;
+  right: 40px;
   color: #fff;
-  font-size:18px;
+  font-size: 18px;
 }
 .landing-login:hover {
-  color:#f0f0f0;
+  color: #f0f0f0;
 }
 
 /* Images */
@@ -256,29 +256,29 @@ h1, h2, h3, h4 {
   color: #666;
 }
 .store-jumbo {
-  background:#fff; 
-  padding-top:50px; 
-  padding-bottom:50px;
+  background: #fff; 
+  padding-top: 50px; 
+  padding-bottom: 50px;
 }
 .store-header {
-  margin-bottom:2px;
-  padding-left:2px;
-  padding-right:2px;
+  margin-bottom: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
   h1 {
-    position:absolute;
-    top:4%;
-    font-size:35px;
+    position: absolute;
+    top: 4%;
+    font-size: 35px;
     text-align: center !important;
     color: #fff;
     width: 100%;
     text-shadow: 0 1px 3px rgba(0,0,0,0.6);
     font-family: 'Product Sans', Arial, sans-serif !important;
-    z-index:0 !important;
+    z-index: 0 !important;
   }
   h2 {
-    position:absolute;
-    top:7%;
-    font-size:20px;
+    position: absolute;
+    top: 7%;
+    font-size: 20px;
     text-align: center !important;
     color: #fff;
     width: 100%;
@@ -703,4 +703,11 @@ ul.nav.navbar-nav.secondary > li.active > a {
   background-size: cover;
   background-position: top;
   height: 700px;
+}
+
+/* How It Works */
+
+#how-it-works {
+  background-color: #ff0000;
+  color: #fff;
 }
