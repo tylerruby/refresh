@@ -19,9 +19,30 @@
   }
 }
 
-.drawer-nav {
-  .btn-red {
+.cart {
+  .cart-header {
+    $cart-header-height: 51px;
+    height: $cart-header-height;
+
+    .cart-header-title {
+      font-size: 1.5em;
+      color: #666;
+      line-height: $cart-header-height;
+    }
+
+    .close {
+      position: absolute;
+      right: 1em;
+      top: 0;
+      line-height: $cart-header-height;
+    }
+  }
+
+  .checkout-button {
     background-color: #ff0000;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
   }
 }
 
