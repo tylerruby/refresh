@@ -16,41 +16,39 @@
 </nav>
 <br />
 <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h2 class="text-center">
-        Contact Us
-      </h2>
-      <h4 class="text-center">Let us know how we can help you!</h4>
-      <hr />
 
-      <div class="col-lg-10 col-lg-offset-1">
-        <br />
-        <%= form_for @contact, :html => {:class => 'form-horizontal' } do |f| %>
-        <div class="col-sm-10 col-sm-offset-1">
-          <div class="form-group">
-            <%= f.text_field :name, :class => "form-control input-lg", :placeholder => "Name", :required => true %>
-          </div>
-        </div>
-        <div class="col-sm-10 col-sm-offset-1">
-          <div class="form-group">
-          <%= f.text_field :email, :class => "form-control input-lg", :placeholder => "Email", :required => true %>
-          </div>
-        </div>
-        <div class="col-sm-10 col-sm-offset-1">
-          <div class="form-group">
-            <%= f.text_area :message, :as => :text, :rows => 4, :class => "form-control input-lg", :placeholder => "Message", :required => true %>
-          </div>
-        </div>
-        <div class= "hidden">
-          <%= hidden_field_tag :nickname, :hint => 'Leave this field blank!' %>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-sm-4 col-sm-offset-4">
-          <%= f.submit 'Submit', :class => "btn btn-block btn-lg red" %>
-        </div>
-      <% end %>
+  <h2 class="text-center">
+    Contact Us
+  </h2>
+
+  <div class="col-lg-10 col-lg-offset-1">
+    <br />
+    <%= form_for @contact, :html => {:class => 'form-horizontal' } do |f| %>
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="form-group">
+        <%= f.text_field :name, :class => "form-control input-lg", :placeholder => "Name", :required => true %>
       </div>
     </div>
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="form-group">
+      <%= f.text_field :email, :class => "form-control input-lg", :placeholder => "Email", :required => true %>
+      </div>
+    </div>
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="form-group">
+        <%= f.text_area :message, :as => :text, :rows => 4, :class => "form-control input-lg", :placeholder => "Message", :required => true %>
+      </div>
+    </div>
+    <div class= "hidden">
+      <%= hidden_field_tag :nickname, :hint => 'Leave this field blank!' %>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="form-group">
+      <%= f.submit 'Submit', :class => "btn btn-block btn-lg red" %>
+      </div>
+      <br /><br />
+    </div>
+  <% end %>
   </div>
 </div>

@@ -1,7 +1,10 @@
+<br />
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "m-x-auto text-center app-login-form", role: "form", 'data-validate' => true }) do |f| %>
-      <h2>Change your password</h2>
+    <div class="m-x-auto text-center">
+    <h2>Change your password</h2>
+    <br />
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: "form", 'data-validate' => true }) do |f| %>
 
       <p class="errors error-message"></p>
       <%= devise_error_messages! %>
@@ -17,6 +20,7 @@
 
       <div class="m-b-lg">
         <%= f.button "Change my password", class: "btn btn-lg btn-block red" %>
+        <br />
       </div>
     <% end %>
   </div>
