@@ -1,4 +1,8 @@
 <ul class="cart drawer-nav list-group" role="menu">
+  <div class="cart-header row text-center">
+    <span class="cart-header-title">Shopping cart</span>
+    <a class="close drawer-toggle">&times;</a>
+  </div>
   <% cart_items.each do |cart_item| %>
     <li class="cart-item list-group-item">
       <div class="media">
@@ -15,10 +19,10 @@
       </div>
     </li>
   <% end %>
-    <%= link_to new_order_path, class: 'list-group-item btn-red text-center' do %>
-      <div class="cart-items-length">
-        <%= humanized_money_with_symbol cart.subtotal %>
-      </div>
-      Check Out
-    <% end %>
+  <%= link_to new_order_path, class: 'checkout-button btn-red text-center' do %>
+    <div class="cart-items-length">
+      <%= humanized_money_with_symbol cart.subtotal %>
+    </div>
+    Check Out
+  <% end %>
 </ul>
