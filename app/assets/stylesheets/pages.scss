@@ -708,6 +708,9 @@ ul.nav.navbar-nav.secondary > li.active > a {
 /* How It Works */
 
 #how-it-works {
-  background-color: #ff0000;
+  background-color: #EF3E36;
   color: #fff;
+}
+.how-it-works:focus {
+  outline:0;
 }
