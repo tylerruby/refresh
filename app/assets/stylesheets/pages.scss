@@ -11,6 +11,11 @@ $link-color: #ff0000;
 $link-hover-decoration: none;
 
 
+
+* {
+  outline:0 !important;
+}
+
 .navbar-inverse {
   height: 30px !important;
 }
@@ -206,6 +211,7 @@ h1, h2, h3, h4 {
   background: #fff !important;
   box-shadow: none !important;
   color: #000 !important;
+  z-index: 1 !important;
 }
 .landing-address::-webkit-input-placeholder { color: #a3a3a3 !important;}
 .landing-address:-moz-placeholder { color: #a3a3a3 !important;}
@@ -216,6 +222,7 @@ h1, h2, h3, h4 {
   color: #fff !important;
   border: 1px solid #ff0000 !important;
   background: #ff0000 !important;
+  z-index: 1 !important;
 }
 
 .landing-header {
@@ -708,9 +715,6 @@ ul.nav.navbar-nav.secondary > li.active > a {
 /* How It Works */
 
 #how-it-works {
-  background-color: #EF3E36;
-  color: #fff;
-}
-.how-it-works:focus {
-  outline:0;
+  background-color: #f0f0f0;
+  color: #444;
 }
