@@ -717,3 +717,19 @@ ul.nav.navbar-nav.secondary > li.active > a {
   background: linear-gradient(#ff1919, #e50000);
   color: #fff;
 }
+.close-button-icon-white {
+    background-image: url("close-white.png");
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    opacity: 1;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+.close-how {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+}

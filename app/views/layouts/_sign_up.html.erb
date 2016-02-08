@@ -2,7 +2,9 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <em class="close-button-icon"></em>
+        </button>
       </div>
       <div class="modal-body p-a-0 js-modalBody">
         <%= form_for(User.new, url: registration_path(:user), html: { id: 'sign-up-form', class: "m-x-auto text-center app-login-form", role: :form, 'data-validate' => true }) do |f| %>
