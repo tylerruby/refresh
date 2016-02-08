@@ -26,7 +26,10 @@
           <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
             <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
             <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
-            <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
+            <div class="product-image-wrapper" data-hover="no">
+              <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
+              <div class="image-hover">Some fancy text goes here</div>
+            </div>  
             <div class="price"><%= product.price.format %></div>
 
               <!-- Food labels

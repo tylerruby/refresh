@@ -25,11 +25,21 @@
     $cart-header-height: 53px;
     height: $cart-header-height;
     border-bottom: 2px solid #eeeeee;
+    background: #fff;
 
     .cart-header-title {
       font-size: 1.2em;
       color: #666;
       line-height: $cart-header-height;
+    }
+    .cart-items-quantity{
+      background-color: darken(#f0f0f0, 25%) !important;
+      padding: 2px 6px !important;
+      border-radius: 3px !important;
+      position: absolute !important;
+      left: 1em !important;
+      bottom: 10px !important;
+      color: #fff;
     }
 
     .close {
@@ -45,14 +55,63 @@
     bottom: 0;
     position: absolute;
     width: 100%;
-    height:50px;
   }
 }
+
+.close-button-icon {
+    background-image: url("close.png");
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    opacity: 1;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
 .cart-item {
-  border: none;
-  border-bottom: 1px solid #eeeeee !important;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 2px solid #eeeeee !important;
+  
+}
+
+.cart-item:last-child {
+  border-bottom-width: 1px solid !important
 }
 
 .cart-icon .badge {
   background-color: red;
 }
+
+/* Checkout Button */
+.btn-red {
+  background-color: #ff0000;
+  border: #ff0000 !important;
+  color: #fff !important;
+  padding: 16px !important;
+  font-size: 15px !important;
+  min-height:30px;
+}
+.btn-red:hover, .btn-red:focus {
+  background-color: #d51913 !important;
+  border: #d51913 !important;
+  color: #fff !important;
+}
+.cart-items-length{
+  background-color: darken(#ff5a5f, 25%) !important;
+  padding: 3px 6px !important;
+  border-radius: 3px !important;
+  position: absolute !important;
+  left: 1em !important;
+  bottom: 12px !important;
+}
+.remove-item-button {
+  border: none;
+  font-size:20px !important;
+  color: #666 !important;
+}
+.remove-item-button:hover, .remove-item-button:focus {
+  background: transparent !important;
+  color: #000 !important;
+}
+

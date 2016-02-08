@@ -401,29 +401,6 @@ h1, h2, h3, h4 {
   color: #333 !important;
 }
 
-/* Checkout Button */
-.btn-red {
-  background-color: #ff0000;
-  border: #ff0000 !important;
-  color: #fff !important;
-  padding: 10px !important;
-  font-size: 15px !important;
-  min-height:30px;
-}
-.btn-red:hover, .btn-red:focus {
-  background-color: #d51913 !important;
-  border: #d51913 !important;
-  color: #fff !important;
-}
-.cart-items-length{
-  background-color: darken(#ff5a5f, 25%) !important;
-  padding: 3px 6px !important;
-  border-radius: 3px !important;
-  position: absolute !important;
-  left: 1em !important;
-  bottom: 6px !important;
-}
-
 /* Authentication Modals */
 .p-a-0 {
     padding: 0 !important;
@@ -666,7 +643,7 @@ ul.nav.navbar-nav.secondary > li.active > a {
 	}
 }
 
-/* Food panels */
+/* Store Show Page */
 .product-name {
   font-weight: bold;
   font-size:16px;
@@ -702,6 +679,24 @@ ul.nav.navbar-nav.secondary > li.active > a {
   line-height: 1.428571429 !important;
   border-radius: 15px !important;
 }
+.product-image-wrapper {
+  position: relative;
+}
+.image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.75);
+  color: #fff;
+  display: none;
+  padding-top: 30%;
+  text-align: center;
+  font-size: 1.1em;
+  font-family: 'Helvetica Neue', sans-serif
+  
+}
 
 /* Restaurant Page */
 
@@ -715,6 +710,10 @@ ul.nav.navbar-nav.secondary > li.active > a {
 /* How It Works */
 
 #how-it-works {
-  background: #ff0000;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#ff1919, #e50000); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#ff1919, #e50000); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#ff1919, #e50000); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#ff1919, #e50000);
   color: #fff;
 }
