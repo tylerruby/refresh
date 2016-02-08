@@ -478,6 +478,7 @@ h1, h2, h3, h4 {
 }
 
 /* Footer */
+
 .footer {
   border-top: 1px solid #e7e7e7;
   background:#fff;
@@ -696,6 +697,9 @@ ul.nav.navbar-nav.secondary > li.active > a {
   font-size: 1.1em;
   font-family: 'Helvetica Neue', sans-serif
   
+}
+.minheight600 {
+  min-height: 600px !important;
 }
 
 /* Restaurant Page */
