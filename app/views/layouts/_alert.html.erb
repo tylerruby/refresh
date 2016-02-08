@@ -1,13 +1,16 @@
 <% flash.each do |key, message| %>
   <% if key.to_s == 'success' %>
     <div class="<%= alert_class_for key %> alert side-alert autoclose fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="top:11px;">
+        <em class="close-button-icon-white"></em>
+      </button>
       <i class="fa fa-exclamation-circle"></i>&nbsp; 
       <%= message %>
     </div>
   <% else %>
     <div class="<%= alert_class_for key %> alert side-alert alert-dismissible fade in" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="top:11px;">
+        <em class="close-button-icon-white"></em>
       </button>
       <i class="fa fa-exclamation-circle"></i> &nbsp;
       <%= message %>
