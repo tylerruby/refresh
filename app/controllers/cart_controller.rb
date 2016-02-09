@@ -35,8 +35,7 @@ class CartController < ApplicationController
     respond_to do |format|
       format.json { head :ok }
       format.html do
-        flash[:success] = "Item's quantity updated to #{quantity}."
-        redirect_to :back
+        render layout: false
       end
     end
   end

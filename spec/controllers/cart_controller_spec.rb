@@ -128,16 +128,6 @@ RSpec.describe CartController, type: :controller do
       do_action
       expect(cart.reload).to be_empty
     end
-
-    it "redirects the user back to the the previous page" do
-      do_action
-      expect(response).to redirect_to previous_url
-    end
-
-    it "sets a success message" do
-      do_action
-      expect(flash[:success]).to eq 'Item removed from the cart.'
-    end
   end
 
   describe "PATCH #update" do
@@ -161,16 +151,6 @@ RSpec.describe CartController, type: :controller do
       do_action
       expect(cart_item.reload.quantity).to eq quantity
       expect(cart.reload.subtotal).to eq product.price * quantity
-    end
-
-    it "redirects the user back to the the previous page" do
-      do_action
-      expect(response).to redirect_to previous_url
-    end
-
-    it "sets a success message" do
-      do_action
-      expect(flash[:success]).to eq "Item's quantity updated to #{quantity}."
     end
   end
 end

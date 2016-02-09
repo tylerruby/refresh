@@ -2,7 +2,6 @@ $(function setupCart() {
   $('.new_cart_item').submit(addAsync);
   var cart = $('.cart');
   var cartIcon = $('.cart-icon');
-  var cartIconCount = $('.cart-icon .badge, .cart-items-quantity');
   var drawer = $('.drawer');
   setupBindings(cart);
 
@@ -11,8 +10,10 @@ $(function setupCart() {
       drawer.drawer('close');
     });
     cart.find('form:has(.remove-item-button)').submit(removeAsync);
-    var cartItemsCount = calculateCartItemsCount(cart.find('.cart-item'));
-    cartIconCount.text(cartItemsCount);
+    cart.find('form:has(.update-quantity)').submit(updateQuantityAsync);
+
+    var cartItemsCount = calculateCartItemsCount(cart.find('.cart-item .quantity'));
+    $('.cart-icon .badge, .cart-items-quantity').text(cartItemsCount);
     if (cartItemsCount == 0) {
       cartIcon.addClass("hide");
     } else {
@@ -85,6 +86,16 @@ $(function setupCart() {
       "DELETE",
       "Item removed from the cart!",
       "There was a problem removing the item from the cart."
+    );
+  }
+
+  function updateQuantityAsync(ev) {
+    asyncSubmit(
+      ev,
+      $(this),
+      "PATCH",
+      "Item quantity updated!",
+      "There was a problem updating the item's quantity."
     );
   }
 });
