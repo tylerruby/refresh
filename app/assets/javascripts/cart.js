@@ -1,7 +1,7 @@
 $(function setupCart() {
   $('.new_cart_item').submit(addAsync);
   var cart = $('.cart');
-  var cartIcon = $('.cart-icon');
+  var cartIconMenu = $('.cart-icon-menu');
   var drawer = $('.drawer');
   setupBindings(cart);
 
@@ -15,9 +15,9 @@ $(function setupCart() {
     var cartItemsCount = calculateCartItemsCount(cart.find('.cart-item .quantity'));
     $('.cart-icon .badge, .cart-items-quantity').text(cartItemsCount);
     if (cartItemsCount == 0) {
-      cartIcon.addClass("hide");
+      cartIconMenu.addClass("hide");
     } else {
-      cartIcon.removeClass("hide");
+      cartIconMenu.removeClass("hide");
     }
   }
 

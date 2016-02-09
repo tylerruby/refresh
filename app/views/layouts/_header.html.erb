@@ -64,7 +64,7 @@
           </li>
           <% end %>
 
-          <li class="<%= 'hide' if cart.empty? %>">
+          <li class="cart-icon-menu<%= ' hide' if cart.empty? %>">
             <a href="#" class="cart-icon drawer-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               <%= image_tag('Shopping-Cart', style: "width:24px;") %>
               <span class="badge"><%= cart_items.count %></span>
