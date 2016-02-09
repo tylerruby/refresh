@@ -2,7 +2,7 @@ $(function setupCart() {
   $('.new_cart_item').submit(addAsync);
   var cart = $('.cart');
   var cartIcon = $('.cart-icon');
-  var cartIconCount = cartIcon.find('.badge');
+  var cartIconCount = $('.cart-icon .badge, .cart-items-quantity');
   var drawer = $('.drawer');
   setupBindings(cart);
 
@@ -11,6 +11,13 @@ $(function setupCart() {
       drawer.drawer('close');
     });
     cart.find('form:has(.remove-item-button)').submit(removeAsync);
+    var cartItemsCount = calculateCartItemsCount(cart.find('.cart-item'));
+    cartIconCount.text(cartItemsCount);
+    if (cartItemsCount == 0) {
+      cartIcon.addClass("hide");
+    } else {
+      cartIcon.removeClass("hide");
+    }
   }
 
   function showErrorMessage(message) {
@@ -26,13 +33,6 @@ $(function setupCart() {
   function updateCart(message) {
     return function delayedUpdateCart(cartHtml) {
       cart.html(cartHtml);
-      var cartItemsCount = cart.find('.cart-item').length;
-      cartIconCount.text(cartItemsCount);
-      if (cartItemsCount == 0) {
-        cartIcon.addClass("hide");
-      } else {
-        cartIcon.removeClass("hide");
-      }
       setupBindings(cart);
       new Alert({
         message: message,
@@ -40,6 +40,19 @@ $(function setupCart() {
         autoclose: 1000
       });
     };
+  }
+
+  function calculateCartItemsCount(cartItems) {
+    return cartItems
+      .toArray()
+      .map(getInt)
+      .reduce(sum, 0);
+
+    function getInt(element) {
+      return parseInt(element.textContent);
+    }
+
+    function sum(acc, x) { return acc + x; }
   }
 
   function asyncSubmit(ev, form, method, successMessage, errorMessage) {

@@ -1,8 +1,6 @@
 <ul class="cart drawer-nav list-group" role="menu">
   <div class="cart-header row text-center">
-    <div class="cart-items-quantity">
-      <%= cart_items.count %>
-    </div>
+    <span class="cart-items-quantity"></span>
     <span class="cart-header-title">Shopping Cart</span>
     <a class="close drawer-toggle">
       <em class="close-button-icon"></em>
@@ -11,6 +9,9 @@
   <% cart_items.each do |cart_item| %>
     <li class="cart-item list-group-item">
       <div class="media">
+        <div class="media-left">
+          <span class="quantity"><%= cart_item.quantity %></span>
+        </div>
         <div class="media-left">
           <%= image_tag cart_item.image.url(:thumb), class: 'media-object' %>
         </div>
