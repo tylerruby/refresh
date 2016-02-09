@@ -7,6 +7,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def failure
+    redirect_to root_path
+  end
+
   private
 
   def sign_in_from_omniauth
@@ -20,4 +24,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to :back
     end
   end
+
 end

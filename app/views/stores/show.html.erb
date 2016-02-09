@@ -37,6 +37,8 @@
                <button class="btn btn-success btn-circle">V</button>
                <button class="btn btn-warning btn-circle">GF</button>
                <button class="btn btn-primary btn-circle">VG</button>
+               <button class="btn btn-info btn-circle">P</button>
+
               </div>
               -->
 
@@ -44,7 +46,7 @@
             <div class="panel-body food-items">
               <div class="col-xs-10">
                 <div class="product-name"><%= product.name %></div>
-                <p>Chick-Fil-A</p>
+                <p><%= product.description %></p>
               </div>
               <div class="col-xs-2">
                 <div class="<%= ' hide' unless policy(@store).add? %>">

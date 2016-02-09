@@ -163,6 +163,6 @@ class Store < ActiveRecord::Base
 
     # Support stores that close after midnight
     # For instance, 01:00 AM in real world is 25:00 in our system.
-    current_time <= EXTRA_HOURS ? current_time + 24 : current_time
+    #current_time <= EXTRA_HOURS ? current_time + 24 : current_time
   end
 end
