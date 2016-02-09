@@ -3,9 +3,13 @@ $(function setupCart() {
   var cart = $('.cart');
   var cartIcon = $('.cart-icon');
   var cartIconCount = cartIcon.find('.badge');
+  var drawer = $('.drawer');
   setupBindings(cart);
 
   function setupBindings(cart) {
+    cart.find('.close').click(function closeCart() {
+      drawer.drawer('close');
+    });
     cart.find('form:has(.remove-item-button)').submit(removeAsync);
   }
 
