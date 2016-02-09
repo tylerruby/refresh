@@ -21,7 +21,6 @@
 
 .cart {
   .cart-header {
-
     $cart-header-height: 53px;
     height: $cart-header-height;
     border-bottom: 2px solid #eeeeee;
@@ -33,12 +32,12 @@
       line-height: $cart-header-height;
     }
     .cart-items-quantity{
-      background-color: darken(#f0f0f0, 25%) !important;
-      padding: 2px 6px !important;
-      border-radius: 3px !important;
-      position: absolute !important;
-      left: 1em !important;
-      bottom: 10px !important;
+      background-color: darken(#f0f0f0, 25%);
+      padding: 2px 6px;
+      border-radius: 3px;
+      position: absolute;
+      left: 1em;
+      top: 14px;
       color: #fff;
     }
 
@@ -81,6 +80,8 @@
 
 .cart-icon .badge {
   background-color: red;
+  margin-left: -10px;
+  margin-top: -20px;
 }
 
 /* Checkout Button */
