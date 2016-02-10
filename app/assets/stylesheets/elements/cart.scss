@@ -49,6 +49,34 @@
     }
   }
 
+  .cart-item {
+    .update-quantity, .remove-item-button {
+      background: none;
+      border: none;
+      color: #666;
+      visibility: hidden;
+
+      &:hover, &:focus {
+        background: transparent;
+        color: #000;
+      }
+    }
+
+    .remove-item-button {
+      font-size: 20px;
+    }
+
+    &:hover {
+      .update-quantity, .remove-item-button {
+        visibility: visible;
+      }
+
+      .price {
+        opacity: 0.2;
+      }
+    }
+  }
+
   .checkout-button {
     background-color: #ff0000;
     bottom: 0;
@@ -58,13 +86,13 @@
 }
 
 .close-button-icon {
-    background-image: url("close.png");
-    background-repeat: no-repeat;
-    background-size: 15px 15px;
-    opacity: 1;
-    width: 16px;
-    height: 16px;
-    display: inline-block;
+  background-image: url("close.png");
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  opacity: 1;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
 }
 
 .cart-item {
@@ -105,14 +133,5 @@
   position: absolute !important;
   left: 1em !important;
   bottom: 12px !important;
-}
-.remove-item-button {
-  border: none;
-  font-size:20px !important;
-  color: #666 !important;
-}
-.remove-item-button:hover, .remove-item-button:focus {
-  background: transparent !important;
-  color: #000 !important;
 }
 
