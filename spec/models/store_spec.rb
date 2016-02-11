@@ -5,6 +5,7 @@ RSpec.describe Store, type: :model do
 
   describe "associations" do
     it { is_expected.to have_one(:address).dependent(:destroy) }
+    it { is_expected.to have_many(:products).dependent(:destroy) }
   end
 
   it { is_expected.to accept_nested_attributes_for(:address).allow_destroy(true) }

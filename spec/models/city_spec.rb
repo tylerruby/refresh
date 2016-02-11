@@ -4,7 +4,7 @@ RSpec.describe City, type: :model do
   let(:city) { build(:city) }
 
   describe "associations" do
-    it { is_expected.to have_many(:addresses) }
+    it { is_expected.to have_many(:addresses).dependent(:nullify) }
   end
 
   it "strips city from surrounding empty space" do
