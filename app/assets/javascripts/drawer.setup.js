@@ -1,3 +1,0 @@
-$(function setupDrawer() {
-  $('.drawer').drawer();
-});

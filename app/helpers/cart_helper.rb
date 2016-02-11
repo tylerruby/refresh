@@ -8,7 +8,7 @@ module CartHelper
         product_id: cart_item.item_id
       },
       method: :patch,
-      class: 'btn btn-sm btn-default update-quantity'
+      class: 'update-quantity'
     ) do
       yield
     end

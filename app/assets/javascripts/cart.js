@@ -5,9 +5,23 @@ $(function setupCart() {
   var drawer = $('.drawer');
   setupBindings(cart);
 
+  function close() {
+    drawer.drawer('close');
+  }
+
+  function setupDrawer() {
+    drawer.drawer('destroy');
+    drawer.drawer({
+      class: {
+        nav: 'list-wrapper'
+      }
+    });
+  }
+
   function setupBindings(cart) {
+    setupDrawer();
     cart.find('.close').click(function closeCart() {
-      drawer.drawer('close');
+      close();
     });
     cart.find('form:has(.remove-item-button)').submit(removeAsync);
     cart.find('form:has(.update-quantity)').submit(updateQuantityAsync);
@@ -16,6 +30,7 @@ $(function setupCart() {
     $('.cart-icon .badge, .cart-items-quantity').text(cartItemsCount);
     if (cartItemsCount == 0) {
       cartIconMenu.addClass("hide");
+      close();
     } else {
       cartIconMenu.removeClass("hide");
     }
