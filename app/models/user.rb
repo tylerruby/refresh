@@ -14,15 +14,16 @@ class User < ActiveRecord::Base
   validates :mobile_number, format: { with: /\(\d{3}\) \d{3}-\d{4}/ }, allow_blank: true
 
   def self.from_oauth(auth)
-		user = find_by(provider: auth.provider, uid: auth.uid) || find_or_create_by(email: auth.email) do |user|
+    email = auth.email || "fallback.#{auth.provider}.#{auth.uid}@derby.com"
+    user = find_by(provider: auth.provider, uid: auth.uid) || find_or_create_by(email: email) do |user|
       user.password = Devise.friendly_token[0,20]
     end
 
-		user.update(
-			email: auth.email,
-			provider: auth.provider,
+    user.update!(
+      email: email,
+      provider: auth.provider,
       uid: auth.uid
-		)
+    )
 
     user
   end
