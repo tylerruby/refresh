@@ -10,6 +10,22 @@
     width: 40%;
     right: -40%;
   }
+
+  .cart-item {
+    .update-quantity, .remove-item-button {
+      visibility: hidden;
+    }
+
+    &:hover {
+      .update-quantity, .remove-item-button {
+        visibility: visible;
+      }
+
+      .price {
+        opacity: 0.2;
+      }
+    }
+  }
 }
 
 @media (min-width: $screen-lg-min) {
@@ -54,10 +70,8 @@
       background: none;
       border: none;
       color: #666;
-      visibility: hidden;
 
       &:hover, &:focus {
-        background: transparent;
         color: #000;
       }
     }
@@ -65,16 +79,17 @@
     .remove-item-button {
       font-size: 20px;
     }
+  }
 
-    &:hover {
-      .update-quantity, .remove-item-button {
-        visibility: visible;
-      }
-
-      .price {
-        opacity: 0.2;
-      }
-    }
+  .list-wrapper {
+    position: absolute;
+    z-index: 1;
+    top: 45px;
+    bottom: 48px;
+    left: 0;
+    width: 100%;
+    background: #ccc;
+    overflow: hidden;
   }
 
   .checkout-button {

@@ -1,4 +1,4 @@
-<ul class="cart drawer-nav list-group" role="menu">
+<nav class="cart drawer-nav list-group" role="menu">
   <div class="cart-header row text-center">
     <span class="cart-items-quantity"></span>
     <span class="cart-header-title">Shopping Cart</span>
@@ -6,35 +6,39 @@
       <em class="close-button-icon"></em>
     </a>
   </div>
-  <% cart_items.each do |cart_item| %>
-    <li class="cart-item list-group-item">
-      <div class="media">
-        <div class="media-left text-center">
-          <%= update_quantity_button(cart_item, 1) do %>
-            <i class="fa fa-chevron-up"></i>
-          <% end %>
-          <span class="quantity"><%= cart_item.quantity %></span>
-          <% if cart_item.quantity > 1 %>
-            <%= update_quantity_button(cart_item, -1) do %>
-              <i class="fa fa-chevron-down"></i>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="media-left">
-          <%= image_tag cart_item.image.url(:thumb), class: 'media-object' %>
-        </div>
-        <div class="media-body">
-          <div class="col-md-8"><%= cart_item.name %></div>
-          <div class="price col-md-4"><%= humanized_money_with_symbol cart_item.subtotal %></div>
-          <%= button_to '×', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'remove-item-button btn btn-xs btn-default pull-right' %>
-        </div>
-      </div>
-    </li>
-  <% end %>
+  <div class="list-wrapper">
+    <ul class="drawer-menu">
+      <% cart_items.each do |cart_item| %>
+        <li class="cart-item list-group-item">
+          <div class="media">
+            <div class="media-left text-center">
+              <%= update_quantity_button(cart_item, 1) do %>
+                <i class="fa fa-chevron-up"></i>
+              <% end %>
+              <span class="quantity"><%= cart_item.quantity %></span>
+              <% if cart_item.quantity > 1 %>
+                <%= update_quantity_button(cart_item, -1) do %>
+                  <i class="fa fa-chevron-down"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="media-left">
+              <%= image_tag cart_item.image.url(:thumb), class: 'media-object' %>
+            </div>
+            <div class="media-body">
+              <div class="col-md-8"><%= cart_item.name %></div>
+              <div class="price col-md-4"><%= humanized_money_with_symbol cart_item.subtotal %></div>
+              <%= button_to '×', { controller: :cart, action: :remove, product_id: cart_item.item_id }, method: :delete, class: 'remove-item-button btn btn-xs btn-default pull-right' %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
   <%= link_to new_order_path, class: 'checkout-button btn-red text-center' do %>
     <div class="cart-items-length">
       <%= humanized_money_with_symbol cart.subtotal %>
     </div>
     Check Out
   <% end %>
-</ul>
+</nav>

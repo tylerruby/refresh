@@ -9,7 +9,17 @@ $(function setupCart() {
     drawer.drawer('close');
   }
 
+  function setupDrawer() {
+    drawer.drawer('destroy');
+    drawer.drawer({
+      class: {
+        nav: 'list-wrapper'
+      }
+    });
+  }
+
   function setupBindings(cart) {
+    setupDrawer();
     cart.find('.close').click(function closeCart() {
       close();
     });
