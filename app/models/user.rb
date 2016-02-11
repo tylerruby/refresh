@@ -3,10 +3,10 @@ class User < ActiveRecord::Base
     :trackable, :validatable, :registerable, :omniauthable,
     omniauth_providers: [:facebook]
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
   has_one :cart
-  belongs_to :current_address, class_name: 'Address'
+  belongs_to :current_address, class_name: 'Address', dependent: :destroy
   accepts_nested_attributes_for :addresses, allow_destroy: true
 
   before_create :create_customer

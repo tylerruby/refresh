@@ -9,7 +9,7 @@ class Store < ActiveRecord::Base
   EXTRA_HOURS = 5
   EXTENDED_DAY_HOURS = 24 + EXTRA_HOURS # To support stores that close after midnight
 
-  has_many :products
+  has_many :products, dependent: :destroy
   has_one :address, as: :addressable, dependent: :destroy
 
   validates :address, presence: true
