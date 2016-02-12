@@ -5,34 +5,17 @@
 
 <%= render 'layouts/how_it_works' %>
 
-<!-- Driver Header 
-<% if current_page?(root_path) %>
-  <div class="driver-bar collapse in" id="demo">
-    <div class="row">
-      <div class="hidden-xs col-sm-3 col-md-5">
-        <a id="rotator">
-        <%= image_tag('Car-96') %>
-        </a>
-      </div>
-      <div class="col-xs-7 col-sm-4 col-xs-offset-1 col-md-2 col-md-offset-0">
-        <div class="text-center">
-          <h2 class="driver-text">Drive For Us</h2>
-        </div>
-      </div>
-      <div class="col-xs-2 col-md-2">
 
-        <%= link_to "Apply", drive_path, class: "driver-apply" %>
-      </div>
-      <div class="col-xs-2 col-md-3">
-        <button type="button" class="btn btn-driver pull-right" data-toggle="collapse" data-target="#demo">
-          <i class="fa fa-2x fa-times"></i>
-        </button>
-        </div>
+<% if current_page?(root_path) %>
+  <div class="visible-xs visible-sm driver-bar collapse in" id="demo">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+
+        <%= link_to "Get the app", drive_path, class: "driver-apply btn btn-block pull-right" %>
       </div>
     </div>
   </div>
 <% end %>
--->
+
 
 <nav class="navbar navbar-default" id="primary-nav">
   <div class="container-fluid">
