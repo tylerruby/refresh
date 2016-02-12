@@ -2,7 +2,7 @@
   Stripe.setPublishableKey('<%= Rails.application.secrets.stripe_publishable_key %>');
 
   jQuery(function setupCreditCardForm ($) {
-    var $form = $('#order-form')
+    var $form = $('#order-form');
     $form.submit(onSubmitForm);
 
     function onSubmitForm () {
