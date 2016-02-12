@@ -33,10 +33,9 @@ class UsersController < ApplicationController
             }
           }
         rescue Stripe::CardError => e
-          @credit_card = CreditCard.new params[:credit_card]
-          @credit_card.errors.add(:base, e.message)
-          partial_html = render_to_string(partial: 'pages/account/credit_cards', locals: { message: e.message })
-          render json: { message: e.message, html: partial_html }, status: :unprocessable_entity
+          render_credit_card_error(e.message)
+        rescue
+          render_credit_card_error("Something went wrong.")
         end
       end
     end
@@ -63,5 +62,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         addresses_attributes: [:id, :address, :city_id, :_destroy]
       )
+    end
+
+    def render_credit_card_error(message)
+      partial_html = render_to_string(partial: 'pages/account/credit_cards', locals: { message: message })
+      render json: { message: message, html: partial_html }, status: :unprocessable_entity
     end
 end
