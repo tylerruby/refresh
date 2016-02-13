@@ -11,6 +11,7 @@ class Product < ActiveRecord::Base
   rails_admin do
     edit do
       field :name
+      field :restaurant
       field :description
       field :price
       field :store
