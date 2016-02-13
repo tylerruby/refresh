@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
     user.update!(
       email: email,
       provider: auth.provider,
-      uid: auth.uid
+      uid: auth.uid,
+      remote_avatar_url: auth.avatar,
     )
 
     user
