@@ -1,22 +1,27 @@
-<h2>Edit profile</h2>
+<div class="row edit-profile">
+  <div class="col-md-4 col-md-offset-4">
+    <div class="m-x-auto text-center">
+      <h2>Edit account</h2>
+      <br />
+      <%= form_for(@user, html: { method: :put, role: "form", 'data-validate' => true }) do |f| %>
+        <p class="errors error-message"></p>
 
-<%= nested_form_for(@user) do |f| %>
-  <fieldset class="addresses">
-    <%= f.fields_for :addresses do |address_form| %>
-      <div class="form-inline">
         <div class="form-group">
-          <%= address_form.label :address %>
-          <%= address_form.text_field :address, class: 'form-control' %>
+          <%= avatar_tag @user %>
+          <div class="help-block">Change avatar</div>
+          <%= f.file_field :avatar %>
         </div>
-        <div class="form-group">
-          <%= address_form.label :city %>
-          <%= address_form.collection_select :city_id, City.all, :id, :full_name, class: 'form-control' %>
-        </div>
-        <%= address_form.link_to_remove 'Remove address', class: 'btn btn-danger' %>
-      </div>
-    <% end %>
-    <%= f.link_to_add "Add a address", :addresses, class: 'btn btn-info' %>
-  </fieldset>
 
-  <%= f.button "Update", class: 'btn btn-default' %>
-<% end %>
+        <div class="form-group">
+          <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
+        </div>
+
+        <%= f.button "Update", class: 'btn btn-default' %>
+      <% end %>
+
+      <div class="cancel-registration">
+        Unhappy?
+        <%= button_to "Cancel my account", registration_path(:user), class: "btn btn-danger", data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+  </div>
+</div>

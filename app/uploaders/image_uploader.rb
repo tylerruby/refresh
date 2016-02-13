@@ -17,7 +17,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   def default_url
     file_path = [
       'fallbacks',
-      ([model.class.to_s.underscore, mounted_as, version_name].compact.join('_') + '.png')
+      [model.class.to_s.underscore, mounted_as, version_name].compact.join('_')
     ].join '/'
 
     'http://' + ENV['HOST'] + ActionController::Base.helpers.image_path(file_path)

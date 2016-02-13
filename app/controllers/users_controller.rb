@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:success] = "Profile updated with success!"
-      redirect_to root_path
+      redirect_to account_path
     else
       flash[:danger] = current_user.errors.full_messages.join(', ')
       render :edit
@@ -60,6 +60,8 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(
+        :avatar,
+        :email,
         addresses_attributes: [:id, :address, :city_id, :_destroy]
       )
     end
