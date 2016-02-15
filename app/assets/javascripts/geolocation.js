@@ -47,21 +47,8 @@ function PlaceWrapper(place) {
 function AddressSelector(form) {
   var that = this;
 
-  function hasDefinedPath() {
-    return !!form.attr('action');
-  }
-
   function parameterize(name) {
     return name.replace(' ', '-').toLowerCase();
-  }
-
-  function checkAddressBeforeSubmit(e) {
-    if (!hasDefinedPath()) {
-      e.preventDefault();
-      var geocoder = new google.maps.Geocoder();
-      var address = form.find('input[name=address]').val();
-      geocoder.geocode({ address: address }, that.submitLocation);
-    }
   }
 
   this.submitLocation = function submitLocation(places) {
@@ -72,10 +59,8 @@ function AddressSelector(form) {
     form.find('input[name=latitude]').val(place.getLatitude());
     form.find('input[name=longitude]').val(place.getLongitude());
     form.find('input[name=address]').val(place.getAddress());
-    form.attr('action', parameterize(place.getCity())).submit();
+    form.submit();
   };
-
-  form.on('submit', checkAddressBeforeSubmit);
 }
 
 // This function is called when the Google Maps API finishes initializing.
