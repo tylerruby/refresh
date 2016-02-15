@@ -5,12 +5,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav secondary">
-          <li class="active"><a href="/help"><b>Today</b></a></li>
-          <li><a href="/">Tomorrow</a></li>
-          <li><a href="/terms">Friday</a></li>
-          <li><a href="/privacy">Saturday</a></li>
-          <li><a href="/privacy">Sunday</a></li>
-          <li><a href="/privacy">Monday</a></li>
+          <% (0..6).each do |offset| %>
+            <%= list_item_to_menu(@menu, offset) %>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.block-images -->

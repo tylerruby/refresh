@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   resources "restaurants", only: [:new, :create]
 
   # These must be the last routes in the file, since they'll match anything
-  get '/:city' => 'menus#show'
+  get '/:city' => 'menus#show', as: :menu
   # post '/:city' => 'stores#search_by_address'
   # get '/:city' => 'stores#search_by_city'
   # get '/atlanta/:id' => 'stores#show', as: :store
