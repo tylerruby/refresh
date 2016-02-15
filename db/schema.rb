@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213161524) do
+ActiveRecord::Schema.define(version: 20160215182037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,20 @@ ActiveRecord::Schema.define(version: 20160213161524) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
+  create_table "menus", force: :cascade do |t|
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menus_products", force: :cascade do |t|
+    t.integer "menu_id"
+    t.integer "product_id"
+  end
+
+  add_index "menus_products", ["menu_id"], name: "index_menus_products_on_menu_id", using: :btree
+  add_index "menus_products", ["product_id"], name: "index_menus_products_on_product_id", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "status"
@@ -178,6 +192,8 @@ ActiveRecord::Schema.define(version: 20160213161524) do
 
   add_foreign_key "addresses", "cities"
   add_foreign_key "carts", "users"
+  add_foreign_key "menus_products", "menus"
+  add_foreign_key "menus_products", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"

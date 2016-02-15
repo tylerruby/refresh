@@ -42,10 +42,9 @@ Rails.application.routes.draw do
   match '/restaurants',     to: 'restaurants#new', via: 'get'
   resources "restaurants", only: [:new, :create]
 
-
-
   # These must be the last routes in the file, since they'll match anything
-  post '/:city' => 'stores#search_by_address'
-  get '/:city' => 'stores#search_by_city'
-  get '/atlanta/:id' => 'stores#show', as: :store
+  get '/:city' => 'menus#show'
+  # post '/:city' => 'stores#search_by_address'
+  # get '/:city' => 'stores#search_by_city'
+  # get '/atlanta/:id' => 'stores#show', as: :store
 end
