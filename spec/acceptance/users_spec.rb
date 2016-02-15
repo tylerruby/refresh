@@ -5,7 +5,8 @@ resource 'Users' do
   header 'Authorization', :authorization
   let(:authorization) { "Bearer #{token}" }
   let(:token) { AuthToken.encode(user_id: user.id) }
-  let(:user) { create(:user) }
+  let!(:atlanta) { create(:city, name: 'Atlanta') }
+  let(:user) { create(:user, current_address: nil) }
 
   post '/user/add_credit_card.json' do
     parameter :number, scope: :credit_card
@@ -63,6 +64,32 @@ resource 'Users' do
     example "removing user's credit card", document: :public do
       do_request
       expect(response_status).to eq 200
+    end
+  end
+
+  post '/user/set_current_address.json' do
+    parameter :address, "The user's current address"
+    let(:address) { '3905 Mike Padgett Hwy' }
+
+    before do
+      stub_address("3905 Mike Padgett Hwy, Atlanta, GA", 33.353523, -81.982439)
+      stub_address("3905 Mike Padgett Hwy", 33.353523, -81.982439, city: 'Atlanta')
+    end
+
+    example_request "it's successful" do
+      expect(response_status).to be 200
+    end
+
+    example "getting the user's city to be used to find menus later", document: :public do
+      do_request
+      expect(json).to eq(
+        "city" => 'atlanta'
+      )
+    end
+
+    example_request "sets the user's current address" do
+      expect(user.reload.current_address.city).to eq atlanta
+      expect(user.reload.current_address.address).to eq address
     end
   end
 end
