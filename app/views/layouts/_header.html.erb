@@ -55,7 +55,7 @@
 
           <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %>
           </li>
-          <li class="<%= !user_signed_in? ? 'hide' : '' %>">
+          <li class="<%= !user_signed_in? ? 'hide' : 'avatar-li' %>">
             <a href="/account"
                class="dropdown-toggle avatar-padding<%= ' hide' unless user_signed_in? %>"
                aria-expanded="false">
