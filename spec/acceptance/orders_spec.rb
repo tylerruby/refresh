@@ -49,7 +49,7 @@ resource 'Orders' do
     parameter :observations, "Order observations (for example, \"I'm the guy using a black shirt\")", scope: :order
     let(:stripe_helper) { StripeMock.create_test_helper }
     let!(:cart) { create(:cart, user: user) }
-    let!(:cart_items) { [cart.add(create(:product), 1)] }
+    let!(:cart_items) { [cart.add(create(:menu_product), 1)] }
     let(:observations) { 'Take off the bacon!' }
     let(:stripeToken) { stripe_helper.generate_card_token }
     let(:delivery_address) { "18th Street Atlanta" }
@@ -57,6 +57,10 @@ resource 'Orders' do
     example "creating an order", document: :public do
       do_request
       expect(response_status).to be 200
+    end
+
+    example_request "creates an order associated with the cart items" do
+      expect(Order.last.cart_items).to eq cart_items
     end
 
     context "record errors" do

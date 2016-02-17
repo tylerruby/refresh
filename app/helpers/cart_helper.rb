@@ -5,7 +5,7 @@ module CartHelper
         controller: :cart,
         action: :update,
         quantity: cart_item.quantity + increment,
-        product_id: cart_item.item_id
+        menu_product_id: cart_item.item_id
       },
       method: :patch,
       class: 'update-quantity'

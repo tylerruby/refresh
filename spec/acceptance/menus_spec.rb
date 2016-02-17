@@ -8,12 +8,18 @@ resource 'Menus' do
   let(:user) { create(:user) }
   let!(:atlanta) { create(:city, name: 'Atlanta') }
 
-  get '/:city' do
-    let(:today_product) { create(:product) }
-    let(:tomorrow_product) { create(:product) }
+  get '/:city.json' do
     let(:city) { 'atlanta' }
-    let(:today_menu) { Menu.create(date: Time.zone.parse('2016-01-01'), products: [today_product]) }
-    let(:tomorrow_menu) { Menu.create(date: Time.zone.parse('2016-01-02'), products: [tomorrow_product]) }
+
+    let(:today_date) { "2016-01-01" }
+    let(:today_menu) { Menu.create(date: today_date) }
+    let(:today_product) { create(:product) }
+    let!(:today_menu_product) { create(:menu_product, menu: today_menu, product: today_product) }
+
+    let(:tomorrow_date) { "2016-01-02" }
+    let(:tomorrow_menu) { Menu.create(date: tomorrow_date) }
+    let(:tomorrow_product) { create(:product) }
+    let!(:tomorrow_menu_product) { create(:menu_product, menu: tomorrow_menu, product: tomorrow_product) }
 
     before do
       Timecop.freeze today_menu.date
@@ -23,14 +29,23 @@ resource 'Menus' do
       example "getting today's menu", document: :public do
         do_request
         expect(json).to eq(
-          "date" => "2016-01-01",
-          "products" => [{
-            "id" => today_product.id,
-            "name" => today_product.name,
-            "description" => today_product.description,
-            "price_cents" => today_product.price_cents,
-            "price_currency" => today_product.price_currency,
-            "image" => today_product.image.url(:thumb)
+          "date" => today_date,
+          "menu_products" => [{
+            "id" => today_menu_product.id,
+
+            "menu" => {
+              "id" => today_menu.id,
+              "date" => today_date
+            },
+
+            "product" => {
+              "id" => today_product.id,
+              "name" => today_product.name,
+              "description" => today_product.description,
+              "price_cents" => today_product.price_cents,
+              "price_currency" => today_product.price_currency,
+              "image" => today_product.image.url(:thumb)
+            }
           }]
         )
       end
@@ -44,13 +59,22 @@ resource 'Menus' do
         do_request
         expect(json).to eq(
           "date" => "2016-01-02",
-          "products" => [{
-            "id" => tomorrow_product.id,
-            "name" => tomorrow_product.name,
-            "description" => tomorrow_product.description,
-            "price_cents" => tomorrow_product.price_cents,
-            "price_currency" => tomorrow_product.price_currency,
-            "image" => tomorrow_product.image.url(:thumb)
+          "menu_products" => [{
+            "id" => tomorrow_menu_product.id,
+
+            "menu" => {
+              "id" => tomorrow_menu.id,
+              "date" => tomorrow_date
+            },
+
+            "product" => {
+              "id" => tomorrow_product.id,
+              "name" => tomorrow_product.name,
+              "description" => tomorrow_product.description,
+              "price_cents" => tomorrow_product.price_cents,
+              "price_currency" => tomorrow_product.price_currency,
+              "image" => tomorrow_product.image.url(:thumb)
+            }
           }]
         )
       end

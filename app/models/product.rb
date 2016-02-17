@@ -4,7 +4,8 @@ class Product < ActiveRecord::Base
   monetize :price_cents
   belongs_to :category
   belongs_to :store
-  has_and_belongs_to_many :menus
+  has_many :menu_products
+  has_many :menus, through: :menu_products
   validates :name, :price, :store, presence: true
 
   scope :available, -> { where(available: true) }
