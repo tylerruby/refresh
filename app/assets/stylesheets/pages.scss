@@ -153,6 +153,13 @@ h1, h2, h3, h4 {
 .avatar-padding {
   padding: 10px !important;
 }
+
+@media only screen and (max-width : 480px) {
+    .avatar-padding {
+        padding: 10px 10px 0 0 !important;
+    }
+}
+
 .profile {
   width: 30px;
 }
