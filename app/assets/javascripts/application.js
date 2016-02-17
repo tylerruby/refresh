@@ -17,6 +17,4 @@
 //= require turbolinks
 //= require jquery_nested_form
 //= require bootstrap/collapse
-//= require isMobile
-//= require linkToApp
 //= require_tree
