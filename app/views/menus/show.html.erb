@@ -5,8 +5,8 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav secondary">
-          <% (0..6).each do |offset| %>
-            <%= list_item_to_menu(@menu, offset) %>
+          <% @menu_dates.each do |date| %>
+            <%= list_item_to_menu(@menu, date) %>
           <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
