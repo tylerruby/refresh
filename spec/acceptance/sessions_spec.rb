@@ -50,10 +50,11 @@ resource 'Sessions' do
   end
 
   post '/auth/:provider.json', :vcr do
+    before { skip "Shouldn't use S3 on tests" }
     parameter :code
     parameter :redirectUri
     let(:code) do
-      "AQAbPYPr-aVYV5DhQVJBlUdAEqjwllnbt3TKDmIGR9I9LY6el22kzSiQS5MXyWT-EXiO3Wfv7HWnyhn18jwUuRxZEP7ILv0dUmvczR4GjYYk7YdeZaOo4T5WcWqOgYE49QMRrTSH22lc3RfYnehHyyplQ-8sZNotw2Mh0wXdVtUcmIBedtlS8dKYSJ_8OmORqWRb-5Mo7wkMMaYV8WgZQ-ngR0IQc_f79cDyrKKkwNz19guCNFbVJu3J-qU5kSex1qp0_3xwwtmH8cU3REOjaXVzfdAbRK0zPdAZq5T6FhjiWFrH1SkNAqJrN7bUQn7IrCXaY-WOOGwZ67kB4NmHSUig36nBLbvohGJelVCvGTlnUQ#_=_"
+      "AQCNbreRDeFL5GAQILSs6MUhA7FZIzeEpDyUWVBSpFK9UJHYd-pZMIjwD9eOiH45ggEQGVtMMbA6r8AipsxqX4LSX5YFemmVLm2mgD5EmOqQ0aPaDOIxza_WYgOV7MFB-u6dMcJDjXwlUgRsqLTmigpIKVP1Jkod1ImvO_l53vJsLoUl5LT9UegnUuG8SsG93ZImizDrm5GD3rwrNrpoOFdKflljKtUe1sKyt8aJ2oEt7ByE80Z78zIcNJ6bhTfEYY9_bQLQBW0TfXi4tjysuP3McUUnwW089S26lJly98UK3stZeWpbb7i8kySfGE33z4W9AA2XSfeIcZ25BswfaU1_ZxHtj_2eGdSRUWAXfj46LQ"
     end
     let(:redirectUri) { "http://localhost:3000/" }
     let(:user) do

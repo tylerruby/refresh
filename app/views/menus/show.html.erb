@@ -16,17 +16,17 @@
 
 <br class="items-list-break" />
 <div class="col-md-10 col-md-offset-1 items-list minheight600">
-  <% @menu.products.each do |product| %>
+  <% @menu.menu_products.each do |menu_product| %>
     <div class="product col-sm-6 col-md-6 col-lg-4">
       <div class="panel panel-default">
         <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
           <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
-          <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
+          <%= f.hidden_field :menu_product_id, name: 'menu_product_id', value: menu_product.id %>
           <div class="product-image-wrapper" data-hover="no">
-            <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
-            <div class="image-hover"><%= product.description %></div>
+            <%= image_tag menu_product.image_url, class: 'food-pictures img-responsive' %>
+            <div class="image-hover"><%= menu_product.description %></div>
           </div>  
-          <div class="price"><%= product.price.format %></div>
+          <div class="price"><%= menu_product.price.format %></div>
 
           <!-- Food labels
             <div class="food-label">
@@ -40,8 +40,8 @@
 
           <div class="panel-body food-items">
             <div class="col-xs-10">
-              <div class="product-name"><%= product.name %></div>
-              <p><%= product.restaurant %></p>
+              <div class="product-name"><%= menu_product.name %></div>
+              <p><%= menu_product.restaurant %></p>
             </div>
             <div class="col-xs-2">
               <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>

@@ -9,13 +9,19 @@ json.cart do
     json.subtotal_cents(cart_item.subtotal.to_money.cents)
     json.subtotal_currency(cart_item.subtotal.to_money.currency.to_s)
 
-    json.product do
-      product = cart_item.item
-      json.(product, :id, :name, :description, :price_cents, :price_currency)
-      json.image(product.image.url(:thumb))
+    json.menu_product do
+      json.menu do
+        json.(cart_item.item.menu, :id, :date)
+      end
 
-      json.store do
-        json.(product.store, :id, :name)
+      json.product do
+        product = cart_item.item.product
+        json.(product, :id, :name, :description, :price_cents, :price_currency)
+        json.image(product.image.url(:thumb))
+
+        json.store do
+          json.(product.store, :id, :name)
+        end
       end
     end
   end

@@ -5,9 +5,10 @@ class CartController < ApplicationController
   end
 
   def add
-    authorize product.store
+    # TODO: adjust authorization to handle only geolocation restriction
+    authorize menu_product.product.store
     Cart.transaction do
-      cart.add(product, product.price, quantity)
+      cart.add(menu_product, menu_product.product.price, quantity)
     end
 
     respond_to do |format|
@@ -19,7 +20,7 @@ class CartController < ApplicationController
   end
 
   def remove
-    cart.remove(product, cart.item_for(product).quantity)
+    cart.remove(menu_product, cart.item_for(menu_product).quantity)
 
     respond_to do |format|
       format.json { head :ok }
@@ -30,7 +31,7 @@ class CartController < ApplicationController
   end
 
   def update
-    cart.item_for(product).update!(quantity: quantity)
+    cart.item_for(menu_product).update!(quantity: quantity)
 
     respond_to do |format|
       format.json { head :ok }
@@ -46,7 +47,7 @@ class CartController < ApplicationController
       params.require(:quantity).to_i
     end
 
-    def product
-      @product ||= Product.find(params[:product_id])
+    def menu_product
+      @menu_product ||= MenuProduct.find(params[:menu_product_id])
     end
 end
