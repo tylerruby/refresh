@@ -1,6 +1,6 @@
 #primary-nav {
   .address-menu {
-    width: 60%;
+    width: 55%;
 
     li {
       width: 100%;
@@ -16,9 +16,11 @@
     }
   }
 }
-
-@media only screen and (max-width : 335px) {
-    #primary-nav .address-menu {
-        width: 55%;
+@media only screen and (max-width : 480px) {
+    .cart-icon-menu:not(.hide) ~ .avatar-li {
+        display: none !important;
+    }
+    .cart-icon-menu  a {
+        padding: 15px 5px !important;
     }
 }
