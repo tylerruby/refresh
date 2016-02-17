@@ -1,0 +1,17 @@
+#primary-nav {
+  .address-menu {
+    width: 40%;
+
+    li {
+      width: 100%;
+
+      a {
+        font-size: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,62 +1,70 @@
 <%= render 'layouts/sign_in' %>
 <%= render 'layouts/sign_up' %>
 <%= render 'layouts/forgot_password' %>
+<%= render 'layouts/cart' %>
 
-<div class="growl" id="app-growl"></div>
+<%= render 'layouts/how_it_works' %>
 
-<nav id="app-navbar" class="navbar navbar-default navbar-fixed-top app-navbar">
-  <div class="container">
-    <div class="col-md-1 col-xs-2">
+<!-- Driver Bar -->
+<% if current_page?(root_path) %>
+  <div class="visible-xs visible-sm driver-bar collapse in" id="demo">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+          <a id='app_link' href='javascript:;' class="driver-apply btn btn-block pull-right">Get the app</a>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<nav class="navbar navbar-default" id="primary-nav">
+  <div class="container-fluid">
+    <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-main">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
         <a class="navbar-brand" href="/">
-          <img src="http://i.imgur.com/suNGJcN.png" style="height:40px; width:40px; margin-top:-9px;" alt="brand">
+            <%= image_tag('Derby-Logo', style: "height:36px; width:74px; margin-top:-5px;") %>
         </a>
       </div>
-    </div>
-    <div class="col-md-2 col-md-offset-4 col-sm-4 col-sm-offset-3 col-xs-offset-2 col-xs-6">
-      <div class="js-genders-nav"></div>
-    </div>
-    <div class="navbar-collapse collapse" id="navbar-collapse-main">
-        <ul class="nav navbar-nav navbar-right m-r-0 hidden-xs">
-          <li >
-            <a class="app-notifications" href="/cart/">
-              <span class="icon icon-shopping-cart"></span>
-              <span class="cart-label number"><span class="ebor-count">1</span></span>
-            </a>
-          </li>
+
+      <ul class="nav navbar-nav address-menu">
+        <% if current_address.present? %>
           <li>
-          <% if user_signed_in? %>
-            <button class="btn btn-default navbar-btn navbar-btn-avitar" data-toggle="popover">
-              <img class="img-circle" src="http://bootstrap-themes.github.io/application/assets/img/avatar-dhg.png">
-            </button>
-          <% else %>
-            <li><%= modal_to "Login", "#loginModal" %></li>
+            <%= link_to '/' + current_address.city.name.parameterize do %>
+              <i class="fa fa-map-marker"></i> <%= current_address.address.gsub(/ \d{5}, (?:USA|United States)/, '') %>
           <% end %>
           </li>
-        </ul>
+        <% end %>
+      </ul>
 
-        <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
-          <li><a href="/home/">Home</a></li>
-          <li><a data-toggle="modal" href="/cart">Cart</a></li>
-          <li><a href="/notifications/">Notifications</a></li>
-          <li><a href="#" data-action="growl">Growl</a></li>
-          <li><a href="/login/">Logout</a></li>
-        </ul>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if current_page?(root_path) %>
+          <li class="hidden-xs">
+            <a href="#how-it-works" role="button" id="how-works" data-toggle="collapse" aria-expanded="false">
+            How it Works
+            </a>
+          </li>
+          <% end %>
 
-        <ul class="nav navbar-nav hidden">
-          <li><a href="/profile">Profile</a></li>
-          <li><%= link_to 'Edit profile', edit_user_path %></li>
-          <li><a href="#" data-action="growl">Growl</a></li>
-          <li><%= link_to 'Previous orders', orders_path %></li>
-          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+          <li class="cart-icon-menu<%= ' hide' if cart.empty? %>">
+            <a href="#" class="cart-icon drawer-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <%= image_tag('Shopping-Cart', style: "width:24px;") %>
+              <span class="badge"><%= cart_items.count %></span>
+            </a>
+          </li>
+
+          <li class="<%= user_signed_in? ? 'hide' : '' %>"><%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link' : 'login-link') %>
+          </li>
+          <li class="<%= !user_signed_in? ? 'hide' : '' %>">
+            <a href="/account"
+               class="dropdown-toggle avatar-padding<%= ' hide' unless user_signed_in? %>"
+               aria-expanded="false">
+              <img class="img-circle profile<%= ' hide' unless user_signed_in? %>" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
+            </a>
+          </li>
         </ul>
-      </div>
-  </div>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </div><!-- /.container-fluid -->
 </nav>
-
+</nav>

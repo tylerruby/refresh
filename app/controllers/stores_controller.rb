@@ -1,6 +1,9 @@
 class StoresController < ApplicationController
   def search_by_address
-    current_user.addresses << new_address if current_user.present?
+    if current_user.present?
+      current_user.addresses << new_address
+      current_user.update!(current_address: new_address)
+    end
 
     session[:address_id] = new_address.id
 
@@ -9,13 +12,27 @@ class StoresController < ApplicationController
 
   def search_by_city
     @city = city
-    @stores = searcher.all
 
-    render :index
+    next_store = SelectNextStore.new(Store.all).select
+
+    respond_to do |format|
+      format.json do
+        render json: { store: { id: next_store.id } }
+      end
+
+      format.html do
+        if @city == 'Atlanta'
+          redirect_to store_path(next_store)
+        else
+          render :index
+        end
+      end
+    end
   end
 
   def show
     @store = searcher.find(params[:id])
+    @available_products = @store.products.available
   end
 
   private
@@ -33,7 +50,7 @@ class StoresController < ApplicationController
       scope = current_user && current_user.addresses || Address
       @new_address ||= scope.find_or_create_by(
         address: params[:address],
-        city: City.find_by(name: city)
+        city: City.find_or_create_by(name: city)
       )
     end
 end

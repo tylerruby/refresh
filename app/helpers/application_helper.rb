@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def body_css_classes
+    [
+      controller_name.dasherize,
+      action_name.dasherize,
+      @additional_body_css_classes
+    ].reject(&:blank?).join(' ')
+  end
+
   def modal_id(record)
     "#{record.class.name.downcase}_modal_#{record.id}"
   end
@@ -22,8 +30,11 @@ module ApplicationHelper
     end
   end
 
-  def modal_to(title, href)
-    link_to title, href, data: { toggle: :modal, dismiss: :modal }
+  def modal_to(title, href, options = {})
+    options = {
+      data: { toggle: :modal, dismiss: :modal }
+    }.merge(options)
+    link_to title, href, options
   end
 
   def dropdown_for(title, options = {})
@@ -38,5 +49,9 @@ module ApplicationHelper
         yield
       end)
     end
+  end
+
+  def store_path(store)
+    "/atlanta/#{store.friendly_id}"
   end
 end
