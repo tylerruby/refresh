@@ -5,19 +5,30 @@ resource 'Menus' do
   header 'Authorization', :authorization
   let(:authorization) { "Bearer #{token}" }
   let(:token) { AuthToken.encode(user_id: user.id) }
-  let(:user) { create(:user) }
-  let!(:atlanta) { create(:city, name: 'Atlanta') }
+
+  let(:address) { create(:address, address: "My special address") }
+  let(:user) { create(:user, current_address: address.dup) }
+  let(:user_region) { create(:region, address: address.dup) }
+
+  before do
+    stub_address("My special address, Atlanta, GA", 0, 0)
+  end
 
   get '/:city.json' do
+    let!(:atlanta) { create(:city, name: 'Atlanta') }
     let(:city) { 'atlanta' }
 
+    let(:menu_from_another_region) { create(:menu, date: today_date) }
+    let(:product_from_another_region) { create(:product) }
+    let!(:menu_product_from_another_region) { create(:menu_product, menu: menu_from_another_region, product: product_from_another_region) }
+
     let(:today_date) { "2016-01-01" }
-    let(:today_menu) { Menu.create(date: today_date) }
+    let(:today_menu) { create(:menu, date: today_date, region: user_region) }
     let(:today_product) { create(:product) }
     let!(:today_menu_product) { create(:menu_product, menu: today_menu, product: today_product) }
 
     let(:tomorrow_date) { "2016-01-02" }
-    let(:tomorrow_menu) { Menu.create(date: tomorrow_date) }
+    let(:tomorrow_menu) { create(:menu, date: tomorrow_date, region: user_region) }
     let(:tomorrow_product) { create(:product) }
     let!(:tomorrow_menu_product) { create(:menu_product, menu: tomorrow_menu, product: tomorrow_product) }
 
