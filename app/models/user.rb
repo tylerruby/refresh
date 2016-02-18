@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable,
     :trackable, :validatable, :registerable, :omniauthable,
     omniauth_providers: [:facebook]
+  mount_uploader :avatar, ImageUploader
 
   has_many :orders, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
@@ -22,7 +23,8 @@ class User < ActiveRecord::Base
     user.update!(
       email: email,
       provider: auth.provider,
-      uid: auth.uid
+      uid: auth.uid,
+      remote_avatar_url: auth.avatar,
     )
 
     user

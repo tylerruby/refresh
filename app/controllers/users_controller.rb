@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_api!
+  before_action :authenticate_api!, except: [:set_current_address]
 
   def edit
     @user = current_user
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:success] = "Profile updated with success!"
-      redirect_to root_path
+      redirect_to account_path
     else
       flash[:danger] = current_user.errors.full_messages.join(', ')
       render :edit
@@ -33,10 +33,9 @@ class UsersController < ApplicationController
             }
           }
         rescue Stripe::CardError => e
-          @credit_card = CreditCard.new params[:credit_card]
-          @credit_card.errors.add(:base, e.message)
-          partial_html = render_to_string(partial: 'pages/account/credit_cards', locals: { message: e.message })
-          render json: { message: e.message, html: partial_html }, status: :unprocessable_entity
+          render_credit_card_error(e.message)
+        rescue
+          render_credit_card_error("Something went wrong.")
         end
       end
     end
@@ -57,11 +56,55 @@ class UsersController < ApplicationController
     render json: UserSerializer.new(current_user)
   end
 
+  def set_current_address
+    if current_user.present?
+      current_user.addresses << new_address
+      current_user.update!(current_address: new_address)
+    end
+
+    session[:address_id] = new_address.id
+
+    respond_to do |format|
+      format.json do
+        render json: { city: new_address.city.name.parameterize }
+      end
+
+      format.html do
+        redirect_to menu_path(city: city.parameterize)
+      end
+    end
+  end
+
   private
 
     def user_params
       params.require(:user).permit(
+        :avatar,
+        :email,
         addresses_attributes: [:id, :address, :city_id, :_destroy]
+      )
+    end
+
+    def render_credit_card_error(message)
+      partial_html = render_to_string(partial: 'pages/account/credit_cards', locals: { message: message })
+      render json: { message: message, html: partial_html }, status: :unprocessable_entity
+    end
+
+    def city
+      @city ||= fetched_address.city
+    end
+
+    def fetched_address
+      @fetched_address ||= FetchAddress.new(params[:address])
+    end
+
+    def new_address
+      scope = current_user && current_user.addresses || Address
+      @new_address ||= scope.find_or_create_by(
+        address: fetched_address.formatted_address,
+        city: City.find_or_create_by(name: city),
+        latitude: fetched_address.latitude,
+        longitude: fetched_address.longitude
       )
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125212252) do
+ActiveRecord::Schema.define(version: 20160218201350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,24 @@ ActiveRecord::Schema.define(version: 20160125212252) do
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
+  create_table "menu_products", force: :cascade do |t|
+    t.integer "menu_id"
+    t.integer "product_id"
+  end
+
+  add_index "menu_products", ["menu_id"], name: "index_menu_products_on_menu_id", using: :btree
+  add_index "menu_products", ["product_id"], name: "index_menu_products_on_product_id", using: :btree
+
+  create_table "menus", force: :cascade do |t|
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "region_id"
+  end
+
+  add_index "menus", ["date", "region_id"], name: "index_menus_on_date_and_region_id", unique: true, using: :btree
+  add_index "menus", ["region_id"], name: "index_menus_on_region_id", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "status"
@@ -130,10 +148,17 @@ ActiveRecord::Schema.define(version: 20160125212252) do
     t.datetime "updated_at",                     null: false
     t.boolean  "available",      default: false
     t.string   "description"
+    t.string   "restaurant"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "stores", force: :cascade do |t|
     t.string   "name"
@@ -167,6 +192,7 @@ ActiveRecord::Schema.define(version: 20160125212252) do
     t.boolean  "admin"
     t.integer  "current_address_id"
     t.string   "mobile_number"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -176,6 +202,9 @@ ActiveRecord::Schema.define(version: 20160125212252) do
 
   add_foreign_key "addresses", "cities"
   add_foreign_key "carts", "users"
+  add_foreign_key "menu_products", "menus"
+  add_foreign_key "menu_products", "products"
+  add_foreign_key "menus", "regions"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "stores"

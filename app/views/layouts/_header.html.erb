@@ -59,7 +59,7 @@
             <a href="/account"
                class="dropdown-toggle avatar-padding<%= ' hide' unless user_signed_in? %>"
                aria-expanded="false">
-              <img class="img-circle profile<%= ' hide' unless user_signed_in? %>" src="https://d1725r39asqzt3.cloudfront.net/fff52caf-79f2-4a03-9aed-c475522e6f91/orig.png" />
+              <%= avatar_tag current_user, version: :thumb, class: "profile" %>
             </a>
           </li>
         </ul>

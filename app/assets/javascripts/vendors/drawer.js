@@ -52,7 +52,6 @@
           $this.data(namespace, { options: options });
 
           var iScroll = new IScroll('.' + __.settings.class.nav, options.iscroll);
-          console.log(iScroll);
 
           if (options.showOverlay) {
             __.addOverlay.call(_this);

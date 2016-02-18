@@ -634,6 +634,7 @@ ul.navbar-nav > li > a {
 ul.nav.navbar-nav.secondary > li.active > a {
   border-bottom: 3px solid #333;
   background: transparent;
+  font-weight: bold;
 }
 
 @media (max-width: 480px) {
@@ -686,21 +687,6 @@ ul.nav.navbar-nav.secondary > li.active > a {
 }
 .product-image-wrapper {
   position: relative;
-}
-.image-hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.75);
-  color: #fff;
-  display: none;
-  padding-top: 30%;
-  text-align: center;
-  font-size: 1.1em;
-  font-family: 'Helvetica Neue', sans-serif
-  
 }
 .minheight600 {
   min-height: 600px !important;

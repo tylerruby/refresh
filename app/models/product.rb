@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
   monetize :price_cents
   belongs_to :category
   belongs_to :store
+  has_many :menu_products
+  has_many :menus, through: :menu_products
   validates :name, :price, :store, presence: true
 
   scope :available, -> { where(available: true) }
@@ -11,6 +13,7 @@ class Product < ActiveRecord::Base
   rails_admin do
     edit do
       field :name
+      field :restaurant
       field :description
       field :price
       field :store

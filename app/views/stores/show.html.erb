@@ -28,7 +28,7 @@
             <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
             <div class="product-image-wrapper" data-hover="no">
               <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
-              <div class="image-hover">Some fancy text goes here</div>
+              <div class="image-hover"><%= product.description %></div>
             </div>  
             <div class="price"><%= product.price.format %></div>
 
@@ -46,7 +46,7 @@
             <div class="panel-body food-items">
               <div class="col-xs-10">
                 <div class="product-name"><%= product.name %></div>
-                <p><%= product.description %></p>
+                <p><%= product.restaurant %></p>
               </div>
               <div class="col-xs-2">
                 <div class="<%= ' hide' unless policy(@store).add? %>">
