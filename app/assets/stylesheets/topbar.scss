@@ -1,6 +1,6 @@
 #primary-nav {
   .address-menu {
-    width: 40%;
+    width: 55%;
 
     li {
       width: 100%;
@@ -11,7 +11,16 @@
         overflow: hidden;
         text-overflow: ellipsis;
         width: 100%;
+        padding: 15px 0;
       }
     }
   }
+}
+@media only screen and (max-width : 480px) {
+    .cart-icon-menu:not(.hide) ~ .avatar-li {
+        display: none !important;
+    }
+    .cart-icon-menu  a {
+        padding: 15px 5px !important;
+    }
 }

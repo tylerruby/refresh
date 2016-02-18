@@ -27,6 +27,12 @@ function PlaceWrapper(place) {
     return place.formatted_address;
   }
 
+  this.getShortAddress = function getShortAddress() {
+      var name = place.name;
+      name = name.replace(/ (NE|NW|SE|SW)/g, '');
+      return name + ", " + place.vicinity;
+  }
+
   // Shamelessly copied from: https://github.com/alexreisner/geocoder/blob/017e06786c0a89905c50ff3c15bd7090c422a8f8/lib/geocoder/results/google.rb#L20
   var cityFields = [
     'locality',
@@ -58,7 +64,7 @@ function AddressSelector(form) {
     }
     form.find('input[name=latitude]').val(place.getLatitude());
     form.find('input[name=longitude]').val(place.getLongitude());
-    form.find('input[name=address]').val(place.getAddress());
+    form.find('input[name=address]').val(place.getShortAddress());
     form.submit();
   };
 }
