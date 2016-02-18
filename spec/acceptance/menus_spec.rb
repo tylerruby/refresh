@@ -103,5 +103,44 @@ resource 'Menus' do
         )
       end
     end
+
+    context "user's region isn't available" do
+      parameter :date, "The menu's date"
+
+      let(:other_address) { create(:address, address: "Some other address") }
+      let(:user) { create(:user, current_address: other_address) }
+      let(:date) { today_date }
+
+      before do
+        stub_address("Some other address, Atlanta, GA", 999, 999)
+      end
+
+      example "trying to get an unavailable menu", document: :public do
+        do_request
+        expect(response_status).to eq 422
+        expect(json).to eq(
+          "message" => "Menu not found for this date and region."
+        )
+      end
+    end
+
+    context "user doesn't have a current address" do
+      parameter :date, "The menu's date"
+
+      let(:user) { create(:user, current_address: nil) }
+      let(:date) { today_date }
+
+      before do
+        stub_address("Some other address, Atlanta, GA", 999, 999)
+      end
+
+      example "trying to get an unavailable menu", document: :public do
+        do_request
+        expect(response_status).to eq 422
+        expect(json).to eq(
+          "message" => "You should choose a current address first."
+        )
+      end
+    end
   end
 end
