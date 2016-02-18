@@ -8,32 +8,6 @@
 
 atlanta = City.create!(name: 'Atlanta', state: 'GA')
 
-address = {
-  city: atlanta,
-  address: 'Georgia Tech, North Ave NW, Atlanta, GA, USA'
-}
-
-Store.create! [
-  {
-    name: 'Breakfast',
-    human_opens_at: '07:00',
-    human_closes_at: '10:30',
-    address: Address.new(address)
-  }
-  # {
-  #   name: 'Lunch',
-  #   human_opens_at: '11:00',
-  #   human_closes_at: '14:00',
-  #   address: Address.new(address)
-  # },
-  # {
-  #   name: 'Dinner',
-  #   human_opens_at: '18:00',
-  #   human_closes_at: '05:00',
-  #   address: Address.new(address)
-  # },
-  # {
-  #   name: 'General Store',
-  #   address: Address.new(address)
-  # }
-]
+Region.create!(name: "Downtown", address: Address.create!(
+  address: "Georgia-Pacific Tower, Atlanta, GA 30303", city: atlanta
+))
