@@ -1,6 +1,6 @@
 module MenuHelper
-  def list_item_to_menu(menu, date)
-    klass = 'active' if date == menu.date
+  def list_item_to_menu(selected_date, date)
+    klass = 'active' if date == selected_date
     content_tag(:li, link_to_menu(date), class: klass)
   end
 

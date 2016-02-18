@@ -1,18 +1,4 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav secondary">
-          <% @menu_dates.each do |date| %>
-            <%= list_item_to_menu(@menu, date) %>
-          <% end %>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.block-images -->
-  </div><!-- /.container-fluid -->
-</nav>
+<%= render 'menus/dates', selected_date: @selected_date, menu_dates: @menu_dates %>
 
 <br class="items-list-break" />
 <div class="col-md-10 col-md-offset-1 items-list minheight600">

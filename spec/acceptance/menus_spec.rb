@@ -96,7 +96,11 @@ resource 'Menus' do
       let(:date) { tomorrow_menu.date + 1.day }
 
       example "trying to get an unavailable menu", document: :public do
-        expect { do_request }.to raise_error(ActiveRecord::RecordNotFound)
+        do_request
+        expect(response_status).to eq 422
+        expect(json).to eq(
+          "message" => "Menu not found for this date and region."
+        )
       end
     end
   end
