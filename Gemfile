@@ -38,7 +38,6 @@ gem 'net-ssh'
 group :development, :test do
   gem 'pry',                     '0.10.1'
   gem 'pry-rails',               '0.3.4'
-  gem 'web-console',             '~> 2.0'
   gem 'spring',                  '1.3.6'
   gem 'spring-commands-rspec',   '1.0.4'
   gem 'rspec-rails',             '3.3.3'
@@ -52,6 +51,7 @@ end
 
 group :development do
   gem 'letter_opener', '1.4.1'
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
