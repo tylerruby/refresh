@@ -3,19 +3,22 @@ $(function setupCart() {
   var cart = $('.cart');
   var cartIconMenu = $('.cart-icon-menu');
   var drawer = $('.drawer');
+  setupDrawer({ showOverlay: true });
   setupBindings(cart);
 
   function close() {
     drawer.drawer('close');
   }
 
-  function setupDrawer() {
-    drawer.drawer('destroy');
-    drawer.drawer({
+  function setupDrawer(options) {
+    options = $.extend( {
       class: {
         nav: 'list-wrapper'
-      }
-    });
+      },
+      showOverlay: false
+    }, options);
+    drawer.drawer('destroy');
+    drawer.drawer(options);
   }
 
   function setupBindings(cart) {
