@@ -11,7 +11,7 @@
           <div class="product-image-wrapper" data-hover="no">
             <%= image_tag menu_product.image_url, class: 'food-pictures img-responsive' %>
             <div class="image-hover"><%= menu_product.description %></div>
-            <div class="product-info" style='display:none'>
+            <div class="product-info" style='display:none' id="info-<%= menu_product.id %>">
                 <div class='cart-items-quantity hover-quantity'></div>
             </div>
           </div>
@@ -37,6 +37,16 @@
               <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>
             </div>
           </div>
+        <% end %>
+
+
+        <% if cart.item_for(menu_product) %>
+          <div class='pull-right delete-form' id="rm-<%=menu_product.id%>">
+          <%= update_quantity_button(cart.item_for(menu_product), -1) do %>
+            <i class="fa fa-minus-circle btn btn-default remove-item-button " ></i>
+            <input type='hidden' value="<%= menu_product.id %>" id='cart_item_menu_product_id' name='menu_product_id' />
+          <% end %>
+        </div>
         <% end %>
       </div>
     </div>

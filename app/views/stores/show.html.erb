@@ -58,6 +58,16 @@
               </div>
             </div>
           <% end %>
+
+          <%= form_for CartItem.remove, url: cart_remove_path, method: :remove do |f| %>
+            <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+            <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
+            <div class="col-xs-2">
+              <div>
+                <%= f.button '', class: 'btn btn-default fa fa-minus-circle remove-item-button pull-right' %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

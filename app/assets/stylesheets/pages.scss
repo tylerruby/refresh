@@ -125,13 +125,14 @@ h1, h2, h3, h4 {
 .login-link {
   color: #000 !important;
 }
-.add-item-button {
+
+.add-item-button, .remove-item-button {
   color: #ff0000 !important;
   background-color: transparent !important;
   border: none !important;
   font-size: 32px !important;
 }
-.add-item-button:hover, .add-item-button:focus {
+.add-item-button:hover, .add-item-button:focus, .remove-item-button:hover, .remove-item-button:focus {
   background-color: transparent !important;
 }
 
@@ -727,4 +728,19 @@ ul.nav.navbar-nav.secondary > li.active > a {
     font-weight: bold;
     line-height: 1;
     text-shadow: 0 1px 0 #fff;
+}
+
+.delete-form {
+  position: relative;
+  top: -64px;
+  left: 10px;
+  .update-quantity {
+    color: #ff0000 !important;
+    background-color: transparent !important;
+    border: none !important;
+    font-size: 32px !important;
+  }
+  button {
+    padding: 0;
+  }
 }
