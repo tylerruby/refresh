@@ -11,7 +11,11 @@
           <div class="product-image-wrapper" data-hover="no">
             <%= image_tag menu_product.image_url, class: 'food-pictures img-responsive' %>
             <div class="image-hover"><%= menu_product.description %></div>
-          </div>  
+            <div class="product-info" style='display:none'>
+                <div class='cart-items-quantity hover-quantity'></div>
+            </div>
+          </div>
+
           <div class="price"><%= menu_product.price.format %></div>
 
           <!-- Food labels

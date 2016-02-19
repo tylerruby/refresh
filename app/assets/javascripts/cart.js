@@ -46,15 +46,28 @@ $(function setupCart() {
     };
   }
 
-  function updateCart(message) {
+  function updateCart(message, form) {
+    var div = $(form).find('.product-info');
+
     return function delayedUpdateCart(cartHtml) {
       cart.html(cartHtml);
       setupBindings(cart);
-      new Alert({
-        message: message,
-        closeable: true,
-        autoclose: 1000
-      });
+      if (div.length) {
+        div.addClass('image-hover');
+        div[0].style.display = 'block';
+
+        setTimeout(function() {
+          div[0].style.display = 'none';
+          div.removeClass('image-hover');
+        }, 1000);
+      }
+      else {
+        new Alert({
+          message: message,
+          closeable: true,
+          autoclose: 1000
+        });
+      }
     };
   }
 
@@ -80,7 +93,7 @@ $(function setupCart() {
       data: form.serialize(),
       dataType: "html"
     })
-    .done(updateCart(successMessage))
+    .done(updateCart(successMessage, form))
     .fail(showErrorMessage(errorMessage));
   }
 
