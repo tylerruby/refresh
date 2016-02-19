@@ -93,8 +93,7 @@ RSpec.describe StoresController, type: :controller do
   describe "GET #show" do
     let(:atlanta) { create(:city, name: 'Atlanta') }
     let!(:store) { create(:store, address: create(:address, city: atlanta)) }
-    let!(:available_product) { create(:product, store: store, available: true) }
-    let!(:unavailable_product) { create(:product, store: store, available: false) }
+    let!(:available_product) { create(:product, store: store) }
     let!(:product_from_store_in_another_city) { create(:product) }
 
     def do_action
