@@ -8,8 +8,6 @@ class Product < ActiveRecord::Base
   has_many :menus, through: :menu_products
   validates :name, :price, :store, presence: true
 
-  scope :available, -> { where(available: true) }
-
   rails_admin do
     edit do
       field :name
@@ -18,7 +16,6 @@ class Product < ActiveRecord::Base
       field :price
       field :store
       field :image
-      field :available
     end
 
     list do
