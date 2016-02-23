@@ -29,7 +29,7 @@
             <div class="media-body">
               <div class="col-md-8"><%= cart_item.name %></div>
               <div class="price col-md-4"><%= humanized_money_with_symbol cart_item.subtotal %></div>
-              <%= button_to '×', { controller: :cart, action: :remove, menu_product_id: cart_item.item_id }, method: :delete, class: 'remove-item-button btn btn-xs btn-default pull-right',  'data-for': cart_item.item_id  %>
+              <%= button_to '×', cart_remove_path(menu_product_id: cart_item.item_id), method: :delete, class: 'remove-item-button btn btn-xs btn-default pull-right',  'data-for': cart_item.item_id  %>
             </div>
           </div>
         </li>
