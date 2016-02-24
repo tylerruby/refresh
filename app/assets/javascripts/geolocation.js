@@ -64,8 +64,10 @@ function AddressSelector(form) {
     }
     form.find('input[name=latitude]').val(place.getLatitude());
     form.find('input[name=longitude]').val(place.getLongitude());
+
     form.find('input[name=address]').val(place.getShortAddress());
-    form.submit();
+    
+    form.attr('action', parameterize(place.getCity())).submit();
   };
 }
 

@@ -392,6 +392,16 @@ h1, h2, h3, h4 {
   border-color: #222 !important;
   color: #fff !important;
 }
+.red-outline {
+  background: #fff;
+  border-color: #ff0000 !important;
+  color: #ff0000 !important;
+}
+.red-outline:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+  color: #fff !important;
+}
 .red {
   background-color: #ff0000;
   border: #ff0000 !important;
