@@ -67,7 +67,7 @@ function AddressSelector(form) {
 
     form.find('input[name=address]').val(place.getShortAddress());
     
-    form.attr('action', parameterize(place.getCity())).submit();
+    form.submit();
   };
 }
 
