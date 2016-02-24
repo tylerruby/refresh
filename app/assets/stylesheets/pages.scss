@@ -798,3 +798,12 @@ ul.nav.navbar-nav.secondary > li.active > a {
     width:100%;
   }
 }
+
+.new_cart_item button, .delete-form button, .delete-form i {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none !important;
+    &:active {
+        color: rgb(171, 2, 2) !important;
+    }
+}
