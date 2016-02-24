@@ -3,7 +3,7 @@
 <br class="items-list-break" />
 <div class="col-md-10 col-md-offset-1 items-list minheight600">
   <% @menu.menu_products.each do |menu_product| %>
-    <div class="product col-sm-6 col-md-6 col-lg-4 col-xs-12">
+    <div class="product col-sm-6 col-md-6 col-lg-4 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
           <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
