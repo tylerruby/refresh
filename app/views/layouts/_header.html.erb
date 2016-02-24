@@ -57,7 +57,7 @@
 
           <li class="<%= user_signed_in? ? 'hide' : '' %>">
             <p class="navbar-btn">
-            <%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link btn red' : 'login-link btn red') %>
+            <%= modal_to "Login", "#loginModal", id: 'sign-in-link', class: (user_signed_in? ? 'hide login-link btn red' : 'login-link btn red-outline') %>
             </p>
           </li>
           <li class="<%= !user_signed_in? ? 'hide' : 'avatar-li' %>">
