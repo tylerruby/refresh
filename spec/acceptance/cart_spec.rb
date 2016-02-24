@@ -83,8 +83,12 @@ resource 'Cart' do
     parameter :menu_product_id, "The MenuProduct's id"
     parameter :quantity, "How many items to add for that product"
     let(:quantity) { 1 }
-    let(:menu_product) { create(:menu_product) }
+    let(:region) { create(:region, address: user.current_address.dup) }
+    let(:menu) { create(:menu, date: Date.current, region: region) }
+    let(:menu_product) { create(:menu_product, menu: menu) }
     let(:menu_product_id) { menu_product.id }
+
+    pending "test and document failed authorization cases"
 
     example "adding a menu product to the cart", document: :public do
       do_request

@@ -5,8 +5,7 @@ class CartController < ApplicationController
   end
 
   def add
-    # TODO: adjust authorization to handle only geolocation restriction
-    authorize menu_product.product.store
+    authorize menu_product
     Cart.transaction do
       cart.add(menu_product, menu_product.product.price, quantity)
     end
