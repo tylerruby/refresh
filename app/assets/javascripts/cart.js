@@ -125,7 +125,7 @@ $(function setupCart() {
       return;
     }
 
-    var qty = act.match(/quantity=(\d+)/);
+    var qty = act.match(/quantity=(-?\d+)/);
 
     if (!qty || !qty[1]) {
       return;
@@ -134,11 +134,18 @@ $(function setupCart() {
     qty = parseInt(qty[1]);
 
     if (action === 'increase') {
-      $(form).attr('action', act.replace(/quantity=(\d+)/,'quantity=' +  (++qty)));
+      $(form).attr('action', act.replace(/quantity=(-?\d+)/,'quantity=' +  (qty+1)));
+      qty += 2;
     } else if (action === 'decrease') {
-      $(form).attr('action', act.replace(/quantity=(\d+)/,'quantity=' +  (--qty)));
+        $(form).attr('action', act.replace(/quantity=(-?\d+)/,'quantity=' +  (qty-1)));
     } else if (action === 'zero') {
-      $(form).attr('action', act.replace(/quantity=(\d+)/,'quantity=0'));
+      $(form).attr('action', act.replace(/quantity=(-?\d+)/,'quantity=0'));
+    }
+
+    var infoDiv = $('#info-' + id);
+
+    if (infoDiv.length != 0) {
+        infoDiv.html(action === 'zero' ? 0 : qty);
     }
   }
 
@@ -182,10 +189,6 @@ $(function setupCart() {
   function updateQuantityAsync(ev, rm) {
     var form = ev.target;
 
-    if (rm) {
-      update_remove_form(form, 'decrease');
-    }
-
     asyncSubmit(
       ev,
       $(form),
@@ -193,5 +196,10 @@ $(function setupCart() {
       "Item quantity updated!",
       "There was a problem updating the item's quantity."
     );
+    if (rm) {
+      update_remove_form(form, 'decrease');
+    }
+
+
   }
 });
