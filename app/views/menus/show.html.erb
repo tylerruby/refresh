@@ -35,12 +35,7 @@
             </div>
             <div class="col-xs-2">
               <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>
-            </div>
-          </div>
-        <% end %>
-
-
-        <% if cart.item_for(menu_product) %>
+              <% if cart.item_for(menu_product) %>
           <div class='pull-right delete-form' id="rm-<%=menu_product.id%>">
           <%= update_quantity_button(cart.item_for(menu_product), -1) do %>
             <i class="fa fa-minus-circle btn btn-default remove-item-button " ></i>
@@ -48,6 +43,12 @@
           <% end %>
         </div>
         <% end %>
+
+            </div>
+          </div>
+        <% end %>
+
+
       </div>
     </div>
   <% end %>
