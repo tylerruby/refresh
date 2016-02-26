@@ -746,7 +746,7 @@ ul.nav.navbar-nav.secondary > li.active > a {
 .delete-form {
   position: relative;
   top: -47px;
-  left: -50px;
+  left: -60px;
   .update-quantity {
     color: #ff0000 !important;
     background-color: transparent !important;
@@ -827,4 +827,20 @@ ul.nav.navbar-nav.secondary > li.active > a {
     &:active {
         color: rgb(171, 2, 2) !important;
     }
+}
+
+.new_cart_item {
+  float: right;
+}
+
+.product-info {
+  position: absolute;
+  left: -21px;
+  top: 12px;
+}
+
+.buttons {
+  position: relative;
+  height: auto;
+  height: 50px;
 }

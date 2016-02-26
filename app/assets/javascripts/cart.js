@@ -69,13 +69,7 @@ $(function setupCart() {
       cart.html(cartHtml);
       setupBindings(cart);
       if (div && div.length) {
-        div.addClass('image-hover');
         div[0].style.display = 'block';
-
-        setTimeout(function() {
-          div[0].style.display = 'none';
-          div.removeClass('image-hover');
-        }, 1000);
       }
       else {
         new Alert({
@@ -146,6 +140,11 @@ $(function setupCart() {
 
     if (infoDiv.length != 0) {
         infoDiv.html(action === 'zero' ? 0 : qty);
+    }
+    if (action === 0 || qty === 0) {
+      rmDiv[0].style.display = 'none';
+    } else {
+      rmDiv[0].style.display = '';
     }
   }
 

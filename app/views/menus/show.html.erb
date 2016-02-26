@@ -5,15 +5,9 @@
   <% @menu.menu_products.each do |menu_product| %>
     <div class="product col-sm-6 col-md-6 col-lg-4 col-sm-12 col-xs-12">
       <div class="panel panel-default">
-        <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
-          <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
-          <%= f.hidden_field :menu_product_id, name: 'menu_product_id', value: menu_product.id %>
           <div class="product-image-wrapper" data-hover="no">
             <%= image_tag menu_product.image_url, class: 'food-pictures img-responsive' %>
             <div class="image-hover"><%= menu_product.description %></div>
-            <div class="product-info" style='display:none' id="info-<%= menu_product.id %>">
-                <div class='cart-items-quantity hover-quantity'></div>
-            </div>
           </div>
 
           <div class="price"><%= menu_product.price.format %></div>
@@ -33,22 +27,36 @@
               <div class="product-name"><%= menu_product.name %></div>
               <p><%= menu_product.restaurant %></p>
             </div>
-            <div class="col-xs-2">
-              <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>
-              <% if cart.item_for(menu_product) %>
-          <div class='pull-right delete-form' id="rm-<%=menu_product.id%>">
-          <%= update_quantity_button(cart.item_for(menu_product), -1) do %>
-            <i class="fa fa-minus-circle btn btn-default remove-item-button " ></i>
-            <input type='hidden' value="<%= menu_product.id %>" id='cart_item_menu_product_id' name='menu_product_id' />
-          <% end %>
-        </div>
-        <% end %>
+            <div class="col-xs-2 buttons">
+              <div class="product-info" id="info-<%= menu_product.id %>">
+                <% if cart.item_for(menu_product) %>
+                  <%= cart.item_for(menu_product).quantity %>
+                <% end %>
+              </div>
 
+              <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
+                <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+                <%= f.hidden_field :menu_product_id, name: 'menu_product_id', value: menu_product.id %>
+
+                <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button pull-right' %>
+              <% end %>
+
+
+              <% if cart.item_for(menu_product) %>
+                <% if cart.item_for(menu_product).quantity == 0 %>
+                  <div class='pull-right delete-form' style="display:none" id="rm-<%=menu_product.id%>">
+                <% else %>
+                  <div class='pull-right delete-form' id="rm-<%=menu_product.id%>">
+                <% end %>
+
+                <%= update_quantity_button(cart.item_for(menu_product), -1) do %>
+                  <i class="fa fa-minus-circle btn btn-default remove-item-button " ></i>
+                  <input type='hidden' value="<%= menu_product.id %>" id='cart_item_menu_product_id' name='menu_product_id' />
+                <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
-        <% end %>
-
-
       </div>
     </div>
   <% end %>
