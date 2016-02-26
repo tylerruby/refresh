@@ -839,6 +839,30 @@ ul.nav.navbar-nav.secondary > li.active > a {
   top: 12px;
 }
 
+@media (min-width:480px) and (max-width:596px) {
+  .product-info {
+    left: -5px;
+  }
+}
+
+@media (min-width: 596px) and (max-width:700px) {
+  .product-info {
+    left: 0px;
+  }
+}
+
+@media (min-width:1110px) and (max-width:1350px) {
+  .product-info {
+    left: -27px;
+  }
+}
+
+@media (min-width:1745px) {
+  .product-info {
+    left: -10px;
+  }
+}
+
 .buttons {
   position: relative;
   height: auto;
