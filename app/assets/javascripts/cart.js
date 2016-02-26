@@ -28,7 +28,10 @@ $(function setupCart() {
       close();
     });
     cart.find('form:has(.remove-item-button)').submit(removeAsync);
-    cart.find('form:has(.update-quantity)').submit(updateQuantityAsync);
+    cart.find('form:has(.update-quantity)').submit(function(ev) {
+      var isRemove = !!$(ev.target).has('.reduce-quantity').length;
+      updateQuantityAsync(ev, isRemove);
+    });
 
     var cartItemsCount = calculateCartItemsCount(cart.find('.cart-item .quantity'));
     $('.cart-icon .badge, .cart-items-quantity').text(cartItemsCount);
@@ -195,10 +198,11 @@ $(function setupCart() {
       "Item quantity updated!",
       "There was a problem updating the item's quantity."
     );
+
     if (rm) {
       update_remove_form(form, 'decrease');
+    } else {
+      update_remove_form(form, 'increase');
     }
-
-
   }
 });

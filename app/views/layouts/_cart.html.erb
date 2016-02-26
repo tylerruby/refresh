@@ -13,12 +13,13 @@
           <div class="media">
             <div class="media-left text-center">
               <%= update_quantity_button(cart_item, 1) do %>
-                <i class="fa fa-chevron-up"></i>
+                <i class="fa fa-chevron-up increase-quantity"></i>
+                <input type='hidden' value="<%=  cart_item.item_id %>" id='cart_item_menu_product_id' name='menu_product_id' />
               <% end %>
               <span class="quantity"><%= cart_item.quantity %></span>
               <% if cart_item.quantity > 1 %>
                 <%= update_quantity_button(cart_item, -1) do %>
-                  <i class="fa fa-chevron-down"></i>
+                  <i class="fa fa-chevron-down reduce-quantity"></i>
                   <input type='hidden' value="<%=  cart_item.item_id %>" id='cart_item_menu_product_id' name='menu_product_id' />
                 <% end %>
               <% end %>
