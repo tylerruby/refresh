@@ -30,7 +30,15 @@ class CartController < ApplicationController
   end
 
   def update
+    if (quantity < 0) then
+      return
+    end
+
     cart.item_for(menu_product).update!(quantity: quantity)
+
+    if (quantity == 0) then
+      cart.remove(menu_product, cart.item_for(menu_product).quantity)
+    end
 
     respond_to do |format|
       format.json { head :ok }
