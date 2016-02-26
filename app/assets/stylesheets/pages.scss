@@ -131,9 +131,16 @@ h1, h2, h3, h4 {
   background-color: transparent !important;
   border: none !important;
   font-size: 32px !important;
+  box-shadow: none !important;
 }
+
+.cart-remove {
+  font-size: 22px !important;
+}
+
 .add-item-button:hover, .add-item-button:focus, .remove-item-button:hover, .remove-item-button:focus {
   background-color: transparent !important;
+  color: rgb(171, 2, 2) !important;
 }
 
 
