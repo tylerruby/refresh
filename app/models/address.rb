@@ -12,7 +12,6 @@ class Address < ActiveRecord::Base
   }
   validates :address, :city, :latitude, :longitude, presence: true
 
-  scope :for_stores, -> { where(addressable_type: 'Store') }
   scope :order_by_distance, -> (location) {
     select("#{table_name}.*")
     .select("(#{distance_from_sql(location)}) as distance")
