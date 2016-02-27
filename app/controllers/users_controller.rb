@@ -57,12 +57,7 @@ class UsersController < ApplicationController
   end
 
   def set_current_address
-    if current_user.present?
-      current_user.addresses << new_address
-      current_user.update!(current_address: new_address)
-    end
-
-    session[:address_id] = new_address.id
+    current_user.update!(current_address: new_address)
 
     respond_to do |format|
       format.json do
@@ -99,7 +94,7 @@ class UsersController < ApplicationController
     end
 
     def new_address
-      scope = current_user && current_user.addresses || Address
+      scope = current_user.persisted? && current_user.addresses || Address
       @new_address ||= scope.find_or_create_by(
         address: fetched_address.formatted_address,
         city: City.find_or_create_by(name: city),
