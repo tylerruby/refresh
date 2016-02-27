@@ -50,13 +50,6 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  describe ".for_stores" do
-    let!(:user_address) { create(:address, addressable: create(:user)) }
-    let!(:store_address) { create(:address, addressable: build(:store, address: nil)) }
-
-    it { expect(Address.for_stores).to eq [store_address] }
-  end
-
   describe ".order_by_distance" do
     before do
       stub_address("closer address, Atlanta, GA", 40.7143528, -74.0059731)
