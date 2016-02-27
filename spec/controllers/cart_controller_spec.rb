@@ -28,12 +28,19 @@ RSpec.describe CartController, type: :controller do
   end
 
   describe "PATCH #add" do
-    let(:menu_product) { create(:menu_product) }
-    let(:product) { menu_product.product }
+    let(:menu_product) { create(:menu_product, menu: menu, product: product) }
+    let(:product) { create(:product) }
+    let(:menu) { create(:menu, date: Date.current, region: region) }
+    let(:region) { create(:region, address: create_address) }
 
     let(:quantity) { 3 }
 
+    def create_address
+      create(:address)
+    end
+
     def do_action
+      session[:address_id] = create_address.id
       patch :add, quantity: quantity, menu_product_id: menu_product.id
     end
 
