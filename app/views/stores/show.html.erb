@@ -26,7 +26,7 @@
           <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
             <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
             <%= f.hidden_field :product_id, name: 'product_id', value: product.id %>
-            <div class="product-image-wrapper" data-hover="no">
+            <div class="product-image-wrapper">
               <%= image_tag product.image_url, class: 'food-pictures img-responsive' %>
               <div class="image-hover"><%= product.description %></div>
               <div class="product-info" style='display:none'>

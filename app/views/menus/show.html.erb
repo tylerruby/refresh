@@ -5,7 +5,7 @@
   <% @menu.menu_products.each do |menu_product| %>
     <div class="product col-sm-6 col-md-6 col-lg-4 col-sm-12 col-xs-12">
       <div class="panel panel-default">
-          <div class="product-image-wrapper" data-hover="no">
+          <div class="product-image-wrapper">
             <%= image_tag menu_product.image_url, class: 'food-pictures img-responsive' %>
             <div class="image-hover"><%= menu_product.description %></div>
           </div>
