@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MenusController, type: :controller do
-  describe 'GET #show', :wip do
+  describe 'GET #show' do
     context 'when current address is present' do
       let(:atlanta) { create(:city, name: 'Atlanta') }
       let(:current_address) { create :address, city: atlanta, address: '4th Av.' }
