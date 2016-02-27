@@ -195,7 +195,9 @@ h1, h2, h3, h4 {
 .driver-footer {
   background: #fff !important;
 }
-/* Landing Video */
+
+
+/* Landing Page */
 .landing-video {
   background-image: url('Iphone-Background.png');
   background-repeat: no-repeat;
@@ -204,17 +206,6 @@ h1, h2, h3, h4 {
   padding-left: 13px;
   margin-top: 80px;
   overflow: hidden;
-}
-
-/* Landing Page */
-.landing-logo {
-  position: absolute;
-  top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  width: 60px;
 }
 .landing-address {
   height: 62px !important;
@@ -270,6 +261,10 @@ h1, h2, h3, h4 {
   color: #f0f0f0;
 }
 
+.features {
+  font-size:17px !important;
+  color:#555;
+}
 /* Images */
 .store-hours {
   color: #666;
