@@ -75,8 +75,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(
         :avatar,
-        :email,
-        addresses_attributes: [:id, :address, :city_id, :_destroy]
+        :email
       )
     end
 
@@ -94,8 +93,7 @@ class UsersController < ApplicationController
     end
 
     def new_address
-      scope = current_user.persisted? && current_user.addresses || Address
-      @new_address ||= scope.find_or_create_by(
+      @new_address ||= Address.create(
         address: fetched_address.formatted_address,
         city: City.find_or_create_by(name: city),
         latitude: fetched_address.latitude,
