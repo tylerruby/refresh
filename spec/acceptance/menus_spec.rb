@@ -22,7 +22,7 @@ resource 'Menus' do
     let(:product_from_another_region) { create(:product) }
     let!(:menu_product_from_another_region) { create(:menu_product, menu: menu_from_another_region, product: product_from_another_region) }
 
-    let(:today_date) { "2016-01-01" }
+    let(:today_date) { '2016-01-04' }
     let(:today_menu) { create(:menu, date: today_date, region: user_region) }
     let(:today_product) { create(:product) }
     let!(:today_menu_product) { create(:menu_product, menu: today_menu, product: today_product) }
