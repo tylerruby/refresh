@@ -876,3 +876,15 @@ ul.nav.navbar-nav.secondary > li.active > a {
   height: auto;
   height: 50px;
 }
+
+
+.help-panel {
+  -webkit-box-shadow: none !important;
+  border-bottom: 1px solid #fafafa !important;
+}
+.help-heading {
+  border-bottom: 0 !important;
+}
+.help-body {
+  border-top: none !important;
+}
