@@ -18,10 +18,6 @@ json.cart do
         product = cart_item.item.product
         json.(product, :id, :name, :description, :price_cents, :price_currency)
         json.image(product.image.url(:thumb))
-
-        json.store do
-          json.(product.store, :id, :name)
-        end
       end
     end
   end

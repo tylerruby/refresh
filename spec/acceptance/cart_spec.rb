@@ -64,11 +64,7 @@ resource 'Cart' do
                     "description" => product.description,
                     "price_cents" => 250,
                     "price_currency" => "USD",
-                    "image" => product.image.url(:thumb),
-                    "store" => {
-                      "id" => product.store.id,
-                      "name" => product.store.name
-                    }
+                    "image" => product.image.url(:thumb)
                   }
                 }
               }

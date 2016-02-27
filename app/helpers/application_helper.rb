@@ -1,14 +1,14 @@
-module ApplicationHelper
-  def body_css_classes
-    [
-      controller_name.dasherize,
-      action_name.dasherize,
-      @additional_body_css_classes
-    ].reject(&:blank?).join(' ')
-  end
+  module ApplicationHelper
+    def body_css_classes
+      [
+        controller_name.dasherize,
+        action_name.dasherize,
+        @additional_body_css_classes
+      ].reject(&:blank?).join(' ')
+    end
 
-  def modal_id(record)
-    "#{record.class.name.downcase}_modal_#{record.id}"
+    def modal_id(record)
+      "#{record.class.name.downcase}_modal_#{record.id}"
   end
 
   def styled_radio_button(name, value, label, options = {})
@@ -49,10 +49,6 @@ module ApplicationHelper
         yield
       end)
     end
-  end
-
-  def store_path(store)
-    "/atlanta/#{store.friendly_id}"
   end
 
   def avatar_tag(user, options = {})

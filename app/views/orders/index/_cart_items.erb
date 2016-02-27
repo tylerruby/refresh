@@ -2,13 +2,11 @@
   <div class="order-item-wrapper">
     <div class="row">
       <div class="col-xs-4 col-sm-3">
-        <%= link_to store_path(cart_item.store) do %>
-          <%= image_tag cart_item.image.url, class: 'img-responsive center-block' %>
-        <% end %>
+        <%= image_tag cart_item.image.url, class: 'img-responsive center-block' %>
       </div>
 
       <div class="col-xs-5">
-        <div class="cart-item-name"><%= link_to cart_item.name, store_path(cart_item.store) %></div>
+        <div class="cart-item-name"><%= cart_item.name %></div>
       </div>
 
       <div class="col-xs-3">

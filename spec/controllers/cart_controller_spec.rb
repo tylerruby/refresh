@@ -28,13 +28,8 @@ RSpec.describe CartController, type: :controller do
   end
 
   describe "PATCH #add" do
-    let(:store) { create(:store) }
     let(:menu_product) { create(:menu_product) }
     let(:product) { menu_product.product }
-
-    before do
-      session[:address_id] = store.address.id
-    end
 
     let(:quantity) { 3 }
 
@@ -42,58 +37,45 @@ RSpec.describe CartController, type: :controller do
       patch :add, quantity: quantity, menu_product_id: menu_product.id
     end
 
-    context "product from a store available for delivery" do
-      it "creates a cart" do
-        do_action
-        expect(session[:cart_id]).to eq Cart.last.id
-      end
-
-      it "recreates a cart" do
-        do_action
-        Cart.last.destroy!
-        do_action
-        expect(session[:cart_id]).to eq Cart.last.id
-      end
-
-      it "adds the MenuProduct to the cart with the product's price and with the correct quantity" do
-        do_action
-        cart = Cart.last
-        cart_item = CartItem.last
-        expect(cart.subtotal).to eq product.price * quantity
-        expect(cart.shopping_cart_items).to eq [cart_item]
-        expect(cart_item.quantity).to eq quantity
-        expect(cart_item.price).to eq product.price
-        expect(cart_item.item).to eq MenuProduct.last
-      end
-
-      it "adds a MenuProduct to the existing cart" do
-        cart = Cart.create!
-        session[:cart_id] = cart.id
-        do_action
-        expect(cart.reload.shopping_cart_items.last.item).to eq menu_product
-      end
-
-      it "adds equal MenuProducts to the existing cart item" do
-        do_action
-        do_action
-
-        cart = Cart.last
-        cart_item = CartItem.last
-        expect(cart.shopping_cart_items).to eq [cart_item]
-        expect(cart_item.quantity).to eq quantity * 2
-        expect(cart.subtotal).to eq product.price * quantity * 2
-      end
+    it "creates a cart" do
+      do_action
+      expect(session[:cart_id]).to eq Cart.last.id
     end
 
-    describe "product from a store which isn't available for delivery" do
-      before do
-        skip 'Authorization'
-        store.update!(address: create(:far_far_away))
-      end
+    it "recreates a cart" do
+      do_action
+      Cart.last.destroy!
+      do_action
+      expect(session[:cart_id]).to eq Cart.last.id
+    end
 
-      it "raises an exception when trying to add" do
-        expect { do_action }.to raise_error(Pundit::NotAuthorizedError)
-      end
+    it "adds the MenuProduct to the cart with the product's price and with the correct quantity" do
+      do_action
+      cart = Cart.last
+      cart_item = CartItem.last
+      expect(cart.subtotal).to eq product.price * quantity
+      expect(cart.shopping_cart_items).to eq [cart_item]
+      expect(cart_item.quantity).to eq quantity
+      expect(cart_item.price).to eq product.price
+      expect(cart_item.item).to eq MenuProduct.last
+    end
+
+    it "adds a MenuProduct to the existing cart" do
+      cart = Cart.create!
+      session[:cart_id] = cart.id
+      do_action
+      expect(cart.reload.shopping_cart_items.last.item).to eq menu_product
+    end
+
+    it "adds equal MenuProducts to the existing cart item" do
+      do_action
+      do_action
+
+      cart = Cart.last
+      cart_item = CartItem.last
+      expect(cart.shopping_cart_items).to eq [cart_item]
+      expect(cart_item.quantity).to eq quantity * 2
+      expect(cart.subtotal).to eq product.price * quantity * 2
     end
   end
 
