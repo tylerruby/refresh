@@ -42,11 +42,10 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     describe "authenticated" do
-      let(:cart) { Cart.create! }
+      let(:cart) { Cart.create!(user: user) }
 
       before do
         cart.add(create(:product), 1)
-        session[:cart_id] = cart.id
         sign_in user
       end
 
@@ -93,12 +92,11 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     context "authenticated" do
-      let!(:cart) { Cart.create! }
+      let!(:cart) { Cart.create!(user: user) }
       let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
       let(:total_cost) { cart.total }
 
       before do
-        session[:cart_id] = cart.id
         sign_in user
 
         allow(Stripe::Charge).to receive(:create).with(

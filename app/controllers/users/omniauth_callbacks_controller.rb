@@ -13,16 +13,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-  def sign_in_from_omniauth
-    @user = User.from_oauth(OmniauthWrapper.new(request.env["omniauth.auth"]))
+    def sign_in_from_omniauth
+      @user = User.from_oauth(OmniauthWrapper.new(request.env["omniauth.auth"]))
 
-    if @user.persisted?
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-    else
-      set_flash_message(:danger, :failure, kind: "Facebook") if is_navigational_format?
-      redirect_to :back
+      if @user.persisted?
+        guest = GuestUser.new(session)
+        @user.update!(cart: guest.cart, current_address: guest.current_address)
+        sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      else
+        set_flash_message(:danger, :failure, kind: "Facebook") if is_navigational_format?
+        redirect_to :back
+      end
     end
-  end
-
 end

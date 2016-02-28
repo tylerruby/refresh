@@ -5,11 +5,10 @@ class ApplicationController < ActionController::Base
   protected
 
     def cart
-      @cart = Cart.exists?(@cart.try(:id)) && @cart  \
-              || current_user && current_user.cart   \
-              || Cart.find_by(id: session[:cart_id]) \
-              || Cart.create!(user: current_user)
-      session[:cart_id] = @cart.id
+      @cart = Cart.exists?(@cart.try(:id)) && @cart \
+              || current_user.cart                  \
+              || Cart.create!
+      current_user.update!(cart: @cart)
       @cart
     end
 
@@ -41,12 +40,16 @@ class ApplicationController < ActionController::Base
       begin
         @current_user ||= warden.authenticate(:scope => :user) || user_from_token
       rescue JWT::DecodeError
-        nil
+        @current_user = GuestUser.new(session)
       end
     end
 
+    def user_signed_in?
+      current_user.persisted?
+    end
+
     def authenticate_api!
-      head :unauthorized unless current_user
+      head :unauthorized unless user_signed_in?
     end
 
     def token_payload

@@ -52,7 +52,7 @@
   end
 
   def avatar_tag(user, options = {})
-    return unless user
+    return unless user.persisted?
     version = options[:version] || :thumb_fill
     classes = ["img-circle", "img-responsive", "center-block", options[:class]].compact.join(' ')
     image_tag user.avatar.url(version), class: classes

@@ -4,9 +4,7 @@
     <br/>
   </div>
   <div class="col-lg-8">
-    <div class="form-group">
-      <%= f.select :delivery_address, current_user.addresses.map(&:full_address), required: true, selected: current_address.full_address, prompt: 'Select an address' %>
-    </div>
+    <p>Delivery address: <%= current_user.current_address.full_address %></p>
   </div>
   <!-- div id="address-info" class="hidden">
     <div class="col-lg-12">

@@ -5,10 +5,8 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, ImageUploader
 
   has_many :orders, dependent: :destroy
-  has_many :addresses, as: :addressable, dependent: :destroy
   has_one :cart
   belongs_to :current_address, class_name: 'Address', dependent: :destroy
-  accepts_nested_attributes_for :addresses, allow_destroy: true
 
   before_create :create_customer
 
@@ -36,10 +34,6 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
-  end
-
-  def current_address
-    super || addresses.first
   end
 
   # TODO: Think about move Stripe stuffs to a proxy object

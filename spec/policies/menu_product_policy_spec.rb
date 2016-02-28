@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe MenuProductPolicy do
-  let(:guest) { nil }
+  let(:guest) { GuestUser.new(address_id: create_nearby_address.id) }
+  let(:guest_without_address) { GuestUser.new({}) }
   let(:user) { create(:user, current_address: create_nearby_address) }
   let(:user_without_address) { create(:user, current_address: nil) }
 
@@ -43,10 +44,13 @@ describe MenuProductPolicy do
                                   )
     end
 
-    # Find a way to block guest user if his address is far away or if he doesn't have an address
     it { is_expected.to permit(guest, available_menu_product) }
-    it { is_expected.to permit(guest, menu_product_from_far_away) }
-    it { is_expected.to permit(guest, menu_product_from_yesterday) }
+    it { is_expected.not_to permit(guest, menu_product_from_far_away) }
+    it { is_expected.not_to permit(guest, menu_product_from_yesterday) }
+
+    it { is_expected.not_to permit(guest_without_address, available_menu_product) }
+    it { is_expected.not_to permit(guest_without_address, menu_product_from_far_away) }
+    it { is_expected.not_to permit(guest_without_address, menu_product_from_yesterday) }
 
     it { is_expected.to permit(user, available_menu_product) }
     it { is_expected.not_to permit(user, menu_product_from_far_away) }
