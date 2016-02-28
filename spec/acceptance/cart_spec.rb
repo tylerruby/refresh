@@ -131,4 +131,54 @@ resource 'Cart' do
       expect(cart_item.reload.quantity).to eq quantity
     end
   end
+
+  patch '/cart/update_items_delivery_time.json' do
+    parameter :delivery_date, "The delivery date for which to update the time"
+    parameter :delivery_time
+    let(:delivery_date) {}
+    let(:delivery_time) { '12:00' }
+
+    let!(:cart) { create(:cart, user: user) }
+
+    let(:menu_product_from_another_date) { create(:menu_product) }
+    let!(:cart_item_from_another_date) do
+      cart.add(
+        menu_product_from_another_date,
+        menu_product_from_another_date.product.price,
+        1
+      )
+    end
+
+    let(:menu) { create(:menu, date: delivery_date) }
+
+    let(:menu_product) { create(:menu_product, menu: menu, product: create(:product)) }
+    let!(:cart_item) do
+      cart.add(
+        menu_product,
+        menu_product.product.price,
+        1
+      )
+    end
+
+    let(:another_menu_product) { create(:menu_product, menu: menu, product: create(:product)) }
+    let!(:another_cart_item) do
+      cart.add(
+        another_menu_product,
+        another_menu_product.product.price,
+        1
+      )
+    end
+
+    example "updating a date's delivery time", document: :public do
+      do_request
+      expect(response_status).to be 200
+    end
+
+    example "updated the cart items delivery_time" do
+      do_request
+      expect(
+        [cart_item, another_cart_item].map(&:reload).map(&:delivery_time)
+      ).to eq [delivery_time, delivery_time]
+    end
+  end
 end

@@ -8,9 +8,17 @@
   </div>
   <div class="list-wrapper">
     <% cart_items_by_date.each do |date, cart_items| %>
-      <div class="date"><%= label_for_date date %></div>
+      <div class="date-group">
+        <span class="delivery-date"><%= label_for_date date %></span>
+        <span class="delivery-time">
+          <%= form_tag cart_update_items_delivery_time_path do %>
+            <%= hidden_field_tag :delivery_date, date %>
+            <%= select_tag :delivery_time, options_for_select(CartItem::DELIVERY_TIMES, cart_items.first.delivery_time), class: 'update-delivery-time form-control' %>
+          <% end %>
+        </span>
+      </div>
+      <ul class="drawer-menu">
       <% cart_items.each do |cart_item| %>
-        <ul class="drawer-menu">
           <li class="cart-item list-group-item">
             <div class="media">
               <div class="media-left text-center">
