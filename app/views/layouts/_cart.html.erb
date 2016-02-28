@@ -19,7 +19,7 @@
       </div>
       <ul class="drawer-menu">
       <% cart_items.each do |cart_item| %>
-          <li class="cart-item list-group-item">
+          <li class="cart-item list-group-item" data-menu-product-id=<%= cart_item.item_id %>>
             <div class="media">
               <div class="media-left text-center">
                 <%= update_quantity_button(cart_item, 1) do %>
