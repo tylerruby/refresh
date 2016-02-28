@@ -47,6 +47,7 @@
       color: #666;
       line-height: $cart-header-height;
     }
+
     .cart-items-quantity{
       background-color: darken(#f0f0f0, 25%);
       padding: 2px 6px;
@@ -63,6 +64,14 @@
       top: 0;
       line-height: $cart-header-height;
     }
+  }
+
+  .date {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background: #00FFFF;
   }
 
   .cart-item {
