@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params) do |order|
       order.user = current_user
+      order.delivery_address = current_user.current_address.full_address
       order.amount = cart.total
       order.status = 'pending'
       order.stripe_token = params[:stripeToken]
