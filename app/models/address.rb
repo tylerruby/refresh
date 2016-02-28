@@ -10,7 +10,7 @@ class Address < ActiveRecord::Base
     && !latitude_changed? \
     && !longitude_changed?
   }
-  validates :address, :city, :latitude, :longitude, presence: true
+  validates :city, :latitude, :longitude, presence: true
 
   scope :order_by_distance, -> (location) {
     select("#{table_name}.*")

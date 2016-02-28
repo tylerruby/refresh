@@ -1,5 +1,5 @@
 module GeocoderTest
-  def stub_address(address, latitude, longitude, city: '')
+  def stub_address(address, latitude, longitude, city: '', region: '')
     Geocoder::Lookup::Test.add_stub(address, [
       {
         'latitude'     => latitude,
@@ -15,6 +15,16 @@ module GeocoderTest
             "long_name" => city,
             "short_name" => city,
             "types" => ["locality", "political"]
+          },
+          {
+            "long_name" => address,
+            "short_name" => address,
+            "types" => ["route"]
+          },
+          {
+            "long_name" => region,
+            "short_name" => region,
+            "types" => ["sublocality"]
           }
         ],
         'geometry' => {

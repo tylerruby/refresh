@@ -4,7 +4,6 @@ RSpec.describe Address, type: :model do
   let(:address) { build(:address) }
 
   describe "validations" do
-    it { is_expected.to validate_presence_of(:address) }
     it { is_expected.to validate_presence_of(:city) }
     it { is_expected.to validate_presence_of(:latitude) }
     it { is_expected.to validate_presence_of(:longitude) }

@@ -59,13 +59,22 @@ class UsersController < ApplicationController
   def set_current_address
     current_user.update!(current_address: new_address)
 
+    city = new_address.city
+    city_name = city.name.parameterize
+
+    region = SelectRegion.new(new_address).region
+    region_name = (region && region.name || fetched_address.region).parameterize
+
     respond_to do |format|
       format.json do
-        render json: { city: new_address.city.name.parameterize }
+        render json: {
+          city: city_name,
+          region: region_name
+        }
       end
 
       format.html do
-        redirect_to menu_path(city: city.parameterize)
+        redirect_to menu_path(city: city_name, region: region_name)
       end
     end
   end
@@ -84,18 +93,14 @@ class UsersController < ApplicationController
       render json: { message: message, html: partial_html }, status: :unprocessable_entity
     end
 
-    def city
-      @city ||= fetched_address.city
-    end
-
     def fetched_address
       @fetched_address ||= FetchAddress.new(params[:address])
     end
 
     def new_address
       @new_address ||= Address.create(
-        address: fetched_address.formatted_address,
-        city: City.find_or_create_by(name: city),
+        address: fetched_address.address,
+        city: City.find_or_create_by(name: fetched_address.city),
         latitude: fetched_address.latitude,
         longitude: fetched_address.longitude
       )
