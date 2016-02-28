@@ -5,18 +5,18 @@ RSpec.describe MenusController, type: :controller do
     context 'when current address is present' do
       let(:atlanta) { create(:city, name: 'Atlanta') }
       let(:current_address) { create :address, city: atlanta, address: '4th Av.' }
-      let(:region) { create(:region, address: current_address) }
+      let(:region) { create(:region, name: 'Downtown', address: current_address) }
       let!(:menu) { create(:menu, date: '2016-01-04', region: region) }
 
       before do
-        stub_address('4th Av., Atlanta, GA', 40.7143528, -74.0059731)
+        stub_address('4th Av., Atlanta, GA', 40.7143528, -74.0059731, region: region.name)
 
         allow_any_instance_of(ApplicationController)
           .to receive(:current_address).and_return(current_address)
       end
 
       def do_action
-        get :show, city: 'atlanta'
+        get :show, city: 'atlanta', region: 'downtown'
       end
 
       context 'when today is a normal weekday' do

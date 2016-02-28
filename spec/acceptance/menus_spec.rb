@@ -8,15 +8,16 @@ resource 'Menus' do
 
   let(:address) { create(:address, address: "My special address") }
   let(:user) { create(:user, current_address: address.dup) }
-  let(:user_region) { create(:region, address: address.dup) }
+  let(:user_region) { create(:region, name: 'Downtown', address: address.dup) }
 
   before do
-    stub_address("My special address, Atlanta, GA", 0, 0)
+    stub_address("My special address, Atlanta, GA", 0, 0, region: 'Downtown')
   end
 
-  get '/:city.json' do
+  get '/:city/:region.json' do
     let!(:atlanta) { create(:city, name: 'Atlanta') }
     let(:city) { 'atlanta' }
+    let(:region) { 'downtown' }
 
     let(:menu_from_another_region) { create(:menu, date: today_date) }
     let(:product_from_another_region) { create(:product) }
