@@ -28,7 +28,7 @@
       <ul class="nav navbar-nav address-menu">
         <% if current_address.present? %>
           <li>
-            <%= link_to '/' + current_address.city.name.parameterize do %>
+            <%= link_to_current_address do %>
               <i class="fa fa-map-marker"></i> <%= current_address.address.gsub(/ \d{5}, (?:USA|United States)/, '') %>
           <% end %>
           </li>
@@ -71,5 +71,4 @@
       </div><!-- /.navbar-collapse -->
     </div>
   </div><!-- /.container-fluid -->
-</nav>
 </nav>

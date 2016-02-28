@@ -17,14 +17,8 @@ class MenusController < ApplicationController
 
     @menu_dates    = SelectMenuDates.new(Date.current).dates
     @selected_date = (params[:date] || @menu_dates.first).to_date
-    @menu          = Menu.find_by(date: @selected_date, region: user_region)
+    @menu          = Menu.find_by(date: @selected_date, region: current_region)
 
     return render(:not_found, status: :unprocessable_entity) unless @menu.present?
   end
-
-  private
-
-    def user_region
-      SelectRegion.new(current_address).region
-    end
 end

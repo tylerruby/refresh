@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  helper_method :current_address, :coordinates, :cart, :cart_items
+  helper_method :current_address, :current_region, :coordinates, :cart, :cart_items, :cart_items_by_date
 
   protected
 
@@ -16,12 +16,20 @@ class ApplicationController < ActionController::Base
       @cart_items ||= cart.shopping_cart_items.order(:created_at)
     end
 
+    def cart_items_by_date
+      cart_items.group_by { |cart_item| cart_item.item.menu.date  }
+    end
+
     def current_address
       if current_user
         current_user.current_address
       else
         Address.find_by(id: session[:address_id])
       end
+    end
+
+    def current_region
+      SelectRegion.new(current_address).region
     end
 
     def coordinates

@@ -57,4 +57,13 @@
     classes = ["img-circle", "img-responsive", "center-block", options[:class]].compact.join(' ')
     image_tag user.avatar.url(version), class: classes
   end
+
+  def link_to_current_address
+    link_to menu_path(
+      city: current_address.city.name.parameterize,
+      region: current_region.name.parameterize
+    ) do
+      yield
+    end
+  end
 end
