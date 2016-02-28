@@ -20,18 +20,25 @@ class SelectMenuDates
   end
 
   def dates
-    (date..date + 6.days).reject(&weekend).reject(&holiday)
+    (date..date + 6.days)
+      .reject(&weekend?)
+      .reject(&holiday?)
+      .reject(&passed_time_limit?)
   end
 
   private
 
     attr_accessor :date
 
-    def weekend
+    def weekend?
       -> (date) { date.saturday? || date.sunday? }
     end
 
-    def holiday
+    def holiday?
       -> (date) { HOLIDAYS.include?(date) }
+    end
+
+    def passed_time_limit?
+      TimeLimitPolicy.new.method(:passed_time_limit?)
     end
 end

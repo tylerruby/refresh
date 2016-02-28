@@ -44,20 +44,35 @@ describe MenuProductPolicy do
                                   )
     end
 
-    it { is_expected.to permit(guest, available_menu_product) }
-    it { is_expected.not_to permit(guest, menu_product_from_far_away) }
-    it { is_expected.not_to permit(guest, menu_product_from_yesterday) }
+    context "it's before 10:00 AM of the same day" do
+      before do
+        Timecop.freeze available_menu_product.menu.date.in_time_zone.change(hour: 9)
+      end
 
-    it { is_expected.not_to permit(guest_without_address, available_menu_product) }
-    it { is_expected.not_to permit(guest_without_address, menu_product_from_far_away) }
-    it { is_expected.not_to permit(guest_without_address, menu_product_from_yesterday) }
+      it { is_expected.to permit(guest, available_menu_product) }
+      it { is_expected.not_to permit(guest, menu_product_from_far_away) }
+      it { is_expected.not_to permit(guest, menu_product_from_yesterday) }
 
-    it { is_expected.to permit(user, available_menu_product) }
-    it { is_expected.not_to permit(user, menu_product_from_far_away) }
-    it { is_expected.not_to permit(user, menu_product_from_yesterday) }
+      it { is_expected.not_to permit(guest_without_address, available_menu_product) }
+      it { is_expected.not_to permit(guest_without_address, menu_product_from_far_away) }
+      it { is_expected.not_to permit(guest_without_address, menu_product_from_yesterday) }
 
-    it { is_expected.not_to permit(user_without_address, available_menu_product) }
-    it { is_expected.not_to permit(user_without_address, menu_product_from_far_away) }
-    it { is_expected.not_to permit(user_without_address, menu_product_from_yesterday) }
+      it { is_expected.to permit(user, available_menu_product) }
+      it { is_expected.not_to permit(user, menu_product_from_far_away) }
+      it { is_expected.not_to permit(user, menu_product_from_yesterday) }
+
+      it { is_expected.not_to permit(user_without_address, available_menu_product) }
+      it { is_expected.not_to permit(user_without_address, menu_product_from_far_away) }
+      it { is_expected.not_to permit(user_without_address, menu_product_from_yesterday) }
+    end
+
+    context "it's 10:00 AM of the same day" do
+      before do
+        Timecop.freeze available_menu_product.menu.date.in_time_zone.change(hour: 10)
+      end
+
+      it { is_expected.not_to permit(guest, available_menu_product) }
+      it { is_expected.not_to permit(user, available_menu_product) }
+    end
   end
 end

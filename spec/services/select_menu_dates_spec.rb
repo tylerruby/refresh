@@ -14,7 +14,8 @@ RSpec.describe SelectMenuDates do
     it "returns all business days" do
       expect(service.dates).to eq [
         monday,
-        tuesday, wednesday,
+        tuesday,
+        wednesday,
         thursday,
         friday
       ]
@@ -55,6 +56,28 @@ RSpec.describe SelectMenuDates do
         tuesday,
         wednesday,
         thursday
+      ]
+    end
+  end
+
+  context "it already passed the time limit for today" do
+    let(:today) { Date.parse('2016-01-04') }
+    let(:monday) { today }
+    let(:tuesday) { monday + 1.day }
+    let(:wednesday) { tuesday + 1.day }
+    let(:thursday) { wednesday + 1.day }
+    let(:friday) { thursday + 1.day }
+
+    before do
+      Timecop.freeze today.in_time_zone.change(hour: 10)
+    end
+
+    it "returns all business days" do
+      expect(service.dates).to eq [
+        tuesday,
+        wednesday,
+        thursday,
+        friday
       ]
     end
   end
