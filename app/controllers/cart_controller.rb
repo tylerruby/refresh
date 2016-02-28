@@ -48,6 +48,23 @@ class CartController < ApplicationController
     end
   end
 
+  def update_items_delivery_time
+    cart
+      .shopping_cart_items
+      .joins(menu_product: :menu)
+      .where(menus: { date: params[:delivery_date] })
+      .each do |cart_item|
+        cart_item.update!(delivery_time: params[:delivery_time])
+      end
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        render layout: false
+      end
+    end
+  end
+
   private
 
     def quantity

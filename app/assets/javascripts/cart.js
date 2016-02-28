@@ -28,6 +28,7 @@ $(function setupCart() {
       close();
     });
     cart.find('form:has(.remove-item-button)').submit(removeAsync);
+    cart.find('.update-delivery-time').change(updateDeliveryTimeAsync)
     cart.find('form:has(.update-quantity)').submit(function(ev) {
       var isRemove = !!$(ev.target).has('.reduce-quantity').length;
       updateQuantityAsync(ev, isRemove);
@@ -204,5 +205,15 @@ $(function setupCart() {
     } else {
       update_remove_form(form, 'increase');
     }
+  }
+
+  function updateDeliveryTimeAsync(ev) {
+    asyncSubmit(
+      ev,
+      $(this.form),
+      "PATCH",
+      "Delivery time updated!",
+      "There was a problem updating the delivery time."
+    );
   }
 });

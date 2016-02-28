@@ -34,6 +34,7 @@ class Order < ActiveRecord::Base
       field :charged?
       field :refunded?
       field :delivery_address
+      field :cart_items
       field :created_at
     end
   end
