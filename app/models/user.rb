@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   # TODO: Think about move Stripe stuffs to a proxy object
   def customer
     # TODO: Should keep caching?

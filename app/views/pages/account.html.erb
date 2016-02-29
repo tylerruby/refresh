@@ -10,9 +10,9 @@
           </div>
           <div class="col-sm-12">
             <br />
-            <h4 class="profile-text text-center">Tyler Ruby</h4>
-            <h5 class="profile-text text-center">tylerruby@comcast.net</h5>
-            <h5 class="profile-text text-center">678-488-2616</h5>
+            <h4 class="profile-text text-center"><%= current_user.full_name %></h4>
+            <h5 class="profile-text text-center"><%= current_user.email %></h5>
+            <h5 class="profile-text text-center"><%= current_user.phone_number %></h5>
             <p class="text-center">
               <%= link_to "Edit Profile", edit_user_path %>
             </p>
