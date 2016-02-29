@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
 
   before_create :create_customer
 
-  validates :mobile_number, format: { with: /\(\d{3}\) \d{3}-\d{4}/ }, allow_blank: true
-
   def self.from_oauth(auth)
     email = auth.email || "fallback.#{auth.provider}.#{auth.uid}@derby.com"
     user = find_by(provider: auth.provider, uid: auth.uid) || find_or_create_by(email: email) do |user|
@@ -34,6 +32,10 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   # TODO: Think about move Stripe stuffs to a proxy object

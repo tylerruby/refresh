@@ -37,14 +37,5 @@ resource 'Registrations' do
         expect(json).to eq("password" => ["can't be blank"])
       end
     end
-
-    context "invalid mobile number" do
-      let(:mobile_number) { 'invalid format' }
-
-      example "failing to create an user with incorrect mobile number", document: :public do
-        do_request
-        expect(json).to eq("mobile_number" => ["is invalid"])
-      end
-    end
   end
 end
