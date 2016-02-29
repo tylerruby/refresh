@@ -84,6 +84,10 @@ resource 'Cart' do
     let(:menu_product) { create(:menu_product, menu: menu) }
     let(:menu_product_id) { menu_product.id }
 
+    before do
+      Timecop.freeze menu.date.in_time_zone.change(hour: 9)
+    end
+
     pending "test and document failed authorization cases"
 
     example "adding a menu product to the cart", document: :public do
@@ -135,8 +139,8 @@ resource 'Cart' do
   patch '/cart/update_items_delivery_time.json' do
     parameter :delivery_date, "The delivery date for which to update the time"
     parameter :delivery_time
-    let(:delivery_date) {}
-    let(:delivery_time) { '12:00' }
+    let(:delivery_date) { '2016-01-01' }
+    let(:delivery_time) { '12:00 PM' }
 
     let!(:cart) { create(:cart, user: user) }
 
@@ -167,6 +171,10 @@ resource 'Cart' do
         another_menu_product.product.price,
         1
       )
+    end
+
+    before do
+      Timecop.freeze menu.date.in_time_zone.change(hour: 9)
     end
 
     example "updating a date's delivery time", document: :public do
