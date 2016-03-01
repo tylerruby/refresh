@@ -45,7 +45,7 @@ RSpec.describe OrdersController, type: :controller do
       let(:cart) { Cart.create!(user: user) }
 
       before do
-        cart.add(create(:product), 1)
+        cart.add(create(:menu_product), 0, 3)
         sign_in user
       end
 
@@ -96,7 +96,7 @@ RSpec.describe OrdersController, type: :controller do
       let(:user) { create(:user, current_address: address) }
       let(:address) { create(:address, address: "18th Street") }
       let!(:cart) { Cart.create!(user: user) }
-      let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
+      let!(:cart_items) { 2.times.map { cart.add(create(:menu_product), 0, 2) } }
       let(:total_cost) { cart.total }
 
       before do
@@ -122,7 +122,6 @@ RSpec.describe OrdersController, type: :controller do
           order.reload
         end
 
-        it { expect(order.cart_items).to eq cart_items }
         it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }

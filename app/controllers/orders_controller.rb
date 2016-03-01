@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    authorize cart, :checkout?
     @cart = cart
     @order = Order.new
     if @cart.empty?
@@ -15,6 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    authorize cart, :checkout?
     @order = Order.new(order_params) do |order|
       order.user = current_user
       order.delivery_address = current_user.current_address.full_address

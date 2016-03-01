@@ -49,7 +49,7 @@ resource 'Orders' do
     parameter :observations, "Order observations (for example, \"I'm the guy using a black shirt\")", scope: :order
     let(:stripe_helper) { StripeMock.create_test_helper }
     let!(:cart) { create(:cart, user: user) }
-    let!(:cart_items) { [cart.add(create(:menu_product), 1)] }
+    let!(:cart_items) { 3.times.map { cart.add(create(:menu_product), 1) } }
     let(:observations) { 'Take off the bacon!' }
     let(:stripeToken) { stripe_helper.generate_card_token }
     let(:delivery_address) { "18th Street Atlanta" }
