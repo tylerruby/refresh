@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
 
   before_create :create_customer
 
-  validates :mobile_number, format: { with: /\(\d{3}\) \d{3}-\d{4}/ }, allow_blank: true
-
   def self.from_oauth(auth)
     email = auth.email || "fallback.#{auth.provider}.#{auth.uid}@derby.com"
     user = find_by(provider: auth.provider, uid: auth.uid) || find_or_create_by(email: email) do |user|

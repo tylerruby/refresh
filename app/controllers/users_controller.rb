@@ -83,7 +83,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(
-        :avatar, :email, :first_name, :last_name, :phone_number)
+        :avatar, :email, :first_name, :last_name, :mobile_number)
     end
 
     def render_credit_card_error(message)
