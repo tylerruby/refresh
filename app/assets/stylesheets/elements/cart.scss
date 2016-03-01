@@ -113,9 +113,17 @@
 
   .checkout-button {
     background-color: #ff0000;
+    border-radius: 0;
     bottom: 0;
     position: absolute;
     width: 100%;
+
+    &.disabled {
+      pointer-events: all;
+      &:active {
+        pointer-events: none;
+      }
+    }
   }
 }
 

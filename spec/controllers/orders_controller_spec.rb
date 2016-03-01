@@ -45,7 +45,7 @@ RSpec.describe OrdersController, type: :controller do
       let(:cart) { Cart.create!(user: user) }
 
       before do
-        cart.add(create(:product), 1)
+        cart.add(create(:menu_product), 0, 3)
         sign_in user
       end
 
@@ -79,12 +79,13 @@ RSpec.describe OrdersController, type: :controller do
   describe "POST #create" do
     let(:token) { stripe_helper.generate_card_token }
     let(:charge_double) { double('Stripe::Charge', id: 'some charge id') }
-    let(:delivery_address) { "18th Street Atlanta" }
+
+    before do
+      stub_address "18th Street, Atlanta, GA", 40.7143528, -74.0059731
+    end
 
     def do_action
-      post :create, stripeToken: token, order: {
-        delivery_address: delivery_address,
-        observations: 'Take off the bacon!' }
+      post :create, stripeToken: token, order: { observations: 'Take off the bacon!' }
     end
 
     def order
@@ -92,8 +93,10 @@ RSpec.describe OrdersController, type: :controller do
     end
 
     context "authenticated" do
+      let(:user) { create(:user, current_address: address) }
+      let(:address) { create(:address, address: "18th Street") }
       let!(:cart) { Cart.create!(user: user) }
-      let!(:cart_items) { 2.times.map { cart.add(create(:product), 1) } }
+      let!(:cart_items) { 2.times.map { cart.add(create(:menu_product), 0, 2) } }
       let(:total_cost) { cart.total }
 
       before do
@@ -120,11 +123,10 @@ RSpec.describe OrdersController, type: :controller do
         end
 
         it { expect(order.cart_items).to eq cart_items }
-        it { expect(order.cart_items).to eq cart_items }
         it { expect(order.user).to eq user }
         it { expect(order.amount).to eq total_cost }
         it { expect(order.status).to eq 'approved' }
-        it { expect(order.delivery_address).to eq delivery_address }
+        it { expect(order.delivery_address).to eq address.full_address }
         it { expect(order.observations).to eq 'Take off the bacon!' }
         it { expect(order.charge_id).to eq charge_double.id }
 
@@ -239,10 +241,7 @@ RSpec.describe OrdersController, type: :controller do
 
             allow(user).to receive :add_credit_card
 
-            post :create, order: {
-              delivery_address: delivery_address,
-              source_id: 'some source id'
-            }
+            post :create, order: { source_id: 'some source id' }
           end
 
           it { expect(user).not_to have_received(:add_credit_card) }

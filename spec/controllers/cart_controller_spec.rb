@@ -39,6 +39,10 @@ RSpec.describe CartController, type: :controller do
       create(:address)
     end
 
+    before do
+      Timecop.freeze menu.date.in_time_zone.change(hour: 9)
+    end
+
     def do_action
       session[:address_id] = create_address.id
       patch :add, quantity: quantity, menu_product_id: menu_product.id
