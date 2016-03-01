@@ -144,7 +144,6 @@ ActiveRecord::Schema.define(version: 20160229010335) do
     t.string   "avatar"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "phone_number"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
