@@ -17,7 +17,7 @@
           <% end %>
         </span>
       </div>
-      <ul class="drawer-menu">
+      <ul class="drawer-menu date-items">
       <% cart_items.each do |cart_item| %>
           <li class="cart-item list-group-item" data-menu-product-id=<%= cart_item.item_id %>>
             <div class="media">
@@ -48,7 +48,8 @@
         </ul>
       <% end %>
   </div>
-  <%= link_to new_order_path, class: 'checkout-button btn-red text-center' do %>
+
+  <%= link_to new_order_path, class: 'checkout-button btn btn-red text-center', title: 'You need at least 3 items per day to be able to checkout' do %>
     <div class="cart-items-length">
       <%= humanized_money_with_symbol cart.subtotal %>
     </div>
