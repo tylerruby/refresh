@@ -16,4 +16,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery_nested_form
-//= require_tree .
+//= require bootstrap/collapse
+//= require_tree

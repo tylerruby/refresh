@@ -1,0 +1,55 @@
+<%= render 'menus/dates', selected_date: @selected_date, menu_dates: @menu_dates %>
+
+<br class="items-list-break" />
+<div class="col-xs-12 col-md-10 col-md-offset-1 items-list minheight600">
+  <% @menu.menu_products.each do |menu_product| %>
+    <div class="product col-sm-6 col-md-6 col-lg-4 col-sm-12 col-xs-12"
+      data-menu-product-id=<%= menu_product.id %>>
+
+      <div class="panel panel-default">
+          <div class="product-image-wrapper">
+            <%= image_tag menu_product.image_url, class: 'food-pictures img-responsive' %>
+            <div class="image-hover"><%= menu_product.description %></div>
+          </div>
+
+          <div class="price"><%= menu_product.price.format %></div>
+
+          <!-- Food labels
+            <div class="food-label">
+            <button class="btn btn-success btn-circle">V</button>
+            <button class="btn btn-warning btn-circle">GF</button>
+            <button class="btn btn-primary btn-circle">VG</button>
+            <button class="btn btn-info btn-circle">P</button>
+
+            </div>
+          -->
+
+          <div class="panel-body food-items">
+            <div class="panel-body-left">
+              <div class="product-name"><%= menu_product.name %></div>
+              <p><%= menu_product.restaurant %></p>
+            </div>
+
+            <div class="panel-body-right">
+              <div class="buttons">
+                <div class="product-info" id="info-<%= menu_product.id %>">
+                  <% if cart.item_for(menu_product) %>
+                    <%= cart.item_for(menu_product).quantity %>
+                  <% end %>
+                </div>
+
+                <i class="fa fa-minus-circle btn btn-default remove-item-button"></i>
+
+                <%= form_for CartItem.new, url: cart_add_path, method: :patch do |f| %>
+                  <%= f.hidden_field :quantity, name: 'quantity', value: 1 %>
+                  <%= f.hidden_field :menu_product_id, name: 'menu_product_id', value: menu_product.id %>
+
+                  <%= f.button '', class: 'btn btn-default fa fa-plus-circle add-item-button' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  <% end %>
+</div>

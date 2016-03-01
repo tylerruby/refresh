@@ -1,84 +1,22 @@
-<div class="container p-t-md">
+<%= form_for(@order, html: { id: 'order-form'}) do |f| %>
+  <br />
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <ul class="list-group media-list media-list-stream">
-        <li class="list-group-item p-a">
-          <h2 class="m-a-0">Checkout</h2>
-        </li>
+    <div class="col-sm-8 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Checkout</h4>
+        </div>
 
-        <li class="media list-group-item p-a">
-          <div class="media-body">
-            <div class="checkout">
-              <table class="table">
-                <thead>
-                  <th>Cloth</th>
-                  <th>Color</th>
-                  <th>Size</th>
-                  <th>Gender</th>
-                  <th>Store</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                </thead>
-                <tbody>
-                  <% @cart.shopping_cart_items.each do |cart_item| %>
-                    <tr>
-                      <td><%= cart_item.name %></td>
-                      <td><%= cart_item.color %></td>
-                      <td><%= cart_item.size %></td>
-                      <td><%= cart_item.gender %></td>
-                      <td><%= link_to cart_item.store.name, cart_item.store %></td>
-                      <td><%= cart_item.quantity %></td>
-                      <td><%= humanized_money_with_symbol cart_item.price %></td>
-                    </tr>
-                  <% end %>
-                  <tr>
-                    <td colspan="5"</td>
-                    <td>Subtotal:</td>
-                    <td><%= humanized_money_with_symbol @cart.subtotal %></td>
-                  </tr>
-                  <tr>
-                    <td colspan="5"</td>
-                    <td>Shipping cost:</td>
-                    <td><%= humanized_money_with_symbol @cart.shipping_cost  %></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h3>Total: <%= humanized_money_with_symbol @cart.total %></h3>
+        <div class="panel-body">
+          <%= render 'orders/new/address', f: f %>
+          <hr />
+          <%= render 'orders/new/payment', f: f %>
+        </div>
+      </div>
+    </div>
 
-              <% if current_user.has_credit_card? %>
-                <%= render layout: 'form', locals: { order: @order, delivery_time: @cart.delivery_time, form_id: 'order-form' } do %>
-                  <% # noop %>
-                <% end %>
-              <% else %>
-                <%= render layout: 'form', locals: { order: @order, delivery_time: @cart.delivery_time, form_id: 'fill-credit-card-form' } do %>
-                    <div class="payment-errors"></div>
-
-                    <div class="form-group">
-                      <label for="card-number">Card Number</label>
-                      <input id="card-number" class="form-control" placeholder="Your credit card number" type="text" size="20" data-stripe="number"/>
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="col-xs-2">
-                        <label for="card-cvc">CVC</label>
-                        <input id="card-cvc" class="form-control" type="text" size="4" data-stripe="cvc"/>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="card-exp-month">Expiration</label>
-                      <div class="form-inline">
-                        <input id="card-exp-month" class="form-control" placeholder="MM" type="text" size="2" data-stripe="exp-month"/>
-                        <span> / </span>
-                        <input class="form-control" placeholder="YYYY" type="text" size="4" data-stripe="exp-year"/>
-                      </div>
-                    </div>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="col-sm-4 col-md-4 col-lg-3">
+      <%= render 'orders/new/summary' %>
     </div>
   </div>
-</div>
+<% end %>

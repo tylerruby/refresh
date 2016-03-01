@@ -1,0 +1,19 @@
+<% cart_items.each do |cart_item| %>
+  <div class="order-item-wrapper">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3">
+        <%= image_tag cart_item.image.url, class: 'img-responsive center-block' %>
+      </div>
+
+      <div class="col-xs-5">
+        <div class="cart-item-name"><%= cart_item.name %></div>
+      </div>
+
+      <div class="col-xs-3">
+        <div class="cart-item-quantity-and-price">
+          <%= cart_item.quantity %> &times; <%= humanized_money_with_symbol cart_item.price_cents %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

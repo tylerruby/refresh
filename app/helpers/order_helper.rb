@@ -11,4 +11,8 @@ module OrderHelper
 
     content_tag :span, order.status.humanize, class: "label label-#{klass}"
   end
+
+  def options_for_payment_source cards
+    cards.map{|card| ["#{card.brand} | #{card.last4}", card.id]}
+  end
 end

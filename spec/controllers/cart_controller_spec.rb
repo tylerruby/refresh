@@ -17,8 +17,8 @@ RSpec.describe CartController, type: :controller do
 
     it "sets an existing cart" do
       cart = Cart.create!
-      old_cart_item = cart.add(create(:cloth_instance), 1)
-      new_cart_item = cart.add(create(:cloth_instance), 1)
+      old_cart_item = cart.add(create(:menu_product), 1)
+      new_cart_item = cart.add(create(:menu_product), 1)
       old_cart_item.touch
       session[:cart_id] = cart.id
       do_action
@@ -28,135 +28,87 @@ RSpec.describe CartController, type: :controller do
   end
 
   describe "PATCH #add" do
-    let(:previous_url) { '/previous_url' }
-    let(:store) { create(:store) }
+    let(:menu_product) { create(:menu_product, menu: menu, product: product) }
+    let(:product) { create(:product) }
+    let(:menu) { create(:menu, date: Date.current, region: region) }
+    let(:region) { create(:region, address: create_address) }
 
-    before do
-      request.env["HTTP_REFERER"] = previous_url
-      session[:address_id] = store.address.id
+    let(:quantity) { 3 }
+
+    def create_address
+      create(:address)
     end
 
-    let(:cloth_variant) { create(:cloth_variant) }
-    let(:quantity) { 3 }
-    let(:cloth_instance_attributes) do
-      {
-        size: "doesn't even matter",
-        cloth_variant_id: cloth_variant.id,
-        store_id: store.id
-      }
+    before do
+      Timecop.freeze menu.date.in_time_zone.change(hour: 9)
     end
 
     def do_action
-      patch :add, quantity: quantity, cloth_instance: cloth_instance_attributes
+      session[:address_id] = create_address.id
+      patch :add, quantity: quantity, menu_product_id: menu_product.id
     end
 
-    context "cloth from a store available for delivery" do
-      it "creates a cart" do
-        do_action
-        expect(session[:cart_id]).to eq Cart.last.id
-      end
-
-      it "recreates a cart" do
-        do_action
-        Cart.last.destroy!
-        do_action
-        expect(session[:cart_id]).to eq Cart.last.id
-      end
-
-      it "creates a cloth instance with the correct attributes" do
-        expect { do_action }.to change { ClothInstance.count }.by(1)
-        cloth_instance = ClothInstance.last
-        expect(cloth_instance.color).to eq cloth_variant.color
-        expect(cloth_instance.size).to eq cloth_variant.size
-        expect(cloth_instance.cloth_variant).to eq cloth_variant
-        expect(cloth_instance.store).to eq store
-      end
-
-      it "doesn't allow a cloth instance that references an inexistent cloth variant id" do
-        expect do
-          patch :add, quantity: 0, cloth_instance: cloth_instance_attributes.merge(cloth_variant_id: -1)
-        end.to raise_error(ActiveRecord::RecordInvalid)
-      end
-
-      it "adds the cloth instance to the cart with the cloth's price and with the correct quantity" do
-        do_action
-        cart = Cart.last
-        cart_item = CartItem.last
-        expect(cart.subtotal).to eq cloth_variant.price * quantity
-        expect(cart.shopping_cart_items).to eq [cart_item]
-        expect(cart_item.quantity).to eq quantity
-        expect(cart_item.price).to eq cloth_variant.price
-        expect(cart_item.item).to eq ClothInstance.last
-      end
-
-      it "redirects the user back to the the previous page" do
-        do_action
-        expect(response).to redirect_to previous_url
-      end
-
-      it "sets a success message" do
-        do_action
-        expect(flash[:success]).to eq 'Item added to the cart!'
-      end
-
-      it "adds a cloth instance to the existing cart" do
-        cart = Cart.create!
-        session[:cart_id] = cart.id
-        do_action
-        expect(cart.reload.shopping_cart_items.last.item).to eq ClothInstance.last
-      end
-
-      it "adds equal cloth instance to the existing cart item" do
-        do_action
-        do_action
-
-        cart = Cart.last
-        cart_item = CartItem.last
-        expect(cart.shopping_cart_items).to eq [cart_item]
-        expect(cart_item.quantity).to eq quantity * 2
-        expect(cart.subtotal).to eq cloth_variant.price * quantity * 2
-      end
+    it "creates a cart" do
+      do_action
+      expect(session[:cart_id]).to eq Cart.last.id
     end
 
-    describe "cloth from a store which isn't available for delivery" do
-      before do
-        store.update!(address: create(:far_far_away))
-      end
+    it "recreates a cart" do
+      do_action
+      Cart.last.destroy!
+      do_action
+      expect(session[:cart_id]).to eq Cart.last.id
+    end
 
-      it "raises an exception when trying to add" do
-        expect { do_action }.to raise_error(Pundit::NotAuthorizedError)
-      end
+    it "adds the MenuProduct to the cart with the product's price and with the correct quantity" do
+      do_action
+      cart = Cart.last
+      cart_item = CartItem.last
+      expect(cart.subtotal).to eq product.price * quantity
+      expect(cart.shopping_cart_items).to eq [cart_item]
+      expect(cart_item.quantity).to eq quantity
+      expect(cart_item.price).to eq product.price
+      expect(cart_item.item).to eq MenuProduct.last
+    end
+
+    it "adds a MenuProduct to the existing cart" do
+      cart = Cart.create!
+      session[:cart_id] = cart.id
+      do_action
+      expect(cart.reload.shopping_cart_items.last.item).to eq menu_product
+    end
+
+    it "adds equal MenuProducts to the existing cart item" do
+      do_action
+      do_action
+
+      cart = Cart.last
+      cart_item = CartItem.last
+      expect(cart.shopping_cart_items).to eq [cart_item]
+      expect(cart_item.quantity).to eq quantity * 2
+      expect(cart.subtotal).to eq product.price * quantity * 2
     end
   end
 
   describe "DELETE #remove" do
     let(:previous_url) { '/previous_url' }
     let(:cart) { Cart.create! }
-    let(:cloth_instance) { create(:cloth_instance) }
+    let(:menu_product) { create(:menu_product) }
+    let(:product) { menu_product.product }
 
     before do
       request.env["HTTP_REFERER"] = previous_url
-      cart.add(cloth_instance, cloth_instance.price, 3)
+      cart.add(menu_product, product.price, 3)
       session[:cart_id] = cart.id
     end
 
     def do_action
-      delete :remove, cloth_instance_id: cloth_instance.id
+      delete :remove, menu_product_id: menu_product.id
     end
 
-    it "removes the cloth instance from the cart" do
+    it "removes the MenuProduct from the cart" do
       do_action
       expect(cart.reload).to be_empty
-    end
-
-    it "redirects the user back to the the previous page" do
-      do_action
-      expect(response).to redirect_to previous_url
-    end
-
-    it "sets a success message" do
-      do_action
-      expect(flash[:success]).to eq 'Item removed from the cart.'
     end
   end
 
@@ -164,12 +116,13 @@ RSpec.describe CartController, type: :controller do
     let(:previous_url) { '/previous_url' }
     let(:cart) { Cart.create! }
     let(:quantity) { 3 }
-    let(:cloth_instance) { create(:cloth_instance) }
-    let(:cart_item) { cart.add cloth_instance, cloth_instance.price, 2 }
+    let(:menu_product) { create(:menu_product) }
+    let(:product) { menu_product.product }
+    let(:cart_item) { cart.add menu_product, product.price, 2 }
 
     def do_action
       cart_item
-      patch :update, quantity: quantity, cloth_instance_id: cloth_instance.id
+      patch :update, quantity: quantity, menu_product_id: menu_product.id
     end
 
     before do
@@ -180,17 +133,7 @@ RSpec.describe CartController, type: :controller do
     it "updates the cart item's quantity" do
       do_action
       expect(cart_item.reload.quantity).to eq quantity
-      expect(cart.reload.subtotal).to eq cloth_instance.price * quantity
-    end
-
-    it "redirects the user back to the the previous page" do
-      do_action
-      expect(response).to redirect_to previous_url
-    end
-
-    it "sets a success message" do
-      do_action
-      expect(flash[:success]).to eq "Item's quantity updated to #{quantity}."
+      expect(cart.reload.subtotal).to eq product.price * quantity
     end
   end
 end

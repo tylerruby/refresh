@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028060143) do
+ActiveRecord::Schema.define(version: 20160229010335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.float    "longitude"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "address_2"
   end
 
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
@@ -36,34 +37,20 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.integer  "quantity"
     t.integer  "item_id"
     t.string   "item_type"
-    t.integer  "price_cents",    default: 0,     null: false
-    t.string   "price_currency", default: "USD", null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "price_cents",    default: 0,          null: false
+    t.string   "price_currency", default: "USD",      null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "delivery_time",  default: "11:30 AM"
   end
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.boolean  "male",       default: false
-    t.boolean  "female",     default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  create_table "chains", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
-  end
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id", using: :btree
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
@@ -71,46 +58,6 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "cloth_instances", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "store_id"
-    t.integer  "cloth_variant_id"
-  end
-
-  add_index "cloth_instances", ["cloth_variant_id"], name: "index_cloth_instances_on_cloth_variant_id", using: :btree
-  add_index "cloth_instances", ["store_id"], name: "index_cloth_instances_on_store_id", using: :btree
-
-  create_table "cloth_variants", force: :cascade do |t|
-    t.string   "size"
-    t.string   "color"
-    t.integer  "cloth_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "cloth_variants", ["cloth_id"], name: "index_cloth_variants_on_cloth_id", using: :btree
-
-  create_table "clothes", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "price_cents",        default: 0,     null: false
-    t.string   "price_currency",     default: "USD", null: false
-    t.integer  "chain_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "colors",             default: [],                 array: true
-    t.integer  "gender"
-    t.string   "image_dimensions"
-    t.integer  "category_id"
-  end
-
-  add_index "clothes", ["category_id"], name: "index_clothes_on_category_id", using: :btree
-  add_index "clothes", ["chain_id"], name: "index_clothes_on_chain_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -125,30 +72,23 @@ ActiveRecord::Schema.define(version: 20151028060143) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "impressions", force: :cascade do |t|
-    t.string   "impressionable_type"
-    t.integer  "impressionable_id"
-    t.integer  "user_id"
-    t.string   "controller_name"
-    t.string   "action_name"
-    t.string   "view_name"
-    t.string   "request_hash"
-    t.string   "ip_address"
-    t.string   "session_hash"
-    t.text     "message"
-    t.text     "referrer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "menu_products", force: :cascade do |t|
+    t.integer "menu_id"
+    t.integer "product_id"
   end
 
-  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
-  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
-  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
-  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
-  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
-  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
-  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
-  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
+  add_index "menu_products", ["menu_id"], name: "index_menu_products_on_menu_id", using: :btree
+  add_index "menu_products", ["product_id"], name: "index_menu_products_on_product_id", using: :btree
+
+  create_table "menus", force: :cascade do |t|
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "region_id"
+  end
+
+  add_index "menus", ["date", "region_id"], name: "index_menus_on_date_and_region_id", unique: true, using: :btree
+  add_index "menus", ["region_id"], name: "index_menus_on_region_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -158,26 +98,29 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "delivery_address"
-    t.integer  "delivery_time"
+    t.string   "charge_id"
+    t.string   "refund_id"
+    t.text     "observations"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
-  create_table "stores", force: :cascade do |t|
+  create_table "products", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.string   "slug"
-    t.integer  "chain_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "image_dimensions"
+    t.integer  "price_cents",    default: 0,     null: false
+    t.string   "price_currency", default: "USD", null: false
+    t.string   "image"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "description"
+    t.string   "restaurant"
   end
 
-  add_index "stores", ["chain_id"], name: "index_stores_on_chain_id", using: :btree
-  add_index "stores", ["slug"], name: "index_stores_on_slug", unique: true, using: :btree
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -196,6 +139,11 @@ ActiveRecord::Schema.define(version: 20151028060143) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "admin"
+    t.integer  "current_address_id"
+    t.string   "mobile_number"
+    t.string   "avatar"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -204,11 +152,9 @@ ActiveRecord::Schema.define(version: 20151028060143) do
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   add_foreign_key "addresses", "cities"
-  add_foreign_key "cloth_instances", "cloth_variants"
-  add_foreign_key "cloth_instances", "stores"
-  add_foreign_key "cloth_variants", "clothes"
-  add_foreign_key "clothes", "categories"
-  add_foreign_key "clothes", "chains"
+  add_foreign_key "carts", "users"
+  add_foreign_key "menu_products", "menus"
+  add_foreign_key "menu_products", "products"
+  add_foreign_key "menus", "regions"
   add_foreign_key "orders", "users"
-  add_foreign_key "stores", "chains"
 end

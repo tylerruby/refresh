@@ -10,17 +10,16 @@ class Address < ActiveRecord::Base
     && !latitude_changed? \
     && !longitude_changed?
   }
-  validates :address, :city, :latitude, :longitude, presence: true
+  validates :city, :latitude, :longitude, presence: true
 
-  scope :for_stores, -> { where(addressable_type: 'Store') }
-  scope :order_by_distance, -> (location) { 
+  scope :order_by_distance, -> (location) {
     select("#{table_name}.*")
     .select("(#{distance_from_sql(location)}) as distance")
     .order('distance')
   }
 
   def full_address
-    [address, city.name, city.state].join(', ')
+    [address, address_2, city.name, city.state].compact.join(', ')
   end
 
   def coordinates
@@ -30,6 +29,7 @@ class Address < ActiveRecord::Base
   rails_admin do
     edit do
       field :address
+      field :address_2
       field :city
     end
   end

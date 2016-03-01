@@ -1,0 +1,28 @@
+.closed {
+  color: #ff0000;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.product-image-wrapper {
+  .image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    display: none;
+    padding-top: 30%;
+    text-align: center;
+    font-size: 1.1em;
+    font-family: 'Helvetica Neue', sans-serif
+  }
+
+  &:hover .image-hover {
+    display: block;
+  }
+}

@@ -1,0 +1,29 @@
+.items-list > .product {
+  .panel-body-left {
+    width: calc(100% - 90px);
+    float: left;
+  }
+
+  .panel-body-right {
+    width: 90px;
+    float: right;
+  }
+
+  .buttons {
+    position: relative;
+    z-index: 0;
+
+    .product-info {
+      text-align: center;
+      position: absolute;
+      font-weight: bold;
+      padding-top: 6px;
+      width: 100%;
+      z-index: -1;
+    }
+
+    .btn {
+      padding: 0
+    }
+  }
+}

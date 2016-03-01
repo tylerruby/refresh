@@ -4,7 +4,6 @@ RSpec.describe Address, type: :model do
   let(:address) { build(:address) }
 
   describe "validations" do
-    it { is_expected.to validate_presence_of(:address) }
     it { is_expected.to validate_presence_of(:city) }
     it { is_expected.to validate_presence_of(:latitude) }
     it { is_expected.to validate_presence_of(:longitude) }
@@ -16,6 +15,12 @@ RSpec.describe Address, type: :model do
 
   describe "#full_address" do
     it { expect(address.full_address).to eq "4th Av., Atlanta, GA" }
+
+    context 'when address_2 is present' do
+      before { address.address_2 = '2º floor' }
+
+      it { expect(address.full_address).to eq "4th Av., 2º floor, Atlanta, GA" }
+    end
   end
 
   describe "#coordinates" do
@@ -44,38 +49,10 @@ RSpec.describe Address, type: :model do
     end
   end
 
-  describe ".for_stores" do
-    let!(:user_address) { create(:address, addressable: create(:user)) }
-    let!(:store_address) { create(:address, addressable: build(:store, address: nil)) }
-
-    it { expect(Address.for_stores).to eq [store_address] }
-  end
-
   describe ".order_by_distance" do
     before do
-      Geocoder::Lookup::Test.add_stub("closer address, Atlanta, GA", [
-        {
-          'latitude'     => 40.7143528,
-          'longitude'    => -74.0059731,
-          'address'      => 'closer address, Atlanta, GA',
-          'state'        => 'Georgia',
-          'state_code'   => 'GA',
-          'country'      => 'United States',
-          'country_code' => 'US'
-        }
-      ])
-
-      Geocoder::Lookup::Test.add_stub("further address, Atlanta, GA", [
-        {
-          'latitude'     => 40.9999999,
-          'longitude'    => -74.9999999,
-          'address'      => 'further address, Atlanta, GA',
-          'state'        => 'Georgia',
-          'state_code'   => 'GA',
-          'country'      => 'United States',
-          'country_code' => 'US'
-        }
-      ])
+      stub_address("closer address, Atlanta, GA", 40.7143528, -74.0059731)
+      stub_address("further address, Atlanta, GA", 40.9999999, -74.9999999)
     end
 
     let!(:further_address) { create(:address, address: 'further address') }

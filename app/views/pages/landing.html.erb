@@ -1,37 +1,106 @@
-  <div id="jumbotron" class="jumbotron home-header">
-    <div class="col-md-12">
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br class="hidden-xs">
-      <br class="hidden-xs">
-      <h1 class="text-center hidden-sm hidden-xs">Clothing On-Demand</h1>
-      <h2 class="text-center hidden-md hidden-lg text-center">Clothing On-Demand</h2>
-      <h3 class="text-center hidden-sm hidden-xs">Get clothes delivered in an hour</h3>
-      <h3 class="text-center hidden-md hidden-lg text-center">Get clothes delivered in an hour</h3>
-    </div>
-  <div class="col-md-4 col-md-offset-4">
-  	<br class="hidden-xs hidden-sm">
-  	<br />
-    <div class="row">
-      <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-12 col-md-offset-0">
-        <%= form_tag '', method: :post, id: 'store-location-form' do %>
-          <div class="input-group">
-            <%= hidden_field_tag :latitude %>
-            <%= hidden_field_tag :longitude %>
-            <%= search_field_tag :address, nil, class: "form-control input-lg landing-search", id: "gmaps-autocomplete", autofocus: true, placeholder: "Enter your address", required: true %>
-            <span class="input-group-btn">
-              <%= button_tag "Go!", value: "search", class: "btn btn-primary btn-lg landing-button" %>
-            </span>
-          </div><!-- /input-group -->
-        <% end %>
-      </div>
-    </div><!-- /.row -->
+<body style="background-color: #fff;">
+	<div class="col-sm-5 col-sm-offset-0 col-md-3 col-md-offset-1 no-padding hidden-xs" style="min-width: 310px;">
+		<div class="landing-video">
+			<video poster="http://i.imgur.com/sWFiNTP.png" width="310" height="418" autoplay loop>
+			  <source src="https://cdn.streamable.com/video/mp4/brqq.mp4" type="video/mp4">
+			  Your browser does not support the video tag.
+			</video>
+		</div>
+	</div>
+	<div class="col-sm-7 col-md-7 no-padding">
+		<div class="jumbotron landing-header">
+			<br /><br /><br />
+			<br class="hidden-md hiddne-lg" />
+			<br class="hidden-md hidden-lg" />
+			<br class="hidden-md hidden-lg" />
 
-  </div>
-</div>
+			<br class="hidden-xs" />
+			<br class="hidden-xs" />
+			<br class="hidden-xs" />
+			<br class="hidden-xs" />
+			<h1 class="text-center hidden-xs hidden-sm">Feed Your Team</h1>
+			<h2 class="text-center hidden-md hidden-lg">Feed Your Team</h2>
+			<h3 class="text-center hidden-xs hidden-sm">The simple way to cater.</h3>
+			<h4 class="text-center hidden-md hidden-lg">The simple way to cater.</h4>
+			<br />
+			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+		    <%= form_tag set_current_address_user_path, method: :post, id: 'location-form' do %>
+		      <div class="input-group">
+		        <%= hidden_field_tag :latitude %>
+		        <%= hidden_field_tag :longitude %>
+		        <%= search_field_tag :address, nil, class: "form-control landing-address", id: "gmaps-autocomplete", autofocus: true, placeholder: "Delivery address", required: true %>
+		        <span class="input-group-btn">
+		          <%= button_tag value: "search", class: "btn btn-default landing-address landing-button" do %>
+		            <i class="fa fa-chevron-right"></i>
+		          <% end %>
+		        </span>
+		      </div><!-- /input-group -->
+		    <% end %>
+			</div><!-- /.col-lg-6 -->
+			<div class="clearfix"></div>
+			<br class="hidden-xs" />
+			<br /><br /><br />
+			<br /><br /><br />
+			<br /><br />
+		</div>
+	</div>
 
-<!-- Loading Google Maps API only for this page -->
-<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&amp;libraries=places&amp;callback=initGoogleMapsAutocomplete" async="" defer=""></script>
+	<div class="clearfix"></div>
+
+	
+	<div class="jumbotron" style="background-color:#f9f9f9;">
+		<div class="row text-center">
+			<div class="col-md-10 col-md-offset-1">
+	      <div class="col-md-4">
+	        <div class="panel-body">
+	         <i class="fa fa-4x fa-credit-card" style="color:#ff0000;"></i>
+	          <h3>
+	            Free Delivery
+	          </h3>
+	          <p class="features">
+	            Derby doesn't charge a delivery fee, and never will.
+	          </p>
+	        </div>
+	      </div>
+
+	      <div class="col-md-4">
+	        <div class="panel-body">
+	          <i class="fa fa-4x fa-thumbs-o-up" style="color:#ff0000;"></i>
+	          <h3>
+	          	Curated Local Dishes
+	          </h3>
+	          <p class="features">
+	            We handpick a daily menu of dishes from the best local restaurants.
+	          </p>
+	        </div>
+	      </div>
+
+	      <div class="col-md-4">
+	        <div class="panel-body">
+	          <i class="fa fa-4x fa-usd" style="color:#ff0000;"></i>
+	          <h3>
+	            No Price Minimum
+	          </h3>
+	          <p class="features">
+	            No matter the size of your business, Derby will take care of your catering needs.
+	          </p>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="jumbotron hidden-xs hidden-sm" style="background:#fff;">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-2 col-md-offset-4">
+				<%= image_tag('App-Store', class: "img-responsive") %>
+			</div>
+			<div class="col-md-2">
+				<%= image_tag('Play-Store', class: "img-responsive") %>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<!-- Loading Google Maps API only for this page -->
+	<script src="https://maps.googleapis.com/maps/api/js?signed_in=true&amp;libraries=places&amp;callback=initGoogleMapsAutocomplete" async="" defer=""></script>
+</body>

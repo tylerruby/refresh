@@ -19,6 +19,10 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
+  config.excluded_models += %w(Store MenuProduct Category Impression)
+
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Refund)
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
@@ -29,6 +33,20 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+    refund
+
+    member :mark_as_delivered do
+      only 'Order'
+      link_icon 'icon-check'
+
+      register_instance_option(:visible?) do
+        bindings[:object].is_a?(Order) && bindings[:object].on_the_way?
+      end
+
+      register_instance_option(:controller) do
+        proc { object.delivered!; redirect_to :back }
+      end
+    end
 
     ## With an audit adapter, you can add:
     # history_index

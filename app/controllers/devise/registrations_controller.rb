@@ -1,6 +1,7 @@
 class Devise::RegistrationsController < DeviseController
   prepend_before_filter :require_no_authentication, only: [:new, :create, :cancel]
   prepend_before_filter :authenticate_scope!, only: [:edit, :update, :destroy]
+  before_action :add_custom_fields, only: :create
 
   # GET /resource/sign_up
   def new
@@ -24,12 +25,19 @@ class Devise::RegistrationsController < DeviseController
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         expire_data_after_sign_in!
       end
+
+      respond_to do |format|
+        format.json do
+          render json: UserSerializer.new(resource)
+        end
+
+        format.html { redirect_to :back }
+      end
     else
       clean_up_passwords resource
       set_minimum_password_length
-      flash[:errors] = resource.errors.full_messages.join(', ')
+      render json: resource.errors, status: :unprocessable_entity
     end
-    redirect_to :back
   end
 
   # GET /resource/edit
@@ -142,5 +150,9 @@ class Devise::RegistrationsController < DeviseController
 
   def translation_scope
     'devise.registrations'
+  end
+
+  def add_custom_fields
+    devise_parameter_sanitizer.for(:sign_up) << :mobile_number
   end
 end

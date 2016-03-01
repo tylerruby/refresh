@@ -1,6 +1,14 @@
-module ApplicationHelper
-  def modal_id(record)
-    "#{record.class.name.downcase}_modal_#{record.id}"
+  module ApplicationHelper
+    def body_css_classes
+      [
+        controller_name.dasherize,
+        action_name.dasherize,
+        @additional_body_css_classes
+      ].reject(&:blank?).join(' ')
+    end
+
+    def modal_id(record)
+      "#{record.class.name.downcase}_modal_#{record.id}"
   end
 
   def styled_radio_button(name, value, label, options = {})
@@ -22,8 +30,11 @@ module ApplicationHelper
     end
   end
 
-  def modal_to(title, href)
-    link_to title, href, data: { toggle: :modal, dismiss: :modal }
+  def modal_to(title, href, options = {})
+    options = {
+      data: { toggle: :modal, dismiss: :modal }
+    }.merge(options)
+    link_to title, href, options
   end
 
   def dropdown_for(title, options = {})
@@ -37,6 +48,22 @@ module ApplicationHelper
       concat (content_tag(:ul, class: 'dropdown-menu') do
         yield
       end)
+    end
+  end
+
+  def avatar_tag(user, options = {})
+    return unless user.persisted?
+    version = options[:version] || :thumb_fill
+    classes = ["img-circle", "img-responsive", "center-block", options[:class]].compact.join(' ')
+    image_tag user.avatar.url(version), class: classes
+  end
+
+  def link_to_current_address
+    link_to menu_path(
+      city: current_address.city.name.parameterize,
+      region: current_region.name.parameterize
+    ) do
+      yield
     end
   end
 end

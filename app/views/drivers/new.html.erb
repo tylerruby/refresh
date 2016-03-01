@@ -1,0 +1,92 @@
+<body style="background:#fff;">
+  <div class="col-md-5 col-md-offset-1 hidden-xs hidden-sm">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= image_tag('Coins-96') %>
+      </div>
+      <div class="col-md-9">
+      <h3>Earn good money</h3> 
+      Make up to $25 an hour and have it direct deposited every week. Start driving with Derby today and start making real money.
+      </div>
+    </div>
+    <br />
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= image_tag('Calendar-96') %>
+      </div>
+      <div class="col-md-9">
+      <h3>Work whenever you want</h3>
+       You’ve got freedom and flexibility to drive whenever you have time. As an independent contractor, you set your own schedule.
+      </div>
+    </div>
+    <br />
+    <div class="col-md-12">
+      <div class="col-md-3">
+        <%= image_tag('Administrator-96') %>
+      </div>
+      <div class="col-md-9">
+      <h3>No more boss.</h3> No boss, no problem. Work for yourself and put that boring office life in your rear view.
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="col-md-8 col-md-offset-1">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br class="hidden-xs" />
+        <br class="hidden-xs" />
+        <h1 class="text-center hidden-xs hidden-sm">Become a driver!</h1>
+        <h2 class="text-center hidden-md hidden-lg">Become a driver!</h2>
+        <h3 class="text-center hidden-xs hidden-sm">Help us change delivery.</h3>
+        <h4 class="text-center hidden-md hidden-lg">Help us change delivery.</h4>
+        <div class="clearfix"></div>
+        <br />
+    </div>
+
+    <%= form_for @driver, :html => {:class => 'form-horizontal' } do |f| %>
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-2">
+        <div class="form-group">
+          <%= f.text_field :name, :class => "form-control input-lg", :placeholder => "Name", :required => true %>
+        </div>
+      </div>
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-2">
+        <div class="form-group">
+        <%= f.text_field :email, :class => "form-control input-lg", :placeholder => "Email", :required => true %>
+        </div>
+      </div>
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-2">
+        <div class="form-group">
+          <%= f.text_field :email, :class => "form-control input-lg", :placeholder => "Phone", :required => true %>
+        </div>
+      </div>
+      <div class= "hidden">
+        <%= hidden_field_tag :nickname, :hint => 'Leave this field blank!' %>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-3">
+        <%= f.submit 'Submit', :class => "btn btn-block btn-lg red" %>
+      </div>
+      <div class="clearfix"></div>
+    <% end %>
+
+    <br class="hidden-xs" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </div>
+</body>

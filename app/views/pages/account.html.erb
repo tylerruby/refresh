@@ -1,0 +1,42 @@
+<br />
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <br />
+          <div class="col-sm-8 col-sm-offset-2">
+            <%= avatar_tag current_user %>
+          </div>
+          <div class="col-sm-12">
+            <br />
+            <h4 class="profile-text text-center"><%= current_user.full_name %></h4>
+            <h5 class="profile-text text-center"><%= current_user.email %></h5>
+            <h5 class="profile-text text-center"><%= current_user.mobile_number %></h5>
+            <p class="text-center">
+              <%= link_to "Edit Profile", edit_user_path %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="text-center">
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "black-links" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <%= render 'pages/account/credit_cards' %>
+    </div>
+    <div class="col-sm-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>History</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

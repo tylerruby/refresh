@@ -1,0 +1,38 @@
+.alert.side-alert {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 50px;
+  border-radius: 0;
+  font: 14px/1.3em 'Raleway', sans-serif;
+  z-index: 1;
+  padding-top:15px !important;
+  .close {
+    font-size: 30px;
+    line-height: 0;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 4px;
+    right: 7px;
+
+    &:focus {
+      outline: none
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+    padding: 10px;
+  }
+}
+
+.alert-info {
+  background-color: #333 !important;
+  border-color: #333 !important;
+  color: #fff !important;
+}
+.alert-success {
+  background-color: #000 !important;
+  border-color: #000 !important;
+  color: #fff !important;
+}

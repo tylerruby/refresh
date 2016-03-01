@@ -1,142 +1,309 @@
-<div class="container p-t-md">
-  <div class="row">
-  	<div class="col-sm-3 col-md-3">
-  		<div class="list-group m-b-md">
-        <%= link_to help_path, class: "list-group-item active" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Help
-        <% end %>
-        <%= link_to about_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          About
-        <% end %>
-        <%= link_to partners_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Partners
-        <% end %>
-        <%= link_to terms_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Terms
-        <% end %>
-        <%= link_to privacy_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Privacy Policy
-        <% end %>
-        <%= link_to blog_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Blog
-        <% end %>
-        <%= link_to contact_path, class: "list-group-item" do %>
-          <span class="icon icon-chevron-thin-right pull-right"></span>
-          Contact
-        <% end %>
-      </div>
-     </div>
-    <div class="col-sm-9 col-md-8">
-      <ul class="list-group media-list media-list-stream">
-        <li class="list-group-item p-a">
-          <h2 class="m-a-0 text-center">Help</h2>
-        </li>
-
-        <li class="media list-group-item p-a">
-          <div class="media-body">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Why use Refresh?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                  <div class="panel-body">
-                    Refresh helps you find hot local clothing items and get them delivered in an hour so you save time and money.  No more waiting weeks for packages, paying outrageous shipping fees, or driving from store to store looking for what you want.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingTwo">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      What are your hours?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                  <div class="panel-body">
-                    We deliver from 9am to Midnight every day, depending on local store hours. On holidays, our delivery hours are subject to store holiday hours. You can view available delivery times for your area from the shopping cart.
-
-                    Our fastest delivery was just 12 minutes! Most customers choose to have delivery in the next 2 hours, and you can also schedule for a later date or time during checkout.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Where do you deliver?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                  <div class="panel-body">
-                    We currently only serve the city of Atlanta, but we are expanding our service area to other cities soon!
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      How much does delivery cost?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                  <div class="panel-body">
-                    We offer several pricing options for Refresh deliveries. The minimum order value is $10.
-                    <br />
-                    <u>Orders over $35:</u> Two hour or scheduled deliveries start at $3.99. Within an Hour deliveries start at $5.99.
-                    <br />
-                    <u>Orders under $35:</u> Two hour or scheduled deliveries start at $7.99. Within an Hour deliveries start at $9.99.
-                    <br />
-                    <small>*There is a $3 charge for each additional store you order from.</small>
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFive">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                      How are items priced on Refresh?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                  <div class="panel-body">
-                    When possible, Refresh works with retailers to bring you the same prices as found in the physical store. In some cases prices may be 15% higher than in-store.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingSix">
-                  <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                      How do I return items?
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
-                  <div class="panel-body"> 
-                    Your purchases will come with a receipt which will allow you to return items depending on the store or item in question.  Most stores we carry have a return policy but some may not allow returns.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="block-images col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav secondary">
+        <li class="active"><a href="/help"><b>Help</b></a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/privacy">Privacy</a></li>
       </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<br />
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h2 class="text-center">
+        Help
+      </h2>
+      <hr />
+
+      <div class="col-lg-10 col-lg-offset-1 panel-group" id="accordion" role="tablist" >
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading1">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse1" aria-contols="collapse1">
+                How much does it cost for delivery?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+            <div class="panel-body help-body">
+              <b>Delivery is free.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading2">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse2" aria-contols="collapse2">
+                Do you have a minimum order size?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+            <div class="panel-body help-body">
+              <b>Each group must be at least 3 people, but we don't have a minimum dollar amount for each order.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading3">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse3" aria-contols="collapse3">
+                How do I use Derby?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+            <div class="panel-body help-body">
+              <b>Derby’s app is extremely simple to use, and is available on iOS and Android and Web. To order online, visit <a href="http://getderby.co">http://getderby.co</a> and enter your delivery address, then browse featured items for delivery.
+              <br /><br />
+              &nbsp;&nbsp;1. Select items from the home screen you wish to purchase by clicking the plus icon.
+              <br /><br />
+              &nbsp;&nbsp;2. Swipe right or click checkout to complete your order.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading4">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse4" aria-contols="collapse4">
+                What is Derby's delivery window?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
+            <div class="panel-body help-body">
+              <b>Derby delivers lunch from 11:30am - 2:30pm.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading5">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse5" aria-contols="collapse5">
+                What is the order cutoff time?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
+            <div class="panel-body help-body">
+              <b>You must place your order before 10:00 am the morning your lunch will be delivered.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading6">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse6" aria-contols="collapse6">
+                Where is Derby available?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
+            <div class="panel-body help-body">
+              <b>Currently, Derby is only serving Atlanta but we will be expanding to more cities very soon.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading7">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse7" aria-contols="collapse7">
+                Who makes the deliveries?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+            <div class="panel-body help-body">
+              <b>Our drivers are personally onboarded by our management team to complete deliveries in your city.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading8">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse8" aria-contols="collapse8">
+                Can I customize my order?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
+            <div class="panel-body help-body">
+              <b>Currently we are unable to provide customized meal requests.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading9">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse9" aria-contols="collapse9">
+                What if I need to contact my driver?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+            <div class="panel-body help-body">
+              <b>You can call your driver at any point during your delivery, directly from the app.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading10">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse10" aria-contols="collapse10">
+                What should I do if I need to edit my delivery address?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+            <div class="panel-body help-body">
+              <b>If you have not placed your order yet, you can edit the drop-off directly from the home page or the check-out page.
+              <br /><br />
+              If you've already placed your order and need to change the delivery address, you can call your driver directly from the app.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading11">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse11" aria-contols="collapse11">
+                What if I need to change my order, or add an item?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+            <div class="panel-body help-body">
+              <b>Call your driver as soon as you realize you need to change the order.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading12">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse12" aria-contols="collapse12">
+                Is tip required?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+            <div class="panel-body help-body">
+              <b>Yes, our drivers rely on tips from our customers. You have the option to tip your driver 15%, 20%, or 25%.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading13">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse13" aria-contols="collapse13">
+                Can I tip my driver with cash?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+            <div class="panel-body help-body">
+              <b>No. Tips are only accepted through the app.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading14">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse14" aria-contols="collapse14">
+                How do you hire your drivers?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+            <div class="panel-body help-body">
+              <b>All driver are thoroughly vetted, including a background check, in-person interview and test deliveries.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading15">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse15" aria-contols="collapse15">
+                Can I apply to become a driver?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
+            <div class="panel-body help-body">
+              <b>Yes, we would love that! You can submit an application here: <a href="http://getderby.co/drive">http://getderby.co/drive</a></b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading16">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse16" aria-contols="collapse16">
+                What if my delivery is late?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse16" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading16">
+            <div class="panel-body help-body">
+              <b>Depending on the circumstances, we may give you a partial refund.</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading17">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse17" aria-contols="collapse17">
+                Will my driver bring the meal inside my office?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse17" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading17">
+            <div class="panel-body help-body">
+              <b>Yes!</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+        <div class="panel panel-default help-panel">
+          <div class="panel-heading help-heading" role="tab" id="heading18">
+            <h3 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="accordion" href="#collapse18" aria-contols="collapse18">
+                I’m a restaurant or caterer and I'm interested in partnering with Derby. What steps should I take?
+              </a>
+            </h3>
+          </div> <!-- .panel-heading !-->
+          <div id="collapse18" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading18">
+            <div class="panel-body help-body">
+              <b>Thanks for your interest! We’re always looking to cater great new dishes.  Visit the <%= link_to "Restaurant Page", restaurants_path %> to sign up!</b>
+            </div> <!-- .panel-body !-->
+          </div> <!-- .collapse !-->
+        </div> <!-- .panel !-->
+
+      </div> <!-- #accordion !-->
+
+      </div>
     </div>
   </div>
 </div>

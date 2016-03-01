@@ -5,50 +5,73 @@ class CartController < ApplicationController
   end
 
   def add
-    cloth_instance = ClothInstance.find_or_initialize_by(cloth_instance_params)
-    cloth_instance.store = store
-    authorize cloth_instance
+    authorize menu_product
     Cart.transaction do
-      cloth_instance.save!
-      cart.add(cloth_instance, cloth_instance.price, quantity)
+      cart.add(menu_product, menu_product.product.price, quantity)
     end
-    flash[:success] = 'Item added to the cart!'
-    redirect_to :back
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        render layout: false
+      end
+    end
   end
 
   def remove
-    cart.remove(cloth_instance, cart.item_for(cloth_instance).quantity)
-    flash[:success] = 'Item removed from the cart.'
-    redirect_to :back
+    cart.remove(menu_product, cart.item_for(menu_product).quantity)
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        render layout: false
+      end
+    end
   end
 
   def update
-    cart.item_for(cloth_instance).update!(quantity: quantity)
-    flash[:success] = "Item's quantity updated to #{quantity}."
-    redirect_to :back
+    if (quantity < 0) then
+      return
+    end
+
+    cart.item_for(menu_product).update!(quantity: quantity)
+
+    if (quantity == 0) then
+      cart.remove(menu_product, cart.item_for(menu_product).quantity)
+    end
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        render layout: false
+      end
+    end
+  end
+
+  def update_items_delivery_time
+    cart
+      .shopping_cart_items
+      .joins(menu_product: :menu)
+      .where(menus: { date: params[:delivery_date] })
+      .each do |cart_item|
+        cart_item.update!(delivery_time: params[:delivery_time])
+      end
+
+    respond_to do |format|
+      format.json { head :ok }
+      format.html do
+        render layout: false
+      end
+    end
   end
 
   private
-
-    def cloth_instance_params
-      params
-      .require(:cloth_instance)
-      .permit(:cloth_variant_id, :store_id)
-    end
 
     def quantity
       params.require(:quantity).to_i
     end
 
-    def cloth_instance
-      @cloth_instance ||= ClothInstance.find(params[:cloth_instance_id])
-    end
-
-    def store
-      store_id = cloth_instance_params[:store_id]
-      StoreSearcher.new(
-        city: Store.find(store_id).address.city.name,
-        coordinates: coordinates
-      ).find(store_id)
+    def menu_product
+      @menu_product ||= MenuProduct.find(params[:menu_product_id])
     end
 end
